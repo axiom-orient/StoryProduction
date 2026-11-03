@@ -10,7 +10,7 @@
   → Markdown/JSON 제작 패키지
 ```
 
-기본 경로는 이미지·영상 도구 없이 사용한다. 움직이는 콘티를 선택하면 승인된 텍스트 콘티에서 NVC 연출 계획, SAC PNG 자산 검토, SMC 프레임 합성을 거쳐 편집 가능한 HTML·자막·VP9 WebM **후보**를 만든다. 이 후보의 최종 release 채택은 별도 미구현 범위다.
+기본 경로는 이미지·영상 도구 없이 사용한다. 움직이는 콘티를 선택하면 승인된 텍스트 콘티에서 NVC 연출 계획, IPC/promptGen 이미지 후보와 SAC PNG 자산 검토, SMC 프레임 합성을 거쳐 편집 가능한 HTML·자막·VP9 WebM **후보**를 만든다. 이 후보의 최종 release 채택은 별도 미구현 범위다.
 
 ## 시작
 
@@ -43,6 +43,7 @@ integration/target/release/storyctl text --workspace /absolute/path/my-story nex
 |---|---|
 | 원문부터 패키지까지 사용 | [텍스트 제작 운영](docs/TEXT_PRODUCTION.md) |
 | 움직이는 콘티 사용 | [Animatic 운영](docs/ANIMATIC_PRODUCTION.md) |
+| promptGen 이미지와 SAC 자산 인계 | [인계·인증 운영](docs/PROMPTGEN_ASSET_HANDOFF.md) |
 | 기존 cinematic·미디어 경로 사용 | [미디어 운영](docs/OPERATIONS.md) |
 | 에이전트 집필·검토 절차 | [작업 지침](docs/AGENT_PLAYBOOK.md) |
 | 제품 방향·계약·구조 | [정체성](docs/IDENTITY_AND_EVOLUTION.md) · [SPEC](docs/SPEC.md) · [ARCHITECTURE](docs/ARCHITECTURE.md) |
@@ -50,5 +51,7 @@ integration/target/release/storyctl text --workspace /absolute/path/my-story nex
 | 구현·변경·실행 근거 | [현재 상태](docs/IMPLEMENTATION_STATUS.md) · [완료 범위와 남은 계획](docs/PLAN.md) |
 
 컴포넌트별 진입점은 [geultu](geultu/README.md), [NarrativeCourier](NarrativeCourier/README.md), [integration](integration/README.md), [ImagePromptCompiler](ImagePromptCompiler/README.md), [SceneAssetCompiler](SceneAssetCompiler/README.md), [SceneMotionCompiler](SceneMotionCompiler/README.md)에 둔다. Producer schema와 consumer 사본의 연결은 [계약 registry](integration/contracts/registry.json)가 소유한다. 연구·후속 설계는 현재 실행 API와 구분하며 LICENSE/NOTICE는 각 소유자의 조건을 따른다.
+
+공개 소스의 라이선스 범위와 제외 자료는 [공개 배포 경계](PUBLIC_DISTRIBUTION.md)를 따른다. LayoutSheet는 독립 저장소의 선택 도구이며 필수 실행 엔진으로 포함하지 않는다.
 
 SEMI 연결은 [macOS provider](integration/macos-provider/README.md)를 따른다. 선택된 단일 workspace의 geultu 조회와 brief/task/candidate/review 변경을 좁게 제공한다. Candidate submit은 채택이 아니며 task preparation은 writer를 실행하지 않는다. 서명·XPC·실제 사용자 승인 qualification은 현재 상태 문서에서 별도로 다룬다.

@@ -183,6 +183,84 @@ impl Fixture {
 }
 
 #[test]
+fn asset_draft_uses_current_owner_packet_and_never_creates_an_approval() {
+    for mode in ["current", "packet-drift", "changed", "unobserved"] {
+        let render = candidate("selected");
+        let fixture = Fixture::new(mode, &render, &render, 0);
+        let packet = packet();
+        let packet_hash = packet["contentHash"].as_str().unwrap();
+        let source = json!({"kind":"nvc.animatic-packet", "identity":format!("packet.{}", &packet_hash[7..]), "sha256":packet_hash});
+        let mut bindings = Vec::new();
+        for (index, asset) in packet["plan"]["assets"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .enumerate()
+        {
+            let image_path = format!("test-{index}.png");
+            let result_path = format!("test-{index}.json");
+            let pixels = b"synthetic filesystem seam, not generated artwork";
+            fs::write(fixture.root.join(&image_path), pixels).unwrap();
+            let mut result: Value = serde_json::from_slice(
+                &fs::read(
+                    repository()
+                        .join("integration/contracts/examples/capability-result.succeeded.json"),
+                )
+                .unwrap(),
+            )
+            .unwrap();
+            result["capability"] = json!("image.generate");
+            result["provider"]["kind"] = json!("codex");
+            result["provider"]["networkPolicy"] = json!("required");
+            result["source"] = source.clone();
+            result["artifacts"] = json!([{"kind":"image_candidate","identity":format!("image.test.{index}"),"path":image_path,
+                "sha256":storyctl::effects::hash::sha256_bytes(pixels),"byteLength":pixels.len(),"mediaType":"image/png","width":asset["width"],"height":asset["height"]}]);
+            result["providerReceipt"] = json!({"backend":"codex-imagegen","thread_id":"synthetic.thread","image_call_id":"synthetic.call","sha256":storyctl::effects::hash::sha256_hex_bytes(pixels)});
+            fs::write(
+                fixture.root.join(&result_path),
+                serde_json::to_vec(&result).unwrap(),
+            )
+            .unwrap();
+            bindings.push(json!({"assetId":asset["assetId"],"result":result_path}));
+        }
+        fs::write(
+            fixture.root.join("bindings.json"),
+            serde_json::to_vec(&json!({"assets":bindings})).unwrap(),
+        )
+        .unwrap();
+        let args = [
+            "asset-draft",
+            "--asset-root",
+            fixture.root.to_str().unwrap(),
+            "--board",
+            "board",
+            "--board-review",
+            "board-review",
+            "--plan",
+            "plan",
+            "--review",
+            "review",
+            "--bindings",
+            "bindings.json",
+            "--output",
+            "animatic/assets-draft.json",
+        ];
+        let result = animatic::run(&fixture.ctx, &args.map(str::to_owned));
+        let output = fixture.root.join("animatic/assets-draft.json");
+        if mode == "current" {
+            assert_eq!(result.unwrap()["status"], "draft_prepared");
+            let draft: Value = serde_json::from_slice(&fs::read(output).unwrap()).unwrap();
+            assert!(draft.get("contentHash").is_none());
+            assert!(draft.get("review").is_none());
+            assert_eq!(fixture.exports.load(Ordering::SeqCst), 2);
+        } else {
+            assert!(result.is_err(), "{mode}");
+            assert!(!output.exists(), "{mode}");
+        }
+    }
+}
+
+#[test]
 fn actual_source_drift_and_unreachable_observations_are_distinct() {
     let render = candidate("selected");
     for (mode, status, source) in [

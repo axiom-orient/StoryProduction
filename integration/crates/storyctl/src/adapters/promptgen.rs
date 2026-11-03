@@ -25,6 +25,8 @@ pub struct PromptgenOptions {
     pub request: PathBuf,
     pub output_dir: PathBuf,
     pub promptgen_bin: PathBuf,
+    pub codex_binary: Option<PathBuf>,
+    pub codex_home: Option<PathBuf>,
     pub timeout_seconds: u64,
     pub artifact_wait_seconds: u64,
 }
@@ -103,6 +105,36 @@ fn executable(selected: &Path) -> Result<PathBuf> {
     Err(Error::not_started(
         "--promptgen-bin must name an executable regular file",
     ))
+}
+
+fn validate_payload_mode(mode: Mode, payload: &Value) -> Result<()> {
+    if mode == Mode::Compile {
+        return Ok(());
+    }
+    let task = payload["task_mode"].as_str().unwrap_or("generate");
+    let references = payload["references"]
+        .as_array()
+        .map(Vec::as_slice)
+        .unwrap_or(&[]);
+    let supported = match mode {
+        Mode::Generate => task == "generate" && references.is_empty(),
+        Mode::Edit => {
+            task == "edit"
+                && references.len() == 1
+                && references[0]["index"] == 1
+                && references[0]["role"] == "base"
+        }
+        Mode::Compile => true,
+    };
+    if !supported
+        || payload["output"]["model"] != "gpt-image-2"
+        || payload["output"]["format"] != "png"
+    {
+        return Err(Error::not_applied(
+            "capability and typed payload disagree: image.generate requires reference-free generate; image.edit requires edit with one index=1 role=base reference; both require gpt-image-2 PNG",
+        ));
+    }
+    Ok(())
 }
 
 fn output_directory(
@@ -426,6 +458,26 @@ pub(crate) fn run_promptgen_in_roots(
     )?;
     let payload = json::parse_object(&payload_bytes)?;
     registry.validate(PAYLOAD_SCHEMA, &payload)?;
+    validate_payload_mode(mode, &payload)?;
+    if mode != Mode::Generate && (options.codex_binary.is_some() || options.codex_home.is_some()) {
+        return Err(Error::not_applied("Codex options require image.generate"));
+    }
+    let codex_binary = options
+        .codex_binary
+        .as_deref()
+        .map(executable)
+        .transpose()?;
+    let codex_home = options
+        .codex_home
+        .as_ref()
+        .map(|path| -> Result<PathBuf> {
+            if path.is_absolute() {
+                Ok(path.clone())
+            } else {
+                Ok(std::env::current_dir()?.join(path))
+            }
+        })
+        .transpose()?;
     let mut snapshots = BTreeMap::from([
         ("capability-request.json".to_owned(), raw.clone()),
         ("input.json".to_owned(), payload_bytes.clone()),
@@ -482,6 +534,15 @@ pub(crate) fn run_promptgen_in_roots(
             "--artifact-wait-seconds".into(),
             options.artifact_wait_seconds.to_string(),
         ]);
+        if let Some(binary) = codex_binary {
+            command.extend([
+                "--codex-binary".into(),
+                binary.to_string_lossy().into_owned(),
+            ]);
+        }
+        if let Some(home) = codex_home {
+            command.extend(["--codex-home".into(), home.to_string_lossy().into_owned()]);
+        }
     }
     if let Some(name) = &reference_name {
         command.extend(["--reference-image".into(), name.clone()]);

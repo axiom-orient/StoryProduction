@@ -2,6 +2,7 @@ use std::collections::{BTreeMap, BTreeSet};
 
 use promptgen_core::image::{CanvasPlacement, CanvasZone, ImagePromptRequest};
 
+use super::panels::{expected_instances, grid, local_center};
 use super::{PLACEMENT_MEASUREMENT_TOLERANCE_PERCENT, SubjectCountCheck, VisibleInstance};
 
 pub(super) fn subject_instances_match_request(
@@ -14,11 +15,22 @@ pub(super) fn subject_instances_match_request(
                 .iter()
                 .find(|check| check.id == subject.id)
                 .is_some_and(|check| {
-                    check.observed == subject.count
-                        && check
-                            .instances
-                            .iter()
-                            .all(|instance| placement_contains(&subject.placement, instance))
+                    Some(check.observed) == expected_instances(request, subject.count)
+                        && if let Some((columns, rows)) = grid(request) {
+                            let mut per_panel = vec![0usize; usize::from(columns * rows)];
+                            check.instances.iter().all(|instance| {
+                                let (panel, local) = local_center(instance, columns, rows);
+                                per_panel[panel] += 1;
+                                placement_contains(&subject.placement, &local)
+                            }) && per_panel
+                                .iter()
+                                .all(|count| *count == usize::from(subject.count))
+                        } else {
+                            check
+                                .instances
+                                .iter()
+                                .all(|instance| placement_contains(&subject.placement, instance))
+                        }
                 })
         })
 }
@@ -27,6 +39,15 @@ pub(crate) fn placement_failure_details(
     checks: &[SubjectCountCheck],
     request: &ImagePromptRequest,
 ) -> Option<(String, String, String)> {
+    if grid(request).is_some() {
+        if subject_instances_match_request(checks, request) {
+            return None;
+        }
+        let summary =
+            "cinematic subjects must satisfy count and local placement in every panel".to_owned();
+        return Some((summary.clone(), summary,
+            "Correct only the failing panel's subject count or placement. Preserve the ordered panel layout and show each typed subject's count in every panel, with placement measured inside that panel; preserve all other panels and visual properties.".to_owned()));
+    }
     for subject in &request.subjects {
         let check = checks.iter().find(|check| check.id == subject.id)?;
         let outside = check
@@ -169,7 +190,7 @@ pub(super) fn counts_are_well_formed(
     found.len() == request.subjects.len()
         && request.subjects.iter().all(|subject| {
             found.get(subject.id.as_str()).is_some_and(|check| {
-                check.expected == subject.count
+                Some(check.expected) == expected_instances(request, subject.count)
                     && usize::from(check.observed) == check.instances.len()
                     && instance_centers_are_unique(&check.instances)
             })

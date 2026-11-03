@@ -6,12 +6,14 @@ use super::{
 };
 
 mod instruction;
+mod panels;
 mod placement;
 mod response;
 mod schema;
 mod text;
 
 pub(super) use self::instruction::{build_count_instruction, build_validation_instruction};
+pub(super) use self::panels::expected_instances;
 pub(super) use self::placement::placement_failure_details;
 use self::placement::{counts_are_well_formed, subject_instances_match_request};
 use self::response::{
@@ -170,6 +172,63 @@ mod tests {
                 }
             })
             .collect()
+    }
+
+    #[test]
+    fn cinematic_counts_and_placement_are_checked_in_each_panel() {
+        let mut request = ImagePromptRequest::from_json(
+            parse(include_str!(concat!(
+                env!("CARGO_MANIFEST_DIR"),
+                "/../../examples/image-cinematic-storyboard.json"
+            )))
+            .unwrap(),
+        )
+        .unwrap();
+        for (layout, centers) in [
+            ("three_panel_strip", vec![(16, 50), (50, 50), (83, 50)]),
+            ("two_by_two", vec![(25, 25), (75, 25), (25, 75), (75, 75)]),
+            (
+                "three_by_two",
+                vec![(16, 25), (50, 25), (83, 25), (16, 75), (50, 75), (83, 75)],
+            ),
+        ] {
+            request.storyboard.as_mut().unwrap().layout = layout.to_owned();
+            let total = centers.len() as u16;
+            let check = SubjectCountCheck {
+                id: request.subjects[0].id.clone(),
+                expected: total,
+                observed: total,
+                evidence: "one appearance per panel".to_owned(),
+                instances: centers
+                    .iter()
+                    .map(|(x, y)| VisibleInstance {
+                        x_percent: *x,
+                        y_percent: *y,
+                        evidence: "visible in panel".to_owned(),
+                    })
+                    .collect(),
+            };
+            assert!(
+                subject_instances_pass(std::slice::from_ref(&check), &request),
+                "{layout}"
+            );
+            let mut wrong = check.clone();
+            wrong.expected = 1;
+            assert!(!subject_instances_pass(&[wrong], &request));
+            let mut wrong = check.clone();
+            wrong.instances[0].x_percent = 1;
+            assert!(!subject_instances_pass(&[wrong], &request));
+            let mut wrong = check.clone();
+            wrong.instances[0].x_percent = wrong.instances[1].x_percent - 1;
+            assert!(
+                !subject_instances_pass(&[wrong], &request),
+                "same total, missing panel"
+            );
+            let mut wrong = check;
+            wrong.observed -= 1;
+            wrong.instances.pop();
+            assert!(!subject_instances_pass(&[wrong], &request));
+        }
     }
 
     #[test]

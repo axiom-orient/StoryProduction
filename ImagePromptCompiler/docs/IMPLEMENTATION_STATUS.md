@@ -111,3 +111,11 @@ OpenAI API/provider execution is NOT_RUN; adapter unit/integration tests use the
 `scripts/test-source-snapshot.py`: **PASS**. 새로운 Codex compilation mismatch 회귀 및 전체 core/provider/Web/CLI tests는 **NOT_RUN**(Rust 부재). integration fake process29의 PASS는 실제 promptgen binary 또는 OpenAI/Codex generation PASS가 아니다.
 
 </details>
+# 2026-11-03 공개 후 수정
+
+`cinematic_storyboard`의 subject count·placement는 패널별로 검증하며 receipt에는 전체 등장 수와 전체 이미지 좌표를 기록한다. 3×1·2×2·3×2의 정상 배치, 누락·중복 패널과 위치 위반을 검사한다. 일반 structured 이미지의 count 의미는 유지한다.
+
+Codex의 실제 exact imagegen skill `cat` 읽기와 기존 `sed` 이벤트를 좁게 허용한다. 다른 경로·명령 연결·셸 치환은 계속 거절한다. 다른 실행 mode의 Codex 인증 옵션을 무시하지 않는다. Story caller는 Codex binary/home을 명시 전달하고 capability·task_mode·참조 계약을 실행 전에 대조한다.
+
+현재 workspace 전체 Rust 테스트, strict Clippy, release build는 로컬 통과했다. 전체 `scripts/verify.sh`는 authentic historical `image-evidence.json` 누락에서 실패한다. 새 provider 실행은 해당 과거 자료를 대체하지 않는다. 실제 이미지 실행·취소·사람 승인 상태는 상위 공개 배포 보고서에서 별도로 기록한다.
+

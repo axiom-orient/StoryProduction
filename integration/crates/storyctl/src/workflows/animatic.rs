@@ -362,7 +362,7 @@ fn run_inner(
         validate_smc(&result, &attempt, &schemas)?;
         return Ok(result);
     }
-    if !["packet", "render"].contains(&operation.as_str()) {
+    if !["packet", "render", "asset-draft"].contains(&operation.as_str()) {
         return Err(Error::not_applied("unsupported animatic operation"));
     }
     let mut options = vec!["export".into()];
@@ -375,6 +375,18 @@ fn run_inner(
         let value = required(&mut args, story)?;
         options.extend([format!("--{owner}"), value]);
     }
+    let asset_draft = if operation == "asset-draft" {
+        let bindings = required(&mut args, "bindings")?;
+        let output = required(&mut args, "output")?;
+        if !output.starts_with("animatic/") {
+            return Err(Error::not_applied(
+                "asset draft output must be under animatic/",
+            ));
+        }
+        Some((bindings, output))
+    } else {
+        None
+    };
     let render = if operation == "render" {
         let assets = required(&mut args, "assets")?;
         let review = required(&mut args, "asset-review")?;
@@ -411,6 +423,25 @@ fn run_inner(
     let hash = string(&packet, "contentHash")?;
     if !crate::effects::hash::is_sha256(hash) {
         return Err(Error::not_applied("NVC packet hash invalid"));
+    }
+    if let Some((bindings, output)) = asset_draft {
+        let integration_schemas =
+            SchemaRegistry::new(&ctx.repository.join("integration/contracts"))?;
+        let prepared =
+            super::animatic_assets::prepare(&root, &packet, &bindings, &integration_schemas)?;
+        let current = export_current()?;
+        validate_packet(&current, &schemas)?;
+        if current != packet {
+            return Err(Error::not_applied(
+                "NVC packet changed before asset draft publication",
+            ));
+        }
+        prepared.revalidate(&root)?;
+        root.immutable(&output, &json::stable_bytes(&prepared.draft)?)?;
+        return Ok(
+            json!({"status":"draft_prepared", "candidateOnly":true, "path":output,
+            "packetHash":hash, "next":"assets submit; actual PNG validation and human asset review remain with SAC"}),
+        );
     }
     let relative = format!("animatic/packets/{}.json", &hash[7..]);
     root.immutable(&relative, &json::stable_bytes(&packet)?)?;

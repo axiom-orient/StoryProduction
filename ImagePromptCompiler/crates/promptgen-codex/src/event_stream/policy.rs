@@ -38,9 +38,61 @@ pub(super) fn classify_item(kind: &str) -> ItemKind {
 
 pub(super) fn is_allowed_skill_read(command: &str, allowed_skill_path: &Path) -> bool {
     let path = allowed_skill_path.display().to_string();
-    let unquoted = format!("/bin/zsh -lc \"sed -n '1,240p' {path}\"");
-    if command == unquoted {
-        return true;
+    let mut paths = vec![shell_quote(&path)];
+    if path
+        .chars()
+        .all(|c| c.is_ascii_alphanumeric() || "/._-".contains(c))
+    {
+        paths.push(path);
     }
-    !path.contains('\'') && command == format!("/bin/zsh -lc \"sed -n '1,240p' '{path}'\"")
+    for path in paths {
+        for reader in ["cat", "/bin/cat", "sed -n '1,240p'"] {
+            let body = format!("{reader} {path}");
+            for shell in ["/bin/zsh", "/bin/bash", "/bin/sh"] {
+                if command == format!("{shell} -lc {}", shell_quote(&body)) {
+                    return true;
+                }
+                // Retain the historical double-quoted event representation only
+                // when no expansion, substitution or escape can run inside it.
+                if !body.contains(['"', '$', '`', '\\'])
+                    && command == format!("{shell} -lc \"{body}\"")
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    false
+}
+
+fn shell_quote(value: &str) -> String {
+    format!("'{}'", value.replace('\'', "'\\''"))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn current_cat_and_historical_sed_read_only_the_exact_skill() {
+        let path = Path::new("/Users/test/.codex/skills/.system/imagegen/SKILL.md");
+        for command in [
+            "/bin/zsh -lc 'cat /Users/test/.codex/skills/.system/imagegen/SKILL.md'",
+            "/bin/zsh -lc \"sed -n '1,240p' /Users/test/.codex/skills/.system/imagegen/SKILL.md\"",
+        ] {
+            assert!(is_allowed_skill_read(command, path));
+        }
+        for command in [
+            "/bin/zsh -lc 'cat /Users/test/.codex/auth.json'",
+            "/bin/zsh -lc 'cat /Users/test/.codex/skills/.system/imagegen/SKILL.md; touch marker'",
+            "/bin/zsh -lc 'cat $(touch marker)/SKILL.md'",
+        ] {
+            assert!(!is_allowed_skill_read(command, path));
+        }
+        let injected = Path::new("/tmp/$(touch marker)/SKILL.md");
+        assert!(!is_allowed_skill_read(
+            "/bin/zsh -lc \"cat /tmp/$(touch marker)/SKILL.md\"",
+            injected
+        ));
+    }
 }

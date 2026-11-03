@@ -10,6 +10,27 @@ use promptgen_core::json::parse;
 static NEXT: AtomicU64 = AtomicU64::new(1);
 
 #[test]
+fn codex_auth_options_are_not_silently_ignored_by_other_modes() {
+    for mode in ["prompt-only", "openai-image-edit"] {
+        let output = Command::new(binary())
+            .args([
+                "image",
+                "--mode",
+                mode,
+                "--codex-home",
+                "/unused-login-home",
+            ])
+            .output()
+            .unwrap();
+        assert!(!output.status.success());
+        assert!(
+            String::from_utf8_lossy(&output.stderr)
+                .contains("openai-image-edit uses OPENAI_API_KEY")
+        );
+    }
+}
+
+#[test]
 fn compiles_image_prompt_examples() {
     let root = repository_root();
     for (command, example, marker) in [

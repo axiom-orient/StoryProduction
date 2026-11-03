@@ -244,7 +244,7 @@ pub fn execute_image_generation(
             },
             "the submitted compiled-prompt SHA-256 and character count are recorded for transport provenance".to_owned(),
             format!(
-                "every reported subject center must remain inside its typed placement region, with a {}-percentage-point visual measurement tolerance",
+                "subject count and placement apply per panel for cinematic_storyboard, otherwise to the full canvas; placement has a {}-percentage-point visual measurement tolerance",
                 fidelity::PLACEMENT_MEASUREMENT_TOLERANCE_PERCENT
             ),
             "quality and opaque-background intent are prompt-level controls and are not inferable from PNG bytes".to_owned(),

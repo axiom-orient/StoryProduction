@@ -58,6 +58,8 @@ impl Fixture {
             request: root.join("request.json"),
             output_dir: root.join("results/run"),
             promptgen_bin: root.join("test-promptgen"),
+            codex_binary: None,
+            codex_home: None,
             timeout_seconds: 1,
             artifact_wait_seconds: 0,
         };
@@ -166,6 +168,44 @@ impl Fixture {
             assert_eq!(result["result"]["failure"]["retryable"], false);
         }
     }
+}
+
+#[test]
+fn capability_payload_mode_mismatch_is_rejected_before_dispatch() {
+    let mut fixture = Fixture::new();
+    fixture.external(false);
+    let mut payload: Value =
+        serde_json::from_slice(&fs::read(fixture.root.join("payload.json")).unwrap()).unwrap();
+    payload["task_mode"] = json!("edit");
+    let bytes = serde_json::to_vec(&payload).unwrap();
+    fs::write(fixture.root.join("payload.json"), &bytes).unwrap();
+    fixture.request["payload"]["sha256"] = json!(hash::sha256_bytes(&bytes));
+    fixture.request["payload"]["byteLength"] = json!(bytes.len());
+    fixture.provider("touch dispatched");
+    assert!(fixture
+        .invoke()
+        .unwrap_err()
+        .message
+        .contains("typed payload disagree"));
+    assert!(!fixture.options.output_dir.exists());
+}
+
+#[test]
+fn codex_runtime_paths_are_forwarded_without_copying_credentials() {
+    let mut fixture = Fixture::new();
+    fixture.receipt_provider(false, false);
+    fixture.options.codex_binary = Some(fixture.options.promptgen_bin.clone());
+    fixture.options.codex_home = Some(fixture.root.join("private-auth-home"));
+    let result = fixture.invoke().unwrap();
+    fixture.assert_terminal(&result, "succeeded");
+    let args = result["command"].as_array().unwrap();
+    assert!(args.iter().any(|value| value == "--codex-binary"));
+    assert!(args.iter().any(|value| value == "--codex-home"));
+    assert!(!fixture
+        .options
+        .output_dir
+        .join("private-auth-home")
+        .exists());
 }
 
 #[test]

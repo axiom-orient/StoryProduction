@@ -86,3 +86,11 @@ Earlier Story/NVC/owner audit logs were `/tmp/story-native-verification-final.lo
 ## Reproduction
 
 Run `integration/scripts/verify-local.sh` from the repository root with Rust 1.97.1 on `PATH`. This development verifier requires Cargo/Rustc and configured owner/media gates; the deployed native text runtime does not. Set `STORY_REQUIRE_MEDIA_TESTS=0` for the basic text lane. Swift provider steps are in [provider analysis](../macos-provider/ANALYSIS.md).
+# 2026-11-03 공개 후 수정
+
+`run-promptgen`은 `--codex-binary`·`--codex-home`을 전달하며 capability와 typed payload의 실행 mode·참조 계약이 다르면 외부 호출 전에 거절한다. API 편집은 기존 OPENAI_API_KEY 인증과 단일 base-reference 경로를 유지한다.
+
+`text … animatic asset-draft`는 현재 NVC export에 결속된 Codex image.generate 결과를 기존 SAC draft로 인계한다. source·asset coverage·크기·actual artifact hash/length·provenance를 확인하고, 현재 packet 및 입력 bytes를 발행 전에 재관찰한다. SAC의 실제 PNG 검사와 사람의 승인, SMC의 candidate-only 렌더는 각 owner에 남는다. LayoutSheet는 필수 dependency로 추가하지 않았다.
+
+로컬 `integration/scripts/verify-local.sh`는 native owner build, contract pins, strict Clippy, native text/media 기계 검증을 통과했다. 해당 E2E 테스트는 fixture bytes·simulated human gates이며 실제 작품의 승인·이미지 품질 통과가 아니다. 실제 단일 장면 실행은 검토 후보와 독립 provider 시도로 별도 기록한다.
+

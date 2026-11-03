@@ -134,25 +134,26 @@ fn subject_geometry_failure_details(
 ) -> (String, String, String) {
     for subject in &request.subjects {
         if let Some(check) = counts.iter().find(|check| check.id == subject.id)
-            && check.observed != subject.count
+            && Some(check.observed) != fidelity::expected_instances(request, subject.count)
         {
+            let expected = fidelity::expected_instances(request, subject.count).unwrap_or(0);
             let summary = format!(
                 "subject {:?} has {} visible instance(s), expected exactly {}",
-                subject.id, check.observed, subject.count
+                subject.id, check.observed, expected
             );
-            let repair = if check.observed > subject.count {
+            let repair = if check.observed > expected {
                 format!(
                     "Remove exactly {} visible instance(s) of {} so exactly {} remain; preserve everything else.",
-                    check.observed - subject.count,
+                    check.observed - expected,
                     subject.description,
-                    subject.count
+                    expected
                 )
             } else {
                 format!(
                     "Add exactly {} visible instance(s) of {} so exactly {} are visible; preserve everything else.",
-                    subject.count - check.observed,
+                    expected - check.observed,
                     subject.description,
-                    subject.count
+                    expected
                 )
             };
             return (summary.clone(), summary, repair);

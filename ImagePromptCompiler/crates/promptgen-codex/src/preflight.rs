@@ -39,6 +39,16 @@ pub(super) fn validate_backend_contract(
             "the prompt compiler supports reference-guided generation, edit, and composite contracts, but this Codex adapter currently has no verified image-input transport; use a backend that binds the declared images by index",
         ));
     }
+    if request
+        .subjects
+        .iter()
+        .any(|subject| super::fidelity::expected_instances(request, subject.count).is_none())
+    {
+        return Err(CodexExecutionError::new(
+            "CODEX_SUBJECT_COUNT_RANGE",
+            "total visible subject count across storyboard panels exceeds the receipt count range",
+        ));
+    }
     Ok(())
 }
 

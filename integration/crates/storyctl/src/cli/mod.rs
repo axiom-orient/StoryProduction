@@ -22,7 +22,7 @@ use std::{
     io::Read,
     path::{Path, PathBuf},
 };
-const HELP:&str="storyctl [--story-root PATH] <doctor|verify-contracts|runtime|text|run-promptgen|capability|scene-asset>\n\nruntime assemble --output PATH [--include-promptgen true|false]\nruntime verify\ntext --workspace PATH [--geultu-bin PATH] [--nvc-bin PATH] [--narrative-project ID]\n  create|status|next|author|import-handoff|scene|storyboard|animatic|run|recover|export|package\nrun-promptgen [--capability-root PATH] --request PATH --output-dir PATH --promptgen-bin PATH\ncapability validate-candidate [--capability-root PATH] --current-source PATH --result PATH\nInstalled runtimes require an external --capability-root for capability files. Native Story orchestration; owners retain source and approval authority.";
+const HELP:&str="storyctl [--story-root PATH] <doctor|verify-contracts|runtime|text|run-promptgen|capability|scene-asset>\n\nruntime assemble --output PATH [--include-promptgen true|false]\nruntime verify\ntext --workspace PATH [--geultu-bin PATH] [--nvc-bin PATH] [--narrative-project ID]\n  create|status|next|author|import-handoff|scene|storyboard|animatic|run|recover|export|package\nrun-promptgen [--capability-root PATH] --request PATH --output-dir PATH --promptgen-bin PATH [--codex-binary PATH --codex-home PATH]\ncapability validate-candidate [--capability-root PATH] --current-source PATH --result PATH\nInstalled runtimes require an external --capability-root for capability files. Native Story orchestration; owners retain source and approval authority.";
 #[derive(Default)]
 struct Options {
     values: BTreeMap<String, Vec<String>>,
@@ -284,6 +284,8 @@ fn dispatch(root: &StoryResourceRoot, command: &str, args: &[String]) -> Result<
                     "request",
                     "output-dir",
                     "promptgen-bin",
+                    "codex-binary",
+                    "codex-home",
                     "timeout-seconds",
                     "artifact-wait-seconds",
                 ],
@@ -305,6 +307,8 @@ fn dispatch(root: &StoryResourceRoot, command: &str, args: &[String]) -> Result<
                     request: PathBuf::from(opt.required("request")?),
                     output_dir: PathBuf::from(opt.required("output-dir")?),
                     promptgen_bin,
+                    codex_binary: opt.get("codex-binary").map(PathBuf::from),
+                    codex_home: opt.get("codex-home").map(PathBuf::from),
                     timeout_seconds: opt
                         .integer("timeout-seconds", promptgen::DEFAULT_TIMEOUT_SECONDS)?,
                     artifact_wait_seconds: opt.integer(

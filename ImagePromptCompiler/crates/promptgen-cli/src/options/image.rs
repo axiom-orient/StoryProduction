@@ -111,6 +111,13 @@ pub(crate) fn parse_image_options(mut cursor: ArgCursor) -> Result<ImageOptions,
             _ => return Err(CliError::usage(format!("unknown option {argument:?}"))),
         }
     }
+    if mode != ImageMode::CodexImagegen
+        && (seen.contains("--codex-binary") || seen.contains("--codex-home"))
+    {
+        return Err(CliError::usage(
+            "--codex-binary and --codex-home require --mode codex-imagegen; openai-image-edit uses OPENAI_API_KEY",
+        ));
+    }
     Ok(ImageOptions {
         compile,
         mode,

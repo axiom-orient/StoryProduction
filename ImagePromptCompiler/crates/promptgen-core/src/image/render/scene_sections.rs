@@ -1,7 +1,7 @@
 //! Structured scene, subject, and composition sections.
 
 use super::super::common::{PromptLanguage, heading, label, quote};
-use super::super::model::ImagePromptRequest;
+use super::super::model::{ImagePromptRequest, ImageRenderProfile};
 use super::{placement, visual};
 
 pub(super) fn render_scene_subject_composition(
@@ -66,6 +66,9 @@ pub(super) fn render_scene_subject_composition(
             format!("pose={}", quote(&subject.pose)),
             format!("action={}", quote(&subject.action)),
         ];
+        if request.render_profile == ImageRenderProfile::CinematicStoryboard {
+            fields.push("count_scope=per_panel; placement_scope=panel_local".to_owned());
+        }
         if !subject.gaze.starts_with("시선 해당 없음")
             && !subject
                 .gaze
