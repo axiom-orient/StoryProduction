@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "nvc.text-storyboard-review/1",
+  "boardHash": "sha256:264d42954ad9ae9718e16251a986e751d5b682b41ddb9bc55328fc1b1a52c91c",
+  "source": {
+    "narrativePackageSha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "sceneMapSha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "releaseBundleSha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "decision": "approved",
+  "reviewer": "SYNTHETIC_TEST_ONLY",
+  "note": "Does not attest to a real project",
+  "reviewedAt": "2026-10-03T00:00:00.123456+00:00",
+  "contentHash": "sha256:7d01f284770448909149e91c879ec49846d5c76b3c705b134bbb4b1474ce9896"
+}

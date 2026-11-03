@@ -1,0 +1,45 @@
+{
+  "codes": [
+    {
+      "class": "REJECTED",
+      "code": "CONTRACT_REJECTED",
+      "retry": "AFTER_INPUT_CHANGE"
+    },
+    {
+      "class": "COMMIT_CONFLICT",
+      "code": "STALE_REVISION",
+      "retry": "RELOAD_AND_REPLAN"
+    },
+    {
+      "class": "REJECTED",
+      "code": "DIGEST_MISMATCH",
+      "retry": "NEVER_SAME_INPUT"
+    },
+    {
+      "class": "FAILED_VALIDATION",
+      "code": "VALIDATION_FAILED",
+      "retry": "WITHIN_REVISION_BUDGET"
+    },
+    {
+      "class": "PROVIDER_FAILED",
+      "code": "PROVIDER_TRANSIENT",
+      "retry": "POLICY_BOUNDED"
+    },
+    {
+      "class": "UNKNOWN_OUTCOME",
+      "code": "UNKNOWN_EXTERNAL_OUTCOME",
+      "retry": "RECONCILE_ONLY"
+    },
+    {
+      "class": "RECOVERY_REQUIRED",
+      "code": "PARTIAL_COMMIT",
+      "retry": "DOCTOR_RECOVERY"
+    },
+    {
+      "class": "REJECTED",
+      "code": "BUDGET_EXHAUSTED",
+      "retry": "HUMAN_DECISION"
+    }
+  ],
+  "schema_id": "geultu.dev/failure-catalog/v1"
+}

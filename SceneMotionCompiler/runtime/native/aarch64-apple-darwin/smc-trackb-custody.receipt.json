@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "targetTriple": "aarch64-apple-darwin",
+  "binaryName": "smc-trackb-custody",
+  "binarySha256": "sha256:a8423f4f720ae69cb7215e6df213032b8975921cc4db4ff191bbf4c81fff71b6",
+  "binaryBytes": 843472,
+  "toolVersion": "rustc 1.97.1 (8bab26f4f 2026-07-14)"
+}

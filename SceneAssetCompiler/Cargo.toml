@@ -1,0 +1,26 @@
+[package]
+name = "sac-animatic"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "SAC-owned immutable animatic PNG pack inspection and review"
+
+[lib]
+path = "native/src/lib.rs"
+
+[[bin]]
+name = "sac-animatic"
+path = "native/src/main.rs"
+
+[dependencies]
+serde = "1"
+serde_json = "1"
+sha2 = "0.10"
+jsonschema = { version = "=0.50.1", default-features = false }
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+libc = "0.2"
+flate2 = "1"
+crc32fast = "1"
+
+[dev-dependencies]
+tempfile = "3"

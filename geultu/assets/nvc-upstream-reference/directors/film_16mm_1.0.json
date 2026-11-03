@@ -1,0 +1,37 @@
+{
+  "preset_id": "film_16mm/1.0",
+  "semantic_affinities": [
+    "memory",
+    "nostalgia",
+    "loss",
+    "history"
+  ],
+  "visual_grammar": {
+    "surface": "film",
+    "grain": "physical"
+  },
+  "motion_grammar": {
+    "gate_weave": true
+  },
+  "camera_grammar": {
+    "default": "archival_camera"
+  },
+  "typography_grammar": {
+    "reveal": "frame_insert"
+  },
+  "transition_grammar": {
+    "default": "splice_or_burn"
+  },
+  "sound_grammar": {
+    "base": [
+      "projector",
+      "room_tone"
+    ]
+  },
+  "supported_motion_modes": [
+    "LAYERED_2_5D",
+    "GEN_I2V",
+    "HYBRID"
+  ],
+  "negative_defaults": []
+}

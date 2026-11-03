@@ -1,0 +1,932 @@
+{
+  "corpus": "Korean Story Polish v4 001-154",
+  "source_package": "story_new_korean_001-154_story-polish-v4.zip",
+  "source_package_sha256": "4fe26d8931d0115793c47f78e1edcb0b179a48466df46df7b1a0f770f223f874",
+  "story_count": 154,
+  "stories": [
+    {
+      "story_id": "001",
+      "filename": "001_아주_옛날에는_사람에게_그림자가_없었더란다..md",
+      "bytes": 2206,
+      "sha256": "2b72aab0f1048fa3e5a10a5d4c116864b06b883bf2627082cfc5729a1014c73a"
+    },
+    {
+      "story_id": "002",
+      "filename": "002_잠을_대신_자는_사람.md",
+      "bytes": 3902,
+      "sha256": "a461908c54ca1df1572d44810cc14d2cc1f4b587db51009984a26ae27d52a1e3"
+    },
+    {
+      "story_id": "003",
+      "filename": "003_막내.md",
+      "bytes": 1934,
+      "sha256": "6bf5cf4c1d70546644ba6ef06ab28fc0d3a47c1231bcd3ba392512c1242d0cc6"
+    },
+    {
+      "story_id": "004",
+      "filename": "004_기억_보관_서비스_이용약관.md",
+      "bytes": 2041,
+      "sha256": "b81d4fb2082fda371809d8a35334a6bda6184480cd6c2eee4f8e8f6d94856b41"
+    },
+    {
+      "story_id": "005",
+      "filename": "005_83초.md",
+      "bytes": 2045,
+      "sha256": "91884e09cc58ff15fb7bd81939e6bd5a5af221a42242bfa93e62e9978a7f9f57"
+    },
+    {
+      "story_id": "006",
+      "filename": "006_엄마_회사.md",
+      "bytes": 1977,
+      "sha256": "b23003db167a4eb41fed028932c3669b51bd4a63b5b7ce56040dbbdcffefb8e7"
+    },
+    {
+      "story_id": "007",
+      "filename": "007_버리고_싶은_마음_접수처.md",
+      "bytes": 2072,
+      "sha256": "276589c8ed1b126f7b12c8cc97ba8abb45a4fecc40748b326755cc877d081206"
+    },
+    {
+      "story_id": "008",
+      "filename": "008_목소리_보관_사기.md",
+      "bytes": 2312,
+      "sha256": "90c057a4d7fea2cb73da08f38dfd1750a69ce0a53a418398a4fe93b59a91c6f3"
+    },
+    {
+      "story_id": "009",
+      "filename": "009_기억하지_못하는_자장가.md",
+      "bytes": 1985,
+      "sha256": "ad5a12a52d7c8f69c2810cc0485f3bf380c052c73b7027557a1f15644261bd0f"
+    },
+    {
+      "story_id": "010",
+      "filename": "010_면회_시간.md",
+      "bytes": 1988,
+      "sha256": "ba3cd71aab856e5994f08b344435dca202a0c642765f0437214787cabbce9125"
+    },
+    {
+      "story_id": "011",
+      "filename": "011_돌이_되는_왕.md",
+      "bytes": 2136,
+      "sha256": "bc965aed69d6f9bb3fe214171b08b2724cea6421c9ade61df71288ef18cfaffd"
+    },
+    {
+      "story_id": "012",
+      "filename": "012_마지막_박자.md",
+      "bytes": 1738,
+      "sha256": "beda6710db96343891898fe7145ea8096ee4bcfd036d46c996c3b41ecfff822a"
+    },
+    {
+      "story_id": "013",
+      "filename": "013_은퇴한_용사의_귀환.md",
+      "bytes": 2116,
+      "sha256": "f088f3e59af6d77b88d5c056fa0821bca468aedcdc093bc8d5f1521feca76216"
+    },
+    {
+      "story_id": "014",
+      "filename": "014_할아버지가_칭찬하면_전기가_나가요.md",
+      "bytes": 1710,
+      "sha256": "c85d9325d68c37755d410e54a36a32e96a49167d8f9105d5c0b06ea32a28ac09"
+    },
+    {
+      "story_id": "015",
+      "filename": "015_딱_한_번_돌아갈_수_있는_하루.md",
+      "bytes": 2197,
+      "sha256": "a8068e65d92e3835ff3768ab5787c7e10e056bb4dbe2c147e7ffe6346b044d82"
+    },
+    {
+      "story_id": "016",
+      "filename": "016_새벽_두_시의_라디오.md",
+      "bytes": 2109,
+      "sha256": "af6b2db44ab5b1028026a9cb539e5bf555ad07e3237161c12e55595b1fe92ded"
+    },
+    {
+      "story_id": "017",
+      "filename": "017_하루_동안_돌려드립니다.md",
+      "bytes": 1954,
+      "sha256": "ce8114e72492b1fb7997070d53a0800e55afc253062d588d7d99b05ec22251f2"
+    },
+    {
+      "story_id": "018",
+      "filename": "018_먼저_가.md",
+      "bytes": 1461,
+      "sha256": "5bb107cd43ce7d08e2f272846a198cbe1a041d699ed8162165e687e5d9b47a44"
+    },
+    {
+      "story_id": "019",
+      "filename": "019_내가_들게.md",
+      "bytes": 1490,
+      "sha256": "6875b64dd36d320c88a50c532e4b821be3a20ff53d9d530efe6be6adfbf084a9"
+    },
+    {
+      "story_id": "020",
+      "filename": "020_실종신고_취소.md",
+      "bytes": 1973,
+      "sha256": "7519fd0535adaa248c8894ccc67dd72fe864d9836783f80cb11dbfd85a6aad3c"
+    },
+    {
+      "story_id": "021",
+      "filename": "021_친구의_기준.md",
+      "bytes": 2082,
+      "sha256": "5ef6a94392eaa652d60e629d9ff2e8647df16e6768fdb09e89f5b35395c07143"
+    },
+    {
+      "story_id": "022",
+      "filename": "022_마중_나오는_사람.md",
+      "bytes": 1833,
+      "sha256": "fd9345c09f3688c5bde389df23649325c5be8d8afd6ae014e88eafea4602fe04"
+    },
+    {
+      "story_id": "023",
+      "filename": "023_중고_시계.md",
+      "bytes": 1995,
+      "sha256": "52d6867ee29e7a61b05287320e9011ee86210d329de1a781fcda1449881b87f0"
+    },
+    {
+      "story_id": "024",
+      "filename": "024_아무도_앉지_않는_자리.md",
+      "bytes": 2018,
+      "sha256": "c2d2c6170e2f59f028447a2d2129c31e3a4dfbecde12282e16d20620a3255c21"
+    },
+    {
+      "story_id": "025",
+      "filename": "025_용서_대기번호.md",
+      "bytes": 2137,
+      "sha256": "bef1708e03bc4ff4ed7778cecadfaa8d152f92d2e0555f790c853ed230fa1742"
+    },
+    {
+      "story_id": "026",
+      "filename": "026_고양이가_보는_집.md",
+      "bytes": 1760,
+      "sha256": "1d7fecad44276abe27e69a70ebc56402d7f29abf70cf1deb1ad6b59f205639df"
+    },
+    {
+      "story_id": "027",
+      "filename": "027_마지막_역_다음.md",
+      "bytes": 2005,
+      "sha256": "79207dd7ed6f5eeee92f6e285183859a5e60d25fb528655ce1add048afe02b5e"
+    },
+    {
+      "story_id": "028",
+      "filename": "028_슈퍼_앞_의자.md",
+      "bytes": 1700,
+      "sha256": "a9b952e6b7215ade998d8aaae763e875c4ba0881118ca11020a4d1c6ab67914c"
+    },
+    {
+      "story_id": "029",
+      "filename": "029_왕의_코는_거짓말을_못_한다.md",
+      "bytes": 1721,
+      "sha256": "972f50a3e4dc5d9c63f426c064a7c9f28135e6adadf7295c86e78359f1c77992"
+    },
+    {
+      "story_id": "030",
+      "filename": "030_모르는_척해_주는_가게.md",
+      "bytes": 1988,
+      "sha256": "62683bfc00a017dc1c5b56826e877dff48852c43b62681357c2145c24595eecd"
+    },
+    {
+      "story_id": "031",
+      "filename": "031_낮_근무와_밤_근무의_노트.md",
+      "bytes": 1953,
+      "sha256": "3a81b9836e0883d4f1651ea295407bfb3f505936748b8dc1b85a5d7a2928537c"
+    },
+    {
+      "story_id": "032",
+      "filename": "032_다시_연결된_번호.md",
+      "bytes": 1857,
+      "sha256": "70bcc23766b300bd602036aedea3c3c22cdff692f8c0c2421eac81ed13f38d18"
+    },
+    {
+      "story_id": "033",
+      "filename": "033_유리구슬.md",
+      "bytes": 1823,
+      "sha256": "72bc87059fab36f66fb6b119b9c68c52bb8cbddfa0e5c853c35dc667d71596a5"
+    },
+    {
+      "story_id": "034",
+      "filename": "034_두_형제와_빈_곡간.md",
+      "bytes": 1726,
+      "sha256": "cc77b96a2092fa4b2e2d57748361e8d30394777f9b86bba898117a729701d264"
+    },
+    {
+      "story_id": "035",
+      "filename": "035_숟가락과_젓가락.md",
+      "bytes": 1276,
+      "sha256": "b2610a7fe446a517024b0987f37101683d4706d525c70412c32c30d41ee3fe9e"
+    },
+    {
+      "story_id": "036",
+      "filename": "036_달리기_싫어하는_사슴.md",
+      "bytes": 1493,
+      "sha256": "c270cc95b0ca9b39fdba101d95baa5bada310b2a96b5f7d6b1315b7dabab9fcd"
+    },
+    {
+      "story_id": "037",
+      "filename": "037_종을_너무_자주_울린_아이.md",
+      "bytes": 1627,
+      "sha256": "7b10a58e02bc18dcc578f5f7eef116a8cd938014ba98f9428cf1d583c6086f5d"
+    },
+    {
+      "story_id": "038",
+      "filename": "038_달을_빌려_간_나무꾼.md",
+      "bytes": 1552,
+      "sha256": "e9a6adde6fdcdc61066e65a0c9dbfa786ed30858fb5eb9c2e0cd996d01d281ae"
+    },
+    {
+      "story_id": "039",
+      "filename": "039_나무_아이의_첫_거짓말.md",
+      "bytes": 1529,
+      "sha256": "95f7c94d2db2f12c9887fb78ca522a263905274a52d2978dcb4929040595a2f7"
+    },
+    {
+      "story_id": "040",
+      "filename": "040_자리_맡아_드립니다.md",
+      "bytes": 1909,
+      "sha256": "72f1154a67ac3fcd716fa243e272afe7a280abd791fc78c8ae6a2ef207903343"
+    },
+    {
+      "story_id": "041",
+      "filename": "041_흰_우산을_든_아이.md",
+      "bytes": 1598,
+      "sha256": "cd246356cc894c7cb06bd598e63766cab3e4071c824b5808c755a2ad4f7bd218"
+    },
+    {
+      "story_id": "042",
+      "filename": "042_등대_안의_바다.md",
+      "bytes": 1597,
+      "sha256": "3d0880e0a7a1f700fefbd7ef5196009a670729309b55f70129537950201220d2"
+    },
+    {
+      "story_id": "043",
+      "filename": "043_높은_가지의_감.md",
+      "bytes": 1178,
+      "sha256": "214780654d7f469a5e71c9dcd34c4398d47ef189c9d4edd54172d1fc675e9195"
+    },
+    {
+      "story_id": "044",
+      "filename": "044_문이_좁은_식당.md",
+      "bytes": 1824,
+      "sha256": "8390f6a3697fbb7397d95828e9ba27d49863c4475834f9795b00a67a4e41c0be"
+    },
+    {
+      "story_id": "045",
+      "filename": "045_마른_우물.md",
+      "bytes": 1297,
+      "sha256": "20af80dee9564441ce475206a90e3d660571700d2e271e262d1c7ac26d474f14"
+    },
+    {
+      "story_id": "046",
+      "filename": "046_김치_끝_조각.md",
+      "bytes": 1484,
+      "sha256": "c2481ab94d75f89e28cd9920658df55d8c255be880cdfb7e17ed308d55d8b18a"
+    },
+    {
+      "story_id": "047",
+      "filename": "047_은퇴자_밴드.md",
+      "bytes": 1570,
+      "sha256": "5664721fabbac871529cb0609f822f0c712daf195ff4e45e6c07337861c26141"
+    },
+    {
+      "story_id": "048",
+      "filename": "048_새벽_해장국.md",
+      "bytes": 1724,
+      "sha256": "8ffabd9ed3d5ae10a348ae8cc6f81a097a284e88ecd0d09a0ec9e691c46cd3bb"
+    },
+    {
+      "story_id": "049",
+      "filename": "049_국_한_그릇.md",
+      "bytes": 1640,
+      "sha256": "c7cb5bb98d7d2af4f6d13926d39cb0fd2295ff84406fcebcbd44f1ed29ae1c9d"
+    },
+    {
+      "story_id": "050",
+      "filename": "050_십_분을_파는_시계방.md",
+      "bytes": 1928,
+      "sha256": "0263a1eb053a5c34dd72a7dfa8136c538a01dc093b7b2ed56ec8bfaf3956abe8"
+    },
+    {
+      "story_id": "051",
+      "filename": "051_대신_고맙다고_전해_드립니다.md",
+      "bytes": 1910,
+      "sha256": "01bd0345f5b97ba7146832128a4f739be28ad1668d73dbd1dd305d5f52825923"
+    },
+    {
+      "story_id": "052",
+      "filename": "052_옥상에서_가장_가까운_곳.md",
+      "bytes": 1924,
+      "sha256": "3c04b8aa0aaa7e21302e50c6d74f61db809e6f3787643cc513ff92741a2a312d"
+    },
+    {
+      "story_id": "053",
+      "filename": "053_유실물_보관_기간.md",
+      "bytes": 1801,
+      "sha256": "43f719b12ba0f58694a785f41ecaaf7ad2984c9240d0d060958974a32746d1d0"
+    },
+    {
+      "story_id": "054",
+      "filename": "054_감정_반품센터.md",
+      "bytes": 1724,
+      "sha256": "7873045a4d0c32f3f216386a18f60d5469bdcecd9ecfae709f2954c8798197a0"
+    },
+    {
+      "story_id": "055",
+      "filename": "055_사진관의_다섯_번째_칸.md",
+      "bytes": 1665,
+      "sha256": "02d02061836237a7fb2723259cfaf3f725af413ea00be0f30a63cea370e0293b"
+    },
+    {
+      "story_id": "056",
+      "filename": "056_정원을_물려받은_사람.md",
+      "bytes": 1668,
+      "sha256": "09b08e4e09c41ed1e4de07409c025db3c8fa5d9885d38e2a7ce54a7ea3798dc8"
+    },
+    {
+      "story_id": "057",
+      "filename": "057_아이들만_보이는_신호등.md",
+      "bytes": 1508,
+      "sha256": "4dc5b533604db91f149e3d14a4d945681ea31f05075ea91d3e7758d74082a29b"
+    },
+    {
+      "story_id": "058",
+      "filename": "058_바리의_빈_병.md",
+      "bytes": 1736,
+      "sha256": "393dcb8a270bfaf9fb516df3821e6434fc9a5072eeff14a2b07105d8e71d5078"
+    },
+    {
+      "story_id": "059",
+      "filename": "059_두_자매의_신발.md",
+      "bytes": 1401,
+      "sha256": "53e66436fa615e2513bd51ccf8ef61d5e3bd7d49e823dd5d0c0cbb764056ef4b"
+    },
+    {
+      "story_id": "060",
+      "filename": "060_마지막_배달.md",
+      "bytes": 1946,
+      "sha256": "f08f8a7b274e07f95f6def24927d03c9e48378e55add33b46537c2612f00bf3b"
+    },
+    {
+      "story_id": "061",
+      "filename": "061_별_하나_늦게_뜨는_이유.md",
+      "bytes": 1872,
+      "sha256": "33f74ba11fdfe313af8bf5e012a1ad2d046a7074b55c0be0e48668959844fb58"
+    },
+    {
+      "story_id": "062",
+      "filename": "062_그림자가_먼저_늙는다.md",
+      "bytes": 1599,
+      "sha256": "6ce0c2806ff11eda6af22bf31e7e8ffb174ec8524597321aa03df70ea8a43ca9"
+    },
+    {
+      "story_id": "063",
+      "filename": "063_꿈_수선집.md",
+      "bytes": 1607,
+      "sha256": "eb651cf8138c45a02efd1b452cfffef0fd6e08620c79228c2cecf426dbe28918"
+    },
+    {
+      "story_id": "064",
+      "filename": "064_후회_보험.md",
+      "bytes": 1834,
+      "sha256": "e259fa58b0d0569f415f6542189ad222bf204bddd11621ca6f586eed2d1786fe"
+    },
+    {
+      "story_id": "065",
+      "filename": "065_일주일에_한_시간.md",
+      "bytes": 1607,
+      "sha256": "38521420b615042064b1cac056a6c97c28d2bbe7823c8f8dd59779d64a88c01a"
+    },
+    {
+      "story_id": "066",
+      "filename": "066_명절_자리_배치.md",
+      "bytes": 1497,
+      "sha256": "e55b1cc33fc85cd2d74a64538f1ddd5ac8f0168a8de042f25a894d0aa8cbfda1"
+    },
+    {
+      "story_id": "067",
+      "filename": "067_하루를_다시_사는_법.md",
+      "bytes": 2066,
+      "sha256": "cb99b046bc04e50e855641d6f5937529c667ad2cd1980f50615c404f4ed8ca8b"
+    },
+    {
+      "story_id": "068",
+      "filename": "068_부재중_전화_17통.md",
+      "bytes": 1585,
+      "sha256": "c70ef462c19cfe70f638e8625936830d4ff2dd80cd4159edcc2dcca8fc2e8e2e"
+    },
+    {
+      "story_id": "069",
+      "filename": "069_세_가지_소원을_거절한_사람.md",
+      "bytes": 1655,
+      "sha256": "a5a96d61026298e16cc1f25d9808a8d9022429840dca260e8798fd2bcae80800"
+    },
+    {
+      "story_id": "070",
+      "filename": "070_숲의_재판.md",
+      "bytes": 1601,
+      "sha256": "7c381f96c73261cd949e3fa9aa06dea0f73bb0b684701744cc1e1ffd33fdf550"
+    },
+    {
+      "story_id": "071",
+      "filename": "071_가까이_서지_못하는_여자.md",
+      "bytes": 1895,
+      "sha256": "7812dc66d31b2c3bf2e5cddd522cc228b50021c017e8ca8e3325889133ccd388"
+    },
+    {
+      "story_id": "072",
+      "filename": "072_장난감_상자의_마지막_밤.md",
+      "bytes": 1699,
+      "sha256": "9627aca0378911e5a0ce2db36f1252aa6ec3d2714088ecd590d5997358a3434e"
+    },
+    {
+      "story_id": "073",
+      "filename": "073_늙은_사자의_마지막_포효.md",
+      "bytes": 1468,
+      "sha256": "adeffe49cb65467a6bfa7003af5b54e31cab0b1011ab12df17b09b58cf13df11"
+    },
+    {
+      "story_id": "074",
+      "filename": "074_기억_창고의_작은_직원.md",
+      "bytes": 1577,
+      "sha256": "b2cb66e5669e6c43d70c39683950ca45a87bdf2b0baf84b8c465d58001768160"
+    },
+    {
+      "story_id": "075",
+      "filename": "075_엄마가_남긴_알람.md",
+      "bytes": 1900,
+      "sha256": "9f18f171e8e64303a8604a1820458e9445cc7b68648e6c28353f9a162e4a21f9"
+    },
+    {
+      "story_id": "076",
+      "filename": "076_막차_기사.md",
+      "bytes": 1568,
+      "sha256": "79b66a5afc2802b5f25e23b74965819119c3d48f3039181aa76fc60238460fe0"
+    },
+    {
+      "story_id": "077",
+      "filename": "077_자판기_커피.md",
+      "bytes": 1496,
+      "sha256": "72e15c6de6766bb3e677b70054bd6155f563d63412bbf62f9f3486258b21bdcf"
+    },
+    {
+      "story_id": "078",
+      "filename": "078_셈을_못하는_아이.md",
+      "bytes": 1464,
+      "sha256": "53cac45b030282504edcf5d3790811fef10805941c560ef89c2927dab902e298"
+    },
+    {
+      "story_id": "079",
+      "filename": "079_3층_버튼.md",
+      "bytes": 1635,
+      "sha256": "24024958210b53b8f7763c43293bdccd90638725c6ffab2d656d9177788016e4"
+    },
+    {
+      "story_id": "080",
+      "filename": "080_거짓말이_자라는_화분.md",
+      "bytes": 1639,
+      "sha256": "a01ee5d430d8faedcff8c541ea7439d2212ca3959710e12db58d62a159d11b2b"
+    },
+    {
+      "story_id": "081",
+      "filename": "081_대장간_고양이_삼_년이면_불을_안다.md",
+      "bytes": 1276,
+      "sha256": "5b1a3b0d2ffe2a359c21a4ffb0bde31615cdf791db436c8d71d3448a696d9bda"
+    },
+    {
+      "story_id": "082",
+      "filename": "082_늙은_독수리는_새끼였던_때를_잊는다.md",
+      "bytes": 1457,
+      "sha256": "db1a44739f9fb9d22bd26b05c88b0fec84f313b804263b7f8cf26d10265cddc0"
+    },
+    {
+      "story_id": "083",
+      "filename": "083_곰_이야기하면_곰이_온다.md",
+      "bytes": 1469,
+      "sha256": "fd4461463f8709022ed175536c1be9016f7fd8667e024894433e8dfd992d3b0d"
+    },
+    {
+      "story_id": "084",
+      "filename": "084_메아리_장사꾼.md",
+      "bytes": 1557,
+      "sha256": "b903488ce2b42f8f4fab34c05a47091506b0be0b217363acc17733a1d4f8219e"
+    },
+    {
+      "story_id": "085",
+      "filename": "085_까치가_물고_간_반지.md",
+      "bytes": 1390,
+      "sha256": "a2845b24f98c5676513142f2160228cf80a047b8e3ac60ce34fca7a20d1aa109"
+    },
+    {
+      "story_id": "086",
+      "filename": "086_마지막_봉화.md",
+      "bytes": 1435,
+      "sha256": "8e2bcb7c15845d58c3f8ef134753850a52baab50072217a17401e4eeaee2d67c"
+    },
+    {
+      "story_id": "087",
+      "filename": "087_모래알로_벽_치기.md",
+      "bytes": 1336,
+      "sha256": "223acf0619a3839da1fff34389f997241be4ca20835f18123f4212f64cb11776"
+    },
+    {
+      "story_id": "088",
+      "filename": "088_낮에는_참새가_듣고_밤에는_와이파이가_듣는다.md",
+      "bytes": 1528,
+      "sha256": "486e7807cfce294e24dc2f9d0602a0ab8e8c316c9f07480b22b17a0a53c3be54"
+    },
+    {
+      "story_id": "089",
+      "filename": "089_고양이_말을_알아듣는_여자.md",
+      "bytes": 1773,
+      "sha256": "73d93b32e1168086ff7a53be4fd616548bd4c4274081262bfe9b312f7aa7692d"
+    },
+    {
+      "story_id": "090",
+      "filename": "090_사진_밖의_아버지.md",
+      "bytes": 1470,
+      "sha256": "3c00615f02541a15bc977af4a78e7add69af224b51d0953b48ba7f831f592bd9"
+    },
+    {
+      "story_id": "091",
+      "filename": "091_해가_북쪽에서_뜬_날.md",
+      "bytes": 1588,
+      "sha256": "0b1236a01cf346b0b6a9e56fa55503528f5669a9d94c0056041b5081e3fb38a1"
+    },
+    {
+      "story_id": "092",
+      "filename": "092_나이를_맡기는_은행.md",
+      "bytes": 1825,
+      "sha256": "84688deeb94d487add43f5c67d5873fa9d3dbaf598374d827f4f27c87ed706ea"
+    },
+    {
+      "story_id": "093",
+      "filename": "093_결혼사진의_빈_의자.md",
+      "bytes": 1273,
+      "sha256": "fc4bc709f06f379de1fac8d149ddeaf6f469495ded3f3ba8c8a00f571543ac1a"
+    },
+    {
+      "story_id": "094",
+      "filename": "094_바다에게_목소리를_빌린_소녀.md",
+      "bytes": 1471,
+      "sha256": "e27e416e3cf5a5173e81152cdc0d61d4db0d1a0eb666d8c4afdb52d001886476"
+    },
+    {
+      "story_id": "095",
+      "filename": "095_세_친구의_우물.md",
+      "bytes": 1434,
+      "sha256": "fa21854b62339e123177dedb1e05fae82dc3ca3cb628fd8598dc3e3d85b2d8ac"
+    },
+    {
+      "story_id": "096",
+      "filename": "096_참은_만큼_돌려드립니다.md",
+      "bytes": 1520,
+      "sha256": "ed77ea935e6b37549fcc2f363e76aaefd44fa2eab0ac2da4208ff71109b7e1a0"
+    },
+    {
+      "story_id": "097",
+      "filename": "097_좋아요가_사라진_날.md",
+      "bytes": 1451,
+      "sha256": "4c048141b3982764517d72fd2c7efcb845ffea8c12eaba0edf0626b24dc62bb1"
+    },
+    {
+      "story_id": "098",
+      "filename": "098_한_짝_장갑.md",
+      "bytes": 1471,
+      "sha256": "961295090d86a448d7354a508acfbf3e70a94f7c2f73acfda82960f109de5d09"
+    },
+    {
+      "story_id": "099",
+      "filename": "099_취하지_않는_술.md",
+      "bytes": 1597,
+      "sha256": "0d03fec95edd7f036993b9ea1003492038dc8254be79c9f666d464ae5a8e2fee"
+    },
+    {
+      "story_id": "100",
+      "filename": "100_패배한_장군의_독백.md",
+      "bytes": 1492,
+      "sha256": "c26bf3d706fd763cdff4e6143d35ad763574729acd2a95c8c59c3687947cc8a3"
+    },
+    {
+      "story_id": "101",
+      "filename": "101_성문_앞의_무명_병사.md",
+      "bytes": 1899,
+      "sha256": "d77f88c719fa7a0130e40acc21d595e51c54d73b3fd7d30ce4c68021e554eea1"
+    },
+    {
+      "story_id": "102",
+      "filename": "102_걱정_보관소의_만기일.md",
+      "bytes": 2372,
+      "sha256": "f07611c776ceebe118f3819b038e0ae464449e4f55e3ad5e22cc43c68bf1711a"
+    },
+    {
+      "story_id": "103",
+      "filename": "103_답장이_오지_않는_편지.md",
+      "bytes": 1943,
+      "sha256": "13a887ece4a5ea9c1ef28b0279a0540a5ce48e422d490c5ab47de5b978611ea2"
+    },
+    {
+      "story_id": "104",
+      "filename": "104_입이_거친_세탁소_할머니.md",
+      "bytes": 2023,
+      "sha256": "73a17a20c754146fcbe9036faf2f476491257e433776a577d7434efb9ed0cfd4"
+    },
+    {
+      "story_id": "105",
+      "filename": "105_고양이가_모르는_하루.md",
+      "bytes": 1879,
+      "sha256": "4cc9374c63a35d2e1fea24888646115972569e82a5ee77b5f5a8dddb724af0e9"
+    },
+    {
+      "story_id": "106",
+      "filename": "106_강아지의_귀.md",
+      "bytes": 1104,
+      "sha256": "e65b7ecacbb1d80f789470dc8bb33870970aa1a45924f6b1b35eee258e68158f"
+    },
+    {
+      "story_id": "107",
+      "filename": "107_평범한_날의_영수증.md",
+      "bytes": 1240,
+      "sha256": "acf25726d95044bf29240b1c33cb50a151e52bb5c5c3fb91afbf5a282e0b9aaa"
+    },
+    {
+      "story_id": "108",
+      "filename": "108_콩_한_알.md",
+      "bytes": 1410,
+      "sha256": "2c9f71aa162a02e52b9be2f1b03a1b190746eb96e720f643cefa91f095667ce1"
+    },
+    {
+      "story_id": "109",
+      "filename": "109_초_하나.md",
+      "bytes": 1839,
+      "sha256": "31a40d732b3de80d1f4990adbb2bf0ae96c1db959a7ae9e94312e464601c4dab"
+    },
+    {
+      "story_id": "110",
+      "filename": "110_후회_지우개.md",
+      "bytes": 1857,
+      "sha256": "e7176692708c8a81819070633eef5962ac143f3494e83862d76231bf831888bc"
+    },
+    {
+      "story_id": "111",
+      "filename": "111_급식실의_빈_접시.md",
+      "bytes": 1991,
+      "sha256": "371c32e3de75d77d04ff196f8625ee6dbdfaf4dbb98506b37a252efd10baa685"
+    },
+    {
+      "story_id": "112",
+      "filename": "112_수요일_밤의_토요일.md",
+      "bytes": 1448,
+      "sha256": "3292d6ef84b986352ce73722ac3bbce130453e66f9a08739b74a14b03190707e"
+    },
+    {
+      "story_id": "113",
+      "filename": "113_왕의_늙은_말.md",
+      "bytes": 1689,
+      "sha256": "4e190bf478a0c39eca5967b005ff488f8358d00cfda9309e5268cc2a988a8576"
+    },
+    {
+      "story_id": "114",
+      "filename": "114_국가기밀문서-우체통_프로젝트.md",
+      "bytes": 1980,
+      "sha256": "c57fb8444ba60eda25936011cdcd6e96f6b9dbfce4ef844b3b0a317dda2e2207"
+    },
+    {
+      "story_id": "115",
+      "filename": "115_관리실_불빛.md",
+      "bytes": 1617,
+      "sha256": "f4fc07b73117b73e3e918df6cddae00364c43be92151aa6bec486cfee2b9cfbb"
+    },
+    {
+      "story_id": "116",
+      "filename": "116_호텔_수건.md",
+      "bytes": 1557,
+      "sha256": "0771e87121f4c83753cfce9960799d4c7dcc7daf45794950b5bf4ea8004627bd"
+    },
+    {
+      "story_id": "117",
+      "filename": "117_복사기_옆의_머그컵.md",
+      "bytes": 1559,
+      "sha256": "8e66d22e73329c679aec3a18a8a28097e92f258a44e150852a24de14ed71b8b2"
+    },
+    {
+      "story_id": "118",
+      "filename": "118_이_부장의_낚시.md",
+      "bytes": 1524,
+      "sha256": "fe837b3d2d41d5cb4d6fbe2358f2c0c8bf899dd058a950d63ef50349a77fadec"
+    },
+    {
+      "story_id": "119",
+      "filename": "119_손바닥만_한_자국.md",
+      "bytes": 1468,
+      "sha256": "028f050a6309b56e77bf105f1a8bc3040eab6db3a5112be07206352f94a92776"
+    },
+    {
+      "story_id": "120",
+      "filename": "120_세_개의_코드.md",
+      "bytes": 1600,
+      "sha256": "06785ebc852f2cde8b92497613007ca88e8026e88357f8e56db9ddf6dfdf5dbb"
+    },
+    {
+      "story_id": "121",
+      "filename": "121_수면선.md",
+      "bytes": 1385,
+      "sha256": "ee2765d3bc58faf19694d6d89f12887d4e2de772a1f8e60ac90b4491b9ec31b0"
+    },
+    {
+      "story_id": "122",
+      "filename": "122_막차의_빈_정류장.md",
+      "bytes": 1513,
+      "sha256": "145fc443b732868456f3fee8bb7e906053baee1f255a749bdeaa21d2689a6b7a"
+    },
+    {
+      "story_id": "123",
+      "filename": "123_등대지기의_노래.md",
+      "bytes": 1648,
+      "sha256": "22d6c0eb664230ece28474891e9f1b8ac0078bdf12aee0401ede9a7b381fa4a1"
+    },
+    {
+      "story_id": "124",
+      "filename": "124_할머니가_웃으면_눈이_와요.md",
+      "bytes": 1700,
+      "sha256": "32bd23329e3c9c5217dd87382ba00c7187daf4db09a7b3c80e3201451d573e15"
+    },
+    {
+      "story_id": "125",
+      "filename": "125_일요일의_다리미.md",
+      "bytes": 1437,
+      "sha256": "7bec49e863f6963f3e1fb3c1ef088c5e4944829bdf2bd9eec8e9c495c8a0ecb9"
+    },
+    {
+      "story_id": "126",
+      "filename": "126_죽음에게_매일_편지를_쓴_소녀.md",
+      "bytes": 2091,
+      "sha256": "b06cd977ee817938d9ca0090765f854d35ccde6108fd728ff329b339cab3702e"
+    },
+    {
+      "story_id": "127",
+      "filename": "127_약속의_벤치.md",
+      "bytes": 1615,
+      "sha256": "86d4af2892fc2a8a06936a3ed35fd9a4e7c0674c5e67ec2beb5d5d2e005685fb"
+    },
+    {
+      "story_id": "128",
+      "filename": "128_마지막_손님을_깎는_이발사.md",
+      "bytes": 1727,
+      "sha256": "143684fe087e09f1aeb7d6c6e46559422e8c169838e7f22a8461bc2a0fb634a1"
+    },
+    {
+      "story_id": "129",
+      "filename": "129_내일에서_온_친구.md",
+      "bytes": 2607,
+      "sha256": "243d92f1bad0e820d56cb4e962e3552395fa57832182a49370d1cd4f2109f472"
+    },
+    {
+      "story_id": "130",
+      "filename": "130_화가의_빈_캔버스.md",
+      "bytes": 1530,
+      "sha256": "f6987a97d987c252ea9ebb48417ca431557a893ab42d20556d381c060be7300e"
+    },
+    {
+      "story_id": "131",
+      "filename": "131_할머니의_두_번째_이름.md",
+      "bytes": 1596,
+      "sha256": "65acb88c41a8cdcbaeae7a679256ca9451931096ca01be1e0cb08226efef5042"
+    },
+    {
+      "story_id": "132",
+      "filename": "132_수호자의_퇴근.md",
+      "bytes": 1722,
+      "sha256": "a4fae3a059811c1795f2583d62546255b3aee8f0c00fc4f0b52a461e4dff7e36"
+    },
+    {
+      "story_id": "133",
+      "filename": "133_열지_않은_타임캡슐.md",
+      "bytes": 1804,
+      "sha256": "9548c5f40e175c9cbc1d37d50885a5944e545b0eeb789650233d38001b21c920"
+    },
+    {
+      "story_id": "134",
+      "filename": "134_지옥의_리코더.md",
+      "bytes": 1524,
+      "sha256": "0b5e322df19d316febc218426e304ce2691528d835d08a4a43dcd28e0156c546"
+    },
+    {
+      "story_id": "135",
+      "filename": "135_보이지_않는_사람의_상담.md",
+      "bytes": 1765,
+      "sha256": "c55884408ab1ec9d3bae25519c9aac37c58a4eb7cb1c28f409b1e04e696a225e"
+    },
+    {
+      "story_id": "136",
+      "filename": "136_아버지의_스텝.md",
+      "bytes": 1641,
+      "sha256": "02467ff2287a59256d35ecd33d84c8c470fa168a8dd9ecc41c23f00f99cef546"
+    },
+    {
+      "story_id": "137",
+      "filename": "137_말이_바뀌는_가족.md",
+      "bytes": 1682,
+      "sha256": "c8a33443a154e36f1729d5cafcf324a74e26478f8df2f32548e42fc218bbe500"
+    },
+    {
+      "story_id": "138",
+      "filename": "138_사람이_있는_편의점.md",
+      "bytes": 1664,
+      "sha256": "918e146e2ddc5527f8e92a4bacadf2813aed0455d449eabbd62e6f6512b25928"
+    },
+    {
+      "story_id": "139",
+      "filename": "139_맞은편_창문.md",
+      "bytes": 1583,
+      "sha256": "8a5c78267dc4b416aacc3652dade9016f360bffecfcc544ff7c2a474cc2ce75c"
+    },
+    {
+      "story_id": "140",
+      "filename": "140_놓고_온_우산.md",
+      "bytes": 1337,
+      "sha256": "bbb6aa0509ecf0747b0b781553d8ecac4c723d0db22b7607900eac7779926eb8"
+    },
+    {
+      "story_id": "141",
+      "filename": "141_귀신들의_수선집.md",
+      "bytes": 1775,
+      "sha256": "6f6bfb4420dc3b36d7b4d97541c173e7b4a664bbe47f9be6f0ec0d6727b82831"
+    },
+    {
+      "story_id": "142",
+      "filename": "142_한_사람의_소원.md",
+      "bytes": 1598,
+      "sha256": "05bd440f8e8b0adc81f73e66aafd32aa833b497e0795490b51b6871a6a648a79"
+    },
+    {
+      "story_id": "143",
+      "filename": "143_화성에서_온_단체채팅.md",
+      "bytes": 1864,
+      "sha256": "aba4a83f66b8d9e1557173dae2539f3a886fa255798f196d9a96143b87c60c67"
+    },
+    {
+      "story_id": "144",
+      "filename": "144_내_동생은_시간_여행자.md",
+      "bytes": 1775,
+      "sha256": "bc68303f6808f84ddd6c0cd63315fe19fed86e3c6ef9fe55761b8e6cef35ce4f"
+    },
+    {
+      "story_id": "145",
+      "filename": "145_칼국수_두_그릇.md",
+      "bytes": 1839,
+      "sha256": "72c178365820e9a8a69e50dc422100fa52190a73221a87d7e7512388e68daf04"
+    },
+    {
+      "story_id": "146",
+      "filename": "146_마지막_손그림_포스터.md",
+      "bytes": 1931,
+      "sha256": "c80e5fa0b9ab4a4ba0c68579bd976732924e40deba620a430fd6a24787add470"
+    },
+    {
+      "story_id": "147",
+      "filename": "147_세_여신과_빈_사과.md",
+      "bytes": 1735,
+      "sha256": "1c9e0240b404ba1057330006ad08c5c15b3d456eecb9edfa7bac7039a9ba31db"
+    },
+    {
+      "story_id": "148",
+      "filename": "148_소개팅에서_미래_얼굴을_본_남자.md",
+      "bytes": 1714,
+      "sha256": "71b7c4c168645bccd481be302d647c0afb9988b0be5a7e0b84fe0b9fbd9e3c35"
+    },
+    {
+      "story_id": "149",
+      "filename": "149_아들이_찾아온_날.md",
+      "bytes": 3792,
+      "sha256": "4b5b6f0d45b9b4e7aa684e82784c22a58254402563a89ca27ad8bfbd236ce7a3"
+    },
+    {
+      "story_id": "150",
+      "filename": "150_악마_인턴과_계약한_남자.md",
+      "bytes": 1872,
+      "sha256": "da32a8c1884069de75a5bbccca8457ee626639f52094da080a7a8ca3c66518bb"
+    },
+    {
+      "story_id": "151",
+      "filename": "151_가상도시의_꽃집.md",
+      "bytes": 1794,
+      "sha256": "4edc007218d29af6d775d201f310e74a15c1b2a9eff768d287a1cc6ecd6a832e"
+    },
+    {
+      "story_id": "152",
+      "filename": "152_울어도_출근할_수_있는_안경.md",
+      "bytes": 1601,
+      "sha256": "7e017d6f0691a7457b590466ccc58733add3ff096a1ca74fee8daeec3c674152"
+    },
+    {
+      "story_id": "153",
+      "filename": "153_혼인_전_열람실.md",
+      "bytes": 2040,
+      "sha256": "03775334f67c719fd40c652b3fe19f5769152af47ae7731561ffed0efbef6dd3"
+    },
+    {
+      "story_id": "154",
+      "filename": "154_고맙다는_말을_못_듣는_남자.md",
+      "bytes": 2349,
+      "sha256": "6517d672c748b2ca75b4728b239c8cb38eb586323efbe6caca65d8990383c1cb"
+    }
+  ]
+}

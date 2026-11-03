@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RenderIR",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "jobs": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "RenderJob",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "job_id": {
+            "type": "string"
+          },
+          "shot_id": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "LAYERED_2_5D",
+              "RIGGED_2D",
+              "STOP_MOTION",
+              "GEN_I2V",
+              "GEN_T2V",
+              "SCENE_3D",
+              "HYBRID"
+            ]
+          },
+          "backend_id": {
+            "type": "string"
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "outputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "invariants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "seed": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "job_id",
+          "shot_id",
+          "mode",
+          "backend_id",
+          "inputs",
+          "outputs",
+          "invariants",
+          "seed"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "jobs"
+  ]
+}

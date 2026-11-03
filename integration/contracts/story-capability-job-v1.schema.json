@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://story-production.local/contracts/capability-job/v1",
+  "title": "StoryCapabilityJob v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "jobId",
+    "requestId",
+    "requestHash",
+    "capability",
+    "source",
+    "provider",
+    "status",
+    "stage",
+    "attempt",
+    "cancelRequested",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "story.capability-job/1"
+    },
+    "jobId": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/identity"
+    },
+    "requestId": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/identity"
+    },
+    "requestHash": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/sha256"
+    },
+    "capability": {
+      "enum": [
+        "image.prompt.compile",
+        "image.generate",
+        "image.edit",
+        "image.effect"
+      ]
+    },
+    "source": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/sourceRef"
+    },
+    "provider": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/provider"
+    },
+    "status": {
+      "enum": [
+        "queued",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "outcome_unknown"
+      ]
+    },
+    "stage": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "attempt": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "cancelRequested": {
+      "type": "boolean"
+    },
+    "resultId": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/identity"
+    },
+    "failure": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/failure"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "succeeded"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "resultId"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "failure"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "cancelled"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "cancelRequested": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "queued",
+              "running"
+            ]
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "failure"
+              ]
+            },
+            {
+              "required": [
+                "resultId"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "succeeded"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "cancelRequested": {
+            "const": false
+          }
+        },
+        "not": {
+          "required": [
+            "failure"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "failed",
+              "cancelled",
+              "outcome_unknown"
+            ]
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "required": [
+            "resultId"
+          ]
+        }
+      }
+    }
+  ]
+}

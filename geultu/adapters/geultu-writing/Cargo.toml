@@ -1,0 +1,10 @@
+[package]
+name = "geultu-writing"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+description = "Built-in writing-type planning adapters for Geultu"
+
+[dependencies]
+geultu = { path = "../../crates/geultu" }
+serde_json.workspace = true

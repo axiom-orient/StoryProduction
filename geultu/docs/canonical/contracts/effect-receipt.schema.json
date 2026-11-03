@@ -1,0 +1,61 @@
+{
+  "$id": "https://geultu.dev/schema/effect-receipt/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "effect_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "external_reference": {
+      "maxLength": 2000,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "failure_code": {
+      "pattern": "^[A-Z][A-Z0-9_]{2,127}$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "idempotency_key": {
+      "pattern": "^idem_[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "receipt_id": {
+      "pattern": "^effect_[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "request_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "response_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "COMMITTED",
+        "FAILED",
+        "UNKNOWN_OUTCOME"
+      ]
+    }
+  },
+  "required": [
+    "receipt_id",
+    "effect_id",
+    "idempotency_key",
+    "status",
+    "request_digest"
+  ],
+  "title": "EffectReceipt v1",
+  "type": "object"
+}

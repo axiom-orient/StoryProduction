@@ -1,0 +1,9 @@
+{
+  "protocol_version": 1,
+  "request_id": "R-001",
+  "operation": "DESCRIBE",
+  "ok": true,
+  "result": {},
+  "error": null,
+  "error_class": null
+}

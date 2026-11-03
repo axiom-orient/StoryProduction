@@ -1,0 +1,23 @@
+{
+  "protocol_version": 1,
+  "request_id": "R-001",
+  "operation": "DESCRIBE",
+  "ok": true,
+  "result": {
+    "backend_id": "web",
+    "version": "1.0.0",
+    "fingerprint": "web@fixture",
+    "operations": [
+      "MATERIALIZE",
+      "RENDER"
+    ],
+    "formats": [
+      "HTML",
+      "PNG",
+      "PDF"
+    ],
+    "limits": {}
+  },
+  "error": null,
+  "error_class": null
+}

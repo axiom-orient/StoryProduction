@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NarrativePackage",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "package_id": {
+      "type": "string",
+      "pattern": "^np_[A-Za-z0-9._-]+$"
+    },
+    "canonical_narrative": {
+      "$ref": "./canonical-narrative.schema.json"
+    },
+    "planning_synopsis": {
+      "anyOf": [
+        {
+          "$ref": "./synopsis.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "adaptation_policy": {
+      "type": "string",
+      "enum": [
+        "faithful",
+        "interpretive",
+        "expansive"
+      ]
+    },
+    "target": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "Target",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "duration_min_sec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "duration_max_sec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "aspect_ratio": {
+          "type": "string",
+          "enum": [
+            "9:16",
+            "16:9",
+            "1:1",
+            "4:5"
+          ]
+        },
+        "fps": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "FPS",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "num": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "den": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "num",
+            "den"
+          ]
+        },
+        "resolution": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "title": "Resolution",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "width": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "width",
+            "height"
+          ]
+        },
+        "text_mode": {
+          "type": "string",
+          "enum": [
+            "source_exact",
+            "adapted",
+            "none"
+          ]
+        },
+        "audio_mode": {
+          "type": "string",
+          "enum": [
+            "none",
+            "ambience",
+            "music_ambience",
+            "narration",
+            "full"
+          ]
+        }
+      },
+      "required": [
+        "duration_min_sec",
+        "duration_max_sec",
+        "aspect_ratio",
+        "fps",
+        "resolution",
+        "text_mode",
+        "audio_mode"
+      ]
+    },
+    "constraints": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "Constraints",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "must_keep": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "must_not": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "visual_references": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rights_profile": {
+          "type": "string",
+          "enum": [
+            "original",
+            "licensed",
+            "public_domain",
+            "mixed",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "must_keep",
+        "must_not",
+        "visual_references",
+        "rights_profile"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "package_id",
+    "canonical_narrative",
+    "planning_synopsis",
+    "adaptation_policy",
+    "target",
+    "constraints"
+  ]
+}

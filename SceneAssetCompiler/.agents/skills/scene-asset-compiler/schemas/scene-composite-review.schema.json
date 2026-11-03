@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/scene-composite-review.schema.json",
+  "title": "SceneCompositeReview",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scene_id",
+    "status",
+    "checks",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "scene_id": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "APPROVED",
+        "REJECTED"
+      ]
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "composition",
+        "identity_binding",
+        "lighting_color",
+        "occlusion",
+        "seams",
+        "layer_harmony"
+      ],
+      "properties": {
+        "composition": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "identity_binding": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "lighting_color": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "occlusion": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "seams": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "layer_harmony": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "composition",
+        "identity_binding",
+        "lighting_color",
+        "occlusion",
+        "seams",
+        "layer_harmony"
+      ],
+      "properties": {
+        "composition": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identity_binding": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lighting_color": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "occlusion": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seams": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "layer_harmony": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

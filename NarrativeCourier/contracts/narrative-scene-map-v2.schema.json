@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-courier.local/contracts/narrative-scene-map/v2.schema.json",
+  "title": "NarrativeSceneMap v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "map_id",
+    "narrative_id",
+    "screenplay_sha256",
+    "scene_ir_sha256",
+    "scenes",
+    "semantic_manifest"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 2 },
+    "map_id": { "type": "string", "pattern": "^nsm2_[0-9a-f]{64}$" },
+    "narrative_id": { "type": "string", "minLength": 1, "maxLength": 512 },
+    "screenplay_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "scene_ir_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10000,
+      "items": { "$ref": "#/$defs/scene" }
+    },
+    "semantic_manifest": { "$ref": "#/$defs/semantic_manifest" }
+  },
+  "$defs": {
+    "scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scene_id",
+        "order",
+        "heading",
+        "setting",
+        "location",
+        "time_of_day",
+        "time_of_day_label",
+        "silent",
+        "characters",
+        "action",
+        "dialogue",
+        "asset_requirements"
+      ],
+      "properties": {
+        "scene_id": { "type": "string", "pattern": "^SCN-[0-9]{3,}$", "maxLength": 64 },
+        "order": { "type": "integer", "minimum": 1, "maximum": 10000 },
+        "heading": { "type": "string", "minLength": 1, "maxLength": 16384 },
+        "setting": { "enum": ["INT", "EXT", "INT/EXT", "I/E"] },
+        "location": { "type": "string", "minLength": 1, "maxLength": 4096 },
+        "time_of_day": {
+          "enum": ["dawn", "morning", "noon", "day", "afternoon", "dusk", "night"]
+        },
+        "time_of_day_label": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "silent": { "type": "boolean" },
+        "characters": {
+          "type": "array",
+          "maxItems": 256,
+          "items": { "type": "string", "minLength": 1, "maxLength": 256 },
+          "uniqueItems": true
+        },
+        "action": {
+          "type": "array",
+          "maxItems": 10000,
+          "items": { "type": "string", "minLength": 1, "maxLength": 16384 }
+        },
+        "dialogue": {
+          "type": "array",
+          "maxItems": 10000,
+          "items": { "$ref": "#/$defs/dialogue" }
+        },
+        "asset_requirements": {
+          "type": "array",
+          "maxItems": 1000,
+          "items": { "$ref": "#/$defs/asset_requirement" }
+        }
+      }
+    },
+    "dialogue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["character", "line"],
+      "properties": {
+        "character": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "line": { "type": "string", "minLength": 1, "maxLength": 16384 }
+      }
+    },
+    "asset_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "description", "source"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "description": { "type": "string", "minLength": 1, "maxLength": 4096 },
+        "source": { "type": "string", "minLength": 1, "maxLength": 4096 }
+      }
+    },
+    "semantic_manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "semantic_manifest_hash", "entries"],
+      "properties": {
+        "schema_version": { "type": "integer", "const": 1 },
+        "semantic_manifest_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "entries": {
+          "type": "array",
+          "maxItems": 100000,
+          "items": { "$ref": "#/$defs/semantic_entry" }
+        }
+      }
+    },
+    "semantic_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_id",
+        "entry_hash",
+        "scene_id",
+        "kind",
+        "source_text",
+        "source_locator"
+      ],
+      "properties": {
+        "semantic_id": { "type": "string", "pattern": "^semantic\\.[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+        "entry_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "scene_id": { "type": "string", "pattern": "^SCN-[0-9]{3,}$", "maxLength": 64 },
+        "kind": {
+          "type": "string",
+          "enum": ["action", "dialogue", "emotion", "lightingTransition", "cameraMovement"]
+        },
+        "source_text": { "type": "string", "minLength": 1, "maxLength": 16384 },
+        "source_locator": { "$ref": "#/$defs/source_locator" }
+      }
+    },
+    "source_locator": {
+      "$comment": "Cross-field invariant: when field is dialogue, dialogue_index must equal occurrence_index; the focused verifier enforces this value equality.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scene_id", "field", "occurrence_index"],
+      "properties": {
+        "scene_id": { "type": "string", "pattern": "^SCN-[0-9]{3,}$", "maxLength": 64 },
+        "field": {
+          "type": "string",
+          "enum": ["action", "dialogue", "emotion", "lightingTransition", "cameraMovement"]
+        },
+        "occurrence_index": { "type": "integer", "minimum": 0, "maximum": 10000 },
+        "character": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "dialogue_index": { "type": "integer", "minimum": 0, "maximum": 10000 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "field": { "const": "dialogue" } } },
+          "then": { "required": ["character", "dialogue_index"] }
+        }
+      ]
+    }
+  }
+}

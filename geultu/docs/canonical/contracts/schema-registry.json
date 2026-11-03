@@ -1,0 +1,286 @@
+{
+  "canonicalization": {
+    "algorithm": "RFC8785-JCS",
+    "digest": "SHA-256",
+    "format": "sha256:<lowercase-hex>"
+  },
+  "schema_id": "geultu.dev/schema-registry/v1",
+  "schemas": [
+    {
+      "file": "artifact-commit.schema.json",
+      "id": "https://geultu.dev/schema/artifact-commit/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifact-ref.schema.json",
+      "id": "https://geultu.dev/schema/artifact-ref/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "command-envelope.schema.json",
+      "id": "https://geultu.dev/schema/command-envelope/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "domain-decision.schema.json",
+      "id": "https://geultu.dev/schema/domain-decision/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "effect-receipt.schema.json",
+      "id": "https://geultu.dev/schema/effect-receipt/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "failure-record.schema.json",
+      "id": "https://geultu.dev/schema/failure-record/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "human-decision.schema.json",
+      "id": "https://geultu.dev/schema/human-decision/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "geultu-story-export-spec.schema.json",
+      "id": "https://geultu.dev/schema/geultu-story-export-spec/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "project-state.schema.json",
+      "id": "https://geultu.dev/schema/project-state/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "receipt-selector.schema.json",
+      "id": "https://geultu.dev/schema/receipt-selector/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "route-admission.schema.json",
+      "id": "https://geultu.dev/schema/route-admission/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "reviewed-synopsis-handoff.schema.json",
+      "id": "https://geultu.dev/schema/reviewed-synopsis-handoff/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "stage-contract.schema.json",
+      "id": "https://geultu.dev/schema/stage-contract/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "geultu-story-package.schema.json",
+      "id": "https://geultu.dev/schema/geultu-story-package/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "text-master.schema.json",
+      "id": "https://geultu.dev/schema/text-master/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "text-run-state.schema.json",
+      "id": "https://geultu.dev/schema/text-run-state/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "validation-receipt.schema.json",
+      "id": "https://geultu.dev/schema/validation-receipt/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "visual-run-state.schema.json",
+      "id": "https://geultu.dev/schema/visual-run-state/v1",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/approval_decision.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/approval_decision.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/approved_style.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/approved_style.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/author_review.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/author_review.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/compiled_canon.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/compiled_canon.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/completion_report.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/completion_report.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/craft_input_plan.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/craft_input_plan.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/craft_reviewed_draft.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/craft_reviewed_draft.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/craft_strategy_binding.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/craft_strategy_binding.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/dramatic_structure.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/dramatic_structure.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/frozen_draft_plan.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/frozen_draft_plan.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/genre_contract.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/genre_contract.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/genre_selection.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/genre_selection.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/narrative_design.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/narrative_design.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/normalized_request.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/normalized_request.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/normalized_style_corpus.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/normalized_style_corpus.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/polish_patch.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/polish_patch.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/polished_draft.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/polished_draft.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/refinement_diagnosis.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/refinement_diagnosis.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/revised_draft.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/revised_draft.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/revision_directive.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/revision_directive.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/revision_recheck.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/revision_recheck.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/rights_report.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/rights_report.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/semantic_guard_report.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/semantic_guard_report.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/semantic_review.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/semantic_review.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/story_diagnosis.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/story_diagnosis.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/structural_review.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/structural_review.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/style_candidate.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/style_candidate.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/style_comparison.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/style_comparison.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/style_profile.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/style_profile.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/style_review.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/style_review.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/text_master.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/text_master.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/treatment_scene_plan.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/treatment_scene_plan.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "artifacts/unit_draft_set.v2.schema.json",
+      "id": "https://geultu.dev/schemas/artifacts/unit_draft_set.v2.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "runtime/approval-decision.schema.json",
+      "id": "https://geultu.dev/schemas/runtime/approval-decision.v1.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "runtime/artifact-ref.schema.json",
+      "id": "https://geultu.dev/schemas/runtime/artifact-ref.v1.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "runtime/protected-span.schema.json",
+      "id": "https://geultu.dev/schemas/runtime/protected-span.v1.schema.json",
+      "status": "TARGET"
+    },
+    {
+      "file": "runtime/refinement-request.schema.json",
+      "id": "https://geultu.dev/schemas/runtime/refinement-request.v1.schema.json",
+      "status": "TARGET"
+    }
+  ],
+  "version": "4.1.0"
+}

@@ -1,0 +1,107 @@
+{
+  "$id": "https://geultu.dev/schema/stage-contract/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "inputs": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "cardinality": {
+            "enum": [
+              "ONE",
+              "OPTIONAL",
+              "MANY"
+            ]
+          },
+          "kind": {
+            "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+            "type": "string"
+          },
+          "name": {
+            "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "kind",
+          "cardinality"
+        ],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "type": "array"
+    },
+    "outputs": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+            "type": "string"
+          },
+          "name": {
+            "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "kind"
+        ],
+        "type": "object"
+      },
+      "maxItems": 64,
+      "minItems": 1,
+      "type": "array"
+    },
+    "required_receipts": {
+      "items": {
+        "$ref": "receipt-selector.schema.json"
+      },
+      "type": "array"
+    },
+    "stage_id": {
+      "pattern": "^(?:T(?:0[0-9]|[12][0-9]|3[0-3])|S(?:0[0-9]|1[0-2]))$",
+      "type": "string"
+    },
+    "transitions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "on": {
+            "enum": [
+              "ACCEPT",
+              "REJECT",
+              "REPAIR",
+              "HUMAN_REQUIRED",
+              "FAIL"
+            ]
+          },
+          "to": {
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "on",
+          "to"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    }
+  },
+  "required": [
+    "stage_id",
+    "inputs",
+    "outputs",
+    "required_receipts",
+    "transitions"
+  ],
+  "title": "StageContract v1",
+  "type": "object"
+}

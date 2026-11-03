@@ -1,0 +1,10 @@
+[package]
+name = "geultu-writer-process"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+description = "Explicit JSON process boundary for external Geultu writing providers"
+
+[dependencies]
+geultu = { path = "../../crates/geultu" }
+serde_json.workspace = true

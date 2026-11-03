@@ -1,0 +1,1608 @@
+{
+  "schemaVersion": 1,
+  "packageName": "scene-motion-compiler",
+  "fileCount": 264,
+  "totalBytes": 2751626,
+  "excludedDirectories": [
+    ".build",
+    ".git",
+    ".gjc",
+    ".pytest_cache",
+    ".tmp",
+    "SceneMotionCompiler Studio.app",
+    "__pycache__",
+    "node_modules",
+    "target"
+  ],
+  "generatedMetadataExcludedFromTreeHash": [
+    "SOURCE_MANIFEST.json",
+    "VERIFY_LOCAL.md"
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "sha256:3679ba2560229c53ae20ca2d1e217006e6204e18c61e961f78a0e06b7a2a3090",
+      "bytes": 184,
+      "mode": "100644"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "sha256:8a84124ae038a188a07fca9493190a141fce9a43adc92739e1dde6e6131763de",
+      "bytes": 1101,
+      "mode": "100644"
+    },
+    {
+      "path": "ANALYSIS.md",
+      "sha256": "sha256:51b4492c6978a6ed991203870e4d13c7dcd93d714cfab93389e5b22100e1ce03",
+      "bytes": 15886,
+      "mode": "100644"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "sha256:d0f6c046826a2411f2a24340bd7efb621475179cc1a0fdab8a556d4e5d041419",
+      "bytes": 31479,
+      "mode": "100644"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "sha256:97c7b105bd71ed441efe6844383ad88d240a7e454f26ff794844a5b6520c29f8",
+      "bytes": 338,
+      "mode": "100644"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "sha256:6f18f08849ca8b2ff8363c60833afd028a79dc917d3221e25c1a585b6e712b50",
+      "bytes": 1059,
+      "mode": "100644"
+    },
+    {
+      "path": "README.md",
+      "sha256": "sha256:3f1d5bb7c2d89388bfbaab6bf70500bdbafc439965ac77a257310a8d28c9e9a0",
+      "bytes": 8073,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/macos-launcher/ANALYSIS.md",
+      "sha256": "sha256:e2859b4f6ac66a0caa3d0951c75b73a8bf77584b33cdaae4a3e00a04cd55dee6",
+      "bytes": 1929,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/macos-launcher/Package.swift",
+      "sha256": "sha256:1d12da3bef03e25756cadb016ee05a193a1cc9fb5f03cb043bdc32af02cad6fe",
+      "bytes": 576,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/macos-launcher/Sources/LauncherCore/StudioProtocol.swift",
+      "sha256": "sha256:9ef70f22069dc00e0baeb4da0fb3d68925126116eabd9521fb1808f895ebb236",
+      "bytes": 1065,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/macos-launcher/Sources/SceneMotionCompilerLauncher/main.swift",
+      "sha256": "sha256:a56d5d0dbb31da07d02933264849920a78dae20a714e4eee0d393f4cd1c7f5ff",
+      "bytes": 12710,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/macos-launcher/Tests/LauncherCoreTests/StudioProtocolTests.swift",
+      "sha256": "sha256:82a5337bb7081ea5a4f79ea1716d0c23ac5bd792666f1939de01b4be7f161cde",
+      "bytes": 810,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/mcp-server/ANALYSIS.md",
+      "sha256": "sha256:520612a24009cdf47fb880d9123638bb456626c08aa30e3788be0ebcc90ce7c8",
+      "bytes": 2759,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/mcp-server/src/cli.js",
+      "sha256": "sha256:d83443b93f674f480a7f8160232f876b3f5c62fd28e998629ab8c57f93b039d3",
+      "bytes": 1231,
+      "mode": "100755"
+    },
+    {
+      "path": "apps/mcp-server/src/launch-config.js",
+      "sha256": "sha256:95be7b2d011eed4394446a6d4b5775dec4f34b654b76063c1f05655c4ddf0a5f",
+      "bytes": 1464,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/mcp-server/src/server.js",
+      "sha256": "sha256:32865364bad82c48340bed8daf0ed58ebc35573b163c2f01ac78d65ac9187d41",
+      "bytes": 6378,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/ANALYSIS.md",
+      "sha256": "sha256:7fbd3f39c491a61bf892cbe267b4d3753b1eae5b4e81f7716783a4ad8a48209c",
+      "bytes": 3967,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/cli.js",
+      "sha256": "sha256:157281ac94ffe7edf85bb39b5e3b54c6f028b82cae06263ba5eb2fcd524acd3b",
+      "bytes": 1132,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/index.html",
+      "sha256": "sha256:675f4920fe61481881f84b7a0e0e869866aa4057f7ffbd08de1bed3108d51025",
+      "bytes": 18047,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/launch-error.js",
+      "sha256": "sha256:f5e3c0bd178bd8f6442ed21db827fd022db5faa4046074b269d23d56529a3e0b",
+      "bytes": 196,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/macos-launcher.js",
+      "sha256": "sha256:9faec9a811d8151195eff6fb47e624de66b8d45d572bfbac58a4d75b27081bc8",
+      "bytes": 2416,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/project-artifacts.js",
+      "sha256": "sha256:168de2db3e69e100a9ac89b5abfaa7708f6cbcab29a0cf3b84a7bcf0e50ecb5d",
+      "bytes": 3008,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/project-root.js",
+      "sha256": "sha256:e897ce15424e239bddfa657949cc9f4e5f65d99c8d5a290e484c762bb6f5bce6",
+      "bytes": 2504,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/raw-request.js",
+      "sha256": "sha256:bdf531accf61686ed2793c7add7a5a57e543b8812b2614483edfe25bc262b849",
+      "bytes": 2626,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/request-body.js",
+      "sha256": "sha256:499e7f34597e609685503dbbd2d3dc3bc3916f4676a8197cd389d91887de58d9",
+      "bytes": 2617,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/responses.js",
+      "sha256": "sha256:be24b6632c0e9fd2b5b9017e52f2aac49b8f6f2588353979c7d2f77f21b03629",
+      "bytes": 1620,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/review-sessions.js",
+      "sha256": "sha256:ecee7dd999ce192fde8db344ca31dee320007854044ac42f82876b5ba8af08c2",
+      "bytes": 3612,
+      "mode": "100644"
+    },
+    {
+      "path": "apps/studio-host/src/server.js",
+      "sha256": "sha256:0e04a8a7561907927196a0d5f8861bc5a5fe8735deac7936d8758b712801fd99",
+      "bytes": 22569,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/narrative-scene-projection.example.json",
+      "sha256": "sha256:385a208c9a2110843abec4e03714594175f68a82e35c7d1b55d4a32b3b58d507",
+      "bytes": 9346,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/scene-asset-compiler-canonical-boundary-fixture.json",
+      "sha256": "sha256:3bfab34f8aaf8a6e5e04e4232529e4b10b0b0b3eaac5b8708a73ea9e31f848ba",
+      "bytes": 707,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/scene-graph.example.json",
+      "sha256": "sha256:df89f946a49f265c4e142b0a125913142cd06321f7bea52899894b4d596f3f23",
+      "bytes": 7007,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/scene-motion-asset-handoff-v2.example.json",
+      "sha256": "sha256:fedef5008ce301638084213329fda6eadb4de3c7c2703f3b3d1451280afd92c8",
+      "bytes": 1637,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/trackb/negative-fixtures.json",
+      "sha256": "sha256:f29838699003910d9615f89bf7a9d314a83d22db635c3476ec33153bf5ba65e9",
+      "bytes": 5430,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/trackb/trackb-delivery-pointer.example.json",
+      "sha256": "sha256:4a704706811b433d5198fcfb7319ae3c0e6d940da55f33c7b7093c31687c2bf3",
+      "bytes": 815,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/trackb/trackb-delivery-set.example.json",
+      "sha256": "sha256:015952a043186f7abf7fa8fa970da3ad809d2da465a4cc6a9135bd3e789761ab",
+      "bytes": 1381,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/trackb/trackb-measured-evidence-receipt.example.json",
+      "sha256": "sha256:36599e70eff2d0398e936ff138217efeafb09b0757e4ce25ee363d2bd1b98c88",
+      "bytes": 1588,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/trackb/trackb-narrative-authority.example.json",
+      "sha256": "sha256:c9e0a32711edc83cb1d72f728f21255c7b573a8b104490bf309bb698a28709c6",
+      "bytes": 3028,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/trackb/trackb-release-approval-receipt.example.json",
+      "sha256": "sha256:dca3ba047215393707857f9a20461fc2ac368c736c7d02bb3c4828849d084832",
+      "bytes": 733,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/examples/trackb/trackb-release-candidate.example.json",
+      "sha256": "sha256:5554a6d103feaf776ed87ebbb2b88f0928480395f49c15083cf66bfe3443d580",
+      "bytes": 2727,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/animatic/animatic-assets-review-v1.schema.json",
+      "sha256": "sha256:4e53a2a1ca555eca328657b6f8ea4baa84e408b180d8122d04f63d5b1601114a",
+      "bytes": 1055,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/animatic/animatic-assets-v1.schema.json",
+      "sha256": "sha256:1f212feb5ef1c96387955d0858e095cec75a81ec5d21b2d5f5ba756834648329",
+      "bytes": 2243,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/animatic/animatic-packet-v1.schema.json",
+      "sha256": "sha256:8df596ddd5a7d965e7b8c06052d6c2544bd07a10283a17d15729a926cce4ccde",
+      "bytes": 2056,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/animatic/animatic-plan-v1.schema.json",
+      "sha256": "sha256:f05021bc88c04938ed309539507b044fe70495323b4221bd2df1e4c779e010c5",
+      "bytes": 8870,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/animatic/animatic-result-v1.schema.json",
+      "sha256": "sha256:23405640602905ccc3ac90d29cc332223f0f37e5e540d8db73266a4ee9ce5b60",
+      "bytes": 4740,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/animatic/animatic-review-v1.schema.json",
+      "sha256": "sha256:105a6e4a00593ba0b35f0bf30769dcd9c0dce83da9f0507bb9fb7e0b87243a41",
+      "bytes": 1526,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/asset-manifest.schema.json",
+      "sha256": "sha256:e65265b6042cbba33781ac5dc612624939a25649f6b82a440aa086a53a1e4d3d",
+      "bytes": 3296,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/cinematic-approval-v1.schema.json",
+      "sha256": "sha256:f453360a08b799c1d8c7a3dadba1fc3ea363c35942d09d4b4f8c369d1f5b495a",
+      "bytes": 1429,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/cinematic-director-plan-v1.schema.json",
+      "sha256": "sha256:f2dda4ad8d890904d5ed3d0395ebd4c3fd8a72ee88e483e1e6282a168639a0ea",
+      "bytes": 8500,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/continuity-bible-v1.schema.json",
+      "sha256": "sha256:8bbceabdc8d51a5244ef37e7ab7aab5b81129082961fa9fafc938345fa626bf8",
+      "bytes": 3604,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/evaluation-report.schema.json",
+      "sha256": "sha256:3868641f1491d2c3c54d0e0268d7396247edbd8ad25f9d7276dffc3b64c93786",
+      "bytes": 1138,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/narrative-courier-narrative-package-v2.schema.json",
+      "sha256": "sha256:313072cf3cc57e33fa951615b6c12ee76fb842c3537e5ef12b6a196e3f6250a5",
+      "bytes": 3064,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/narrative-release-bundle.schema.json",
+      "sha256": "sha256:860dcb26479ae0b0a7ef7e666483f30e9d1a0fc48520399967d3f49cee2a4fc3",
+      "bytes": 2883,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/narrative-scene-map.schema.json",
+      "sha256": "sha256:d18181b216c01a74c93802fee31000a970e8f27b7267fbcd2678af443ed94ff2",
+      "bytes": 5734,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/narrative-scene-projection.schema.json",
+      "sha256": "sha256:32bd33b08fb7b23232c47528aea2eeef75ab7263c343876eeff77c62bfa1d9c4",
+      "bytes": 5817,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/production/production-v1.schema.json",
+      "sha256": "sha256:fa1653ae41de23ca090d2f42355a419412a81205d3aeeeff893400dc89a9677d",
+      "bytes": 23077,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/scene-asset-compiler/binding-manifest-v1.schema.json",
+      "sha256": "sha256:97a1081626333a9a9ee00309bdf3acab0aeb79ecc4d0f76d17d621ae80dea521",
+      "bytes": 2747,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/scene-asset-compiler/scene-asset-pack-audit-v1.schema.json",
+      "sha256": "sha256:0e3d39a4c89f312f257de7f6988cfe41d1d260c6b851e766d9a0c4fe35af40c0",
+      "bytes": 2286,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/scene-asset-compiler/scene-asset-pack-v2.schema.json",
+      "sha256": "sha256:736d61a59d1c68cf3aaed529b19713d2c7867ab69ef909ef7b8d63390b904765",
+      "bytes": 5861,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/scene-asset-compiler/scene-asset-release-approval-v1.schema.json",
+      "sha256": "sha256:ec0239bc0180cb62f5f53010ab73ee56a74c8e406af2ae413889746cb7292428",
+      "bytes": 1400,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/scene-asset-compiler/scene-motion-asset-handoff-v2.schema.json",
+      "sha256": "sha256:67df73b3ea7d764b847c8ca3442fda5769d167aa581198c40f4b7fc1fb768e12",
+      "bytes": 2256,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/scene-asset-compiler/visual-reference-approval-v1.schema.json",
+      "sha256": "sha256:b3dbe29cb8d8ab88b1ec3b3252ec96e1757e70c3ad786c24e0fc57e3579f4845",
+      "bytes": 937,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/scene-asset-compiler/visual-reference-pack-v1.schema.json",
+      "sha256": "sha256:78efee1b1b943596b448209d2a660860e7dd9273b55df798b416d310558a5296",
+      "bytes": 4810,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/scene-graph.schema.json",
+      "sha256": "sha256:86612128de385aaa70a2f2920d50ad736b60c1af036e4069eabd8e2179bf3ee5",
+      "bytes": 15975,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/trackb/registry.json",
+      "sha256": "sha256:0d2916548ef03256bf88efeee48b6350ae9eefa38ccf4087e4ed1d4131aa0864",
+      "bytes": 1556,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/trackb/trackb-delivery-pointer-v2.schema.json",
+      "sha256": "sha256:1403639a608199aa3d9d47ce78c7036def7a7fb901ce39aa7dae430fad670159",
+      "bytes": 1536,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/trackb/trackb-delivery-set-v2.schema.json",
+      "sha256": "sha256:1b3e5f0dc2b30fda640526f4b4421486bf1e002c8081c00bc6c32067612f0319",
+      "bytes": 2296,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/trackb/trackb-measured-evidence-receipt-v2.schema.json",
+      "sha256": "sha256:f29085a109b9bd3c89c275dc7b4379fd6ac16ff31d889cacc9b3207fc35bf768",
+      "bytes": 4865,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/trackb/trackb-narrative-authority-v2.schema.json",
+      "sha256": "sha256:f999ae0a88e799bf2c6d756a0b3286aec7c6b3a5bfe40e8737713ca26f786e15",
+      "bytes": 4869,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/trackb/trackb-release-approval-receipt-v2.schema.json",
+      "sha256": "sha256:834ef5487cb2214808ed98276a8e65bd82a799cc4441d3fa664634d57ecbfbd1",
+      "bytes": 1907,
+      "mode": "100644"
+    },
+    {
+      "path": "contracts/schemas/trackb/trackb-release-candidate-v4.schema.json",
+      "sha256": "sha256:2d6d29a545ebfe1803876d3be0f0edeed4d6a8794ec092bb9d39261d5884f8f9",
+      "bytes": 4430,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "sha256:2be7a1f3653bcc84cbefd08a2ae41e18a59f926087729dec0d9111c569484e09",
+      "bytes": 6295,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/BOUNDARY_NARRATIVE_COURIER.md",
+      "sha256": "sha256:6254cf99c9a406a70d6ef8e16fc303dfa8f6d733cd957d1263152292618ddb2e",
+      "bytes": 3262,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/IDENTITY_AND_EVOLUTION.md",
+      "sha256": "sha256:72cb948488d54f454ea2367884f81c330df80eb96a1261a8ac6e885c4ff702a0",
+      "bytes": 2176,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_STATUS.md",
+      "sha256": "sha256:14ea42544c1c15f785f1bfe5f6e0ee49b9a492bcaf6447a8c7071a691d3ecc0b",
+      "bytes": 18044,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/PLAN.md",
+      "sha256": "sha256:dc60082eeac2d6a197a5c0b25f5e2eca757600c1be5e03802ad90d7f8f557314",
+      "bytes": 1762,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/PRODUCT_CONTRACT.md",
+      "sha256": "sha256:4cf8873917db49b51c6315ed0eee2483b441659d22343f31fde40f0f6a5d661f",
+      "bytes": 986,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/SPEC.md",
+      "sha256": "sha256:2bd91a2337db2aa6718b9dd719f820d5836fe6ad719c912bbfe85189bb514ac9",
+      "bytes": 4847,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-animatic/Cargo.toml",
+      "sha256": "sha256:d680db2a9937daea627df91cda39441a7bd665dd24b82087e9fbefa083ef6cb0",
+      "bytes": 473,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-animatic/src/animatic.rs",
+      "sha256": "sha256:18880d56e299ccde25a140d01b08d6b63de455cf159a5ce9cd21455c0fb2a0cd",
+      "bytes": 33892,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-animatic/src/browser.rs",
+      "sha256": "sha256:591d6cfe356c055cfe5fb830fa17e26909a7ccf06146ee32c13f23c888e5453a",
+      "bytes": 17115,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-animatic/src/io.rs",
+      "sha256": "sha256:0a8fd7811f661bebc018e81b9b904b96631a24dc1fe04c629565911e1ff66f28",
+      "bytes": 23874,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-animatic/src/main.rs",
+      "sha256": "sha256:c315610a55c224a826eaef947a3a21e982bd1ccb7f3ef81a67513016f8560b2f",
+      "bytes": 4059,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-animatic/src/process.rs",
+      "sha256": "sha256:e89dcde8d36322267af4bc8d7fe1bf24d23ff21978e0ced91ed4b607cfa8069b",
+      "bytes": 9575,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-animatic/src/producer.rs",
+      "sha256": "sha256:eae9e724867ea030bf989ccd7c781af29dc760a2349b6fbd39454fd6e57fe026",
+      "bytes": 1496,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-animatic/tests/boundaries.rs",
+      "sha256": "sha256:848e615f22c67ef98378c336cef76af25cd65b62c0b8fefad564ca7b79634e05",
+      "bytes": 6248,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/ANALYSIS.md",
+      "sha256": "sha256:47b6e7c3937dcf74ff1b8c91cda67a7644146cd971af876fb74ce1eee33735d2",
+      "bytes": 5764,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/Cargo.toml",
+      "sha256": "sha256:5736df030b72d396fae1c059c994071182ad9e692b54c40bb412687236af2301",
+      "bytes": 401,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/artifacts.rs",
+      "sha256": "sha256:118ec322ee57d95f1fc57da6bb1cb74f189be0a70d52276f04d36efce6d34e04",
+      "bytes": 6705,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/artifacts/path.rs",
+      "sha256": "sha256:c20689cc481f7d5510c776ff39b470824ae7b8b126dbb9699ee9e767a9144e82",
+      "bytes": 6135,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/error.rs",
+      "sha256": "sha256:b9329a5d8e938097affdf4b1c5766b378d14bd1c0dcb281ba57d5ae74088c9ab",
+      "bytes": 1031,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/filesystem.rs",
+      "sha256": "sha256:3f84ddd43acbd0cc6e5881e6623e71eee1cb2b8cffc81d6560f0838e09567ff0",
+      "bytes": 150,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/filesystem/admission.rs",
+      "sha256": "sha256:9126a58a9d393ee4798190c3672acea3e021c4d7da59641a0610861b39ff05bf",
+      "bytes": 9555,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/filesystem/descriptors.rs",
+      "sha256": "sha256:a73f8c12375542266ef425d3902cbe3ffc1f73a0badb46c4786ea9dc1af15fd4",
+      "bytes": 8568,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/filesystem/publication.rs",
+      "sha256": "sha256:1e5d4d22fa23e7e7dcb091d3dd7c62f7c9473de7ed03941ed8a31e88c80a6392",
+      "bytes": 7500,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/lock_release.rs",
+      "sha256": "sha256:ef5ce57b7ee5e14495ecdd4d488f3e20116a52cccf30f5ca8d61dbc21d74d951",
+      "bytes": 12204,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/main.rs",
+      "sha256": "sha256:d1d77d30f04b0dc6c1ff0709a8640ce2b245fcb9e673ccfb92470cdfcccacba9",
+      "bytes": 2210,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/process_identity.rs",
+      "sha256": "sha256:510514ae31bf043f091eaf9fdc6b22b9bdd55ee5e62d0ab8b23b827a23bf9cda",
+      "bytes": 3761,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/protocol.rs",
+      "sha256": "sha256:9870b7411369625139a0b8765425bd5ce13dafc573d64f0f92c453d82f5a40de",
+      "bytes": 5930,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/record_fields.rs",
+      "sha256": "sha256:4dfcbe707793f302893ff99357cb0e1ec639cd8ca54fb00daa8a5b17a4734a67",
+      "bytes": 408,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/release_records.rs",
+      "sha256": "sha256:a1ae182b6ef04c373a4b161d823c38a6f8756d7e50b19a8845b4539007cfd185",
+      "bytes": 10549,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/session.rs",
+      "sha256": "sha256:78e1dcc524a6bf339d38ef57b563618c5da5461454b7290840ea97d317f539a1",
+      "bytes": 3907,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/session/lifecycle.rs",
+      "sha256": "sha256:30410993a7b581277ac950caa4c5fa906a24a922f6c0726039beccd2066f294a",
+      "bytes": 14278,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/session/measurement.rs",
+      "sha256": "sha256:b897d464447fbfd706986354f78beb4c5e6ebd5069ccfe94309e525be853535b",
+      "bytes": 10851,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/session/pointer.rs",
+      "sha256": "sha256:d8b4ddfe5bf77d25d362897271747066e5f925c6c8a6515bbc7659a4ab115660",
+      "bytes": 18492,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/session/project_ingress.rs",
+      "sha256": "sha256:89fb1fbdf78ed58b4e00a75fcdec2ae7e9c8b284e0f603bc337d7f4f865719e6",
+      "bytes": 3939,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/session/storage.rs",
+      "sha256": "sha256:2a75013d8a2cd8ebff4617241adc415624ec07d677b1afdba8e62ce040f82977",
+      "bytes": 9821,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/session/tests.rs",
+      "sha256": "sha256:9589a46867715dde8d974bc428fb4b41dd747e55aafd758c1e708d50516dc331",
+      "bytes": 18369,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/src/startup.rs",
+      "sha256": "sha256:b162456037b42cfd05264551e1e383c320b48c520bb7e9dd4c1c8fc5e3c990fc",
+      "bytes": 3418,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-trackb-custody/tests/protocol.rs",
+      "sha256": "sha256:5c3b44842c231d61e7c59e54181c83511c21ea6e8a534197740a69ff7dd2cf20",
+      "bytes": 63164,
+      "mode": "100644"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "sha256:f46df97e78e65a814c9e0346e89da7903823aa888478cea704da24a3d1d8f7fc",
+      "bytes": 1752,
+      "mode": "100644"
+    },
+    {
+      "path": "package.json",
+      "sha256": "sha256:1f9b88380497fabcb1eaa0afc7e63ba0d0f46f7e9e6102f4ab2a5fae75f4c888",
+      "bytes": 1946,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/adapters/ANALYSIS.md",
+      "sha256": "sha256:5c85921bf663e8a0c367d75c0533ba6ef064164b808a098a50ef2534513b595d",
+      "bytes": 3334,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/adapters/src/cinematic-contract.js",
+      "sha256": "sha256:0f431b6831f1b6236afff89a8bead99de2c8ea6182f583e114ff844347f817df",
+      "bytes": 7870,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/adapters/src/narrative-courier-release-files.js",
+      "sha256": "sha256:2b2cae1f4b81c30c0dcd9b65e4289015aefabffe072c9e141587ca6d3747673b",
+      "bytes": 7109,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/adapters/src/narrative-courier-release-support.js",
+      "sha256": "sha256:9605f7b5ff4d22dfb42d24d1157a94ae0d579bf7bf8459d331032132a7837d49",
+      "bytes": 469,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/adapters/src/narrative-courier-release.js",
+      "sha256": "sha256:82046796857433767fbad1adf14270d760f576241bab1b39264e5122535198d4",
+      "bytes": 14551,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/adapters/src/narrative-scene-projection.js",
+      "sha256": "sha256:8324cfc62885e1c57d866cbcad4fab9cff6034e5dd5c05b2cff2cec9ba105856",
+      "bytes": 21972,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/ANALYSIS.md",
+      "sha256": "sha256:5fbbd2e6f5a25a328201b92ff95d4441bccddbeeb4aabd48f424a6e0fa124f95",
+      "bytes": 10275,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/command-error.js",
+      "sha256": "sha256:d1ac09cb75335ad43a51af0fdf983d6d417fb11f0054d7d0aa9e2b8abe8c766d",
+      "bytes": 329,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/command-registry.js",
+      "sha256": "sha256:5f3b9f15a1888eb888d8d2c5bdd5fc64db76a37c9eca7e46447531156ccc1ee0",
+      "bytes": 6385,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/index.js",
+      "sha256": "sha256:e23b4040855c947299e89e8b417f9dd43ab71ffc73cfa40133118aa8b170d9a5",
+      "bytes": 307,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/product-version.js",
+      "sha256": "sha256:3a208f23b8834f71749cb4526d96b2153c9d4866c713139f0c68086884a910f3",
+      "bytes": 320,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/scene-asset-compiler-handoff-contract.js",
+      "sha256": "sha256:dcade74dca844f1424dc86d10b14e30c30fdbede2fdf4bd8bfebc359ea9a3d1f",
+      "bytes": 7948,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/scene-asset-compiler-handoff-files.js",
+      "sha256": "sha256:dfdd0a61547d97310638445d49e9940588e6c15397e0f8dd5bf7713204d9624b",
+      "bytes": 6986,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/scene-asset-compiler-handoff.js",
+      "sha256": "sha256:e8cff419f0e9f951817c308dbd37c2005c416df78bfef38990de363ff4a319b8",
+      "bytes": 10720,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/scene-html-output.js",
+      "sha256": "sha256:e99d53102b4d26eefd0f675e23c0d2888103f144b7a530b59f05b9897bdecbf5",
+      "bytes": 4177,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/service.js",
+      "sha256": "sha256:afb4d441a9dd81fcdbc2b36e7ace250a66dc873ad86c9391c513651f5b60164a",
+      "bytes": 9218,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/studio-dispatcher.js",
+      "sha256": "sha256:09fd9aa1d875a53e20e027181e4e54f13015e035682fd2a1954c345c52e711bc",
+      "bytes": 539,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-application-primitives.js",
+      "sha256": "sha256:5ffe2cb5e9fd692791e50abba91254829237eeaa304591d3b4ef56a515b4f1ba",
+      "bytes": 449,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-commands.js",
+      "sha256": "sha256:7f98e4ccb5b90be0139451deb8bd8d1c9817de0367c5c2f6ba5c3e553f114214",
+      "bytes": 4486,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-measure-evidence.js",
+      "sha256": "sha256:1f39e6cde11e2a4a77b6cab16253c4c38d418d866220ee7e681e5c7cb80ed214",
+      "bytes": 9351,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-measure-runtime.js",
+      "sha256": "sha256:49473ef7d71efa65d0ebae1156ec1a8799cb8b7e26edde4b9e37ff72d554f4f9",
+      "bytes": 7706,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-measure-support.js",
+      "sha256": "sha256:0f5934be9cf585db12b79182f9f90048a722d6c15b928e4d6d757587f4c228fd",
+      "bytes": 2163,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-bindings.js",
+      "sha256": "sha256:3c6ec1dfe5ffa8e15ddaceadb8a8adfc915f1fa65d25d89aae09094d374b949e",
+      "bytes": 15573,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-candidate.js",
+      "sha256": "sha256:56b14e5b44ca527ed5fae0d5f775e73f78e0b72c0d5fb07ed19c05c510b0b64c",
+      "bytes": 10627,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-contract.js",
+      "sha256": "sha256:e5c509d21299c7f5bc5bf86d408ff6e02b3e4933dc8a1ecfb0f004562c45d44b",
+      "bytes": 3014,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-input-contract.js",
+      "sha256": "sha256:a07836f6a2d93aa6a5585fdbf18e7e7d9b892cc54203ca9f1714f89d8c72deaf",
+      "bytes": 12269,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-runtime-approval.js",
+      "sha256": "sha256:e7cea75a64e0f064599e22c923a5b24b9cb8ff0cae316d774b8eb80fe234fa77",
+      "bytes": 6516,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-runtime-approve.js",
+      "sha256": "sha256:918ca69f5913cb121008b7abbe8f0d557042a0ecc1ea5af6be3e072169808660",
+      "bytes": 8917,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-runtime-artifacts.js",
+      "sha256": "sha256:1111d2076543548f798133309ed6a6b4d42c4d18f47e3b8dfcc597a85a416922",
+      "bytes": 4526,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-runtime-custody.js",
+      "sha256": "sha256:a3989b9ee7c4b6a8f2df7545699cb539fb89984daa51dc9edd27f9536519360b",
+      "bytes": 10372,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-runtime-delivery.js",
+      "sha256": "sha256:9752a7d2b42e69ac6b84565b66afea41c24da33be2daba19154014bcbd275ae9",
+      "bytes": 13194,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-runtime-prepare.js",
+      "sha256": "sha256:a1f84c41ccd76308ef8d208677d236392b9561de2cb000e4f55c1265084e7b75",
+      "bytes": 9059,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-runtime-promote.js",
+      "sha256": "sha256:2f04552a1220b1ffa48c3659201e0dc16e6e76949be8c33ab135bde342ee1f6e",
+      "bytes": 9050,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-runtime-registry.js",
+      "sha256": "sha256:5e2c10b31c104e94224005706335dd4784aaa505736903d3a6eba6777d4dbd3f",
+      "bytes": 2784,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-runtime-status.js",
+      "sha256": "sha256:cff437be0f8332e4289d9b1f73788c3ee767b135a92e5f153d490012eb247bf9",
+      "bytes": 4812,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/application/src/trackb-release-runtime-support.js",
+      "sha256": "sha256:3c97eea6e4299acb89c7787daddc1b2d5af94eb0bbe33375bc017400be26eaf0",
+      "bytes": 2683,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/browser-renderer/ANALYSIS.md",
+      "sha256": "sha256:7d615775f4829d897c732683ce15ca1cf3a8fe39834b9971510e106d588e90f4",
+      "bytes": 3599,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/browser-renderer/src/cdp-client.js",
+      "sha256": "sha256:70c05aae01be3de27b16c47badd7c2962f1cf995507ff27add832c64773b8cc9",
+      "bytes": 3526,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/browser-renderer/src/chromium.js",
+      "sha256": "sha256:7a59b2d02f93215322e690d516a9a3c66861e43288e06b07e5c17bafc4a3f6b7",
+      "bytes": 19280,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/browser-renderer/src/index.js",
+      "sha256": "sha256:c930025fede9dadcbde8a34d6928475e369e2b8b070a573a25a373ea3b7847a0",
+      "bytes": 67,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/browser-renderer/src/render.js",
+      "sha256": "sha256:4a11817c78589a260700cca01367ad6b63c2cf703f02b0622defd08ded29f41b",
+      "bytes": 16367,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/browser-renderer/src/trackb-measured-evidence.js",
+      "sha256": "sha256:6f1cf856526cc7590097c737cfa030aebc800b43d048c74afa949c9cc11f8463",
+      "bytes": 23182,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/cli/ANALYSIS.md",
+      "sha256": "sha256:e87cbec169e679415862e478a3135372b8877d3201cd7dd2f3e90943a0b7adef",
+      "bytes": 1484,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/cli/src/main.js",
+      "sha256": "sha256:3aecdddd158825f213af64c501ed5bdc28a22ed538aa312dab9a499a41202707",
+      "bytes": 7979,
+      "mode": "100755"
+    },
+    {
+      "path": "packages/composer/ANALYSIS.md",
+      "sha256": "sha256:3faa329d59e413f24d0beb6f468952dcc6d40a2bdc0aac7c3da5fd79c467ab49",
+      "bytes": 2183,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/composer/src/scene-html.js",
+      "sha256": "sha256:c68ebe8164c415cfb6f341c68c0740f6e038a7c81abc6e3a8927dba3550a3fb2",
+      "bytes": 18089,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/ANALYSIS.md",
+      "sha256": "sha256:5c2fc5d9bbe80d5df10bd82e8e89b7990d81f5fb79a1f27efd39e87d63fe6610",
+      "bytes": 4944,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/closed-schema-set.js",
+      "sha256": "sha256:3049bf3e39b060763932b2108b619c1fa776428fa29059284ccb2b1926790a89",
+      "bytes": 8662,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/schema-validator.js",
+      "sha256": "sha256:630b42dfb752a29c0f212d32918394c2894f2513b4b55fa174f718934d20c39d",
+      "bytes": 13968,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-artifact-contract.js",
+      "sha256": "sha256:17a33ad96e23e9588811fe0fcd65a0822b9d30a3ac7f3c1772d819cb95301969",
+      "bytes": 1178,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-artifact-contract/authority.js",
+      "sha256": "sha256:578be924f900ed75277b842256f52e3664e94a660b9bb36babe697e055ee44d0",
+      "bytes": 7591,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-artifact-contract/bindings.js",
+      "sha256": "sha256:6b021110ea559883768609e22e843313551a0ac99c893184b346d86cbf12549c",
+      "bytes": 22440,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-artifact-contract/candidate.js",
+      "sha256": "sha256:658ac9187b7c2e4afac5499abe30a58fd2e43e3bc31ad3483b2d59c026a117a4",
+      "bytes": 4011,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-artifact-contract/projection.js",
+      "sha256": "sha256:9399478436c4fb8417706c5ab6192647bca5b6ac872360f2d2167304a2b431d0",
+      "bytes": 1573,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-artifact-contract/release.js",
+      "sha256": "sha256:a4db42b1a77727be8b3755b6a0967ed56a6fbffe575fa70f42278814e52801b1",
+      "bytes": 8321,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-artifact-contract/schema.js",
+      "sha256": "sha256:e637086b22babe0cbc177a51fd3eb7271734fa58b6acbcf641d55a5fffe7c97d",
+      "bytes": 805,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-artifact-schemas.js",
+      "sha256": "sha256:8af8c2aada36b3e7e99c376817d7c3121fcf2a346ec4dbdc451467186c244324",
+      "bytes": 4336,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-command-contract.js",
+      "sha256": "sha256:ce7c790f8109357ebb29f34f0772aff0d54b7e1351c3a07307ab1233f1e3c2c8",
+      "bytes": 23346,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-contract-primitives.js",
+      "sha256": "sha256:eebf602a68400aca76ec333c22a604a3f0d683fd9d9c8703f99d8584c81c191d",
+      "bytes": 12012,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-contract.js",
+      "sha256": "sha256:257f89dfec118814dee05f1018bc2b56fbb2b16af1def2f12ee7fc3e3e4e5a66",
+      "bytes": 2755,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-navigation-guard.js",
+      "sha256": "sha256:0383d19f7c81a6634db842a09d794bdc87978eb17284eba49aee4c6f6cb3822c",
+      "bytes": 4076,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-registry.js",
+      "sha256": "sha256:d4dd5a61dd2bf5c5997731d8efa2a4a26f8579de5546a8028870092f5e2fb9b9",
+      "bytes": 13480,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/contracts/src/trackb-semantic-manifest-contract.js",
+      "sha256": "sha256:6b62807d2f5be3bc40ee2badaf1da07347767a392c4b4924d8006875bc8ccf7d",
+      "bytes": 11107,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/core/ANALYSIS.md",
+      "sha256": "sha256:2913e76ab018b5e0b819b193decd38be10a7cb0a5c66d732083c1b81305333c8",
+      "bytes": 1946,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/core/src/canonical.js",
+      "sha256": "sha256:f43059873da1d04f5bc1bfc0e9a4a7b6cbd8f61d36058fb7e26c20d6de42071f",
+      "bytes": 2432,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/core/src/errors.js",
+      "sha256": "sha256:218b3db6b3567ea23865e08caacbaa9a4187891095020c9149b0b2a437adc460",
+      "bytes": 180,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/core/src/json-codec.js",
+      "sha256": "sha256:4196a570d3c05fb19907ba5b4121af07b5df7f0fd4167d0d2eb11ad115df8658",
+      "bytes": 1087,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/core/src/schema-registry.js",
+      "sha256": "sha256:77b2e92f70a3a38b9ba3a3ffda8af6f83f691b2cbe42d6082ece08e929ce375e",
+      "bytes": 3004,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/export/src/deterministic-zip.js",
+      "sha256": "sha256:37fa205db1947f95d71462fc45d47b506fc2e689ba21a0c7aba2368d7bc98968",
+      "bytes": 5888,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/production/ANALYSIS.md",
+      "sha256": "sha256:c88c78819306e197cfcc7bebb6e7faf5378b2a3961422d7aa56f76898be7b7b4",
+      "bytes": 12119,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/production/src/animatic-runtime.js",
+      "sha256": "sha256:0fd5616f9db387da28d91c46b3d6831636af35c6fe2f983b4d95cf567246fd95",
+      "bytes": 5705,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/production/src/animatic.js",
+      "sha256": "sha256:06c6f9487abdfea30c9a8417a3d5326c3ae57411ad61f91472272fdcb1e7100f",
+      "bytes": 2090,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/production/src/clip-lifecycle.js",
+      "sha256": "sha256:b25a2e9da7013faae1e8cd229ff63d5414580c0f2a01d792027efb23d7a8eed5",
+      "bytes": 8298,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/production/src/editorial.js",
+      "sha256": "sha256:a83341d51639126f0a6c5983e6917b4656023e93d21c69fa1b81494b94e13bae",
+      "bytes": 7817,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/production/src/index.js",
+      "sha256": "sha256:3b8e7cb24a3452a1ac164a4176344ddc544a3b8ef91626c0008380336112e56b",
+      "bytes": 1625,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/production/src/io.js",
+      "sha256": "sha256:acc138b70b9f0bb4b3a214b536a1717d82e126581afed6dfc25603fb13bcb474",
+      "bytes": 7335,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/production/src/motion-request.js",
+      "sha256": "sha256:2498eefa1574708c870a7375ac71cebd35ffee587476ee7696cf6d82e395dc74",
+      "bytes": 2550,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/production/src/production-contract.js",
+      "sha256": "sha256:244ed8c0796cec7e02bbe6bc0b456d1133486f6840899aa65af2634ce24a7b66",
+      "bytes": 2100,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/production/src/visual-context.js",
+      "sha256": "sha256:dc1cb48fb90ac63ad726fe58355493ca284b71870842fa40b9810b976e2be35c",
+      "bytes": 3292,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/source-integrity/ANALYSIS.md",
+      "sha256": "sha256:e95642f30aaee0ace77f69c4251a2ecae44d5b9d0c99301cf2b3152501315e52",
+      "bytes": 3077,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/source-integrity/src/doctor.js",
+      "sha256": "sha256:ac2ce219a0a079a1c4898e545b954c1e9e2a533f7761d9c5042651deb0d21992",
+      "bytes": 2728,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/source-integrity/src/index.js",
+      "sha256": "sha256:b0ff577d8893e807140acf434e45e6b956a6d3585566c74a9d8c4a6329f9a44a",
+      "bytes": 403,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/source-integrity/src/source-package/archive.js",
+      "sha256": "sha256:9da2e1fd170950344f80193ce464551f35a4ae50df4ca53d1858b8b188818d1b",
+      "bytes": 14622,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/source-integrity/src/source-package/clean-verification.js",
+      "sha256": "sha256:e10d15a253aa33c8ed32c8c1aa9932930e31d5056575a81164cc998b56f0dcf7",
+      "bytes": 5999,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/source-integrity/src/source-package/filesystem.js",
+      "sha256": "sha256:acff658d0c2d3ad411668ee99750f1269a6eed0b950490e433984eee174de1a5",
+      "bytes": 2340,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/source-integrity/src/source-package/limits.js",
+      "sha256": "sha256:d8f08031be8ff3c1d3e6d61dbd60a7847a630d7556d83843f7988f6754c8af86",
+      "bytes": 1670,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/source-integrity/src/source-package/manifest.js",
+      "sha256": "sha256:e2f6642d7669a0f75219bf12d9ac1d9e8eff219f99ff1150da50157b59ebfae1",
+      "bytes": 7705,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/store/ANALYSIS.md",
+      "sha256": "sha256:6d8da302f0216fd6125b0f2e2f1f22a5b4c4b82056723c284a63d93e16e217a5",
+      "bytes": 7308,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/store/src/index.js",
+      "sha256": "sha256:1b06d2378d8a43d12c5f43acdfc9dd9f6340eca86bef043bb19759672bdd391c",
+      "bytes": 550,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/store/src/trackb-custody-binary.js",
+      "sha256": "sha256:ac7a9aaafbcc7b54c580b5461c7a4102f2c051113bd19fecd20d02eb0714c794",
+      "bytes": 7736,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/store/src/trackb-custody-files.js",
+      "sha256": "sha256:204bbbfaf919c4efcd22cd5ee467f8edd390267b3cae77f683f2828d78d479e2",
+      "bytes": 5609,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/store/src/trackb-custody-protocol.js",
+      "sha256": "sha256:75e956a30fc32f1ca2fb41516ce17fd1052b818548140ab2932e4e9de9cb3c7b",
+      "bytes": 16504,
+      "mode": "100644"
+    },
+    {
+      "path": "packages/store/src/trackb-custody-session.js",
+      "sha256": "sha256:d4718712dfd58afa5c6fbc2ce5e0c56b52ac94a2e23b15228c24f1f5c86affdd",
+      "bytes": 19852,
+      "mode": "100644"
+    },
+    {
+      "path": "runtime/native/aarch64-apple-darwin/smc-trackb-custody",
+      "sha256": "sha256:a8423f4f720ae69cb7215e6df213032b8975921cc4db4ff191bbf4c81fff71b6",
+      "bytes": 843472,
+      "mode": "100755"
+    },
+    {
+      "path": "runtime/native/aarch64-apple-darwin/smc-trackb-custody.receipt.json",
+      "sha256": "sha256:efc87dcfb90d26faaf84daf33b8995fd6e6f19ccdcded1a04a76d2e47ca82b51",
+      "bytes": 279,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/ANALYSIS.md",
+      "sha256": "sha256:c41d4113590ca936d73980d2a9224ed6f441fa50fee4ffe0cef9a1ddbd78efb8",
+      "bytes": 2803,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/aggregate-verifier.mjs",
+      "sha256": "sha256:f604bf44826d6b8f665f07d6d09e402b6a97806e69fd441f670872dbf9037e74",
+      "bytes": 12584,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/aggregate-verifier/configuration.mjs",
+      "sha256": "sha256:fd9670fb76dabfbd9dd040dccd0c9bc5942fb6781252f2a6289c085bd292cae5",
+      "bytes": 5769,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/aggregate-verifier/errors.mjs",
+      "sha256": "sha256:b9bcdcf8abf413503460e6ecbc6acff06a9a423fe66d2e536b1c5b90ba4d17e4",
+      "bytes": 193,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/aggregate-verifier/gate-runner.mjs",
+      "sha256": "sha256:1cb2d3bd474675f0e3df48de5b2d0f020e1ccf5106dbc0bc49cfd7901a739bce",
+      "bytes": 8243,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/aggregate-verifier/log-capture.mjs",
+      "sha256": "sha256:14191396077c398cd76878f488acf3a6fdd753d4a292a050c52de3200f9cc2b8",
+      "bytes": 3605,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/aggregate-verifier/process-group.mjs",
+      "sha256": "sha256:c81ef25e3085c296eef70bab5c98e411945c33831773de8aadb89f68ebbc8f9b",
+      "bytes": 3562,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/aggregate-verifier/source-identity.mjs",
+      "sha256": "sha256:146d4afd6ca54143cf0de26c05517e031a964fa15787b74acd9ebdda177ecabf",
+      "bytes": 8147,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/aggregate-verifier/workspace.mjs",
+      "sha256": "sha256:e8c0373ae202b981a899309bdef3b091bbba389dc2cf49194b6017002dca4442",
+      "bytes": 7479,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/build-macos-launcher.mjs",
+      "sha256": "sha256:e7b11f48c0f49646fd262874b30fe9d7c9dc231dab63f5291e97d16891b94724",
+      "bytes": 2777,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/build-trackb-custody.mjs",
+      "sha256": "sha256:edd845ccc6374ce68a4c0ecb9e7cc6ad7f0749e2301d9710b2d502f4213cda7e",
+      "bytes": 3977,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/check-narrative-courier-pin.mjs",
+      "sha256": "sha256:d5062dad4a5384143dec4b8a16f3fe7ac7575a46df4fec96b7b0f5cdd2ee736a",
+      "bytes": 4093,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/check-scene-asset-compiler-pin.mjs",
+      "sha256": "sha256:942cf2b03c3779edce0306cd73dc2eccb19a356edd2b6b9fd2bef8bd0624cb85",
+      "bytes": 2536,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/check-syntax.mjs",
+      "sha256": "sha256:02c1de481663ee605a88fce30fd0bf008b5660999ea36ac84c817a84616a9969",
+      "bytes": 1044,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/doctor.mjs",
+      "sha256": "sha256:ee8e79cac695d4940acab3c5efaebebbd4bb84712cbf0ad79416a39500a2d16d",
+      "bytes": 677,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/launch-studio-macos.mjs",
+      "sha256": "sha256:6a9ac5f00838cfece812a1961ba84f51d3a821d85d82e06a850713358a41a7ec",
+      "bytes": 2130,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/package-source.mjs",
+      "sha256": "sha256:1b11e8f792924d4ab7a2884d5ebf8756da4f8ad35035aca6b5b81ae06e9bd96c",
+      "bytes": 1292,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/package-trackb-runtime.mjs",
+      "sha256": "sha256:6a3b3fa1691c4a0875a41213d7872fc77fc65d1ed1a6eb915c29e03bf0e2f776",
+      "bytes": 7270,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/run-cli-smoke.mjs",
+      "sha256": "sha256:93bd5e943d47f19f2ece54f8208d4d7f1eda966e45d206fe7ce0df19276b84e2",
+      "bytes": 1563,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/run-lifecycle-qa.mjs",
+      "sha256": "sha256:34f83d211a5e85236d27a7072c68c7152f85c1510c70e833f83130aeb0722af2",
+      "bytes": 1722,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/run-source-integrity.mjs",
+      "sha256": "sha256:344985fe78a8d277877f87d7a484a87c9fc9a71b38aa30b4813e1e86bba99054",
+      "bytes": 3479,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/run-studio-smoke.mjs",
+      "sha256": "sha256:7cd33b4c311c24a0e564b239a42c49a0d78db8a22ed7380aec195feb7e45f95b",
+      "bytes": 2492,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/run-test-suite.mjs",
+      "sha256": "sha256:cb9f5272adf7840d296b9c8d6391c5d4c72692751f44e3dbae2dfbc3ffdb3db3",
+      "bytes": 17134,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/run-trackb-smoke.mjs",
+      "sha256": "sha256:60ed4e3ef109907be3fe11bf0b7406ff443ca92fafc61616241df8d5dac457cd",
+      "bytes": 546,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/source-manifest.mjs",
+      "sha256": "sha256:74f6cb1bc919184f09e37a1e84635c158d008daf0ed05b4a28f69c78b7d2702f",
+      "bytes": 12154,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/validate-contracts.mjs",
+      "sha256": "sha256:017c4669fb6b3e47b5eecb26d4d3acbb91c80d80bff4a3fe372c5e9a10429c67",
+      "bytes": 6253,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/verify-clean-source-package.mjs",
+      "sha256": "sha256:fadbe7f100a8ed5d8d846b134701576302f3dff2c6a6313db41dbf2d2371afd8",
+      "bytes": 568,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/verify-operational.mjs",
+      "sha256": "sha256:1d2df2bc24f0d621135bbfe258890236ed3ddf914b388d52ac827406e0ed36ce",
+      "bytes": 4112,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/verify-operational.sh",
+      "sha256": "sha256:8892ebf2644b68b64b9306dbf14bd3ac1ec6805beda1105df40c5345867ce7c3",
+      "bytes": 131,
+      "mode": "100755"
+    },
+    {
+      "path": "scripts/verify-source-package.mjs",
+      "sha256": "sha256:f9a98fc1a98d1667603b80256043f095dfa34ce8b7966e3e0af8e77affc4f62e",
+      "bytes": 900,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/verify-source-tree.mjs",
+      "sha256": "sha256:0129b792a25efc92e2c1f454144e4cb68b86cd20c8fbe6eb902d0f6975603269",
+      "bytes": 806,
+      "mode": "100644"
+    },
+    {
+      "path": "scripts/verify.sh",
+      "sha256": "sha256:6fb00b7515cccd231b3eae411cc8f6a135551b3d19ea6e677d3b472b607efc2c",
+      "bytes": 132,
+      "mode": "100755"
+    },
+    {
+      "path": "tests/aggregate-verifier.test.js",
+      "sha256": "sha256:e44db02a6521259e557aa186e4ca960fc00b7bb146e4f00b9d41561404d9aadc",
+      "bytes": 22608,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/animatic.test.js",
+      "sha256": "sha256:8ca9f8b5924e2acf5b35a7aff73b708014ace805b80fd23e07fe3c3403203fb5",
+      "bytes": 17485,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/application-commands.test.js",
+      "sha256": "sha256:98add12817e1baef991b29311833ec103cc3d10ba345d65ee3f6d628ce499d50",
+      "bytes": 9611,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/browser-font-configuration.test.js",
+      "sha256": "sha256:e8672ebdd916893df01ab610e572e5701375550a933e1e90d1aa10c3fa288278",
+      "bytes": 1148,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/browser-renderer.test.js",
+      "sha256": "sha256:acc6232368362fabf52d5e10cca8e8905b2d083a61120625697505ebb0328e88",
+      "bytes": 5915,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cinematic-production.test.js",
+      "sha256": "sha256:ae20b337169565a3df553fb8947a280ebe614c229cca2c1cad7890c6b7a43ec3",
+      "bytes": 7979,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/cli.test.js",
+      "sha256": "sha256:f5b7c61d0248a04a59f5c999b5da0d0e9a58da3653de53ee71682e24f02153ad",
+      "bytes": 1801,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/composer-html.test.js",
+      "sha256": "sha256:3f69b2b1a47e791729cda57824896e679cf7efa3332d4e3b9cb89ddd851371f6",
+      "bytes": 11559,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/contract-authority.test.js",
+      "sha256": "sha256:f08571de732d1595dbbe55bea665a4bb095f4d8cf6b95bd8ae970b92e034dc21",
+      "bytes": 8335,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/json-codec.test.js",
+      "sha256": "sha256:d776680e62800423cadb8bb2253ea9779c1504586a19febb07c9723f32f54037",
+      "bytes": 655,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/mcp-server.test.js",
+      "sha256": "sha256:36fc3958d3745d3da5356b5b4281eafd22e9b671a0700ec91328c9a8be8cf53f",
+      "bytes": 5696,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/narrative-courier-release.test.js",
+      "sha256": "sha256:9101975573bc292c6d3089a8ac3a842a6c167eb84f5c10f72dee34a16ae0864a",
+      "bytes": 13254,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/production-editorial.test.js",
+      "sha256": "sha256:a93406eea07aa6e515b0341825ab6593d873d53d22938c84ef7c5b64a90d2920",
+      "bytes": 7484,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/scene-asset-compiler-asset-boundary.test.js",
+      "sha256": "sha256:3a682e03a65b0a2322d2d6a8201233f20de79e39a5987280ad5a76807c15194d",
+      "bytes": 23951,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/scene-html-output.test.js",
+      "sha256": "sha256:0ab528a1e9c92014e15481ff464f3ee4a18ad6fdc5540b04dd789d90746fd5cd",
+      "bytes": 3266,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/source-manifest.test.js",
+      "sha256": "sha256:8206a546e8958030be7c4dbae024ce4002a546f11325001e1d7d216adc66e951",
+      "bytes": 13217,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/studio-host.test.js",
+      "sha256": "sha256:4d2d96378c1c0bf98f8a152b91609eb26fb220897d9be685bb5b48dff89f51d3",
+      "bytes": 45084,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/studio-macos-launcher.test.js",
+      "sha256": "sha256:5142f3df4230f1d9f7bd4d08d80bcfc68a39c3bd50b332f5f3da86171ad14870",
+      "bytes": 5716,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/support/narrative-fixture.js",
+      "sha256": "sha256:46c3fc0512894f666c3a04851d6b8243a63804ec8a5f77c1e3f79796564e03fe",
+      "bytes": 14000,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/support/visual-reference-fixture.js",
+      "sha256": "sha256:080657ffd01c7dd395d0ad2b68c375554d4d7c27c83e35d235d024511b8cc15f",
+      "bytes": 2113,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/trackb-custody.test.js",
+      "sha256": "sha256:5b04a67734c00cf4cbc9ce5f2dfb4d971d82918a0b88f892d8210b25517ffac1",
+      "bytes": 34518,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/trackb-measure-runtime.test.js",
+      "sha256": "sha256:e0ad027b691761ab064369b451e5f9fcae7f0108bc38b33dee89858c0f2885dc",
+      "bytes": 7978,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/trackb-measured-evidence.test.js",
+      "sha256": "sha256:d452aca8af1c67437374c21c014fc5db3948cfdd510a8485e24dd5efcde173dc",
+      "bytes": 19187,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/trackb-release-contract.test.js",
+      "sha256": "sha256:f7c6dae07306ace41949cdd227639e8ad7a6bbdecd91ffdc27ec9503c03d680b",
+      "bytes": 54396,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/trackb-release-runtime.test.js",
+      "sha256": "sha256:4fd02844a2424b284bd3f76ad0e9d37abd99b9bce47d696885eece38f55ca45b",
+      "bytes": 96473,
+      "mode": "100644"
+    },
+    {
+      "path": "tests/visual-reference-boundary.test.js",
+      "sha256": "sha256:b198ecf7e09cc1bee0d3c892dcdffc822f70fd64d2e2a7608d3f21a8a67e0b46",
+      "bytes": 2851,
+      "mode": "100644"
+    }
+  ],
+  "sourceTreeHash": "sha256:f547b62f829c287c40cd54d686912e5406eacc974b9118b40f11184830fd6da2"
+}

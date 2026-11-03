@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/packaging-preservation.schema.json",
+  "title": "PackagingPreservationEvidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "attempt_no",
+    "evidence_level",
+    "substrate_sha256",
+    "psd_sha256",
+    "render_back_sha256",
+    "reviewer",
+    "tool",
+    "tool_version",
+    "comparison_receipt",
+    "metrics",
+    "verdict",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "attempt_no": {"type": "integer", "minimum": 1},
+    "evidence_level": {"const": "SUBMITTER_ATTESTED"},
+    "substrate_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "psd_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "render_back_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "reviewer": {"type": "string", "minLength": 1},
+    "tool": {"type": "string", "minLength": 1},
+    "tool_version": {"type": "string", "minLength": 1},
+    "comparison_receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canvas_match", "pixel_exact", "changed_pixels", "max_channel_delta", "alpha_match"],
+      "properties": {
+        "canvas_match": {"const": true},
+        "pixel_exact": {"const": true},
+        "changed_pixels": {"const": 0},
+        "max_channel_delta": {"const": 0},
+        "alpha_match": {"const": true}
+      }
+    },
+    "verdict": {"enum": ["PASS", "FAIL"]},
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

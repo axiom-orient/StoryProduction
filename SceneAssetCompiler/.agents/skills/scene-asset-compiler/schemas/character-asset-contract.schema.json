@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/character-asset-contract.schema.json",
+  "title": "CharacterAssetContract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "character_id",
+    "status",
+    "master_canvas",
+    "strategy",
+    "anchors",
+    "states",
+    "export"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "character_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9._-]+$"
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "FROZEN",
+        "RELEASED"
+      ]
+    },
+    "master_canvas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "width",
+        "height",
+        "color_space",
+        "alpha"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 256
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 256
+        },
+        "color_space": {
+          "const": "sRGB"
+        },
+        "alpha": {
+          "const": true
+        }
+      }
+    },
+    "strategy": {
+      "enum": [
+        "WHOLE_CHARACTER",
+        "BODY_HEAD",
+        "SEMANTIC_LAYERS"
+      ]
+    },
+    "anchors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseline_y",
+        "body_center_x"
+      ],
+      "properties": {
+        "baseline_y": {
+          "type": "number"
+        },
+        "body_center_x": {
+          "type": "number"
+        },
+        "neck_anchor": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "head_socket_bbox": {
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      }
+    },
+    "states": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "whole",
+        "body",
+        "head"
+      ],
+      "properties": {
+        "whole": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "body": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "head": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "export": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "trim",
+        "runtime_correction_allowed"
+      ],
+      "properties": {
+        "format": {
+          "const": "PNG_RGBA"
+        },
+        "trim": {
+          "const": false
+        },
+        "runtime_correction_allowed": {
+          "const": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "$id": "https://geultu.dev/schema/geultu-story-package/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "global_constraints": {
+      "default": [],
+      "items": {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 256,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "language": {
+      "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$",
+      "type": "string"
+    },
+    "logline": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string"
+    },
+    "package_id": {
+      "pattern": "^np_[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "scenes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "characters": {
+            "items": {
+              "maxLength": 300,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 256,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "continuity": {
+            "items": {
+              "maxLength": 2000,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 256,
+            "type": "array"
+          },
+          "locations": {
+            "items": {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 64,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "narrative": {
+            "maxLength": 200000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "order": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "scene_id": {
+            "pattern": "^scene_[A-Za-z0-9_.-]{1,120}$",
+            "type": "string"
+          },
+          "summary": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "visual_priority": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          }
+        },
+        "required": [
+          "scene_id",
+          "order",
+          "summary",
+          "narrative",
+          "characters",
+          "locations",
+          "continuity",
+          "visual_priority"
+        ],
+        "type": "object"
+      },
+      "maxItems": 10000,
+      "minItems": 1,
+      "type": "array"
+    },
+    "schema_id": {
+      "const": "geultu.dev/geultu-story-package/v1"
+    },
+    "source": {
+      "additionalProperties": false,
+      "properties": {
+        "export_spec": {
+          "$ref": "artifact-ref.schema.json"
+        },
+        "text_master": {
+          "$ref": "artifact-ref.schema.json"
+        }
+      },
+      "required": [
+        "text_master",
+        "export_spec"
+      ],
+      "type": "object"
+    },
+    "title": {
+      "maxLength": 300,
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_id",
+    "package_id",
+    "source",
+    "title",
+    "language",
+    "logline",
+    "scenes"
+  ],
+  "title": "GeultuStoryPackage v1",
+  "type": "object"
+}

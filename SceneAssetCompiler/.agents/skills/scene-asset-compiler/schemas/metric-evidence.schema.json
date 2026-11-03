@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/metric-evidence.schema.json",
+  "title": "MetricEvidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","task_id","attempt_no","metrics"],
+  "properties": {
+    "schema_version":{"const":1},
+    "task_id":{"type":"string"},
+    "attempt_no":{"type":"integer"},
+    "metrics":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["name","purpose","value","interpretation","hard_gate"],"properties":{"name":{"enum":["DREAMSIM","DINOV2","LPIPS","CLIPSCORE","TIFA","SOFT_TIFA","GENEVAL","HPS","PICKSCORE","GROUNDING_DINO","SAM2","CUSTOM"]},"purpose":{"type":"string"},"value":{},"interpretation":{"type":"string"},"hard_gate":{"type":"boolean"}}}}
+  }
+}

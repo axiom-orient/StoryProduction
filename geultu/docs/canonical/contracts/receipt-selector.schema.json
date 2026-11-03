@@ -1,0 +1,29 @@
+{
+  "$id": "https://geultu.dev/schema/receipt-selector/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "min_version": {
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "type": "string"
+    },
+    "required_outcome": {
+      "const": "PASS"
+    },
+    "subject_name": {
+      "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+      "type": "string"
+    },
+    "validator_id": {
+      "pattern": "^[a-z][a-z0-9_.-]{0,127}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "validator_id",
+    "subject_name",
+    "required_outcome"
+  ],
+  "title": "ReceiptSelector v1",
+  "type": "object"
+}

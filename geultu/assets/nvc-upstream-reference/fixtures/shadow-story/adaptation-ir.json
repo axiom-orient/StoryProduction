@@ -1,0 +1,106 @@
+{
+  "selected_scenes": [
+    {
+      "scene_id": "SC_01",
+      "source_spans": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 20,
+          "end": 170,
+          "quote": "그림자가 없는 세계"
+        }
+      ],
+      "narrative_function": "establish_world_rule",
+      "obligations": [],
+      "representation": {
+        "text": true,
+        "image": true,
+        "sound": false
+      },
+      "visual_metaphor": "sunlit_people_without_shadows"
+    },
+    {
+      "scene_id": "SC_02",
+      "source_spans": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 330,
+          "end": 500,
+          "quote": "신발과 빈 방석"
+        }
+      ],
+      "narrative_function": "physicalize_absence",
+      "obligations": [
+        "TR_01"
+      ],
+      "representation": {
+        "text": true,
+        "image": true,
+        "sound": true
+      },
+      "visual_metaphor": "empty_half"
+    },
+    {
+      "scene_id": "SC_03",
+      "source_spans": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 500,
+          "end": 840,
+          "quote": "산 정상과 최초 그림자"
+        }
+      ],
+      "narrative_function": "birth_of_shadow",
+      "obligations": [
+        "TR_01"
+      ],
+      "representation": {
+        "text": true,
+        "image": true,
+        "sound": true
+      },
+      "visual_metaphor": "ink_shadow"
+    },
+    {
+      "scene_id": "SC_04",
+      "source_spans": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 850,
+          "end": 1030,
+          "quote": "모두의 그림자"
+        }
+      ],
+      "narrative_function": "world_rule_change",
+      "obligations": [
+        "TR_02"
+      ],
+      "representation": {
+        "text": true,
+        "image": true,
+        "sound": false
+      },
+      "visual_metaphor": "memory_shadows"
+    },
+    {
+      "scene_id": "SC_05",
+      "source_spans": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 1040,
+          "end": 1250,
+          "quote": "그림자가 먼저 집에 닿음"
+        }
+      ],
+      "narrative_function": "resolution",
+      "obligations": [],
+      "representation": {
+        "text": true,
+        "image": true,
+        "sound": true
+      },
+      "visual_metaphor": "shadow_home_first"
+    }
+  ],
+  "omitted_spans": []
+}

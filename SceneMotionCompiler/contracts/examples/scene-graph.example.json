@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 3,
+  "sceneGraphId": "scenegraph.home-demo",
+  "sourceNarrativeId": "narrative.home-premise",
+  "characters": [
+    {
+      "id": "char.hero",
+      "name": "주인공",
+      "appearance": "20대 남성, 검은 코트, 짧은 흑발",
+      "personality": "결단력 있으나 과거의 트라우마를 안고 있음",
+      "voiceProfile": "낮고 차분한 톤",
+      "consistencyAnchors": {
+        "loraId": "char-hero-v1",
+        "referenceCardPath": "assets/ref/hero-card.png"
+      }
+    },
+    {
+      "id": "char.mentor",
+      "name": "멘토",
+      "appearance": "50대 여성, 은발, 안경"
+    }
+  ],
+  "environments": [
+    {
+      "id": "env.rooftop.night",
+      "name": "옥상",
+      "lighting": {
+        "key": "moonlight",
+        "fill": "city-glow",
+        "practical": [
+          "neon-sign",
+          "streetlamp"
+        ]
+      },
+      "mood": "noir, 고독함",
+      "weather": "clear"
+    },
+    {
+      "id": "env.office.day",
+      "name": "사무실",
+      "lighting": {
+        "key": "window-light"
+      },
+      "mood": "차분한 일상"
+    }
+  ],
+  "props": [
+    {
+      "id": "prop.phone",
+      "name": "스마트폰",
+      "description": "화면이 켜지는 스마트폰",
+      "animationHint": "screen-glows-blue"
+    }
+  ],
+  "shots": [
+    {
+      "id": "shot.001",
+      "sourceSceneId": "SCN-001",
+      "environmentId": "env.rooftop.night",
+      "characterIds": [
+        "char.hero"
+      ],
+      "action": "주인공이 옥상 가장자리에 서서 도시를 내려다본다",
+      "emotion": "결의, 고독",
+      "propIds": [
+        "prop.phone"
+      ],
+      "dialogue": [
+        {
+          "characterId": "char.hero",
+          "line": "이제 그만 끝내자",
+          "delivery": "속삭임"
+        }
+      ],
+      "durationFrames": 96,
+      "timeOfDay": "night",
+      "camera": {
+        "shotSize": "WIDE",
+        "cameraAngle": "EYE_LEVEL",
+        "cameraMovement": "PUSH_IN",
+        "lensIntent": "NORMAL"
+      },
+      "narrativeRefs": [
+        "SCN-001"
+      ],
+      "semanticRefs": [
+        "semantic.action.SCN-001.0000",
+        "semantic.dialogue.SCN-001.0000",
+        "semantic.emotion.SCN-001.0000",
+        "semantic.lightingTransition.SCN-001.0000"
+      ],
+      "continuityRefs": [
+        "SCN-001"
+      ],
+      "composition": "Library example composition",
+      "performanceBeat": "Library example performance",
+      "visualPriority": [],
+      "referencePolicy": {
+        "requiresKeyframe": true,
+        "requiresCharacterReference": true,
+        "requiresEnvironmentReference": true
+      }
+    },
+    {
+      "id": "shot.002",
+      "sourceSceneId": "SCN-002",
+      "environmentId": "env.office.day",
+      "characterIds": [
+        "char.mentor",
+        "char.hero"
+      ],
+      "action": "멘토가 모니터를 가리키며 설명하고 주인공이 화면을 주시한다",
+      "durationFrames": 72,
+      "timeOfDay": "morning",
+      "camera": {
+        "shotSize": "MEDIUM",
+        "cameraAngle": "EYE_LEVEL",
+        "cameraMovement": "STATIC",
+        "lensIntent": "NORMAL"
+      },
+      "narrativeRefs": [
+        "SCN-002"
+      ],
+      "semanticRefs": [
+        "semantic.cameraMovement.SCN-002.0000"
+      ],
+      "continuityRefs": [
+        "SCN-002"
+      ],
+      "composition": "Library example composition",
+      "performanceBeat": "Library example performance",
+      "visualPriority": [],
+      "referencePolicy": {
+        "requiresKeyframe": true,
+        "requiresCharacterReference": true,
+        "requiresEnvironmentReference": true
+      }
+    }
+  ],
+  "timeline": {
+    "fps": 24,
+    "transitions": [
+      {
+        "fromShot": "shot.001",
+        "toShot": "shot.002",
+        "type": "cross-dissolve",
+        "durationFrames": 12
+      }
+    ],
+    "totalDurationFrames": 168
+  },
+  "semanticManifest": {
+    "schemaVersion": 1,
+    "sourceSemanticManifestHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "semanticManifestHash": "sha256:ad79cc59186fcee5d2ecbf188438e3a318d5490094268c9945afc55575ba7864",
+    "entries": [
+      {
+        "semanticId": "semantic.action.SCN-001.0000",
+        "entryHash": "sha256:336becac249a3f9b199deb1ae4e3e826148589af66d4585165bb24412d343c4e",
+        "shotId": "shot.001",
+        "sourceSceneId": "SCN-001",
+        "kind": "action",
+        "sourceText": "주인공이 옥상 가장자리에 서서 도시를 내려다본다",
+        "sourceLocator": {
+          "sceneId": "SCN-001",
+          "field": "action",
+          "occurrenceIndex": 0
+        }
+      },
+      {
+        "semanticId": "semantic.dialogue.SCN-001.0000",
+        "entryHash": "sha256:b0e367bc31d46c69cb6d9b63e7654daaf49dd4d654e7d2dd780b02857cb79cf8",
+        "shotId": "shot.001",
+        "sourceSceneId": "SCN-001",
+        "kind": "dialogue",
+        "sourceText": "이제 그만 끝내자",
+        "sourceLocator": {
+          "sceneId": "SCN-001",
+          "field": "dialogue",
+          "occurrenceIndex": 0,
+          "character": "주인공",
+          "dialogueIndex": 0
+        }
+      },
+      {
+        "semanticId": "semantic.emotion.SCN-001.0000",
+        "entryHash": "sha256:15ea18bb635387e6c83568e77043347a4d54402bf677ada5a4281153a947bf96",
+        "shotId": "shot.001",
+        "sourceSceneId": "SCN-001",
+        "kind": "emotion",
+        "sourceText": "결의, 고독",
+        "sourceLocator": {
+          "sceneId": "SCN-001",
+          "field": "emotion",
+          "occurrenceIndex": 0
+        }
+      },
+      {
+        "semanticId": "semantic.lightingTransition.SCN-001.0000",
+        "entryHash": "sha256:a520a6332867ca301333ccd9c6406a464e7cb3f5e122e3617387d81e42859f5b",
+        "shotId": "shot.001",
+        "sourceSceneId": "SCN-001",
+        "kind": "lightingTransition",
+        "sourceText": "moonlight→city-glow",
+        "sourceLocator": {
+          "sceneId": "SCN-001",
+          "field": "lightingTransition",
+          "occurrenceIndex": 0
+        }
+      },
+      {
+        "semanticId": "semantic.cameraMovement.SCN-002.0000",
+        "entryHash": "sha256:0ea21efcfad812c958265f1bb2905fe8db3e777ab1c7bf092b3892bbf4e234c7",
+        "shotId": "shot.002",
+        "sourceSceneId": "SCN-002",
+        "kind": "cameraMovement",
+        "sourceText": "static",
+        "sourceLocator": {
+          "sceneId": "SCN-002",
+          "field": "cameraMovement",
+          "occurrenceIndex": 0
+        }
+      }
+    ]
+  },
+  "sourceNarrativeSha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "sourceSceneMapSha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "directorPlanSha256": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+  "continuityBibleSha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+  "directorApprovalSha256": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+}

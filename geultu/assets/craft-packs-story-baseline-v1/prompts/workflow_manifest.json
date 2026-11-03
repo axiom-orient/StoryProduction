@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "description": "Story-owned baseline workflow: one draft proposal followed by one human review gate.",
+  "nodes": [
+    {
+      "kind": "agent",
+      "id": "draft-scene",
+      "step": 1,
+      "phase": "draft",
+      "role": "scene-drafter",
+      "system_prompt": "prompts/system.md",
+      "task_prompt": "prompts/task.md",
+      "inputs": ["source_scene", "author_intent"],
+      "output": "scene_candidate"
+    },
+    {
+      "kind": "human",
+      "id": "review-scene",
+      "gate_type": "review",
+      "label": "Review scene candidate",
+      "source": "scene_candidate",
+      "checkpoint": "author-review",
+      "notice": "A candidate is a proposal. Review against the current source; only a separate owner adoption action changes the scene."
+    }
+  ]
+}

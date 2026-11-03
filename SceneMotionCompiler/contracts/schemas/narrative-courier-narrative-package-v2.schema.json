@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-courier.local/contracts/narrative-package/v2.schema.json",
+  "title": "NarrativePackage v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "package_id",
+    "narrative_id",
+    "sts_domain",
+    "source_snapshot_sha256",
+    "canonical_narrative",
+    "authority",
+    "scene_map"
+  ],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "package_id": { "type": "string", "pattern": "^nvc2_[0-9a-f]{64}$" },
+    "narrative_id": { "type": "string", "minLength": 1 },
+    "sts_domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "bundle_sha256"],
+      "properties": {
+        "id": { "const": "sts" },
+        "version": { "type": "string", "minLength": 1 },
+        "bundle_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "source_snapshot_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "canonical_narrative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "artifact"],
+      "properties": {
+        "kind": { "const": "SCREENPLAY" },
+        "artifact": { "$ref": "#/$defs/artifact_ref" }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_ir",
+        "narrative_ir",
+        "execution_constraints",
+        "character_states",
+        "scene_ir",
+        "verification"
+      ],
+      "properties": {
+        "source_ir": { "$ref": "#/$defs/artifact_ref" },
+        "narrative_ir": { "$ref": "#/$defs/artifact_ref" },
+        "execution_constraints": { "$ref": "#/$defs/artifact_ref" },
+        "character_states": { "$ref": "#/$defs/artifact_ref" },
+        "scene_ir": { "$ref": "#/$defs/artifact_ref" },
+        "verification": { "$ref": "#/$defs/artifact_ref" }
+      }
+    },
+    "scene_map": { "$ref": "#/$defs/scene_map_artifact_ref" }
+  },
+  "$defs": {
+    "artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "sha256"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/|\\\\)\\\\.\\\\.(?:/|\\\\|$))(?!.*:).+$"
+        },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "mime": { "type": "string", "minLength": 1 }
+      }
+    },
+    "scene_map_artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "sha256"],
+      "properties": {
+        "kind": { "const": "narrative_scene_map_v2" },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/|\\\\)\\\\.\\\\.(?:/|\\\\|$))(?!.*:).+$"
+        },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "mime": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

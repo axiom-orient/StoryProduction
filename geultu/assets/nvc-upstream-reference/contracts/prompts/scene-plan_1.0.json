@@ -1,0 +1,24 @@
+{
+  "prompt_id": "scene-plan/1.0",
+  "stage_id": "S04_SCENE_PLAN",
+  "purpose": "Compile scene-level world state transitions",
+  "authoritative_inputs": [
+    "adaptation_ir",
+    "story_ir"
+  ],
+  "allowed_inference": [
+    "non-essential blocking"
+  ],
+  "forbidden_mutation": [
+    "immutable entity attributes",
+    "world rules"
+  ],
+  "output_schema": "schemas/scene-ir.schema.json",
+  "hard_requirements": [
+    "state_out must support next state_in"
+  ],
+  "evaluation_rubric": [
+    "continuity"
+  ],
+  "template": "Implementation MUST inject only authoritative inputs and request output conforming exactly to output_schema. Natural-language wording is versioned separately; schema and hard requirements are authoritative."
+}

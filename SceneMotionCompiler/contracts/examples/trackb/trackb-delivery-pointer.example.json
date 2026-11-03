@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 2,
+  "pointerKey": "pointer.narrative.demo",
+  "narrativeId": "narrative.demo",
+  "revision": 1,
+  "state": "PROMOTED",
+  "deliverySetHash": "sha256:d8cc23a1fbaf532b73280cbdbe8a6ec1812baf41f1403534880b69b1f8ab6ed0",
+  "candidateHash": "sha256:31b0422f01d8b0547ca679d57f057a7c07397225832b9cee12d034549b998fd7",
+  "approvalHash": "sha256:84f3400cc69aaa2e1ad6746314b4d06adacd49be4b9f26f136e5dff1b6a6bce0",
+  "meaningQualificationHash": "sha256:246118d7cff01a7240ced3d135270b9442775aa141325eb599cf2b0243b49c77",
+  "baseDeliverySetHash": "NONE",
+  "deliverySetPath": "scenes/trackb/narrative.demo/delivery-sets/0d66843ab3e776409c4fab149a537cf13be95ce96d1a3a62a81880e83c47f9f2/trackb-delivery-set-v2.json",
+  "pointerHash": "sha256:03aeaecda48cd18a10ac36d4e7544f8635afdc8c49d57508c2116ec1b4d8d749"
+}

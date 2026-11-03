@@ -1,0 +1,188 @@
+{
+  "shots": [
+    {
+      "shot_id": "SH_01",
+      "scene_id": "SC_01",
+      "narrative_function": "prove impossible rule",
+      "setup": {
+        "environment": "village"
+      },
+      "event": {
+        "action": "daily_life"
+      },
+      "lighting": {
+        "source": "sun"
+      },
+      "camera": {
+        "scale": "wide",
+        "movement": "slow_push"
+      },
+      "motion": {
+        "mode": "LAYERED_2_5D",
+        "primary": "walk_cycle",
+        "ambient": [
+          "sun_drift",
+          "cloud_drift",
+          "branch_sway"
+        ]
+      },
+      "hard_constraints": {
+        "human_shadow": "FORBIDDEN"
+      },
+      "asset_refs": [
+        "BG_VILLAGE",
+        "SUN",
+        "CLOUD_01",
+        "TREE_BRANCH",
+        "CHAR_WALKER_A"
+      ],
+      "obligations": []
+    },
+    {
+      "shot_id": "SH_02",
+      "scene_id": "SC_02",
+      "narrative_function": "absence through objects",
+      "setup": {
+        "environment": "home"
+      },
+      "event": {
+        "action": "notices_empty_place"
+      },
+      "lighting": {
+        "source": "window"
+      },
+      "camera": {
+        "scale": "medium_wide",
+        "movement": "slow_push"
+      },
+      "motion": {
+        "mode": "LAYERED_2_5D",
+        "primary": "camera_push",
+        "ambient": [
+          "dust",
+          "cloth_sway"
+        ]
+      },
+      "hard_constraints": {
+        "human_shadow": "FORBIDDEN"
+      },
+      "asset_refs": [
+        "BG_HOME",
+        "CHAR_ARTISAN_YOUNG",
+        "WIFE_SHOES",
+        "EMPTY_CUSHION_HALF"
+      ],
+      "obligations": [
+        "TR_01"
+      ]
+    },
+    {
+      "shot_id": "SH_03",
+      "scene_id": "SC_03",
+      "narrative_function": "first shadow",
+      "setup": {
+        "environment": "summit"
+      },
+      "event": {
+        "action": "shadow_emerges"
+      },
+      "lighting": {
+        "source": "low_sun"
+      },
+      "camera": {
+        "scale": "wide",
+        "movement": "slow_push"
+      },
+      "motion": {
+        "mode": "HYBRID",
+        "primary": "procedural_shadow_growth",
+        "ambient": [
+          "wind",
+          "cloud_drift"
+        ]
+      },
+      "hard_constraints": {
+        "before": "NO_SHADOW",
+        "after": "ONE_ATTACHED_SHADOW"
+      },
+      "asset_refs": [
+        "BG_SUMMIT",
+        "CHAR_ARTISAN_YOUNG",
+        "SHADOW_MASK"
+      ],
+      "obligations": [
+        "TR_01"
+      ]
+    },
+    {
+      "shot_id": "SH_04",
+      "scene_id": "SC_04",
+      "narrative_function": "spread shadows",
+      "setup": {
+        "environment": "village"
+      },
+      "event": {
+        "action": "villagers_notice"
+      },
+      "lighting": {
+        "source": "sunset"
+      },
+      "camera": {
+        "scale": "wide",
+        "movement": "static"
+      },
+      "motion": {
+        "mode": "LAYERED_2_5D",
+        "primary": "reaction",
+        "ambient": [
+          "dust"
+        ]
+      },
+      "hard_constraints": {
+        "visible_people_shadow": "REQUIRED"
+      },
+      "asset_refs": [
+        "BG_VILLAGE_SUNSET",
+        "CHAR_GROUP",
+        "SHADOW_GROUP"
+      ],
+      "obligations": [
+        "TR_02"
+      ]
+    },
+    {
+      "shot_id": "SH_05",
+      "scene_id": "SC_05",
+      "narrative_function": "final metaphor",
+      "setup": {
+        "environment": "path"
+      },
+      "event": {
+        "action": "shadow_reaches_home_first"
+      },
+      "lighting": {
+        "source": "sunset"
+      },
+      "camera": {
+        "scale": "wide",
+        "movement": "slow_follow"
+      },
+      "motion": {
+        "mode": "HYBRID",
+        "primary": "walk_shadow_extension",
+        "ambient": [
+          "branch_sway"
+        ]
+      },
+      "hard_constraints": {
+        "shadow_endpoint": "HOME_BEFORE_BODY"
+      },
+      "asset_refs": [
+        "BG_PATH_HOME",
+        "CHAR_ARTISAN_OLD",
+        "SHADOW_OLD"
+      ],
+      "obligations": []
+    }
+  ]
+}

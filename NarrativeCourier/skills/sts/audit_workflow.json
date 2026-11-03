@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "domain_id": "sts-audit",
+  "domain_version": "4.3.0",
+  "description": "Independent existing-screenplay audit: synopsis and screenplay are reconstructed separately before semantic comparison.",
+  "stages": [
+    {
+      "id": "source",
+      "system_prompt": "prompts/audit/system.md",
+      "task_prompt": "prompts/audit/source_extract.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/world-rules-epistemics.md",
+        "principles/externalization-form.md"
+      ],
+      "input": "synopsis",
+      "schema": "schemas/audit-source-ir.schema.json",
+      "output": "01_source_ir.json",
+      "blind_to": [
+        "screenplay",
+        "screenplay_ir"
+      ]
+    },
+    {
+      "id": "screenplay",
+      "system_prompt": "prompts/critic/reconstruction_system.md",
+      "task_prompt": "prompts/audit/screenplay_extract.md",
+      "principles": [
+        "principles/core.md",
+        "principles/causality-scenes.md",
+        "principles/character-state.md",
+        "principles/screenplay-expression.md",
+        "principles/world-rules-epistemics.md",
+        "principles/externalization-form.md"
+      ],
+      "input": "screenplay",
+      "schema": "schemas/audit-screenplay-ir.schema.json",
+      "output": "02_screenplay_ir.json",
+      "blind_to": [
+        "synopsis",
+        "source_ir"
+      ]
+    },
+    {
+      "id": "compare",
+      "system_prompt": "prompts/audit/system.md",
+      "task_prompt": "prompts/audit/compare.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/revision-verification.md",
+        "principles/world-rules-epistemics.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "01_source_ir.json",
+        "02_screenplay_ir.json"
+      ],
+      "schema": "schemas/audit-result.schema.json",
+      "output": "audit.json",
+      "blind_to": [
+        "raw_synopsis",
+        "raw_screenplay"
+      ]
+    }
+  ]
+}

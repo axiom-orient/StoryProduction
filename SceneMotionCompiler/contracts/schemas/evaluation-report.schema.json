@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-forge.local/schemas/evaluation-report.schema.json",
+  "title": "EvaluationReport",
+  "type": "object",
+  "required": [
+    "reportId",
+    "screenId",
+    "scoreVector",
+    "hardGates",
+    "outcome"
+  ],
+  "properties": {
+    "reportId": {
+      "type": "string"
+    },
+    "screenId": {
+      "type": "string"
+    },
+    "scoreVector": {
+      "$ref": "score-vector.schema.json"
+    },
+    "hardGates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "gate",
+          "status"
+        ],
+        "properties": {
+          "gate": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PASS",
+              "FAIL",
+              "SKIP"
+            ]
+          },
+          "detail": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "REPAIR_REQUIRED"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,37 @@
+{
+  "expectedCanonicalHash": "sha256:9c5ebb42097114a051fa5197a907dada40dd9eae751ad3c61ffcf952dbf0304c",
+  "payload": {
+    "zeta": "마지막 장면 🌙",
+    "alpha": {
+      "unicode": "장면 🎬",
+      "nullValue": null,
+      "booleanFalse": false,
+      "booleanTrue": true,
+      "sortedChallenge": {
+        "z": "끝",
+        "a": "시작",
+        "middle": "중간"
+      }
+    },
+    "crop": {
+      "height": 1080,
+      "width": 1920,
+      "y": 24,
+      "x": 12
+    },
+    "items": [
+      {
+        "z": true,
+        "a": null,
+        "crop": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        }
+      },
+      "한글",
+      false
+    ]
+  }
+}

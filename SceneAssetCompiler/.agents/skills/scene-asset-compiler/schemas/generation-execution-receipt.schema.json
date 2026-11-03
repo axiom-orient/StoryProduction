@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GenerationExecutionReceipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","task_id","attempt_no","created_at","provider","tool","model","model_snapshot","request_id","started_at","finished_at","outcome","evidence_level","submitted_prompt_path","submitted_prompt_sha256","capsule_verbatim","capsule_sha256","prompt_sha256","requested","inputs","outputs"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "task_id": {"type": "string"},
+    "attempt_no": {"type": "integer", "minimum": 1},
+    "created_at": {"type": "string"},
+    "provider": {"type": "string", "minLength": 1},
+    "tool": {"type": "string", "minLength": 1},
+    "model": {"type": "string", "minLength": 1},
+    "model_snapshot": {"type": "string", "minLength": 1},
+    "request_id": {"type": "string", "minLength": 1},
+    "started_at": {"type": "string", "minLength": 1},
+    "finished_at": {"type": "string", "minLength": 1},
+    "outcome": {"enum": ["SUCCEEDED","FAILED","CANCELLED","UNKNOWN"]},
+    "evidence_level": {"enum": ["EXECUTOR_RECORDED","PROVIDER_RECEIPT"]},
+    "submitted_prompt_path": {"type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"},
+    "submitted_prompt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "capsule_verbatim": {"type": "boolean"},
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "perfectpixel_inspection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "packaging_retry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode","trigger","retry_index","max_retries","substrate_sha256","preserve_locked_pixels","preserve_locked_layout","creative_changes"],
+      "properties": {
+        "mode": {"const": "PSD_ONLY"},
+        "trigger": {"const": "PREFERRED_OUTPUT_MISSING"},
+        "retry_index": {"type": "integer", "minimum": 1},
+        "max_retries": {"const": 1},
+        "substrate_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "preserve_locked_pixels": {"const": true},
+        "preserve_locked_layout": {"const": true},
+        "creative_changes": {"const": "FORBID"}
+      }
+    },
+    "capsule_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "prompt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "requested": {
+      "type": "object", "additionalProperties": false,
+      "required": ["format","size","transparent_background"],
+      "properties": {"format":{"enum":["PNG","WEBP","PSD"]},"size":{"type":"string"},"transparent_background":{"type":"boolean"}}
+    },
+    "inputs": {"type":"array","items":{"type":"object","additionalProperties":false,"required":["role","path","sha256"],"properties":{"role":{"type":"string"},"path":{"type":"string"},"sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}}}},
+    "outputs": {"type":"array","items":{"type":"object","additionalProperties":false,"required":["path","sha256","size_bytes"],"properties":{"path":{"type":"string"},"sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},"size_bytes":{"type":"integer","minimum":0}}}}
+  }
+}

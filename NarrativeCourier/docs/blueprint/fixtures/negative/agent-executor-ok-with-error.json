@@ -1,0 +1,7 @@
+{
+  "request_id": "A-001",
+  "ok": true,
+  "artifact": {},
+  "error": "contradictory success error",
+  "error_class": null
+}

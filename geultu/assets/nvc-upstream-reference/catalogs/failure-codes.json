@@ -1,0 +1,385 @@
+{
+  "schema_version": "1.0.0",
+  "codes": [
+    {
+      "code": "SRC_001_SCHEMA_INVALID",
+      "namespace": "SRC",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SRC_002_UNSUPPORTED_CANONICAL_KIND",
+      "namespace": "SRC",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SRC_003_HASH_MISMATCH",
+      "namespace": "SRC",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SRC_004_AUTHORITY_AMBIGUOUS",
+      "namespace": "SRC",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SRC_005_SYNOPSIS_CANONICAL_CONFLICT",
+      "namespace": "SRC",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SRC_006_TARGET_INVALID",
+      "namespace": "SRC",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SRC_007_RIGHTS_UNKNOWN",
+      "namespace": "SRC",
+      "default_severity": "WARNING"
+    },
+    {
+      "code": "SEM_001_UNRESOLVED_REFERENCE",
+      "namespace": "SEM",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SEM_002_UNSOURCED_FACT",
+      "namespace": "SEM",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SEM_003_SOURCE_CONTRADICTION",
+      "namespace": "SEM",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SEM_004_CAUSAL_LINK_LOST",
+      "namespace": "SEM",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SEM_005_INTENTION_LOST",
+      "namespace": "SEM",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SEM_006_EVENT_ORDER_INVALID",
+      "namespace": "SEM",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SEM_007_HARD_ASSERTION_MISSING",
+      "namespace": "SEM",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SEM_008_AMBIGUITY_BLOCKING",
+      "namespace": "SEM",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "DIR_001_MEDIUM_SEMANTIC_MISMATCH",
+      "namespace": "DIR",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "DIR_002_RENDERER_UNAVAILABLE",
+      "namespace": "DIR",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "DIR_003_TEXT_GRAMMAR_UNDEFINED",
+      "namespace": "DIR",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "DIR_004_MOTION_GRAMMAR_UNDEFINED",
+      "namespace": "DIR",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "DIR_005_PRODUCTION_INFEASIBLE",
+      "namespace": "DIR",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "ADP_001_MANDATORY_BEAT_OMITTED",
+      "namespace": "ADP",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "ADP_002_REDUNDANT_SCENE",
+      "namespace": "ADP",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "ADP_003_UNSAFE_COMPRESSION",
+      "namespace": "ADP",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "ADP_004_UNJUSTIFIED_CREATIVE_INSERTION",
+      "namespace": "ADP",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "ADP_005_HARD_OBLIGATION_UNCOVERED",
+      "namespace": "ADP",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SCN_001_STATE_IN_OUT_MISMATCH",
+      "namespace": "SCN",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SCN_002_ILLEGAL_ENTITY_MUTATION",
+      "namespace": "SCN",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SCN_003_TIME_DISCONTINUITY",
+      "namespace": "SCN",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SCN_004_LOCATION_DISCONTINUITY",
+      "namespace": "SCN",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SCN_005_WORLD_RULE_VIOLATION",
+      "namespace": "SCN",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SHT_001_UNRENDERABLE_SHOT",
+      "namespace": "SHT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SHT_002_CAMERA_UNDEFINED",
+      "namespace": "SHT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SHT_003_ACTION_AMBIGUOUS",
+      "namespace": "SHT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SHT_004_OBLIGATION_UNASSIGNED",
+      "namespace": "SHT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SHT_005_INVARIANT_UNENFORCEABLE",
+      "namespace": "SHT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SHT_006_ASSET_REFERENCE_DANGLING",
+      "namespace": "SHT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "AST_001_MISSING_REFERENCE",
+      "namespace": "AST",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "AST_002_IDENTITY_SPEC_INCOMPLETE",
+      "namespace": "AST",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "AST_003_CONTINUITY_SCOPE_INVALID",
+      "namespace": "AST",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "AST_004_HIDDEN_AREA_REQUIRED",
+      "namespace": "AST",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "AST_005_RIGHTS_PROVENANCE_MISSING",
+      "namespace": "AST",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "GEN_001_IDENTITY_DRIFT",
+      "namespace": "GEN",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "GEN_002_STYLE_DRIFT",
+      "namespace": "GEN",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "GEN_003_STATE_VIOLATION",
+      "namespace": "GEN",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "GEN_004_REFERENCE_IGNORED",
+      "namespace": "GEN",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "GEN_005_OUTPUT_CORRUPT",
+      "namespace": "GEN",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "RND_001_NO_CAPABLE_BACKEND",
+      "namespace": "RND",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "RND_002_CAPABILITY_MISMATCH",
+      "namespace": "RND",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "RND_003_NONDETERMINISTIC_INVARIANT",
+      "namespace": "RND",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "RND_004_RENDER_TIMEOUT",
+      "namespace": "RND",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "RND_005_BACKEND_ERROR",
+      "namespace": "RND",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "MOT_001_MOTION_INVARIANT_VIOLATION",
+      "namespace": "MOT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "MOT_002_BACKGROUND_DRIFT",
+      "namespace": "MOT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "MOT_003_TEMPORAL_DISCONTINUITY",
+      "namespace": "MOT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "MOT_004_LOOP_SEAM_VISIBLE",
+      "namespace": "MOT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "MOT_005_CAMERA_TRAJECTORY_VIOLATION",
+      "namespace": "MOT",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "CMP_001_TIMELINE_INVALID",
+      "namespace": "CMP",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "CMP_002_TEXT_TIMING_COLLISION",
+      "namespace": "CMP",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "CMP_003_AUDIO_TIMING_COLLISION",
+      "namespace": "CMP",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "CMP_004_FRAME_RATE_MISMATCH",
+      "namespace": "CMP",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "CMP_005_DURATION_OUT_OF_RANGE",
+      "namespace": "CMP",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "QAV_001_TRANSITION_UNRECOVERABLE",
+      "namespace": "QAV",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "QAV_002_SOURCE_CONTRADICTION",
+      "namespace": "QAV",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "QAV_003_CONTINUITY_FAILURE",
+      "namespace": "QAV",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "QAV_004_HARD_GATE_FAILED",
+      "namespace": "QAV",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "QAV_005_LOW_CONFIDENCE_REVIEW",
+      "namespace": "QAV",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "QAV_006_RIGHTS_GATE_FAILED",
+      "namespace": "QAV",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "PKG_001_MEDIA_DECODE_FAILURE",
+      "namespace": "PKG",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "PKG_002_LINEAGE_INCOMPLETE",
+      "namespace": "PKG",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "PKG_003_HASH_MISMATCH",
+      "namespace": "PKG",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "PKG_004_MANIFEST_INCOMPLETE",
+      "namespace": "PKG",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SYS_001_STAGE_CONTRACT_INVALID",
+      "namespace": "SYS",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SYS_002_SCHEMA_REF_DANGLING",
+      "namespace": "SYS",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SYS_003_ARTIFACT_OWNER_VIOLATION",
+      "namespace": "SYS",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SYS_004_DAG_CYCLE",
+      "namespace": "SYS",
+      "default_severity": "ERROR"
+    },
+    {
+      "code": "SYS_005_RETRY_BUDGET_EXHAUSTED",
+      "namespace": "SYS",
+      "default_severity": "ERROR"
+    }
+  ]
+}

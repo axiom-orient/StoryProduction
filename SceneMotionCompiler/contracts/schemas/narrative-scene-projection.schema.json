@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-motion-compiler.local/schemas/narrative-scene-projection.schema.json",
+  "title": "NarrativeSceneProjection v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "projectionId",
+    "narrativeId",
+    "sourceNarrativeId",
+    "bundleSha256",
+    "packageSha256",
+    "sceneMapSha256",
+    "sourceSemanticManifestHash",
+    "semanticManifestHash",
+    "sceneGraphPath",
+    "sceneGraphHash",
+    "sceneCount",
+    "sceneIds",
+    "sceneToShot",
+    "directorPlanSha256",
+    "continuityBibleSha256",
+    "directorApprovalSha256",
+    "shotCount",
+    "sourceArtifacts"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 3
+    },
+    "projectionId": {
+      "pattern": "^projection\\.[A-Za-z0-9._:-]{1,127}$",
+      "type": "string"
+    },
+    "narrativeId": {
+      "pattern": "^narrative\\.[A-Za-z0-9._:-]{1,127}$",
+      "type": "string"
+    },
+    "sourceNarrativeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bundleSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "packageSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sceneMapSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sourceSemanticManifestHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "semanticManifestHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sceneGraphPath": {
+      "type": "string",
+      "pattern": "^projection/generations/[A-Za-z0-9._-]+/scene-graph\\.json$"
+    },
+    "sceneGraphHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sceneCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sceneIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^SCN-[0-9]{3,}$"
+      },
+      "uniqueItems": true
+    },
+    "sceneToShot": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sceneId",
+          "shotId",
+          "order"
+        ],
+        "properties": {
+          "sceneId": {
+            "type": "string",
+            "pattern": "^SCN-[0-9]{3,}$"
+          },
+          "shotId": {
+            "type": "string",
+            "pattern": "^shot\\.[a-z0-9][a-z0-9._-]{0,126}$"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "directorPlanSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "continuityBibleSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "directorApprovalSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "shotCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sourceArtifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sceneMap",
+        "continuityBible",
+        "directorPlan",
+        "directorApproval"
+      ],
+      "properties": {
+        "sceneMap": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "encoding",
+            "sha256",
+            "bytesBase64"
+          ],
+          "properties": {
+            "encoding": {
+              "const": "base64url"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "bytesBase64": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "minLength": 1,
+              "maxLength": 11184811
+            }
+          }
+        },
+        "continuityBible": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "encoding",
+            "sha256",
+            "bytesBase64"
+          ],
+          "properties": {
+            "encoding": {
+              "const": "base64url"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "bytesBase64": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "minLength": 1,
+              "maxLength": 11184811
+            }
+          }
+        },
+        "directorPlan": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "encoding",
+            "sha256",
+            "bytesBase64"
+          ],
+          "properties": {
+            "encoding": {
+              "const": "base64url"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "bytesBase64": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "minLength": 1,
+              "maxLength": 11184811
+            }
+          }
+        },
+        "directorApproval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "encoding",
+            "sha256",
+            "bytesBase64"
+          ],
+          "properties": {
+            "encoding": {
+              "const": "base64url"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            "bytesBase64": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "minLength": 1,
+              "maxLength": 11184811
+            }
+          }
+        }
+      }
+    }
+  }
+}

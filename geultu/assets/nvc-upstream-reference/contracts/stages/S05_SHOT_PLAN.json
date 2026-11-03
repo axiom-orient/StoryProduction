@@ -1,0 +1,111 @@
+{
+  "stage_id": "S05_SHOT_PLAN",
+  "version": "1.0.0",
+  "artifact_owner": "CinematographyPlanner",
+  "executor_classes": [
+    "LLM",
+    "DET"
+  ],
+  "inputs": [
+    {
+      "kind": "scene_bundle_ir",
+      "schema": "schemas/scene-ir.schema.json",
+      "required": true
+    },
+    {
+      "kind": "director_ir",
+      "schema": "schemas/director-ir.schema.json",
+      "required": true
+    },
+    {
+      "kind": "meaning_spec",
+      "schema": "schemas/meaning-spec.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "shot_bundle_ir",
+      "schema": "schemas/shot-ir.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "each shot renderable",
+    "hard obligations assigned",
+    "hard invariants enforceable"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "SHT_001_UNRENDERABLE_SHOT",
+    "SHT_002_CAMERA_UNDEFINED",
+    "SHT_003_ACTION_AMBIGUOUS",
+    "SHT_004_OBLIGATION_UNASSIGNED",
+    "SHT_005_INVARIANT_UNENFORCEABLE",
+    "SHT_006_ASSET_REFERENCE_DANGLING"
+  ],
+  "retry_policy": {
+    "max_repairs": 2
+  },
+  "next": {
+    "on_pass": "S06_ASSET_PLAN",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "derive shot purpose and setup/event/lighting/camera",
+      "executor_class": "LLM",
+      "inputs": [
+        "scene_bundle_ir",
+        "director_ir"
+      ],
+      "outputs": [
+        "shot_draft"
+      ],
+      "hard_gate": "every shot has narrative purpose and camera",
+      "failure_codes": [
+        "SHT_002_CAMERA_UNDEFINED",
+        "SHT_003_ACTION_AMBIGUOUS"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "route motion mode and encode hard constraints",
+      "executor_class": "LLM",
+      "inputs": [
+        "shot_draft",
+        "director_ir"
+      ],
+      "outputs": [
+        "shot_motion_draft"
+      ],
+      "hard_gate": "hard invariant has enforceable strategy",
+      "failure_codes": [
+        "SHT_005_INVARIANT_UNENFORCEABLE"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "assign meaning obligations and required asset refs",
+      "executor_class": "DET",
+      "inputs": [
+        "shot_motion_draft",
+        "meaning_spec"
+      ],
+      "outputs": [
+        "shot_bundle_ir"
+      ],
+      "hard_gate": "hard obligations assigned and refs syntactically valid",
+      "failure_codes": [
+        "SHT_004_OBLIGATION_UNASSIGNED",
+        "SHT_006_ASSET_REFERENCE_DANGLING",
+        "SHT_001_UNRENDERABLE_SHOT"
+      ]
+    }
+  ]
+}

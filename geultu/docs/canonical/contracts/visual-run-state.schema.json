@@ -1,0 +1,73 @@
+{
+  "$id": "https://geultu.dev/schema/visual-run-state/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accepted_outputs": {
+      "additionalProperties": {
+        "$ref": "artifact-ref.schema.json"
+      },
+      "maxProperties": 512,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,63}$"
+      },
+      "type": "object"
+    },
+    "narrative_package": {
+      "$ref": "artifact-ref.schema.json"
+    },
+    "pending_effect": {
+      "oneOf": [
+        {
+          "$ref": "effect-receipt.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "project_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "geultu.dev/visual-run-state/v1"
+    },
+    "stage": {
+      "pattern": "^S(?:0[0-9]|1[0-2])$",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "READY",
+        "RUNNING",
+        "REPAIR_REQUIRED",
+        "RECOVERY_REQUIRED",
+        "COMPLETED",
+        "FAILED"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "project_id",
+    "run_id",
+    "revision",
+    "stage",
+    "status",
+    "narrative_package",
+    "accepted_outputs"
+  ],
+  "title": "VisualRunState v1",
+  "type": "object"
+}

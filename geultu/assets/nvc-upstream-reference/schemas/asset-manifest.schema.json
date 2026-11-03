@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AssetManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "assets": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "Asset",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "asset_id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "character",
+              "background",
+              "prop",
+              "fx",
+              "typography",
+              "audio",
+              "rig",
+              "geometry",
+              "reference"
+            ]
+          },
+          "continuity_scope": {
+            "type": "string",
+            "enum": [
+              "shot",
+              "scene",
+              "story",
+              "corpus"
+            ]
+          },
+          "spec": {
+            "type": "object"
+          },
+          "required_views": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "allowed_mutations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "forbidden_mutations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "consumers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "asset_id",
+          "type",
+          "continuity_scope",
+          "spec",
+          "required_views",
+          "allowed_mutations",
+          "forbidden_mutations",
+          "consumers"
+        ]
+      }
+    }
+  },
+  "required": [
+    "assets"
+  ]
+}

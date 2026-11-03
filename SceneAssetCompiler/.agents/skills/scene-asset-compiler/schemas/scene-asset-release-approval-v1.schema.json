@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/contracts/scene-asset-release-approval/v1.schema.json",
+  "title": "SceneAssetReleaseApproval v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "approvalId", "status", "reviewer", "approvedAt", "note", "subject", "subjectHash"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "approvalId": { "type": "string", "pattern": "^SARA1-[0-9a-f]{64}$" },
+    "status": { "const": "APPROVED" },
+    "reviewer": { "type": "string", "minLength": 1 },
+    "approvedAt": { "type": "string", "format": "date-time" },
+    "note": { "type": "string" },
+    "subject": { "$ref": "#/$defs/subject" },
+    "subjectHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sceneGraphHash", "assetPackHash", "assetPackAuditHash", "bindingManifestHash"],
+      "properties": {
+        "sceneGraphHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "assetPackHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "assetPackAuditHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "bindingManifestHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+      }
+    }
+  }
+}

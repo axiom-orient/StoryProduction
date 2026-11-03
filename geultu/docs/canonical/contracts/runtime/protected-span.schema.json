@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geultu.dev/schemas/runtime/protected-span.v1.schema.json",
+  "title": "Protected UTF-8 byte span",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "start": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "end": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "start",
+    "end",
+    "reason"
+  ]
+}

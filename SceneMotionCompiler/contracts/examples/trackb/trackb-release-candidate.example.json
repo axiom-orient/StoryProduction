@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 4,
+  "candidateId": "candidate.demo.v4",
+  "narrativeId": "narrative.demo",
+  "authorityHash": "sha256:a5083c7236b7d58e38ff75b567744ffd1bc17d39f39e840dbf9bee0c08e5d888",
+  "meaningQualificationHash": "sha256:246118d7cff01a7240ced3d135270b9442775aa141325eb599cf2b0243b49c77",
+  "evidenceReceiptHash": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+  "baseDeliverySetHash": "NONE",
+  "artifacts": {
+    "projectionReceiptHash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "sceneGraphHash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "assetHandoffHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "assetHandoffSceneGraphHash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "htmlHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "provenanceHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "evidenceCells": [
+    {
+      "shotId": "shot.001",
+      "gateVerdict": "ITERATE",
+      "meaningCoverage": [
+        { "meaningId": "meaning.dialogue.001", "entryHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "status": "SUPPORTED", "representation": "METADATA" },
+        { "meaningId": "meaning.action.001", "entryHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222", "status": "SUPPORTED", "representation": "METADATA" },
+        { "meaningId": "meaning.emotion.001", "entryHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333", "status": "SUPPORTED", "representation": "METADATA" },
+        { "meaningId": "meaning.lightingTransition.001", "entryHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444", "status": "SUPPORTED", "representation": "METADATA" },
+        { "meaningId": "meaning.cameraMovement.001", "entryHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555", "status": "SUPPORTED", "representation": "METADATA" }
+      ],
+      "runtimeEvidence": { "networkRequestCount": 0, "exceptionCount": 0, "pass": true },
+      "assetEvidence": { "assetManifestHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333", "pass": true },
+      "visualEvidence": { "htmlHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111", "pass": true },
+      "evidenceCellHash": "sha256:7f9acc3e57292d61fca3bb087f3971d5eae65b278a5c37b33ae5cbdb06402f93"
+    }
+  ],
+  "candidateVerdict": "ITERATE",
+  "candidateHash": "sha256:31b0422f01d8b0547ca679d57f057a7c07397225832b9cee12d034549b998fd7"
+}

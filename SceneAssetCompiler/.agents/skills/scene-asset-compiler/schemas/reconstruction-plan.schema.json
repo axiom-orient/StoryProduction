@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/reconstruction-plan.schema.json",
+  "title": "ReconstructionPlan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "reconstruction_id",
+    "task_id",
+    "source_attempt",
+    "created_at",
+    "strategy",
+    "reset_scope",
+    "edit_target",
+    "preserve_axes",
+    "rewrite_axes",
+    "instruction",
+    "reference_policy",
+    "experiments",
+    "requires_fresh_executor_context"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "reconstruction_id": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "source_attempt": {
+      "type": "integer"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "strategy": {
+      "enum": [
+        "SURGICAL_EDIT",
+        "TARGETED_EDIT",
+        "TARGETED_REGENERATION",
+        "RECONSTRUCT_FROM_AUTHORITY",
+        "REFERENCE_ABLATION",
+        "RESEED_ANCHOR",
+        "RESET_EXECUTION_CONTEXT"
+      ]
+    },
+    "reset_scope": {
+      "enum": [
+        "OUTPUT",
+        "PROMPT_AND_OUTPUT",
+        "EXECUTOR_CONTEXT_AND_OUTPUT"
+      ]
+    },
+    "edit_target": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "preserve_axes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rewrite_axes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "instruction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reference_policy": {
+      "enum": [
+        "MINIMAL_ROLE_COMPLETE",
+        "KEEP_AND_ABLATE_SUSPECTS"
+      ]
+    },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "requires_fresh_executor_context": {
+      "type": "boolean"
+    }
+  }
+}

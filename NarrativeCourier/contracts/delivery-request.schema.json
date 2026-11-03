@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-courier.local/contracts/delivery-request.schema.json",
+  "title": "DeliveryRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "narrative_package_sha256",
+    "intent",
+    "coverage",
+    "outputs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,119}$"
+    },
+    "narrative_package_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "intent": {
+      "enum": [
+        "ANALYSIS",
+        "DEVELOPMENT",
+        "NARRATIVE",
+        "PRESENTATION",
+        "PROMOTION"
+      ]
+    },
+    "coverage": {
+      "enum": [
+        "FULL",
+        "SUMMARY",
+        "SELECTION",
+        "EXCERPT",
+        "MOOD"
+      ]
+    },
+    "audience": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "must_include_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/narrative_ref"
+      },
+      "default": []
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/output_request"
+      }
+    },
+    "asset_inputs": {
+      "type": "array",
+      "uniqueItems": true,
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/asset_input"
+      }
+    }
+  },
+  "$defs": {
+    "narrative_ref": {
+      "type": "string",
+      "pattern": "^(SRC|REL|GAP|CON|SCN)-[A-Za-z0-9_-]+$"
+    },
+    "output_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output_id",
+        "format"
+      ],
+      "properties": {
+        "output_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,119}$"
+        },
+        "format": {
+          "enum": [
+            "HTML",
+            "PNG",
+            "WEBP",
+            "SVG",
+            "PDF",
+            "MP4",
+            "WEBM",
+            "JSON",
+            "OTIO",
+            "PPTX"
+          ]
+        },
+        "backend_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "aspect_ratio": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*:[1-9][0-9]*$"
+        },
+        "fps": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "num",
+            "den"
+          ],
+          "properties": {
+            "num": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            },
+            "den": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4294967295
+            }
+          }
+        },
+        "duration_frames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": []
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "format": {
+                "enum": [
+                  "PNG",
+                  "WEBP"
+                ]
+              }
+            },
+            "required": [
+              "format"
+            ]
+          },
+          "then": {
+            "required": [
+              "width",
+              "height"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "format": {
+                "enum": [
+                  "MP4",
+                  "WEBM"
+                ]
+              }
+            },
+            "required": [
+              "format"
+            ]
+          },
+          "then": {
+            "required": [
+              "width",
+              "height",
+              "fps",
+              "duration_frames"
+            ]
+          }
+        }
+      ]
+    },
+    "asset_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "mime": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "asset_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_id",
+        "kind",
+        "role",
+        "narrative_refs",
+        "generation_mode",
+        "source"
+      ],
+      "properties": {
+        "asset_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,119}$"
+        },
+        "kind": {
+          "enum": [
+            "IMAGE",
+            "VECTOR",
+            "AUDIO",
+            "VIDEO",
+            "FONT",
+            "MODEL_3D",
+            "DATA"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "narrative_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/narrative_ref"
+          }
+        },
+        "generation_mode": {
+          "enum": [
+            "USER",
+            "DERIVED"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/asset_source"
+        }
+      }
+    }
+  }
+}

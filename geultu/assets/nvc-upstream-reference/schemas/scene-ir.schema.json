@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SceneBundleIR",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "scenes": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "SceneIR",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scene_id": {
+            "type": "string"
+          },
+          "state_in": {
+            "type": "object"
+          },
+          "state_delta": {
+            "type": "object"
+          },
+          "state_out": {
+            "type": "object"
+          },
+          "location": {
+            "type": "string"
+          },
+          "time": {
+            "type": "string"
+          },
+          "narrative_function": {
+            "type": "string"
+          },
+          "obligations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "scene_id",
+          "state_in",
+          "state_delta",
+          "state_out",
+          "location",
+          "time",
+          "narrative_function",
+          "obligations"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "scenes"
+  ]
+}

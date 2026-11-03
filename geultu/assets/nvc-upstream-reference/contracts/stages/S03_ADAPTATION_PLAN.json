@@ -1,0 +1,124 @@
+{
+  "stage_id": "S03_ADAPTATION_PLAN",
+  "version": "1.0.0",
+  "artifact_owner": "AdaptationPlanner",
+  "executor_classes": [
+    "LLM",
+    "DET"
+  ],
+  "inputs": [
+    {
+      "kind": "story_ir",
+      "schema": "schemas/story-ir.schema.json",
+      "required": true
+    },
+    {
+      "kind": "meaning_spec",
+      "schema": "schemas/meaning-spec.schema.json",
+      "required": true
+    },
+    {
+      "kind": "director_ir",
+      "schema": "schemas/director-ir.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "adaptation_ir",
+      "schema": "schemas/adaptation-ir.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "hard assertions coverage == 100%",
+    "hard transition coverage == 100%",
+    "all omissions justified"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "ADP_001_MANDATORY_BEAT_OMITTED",
+    "ADP_002_REDUNDANT_SCENE",
+    "ADP_003_UNSAFE_COMPRESSION",
+    "ADP_004_UNJUSTIFIED_CREATIVE_INSERTION",
+    "ADP_005_HARD_OBLIGATION_UNCOVERED"
+  ],
+  "retry_policy": {
+    "max_repairs": 2
+  },
+  "next": {
+    "on_pass": "S04_SCENE_PLAN",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "segment event graph into candidate visual beats",
+      "executor_class": "LLM",
+      "inputs": [
+        "story_ir",
+        "meaning_spec"
+      ],
+      "outputs": [
+        "beat_candidates"
+      ],
+      "hard_gate": "every hard obligation appears in >=1 candidate",
+      "failure_codes": [
+        "ADP_005_HARD_OBLIGATION_UNCOVERED"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "assign representation mode text/image/sound and scene economy",
+      "executor_class": "LLM",
+      "inputs": [
+        "beat_candidates",
+        "director_ir"
+      ],
+      "outputs": [
+        "scene_candidates"
+      ],
+      "hard_gate": "each scene has narrative function",
+      "failure_codes": [
+        "ADP_002_REDUNDANT_SCENE"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "optimize scene set under duration and coverage constraints",
+      "executor_class": "DET",
+      "inputs": [
+        "scene_candidates",
+        "meaning_spec",
+        "target"
+      ],
+      "outputs": [
+        "adaptation_ir.draft"
+      ],
+      "hard_gate": "hard coverage 100% and duration feasible",
+      "failure_codes": [
+        "ADP_001_MANDATORY_BEAT_OMITTED",
+        "ADP_003_UNSAFE_COMPRESSION"
+      ]
+    },
+    {
+      "step_id": "P04",
+      "purpose": "audit omissions and creative insertions",
+      "executor_class": "DET",
+      "inputs": [
+        "adaptation_ir.draft"
+      ],
+      "outputs": [
+        "adaptation_ir"
+      ],
+      "hard_gate": "all omissions justified and creative additions explicit",
+      "failure_codes": [
+        "ADP_004_UNJUSTIFIED_CREATIVE_INSERTION"
+      ]
+    }
+  ]
+}

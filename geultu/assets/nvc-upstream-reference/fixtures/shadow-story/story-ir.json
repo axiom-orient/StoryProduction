@@ -1,0 +1,229 @@
+{
+  "story_id": "story_shadow_001",
+  "entities": [
+    {
+      "entity_id": "CHAR_ARTISAN",
+      "type": "character",
+      "name": "장인",
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 180,
+          "end": 210,
+          "quote": "나무를 깎는 젊은 장인"
+        }
+      ]
+    },
+    {
+      "entity_id": "CHAR_WIFE",
+      "type": "character",
+      "name": "아내",
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 220,
+          "end": 250,
+          "quote": "아내"
+        }
+      ]
+    },
+    {
+      "entity_id": "SHADOW",
+      "type": "abstract",
+      "name": "그림자",
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 20,
+          "end": 60,
+          "quote": "그림자가 없었더란다"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "event_id": "EV_01",
+      "actor": null,
+      "action": "humans_have_no_shadows",
+      "patient": null,
+      "location": null,
+      "goal": null,
+      "pre_state": {},
+      "post_state": {
+        "human.shadow": "absent"
+      },
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 20,
+          "end": 60,
+          "quote": "그림자가 없었더란다"
+        }
+      ]
+    },
+    {
+      "event_id": "EV_02",
+      "actor": "CHAR_WIFE",
+      "action": "does_not_return",
+      "patient": "CHAR_ARTISAN",
+      "location": "mountain",
+      "goal": null,
+      "pre_state": {
+        "wife": "away"
+      },
+      "post_state": {
+        "wife": "missing"
+      },
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 250,
+          "end": 300,
+          "quote": "아내는 돌아오지 않았다"
+        }
+      ]
+    },
+    {
+      "event_id": "EV_03",
+      "actor": "CHAR_ARTISAN",
+      "action": "cannot_forget",
+      "patient": "CHAR_WIFE",
+      "location": "home",
+      "goal": "remember",
+      "pre_state": {
+        "wife": "missing"
+      },
+      "post_state": {
+        "memory": "persistent"
+      },
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 330,
+          "end": 460,
+          "quote": "장인은 잊지 못했다"
+        }
+      ]
+    },
+    {
+      "event_id": "EV_04",
+      "actor": "CHAR_ARTISAN",
+      "action": "climbs_and_asks",
+      "patient": null,
+      "location": "summit",
+      "goal": "understand_what_remains",
+      "pre_state": {
+        "human.shadow": "absent"
+      },
+      "post_state": {
+        "question": "asked"
+      },
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 500,
+          "end": 710,
+          "quote": "산으로 올라갔다"
+        }
+      ]
+    },
+    {
+      "event_id": "EV_05",
+      "actor": "CHAR_ARTISAN",
+      "action": "gets_first_shadow",
+      "patient": "SHADOW",
+      "location": "summit",
+      "goal": null,
+      "pre_state": {
+        "human.shadow": "absent"
+      },
+      "post_state": {
+        "artisan.shadow": "present"
+      },
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 730,
+          "end": 830,
+          "quote": "발끝에서 검은 것이 길게 늘어났다"
+        }
+      ]
+    },
+    {
+      "event_id": "EV_06",
+      "actor": null,
+      "action": "all_gain_shadows",
+      "patient": "SHADOW",
+      "location": "village",
+      "goal": null,
+      "pre_state": {
+        "others.shadow": "absent"
+      },
+      "post_state": {
+        "others.shadow": "present"
+      },
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 850,
+          "end": 980,
+          "quote": "모두에게 그림자가 생겼다"
+        }
+      ]
+    },
+    {
+      "event_id": "EV_07",
+      "actor": "CHAR_ARTISAN",
+      "action": "walks_home_old",
+      "patient": null,
+      "location": "path",
+      "goal": "return_home",
+      "pre_state": {},
+      "post_state": {
+        "artisan.age": "old",
+        "shadow.first_home": true
+      },
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 1040,
+          "end": 1170,
+          "quote": "그림자는 길어져 먼저 집에 닿곤 했다"
+        }
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "id": "TH_01",
+      "statement": "그림자는 상실 뒤에 남은 기억의 자리다.",
+      "origin": "inferred",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 900,
+          "end": 1030,
+          "quote": "사랑한 사람을 잃은 만큼 짙고"
+        }
+      ]
+    }
+  ],
+  "motifs": [
+    "그림자",
+    "신발",
+    "빈 방석",
+    "산길"
+  ],
+  "ambiguities": []
+}

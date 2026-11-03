@@ -1,0 +1,27 @@
+{
+  "prompt_id": "direction-synthesis/1.0",
+  "stage_id": "S02_DIRECTION_SYNTHESIS",
+  "purpose": "Generate and rank medium/directorial grammars",
+  "authoritative_inputs": [
+    "story_ir",
+    "meaning_spec",
+    "target"
+  ],
+  "allowed_inference": [
+    "visual metaphor candidates"
+  ],
+  "forbidden_mutation": [
+    "story facts",
+    "hard constraints"
+  ],
+  "output_schema": "schemas/director-ir.schema.json",
+  "hard_requirements": [
+    "Do not map genre directly to one style"
+  ],
+  "evaluation_rubric": [
+    "semantic fit",
+    "production fit",
+    "novelty"
+  ],
+  "template": "Implementation MUST inject only authoritative inputs and request output conforming exactly to output_schema. Natural-language wording is versioned separately; schema and hard requirements are authoritative."
+}

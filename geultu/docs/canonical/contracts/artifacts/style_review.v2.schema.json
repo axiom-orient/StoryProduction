@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geultu.dev/schemas/artifacts/style_review.v2.schema.json",
+  "title": "style_review artifact body",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "../runtime/artifact-ref.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "drift_findings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "style_ref": {
+      "$ref": "../runtime/artifact-ref.schema.json"
+    }
+  },
+  "required": [
+    "api_version",
+    "source_refs",
+    "drift_findings",
+    "style_ref"
+  ]
+}

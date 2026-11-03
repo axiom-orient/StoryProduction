@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/render-contract.schema.json",
+  "title": "RenderContract",
+  "$comment": "JSON Schema enforces structural constraints. Runtime validate_render_contract is the canonical semantic gate for cross-field bounds, focal-point containment, crop-inset sums, and duplicate slot IDs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "capture_profile",
+    "genre_profile",
+    "semantic_role"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "capture_profile": {
+      "enum": [
+        "NONE",
+        "PHOTOREAL"
+      ]
+    },
+    "genre_profile": {
+      "enum": [
+        "PROJECT_STYLE",
+        "PHOTOREAL",
+        "JAPANESE_MANGA",
+        "FANTASY",
+        "PICTURE_BOOK"
+      ]
+    },
+    "semantic_role": {
+      "enum": [
+        "SCENE",
+        "BACKGROUND",
+        "OBJECT",
+        "CHARACTER"
+      ]
+    },
+    "wireframe_layout": {
+      "$ref": "#/$defs/wireframeLayout"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "genre_profile": {
+            "const": "PHOTOREAL"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "capture_profile": {
+            "const": "PHOTOREAL"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "wireframe_layout"
+        ]
+      },
+      "then": {
+        "properties": {
+          "semantic_role": {
+            "enum": [
+              "SCENE",
+              "BACKGROUND"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "normalizedBounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "normalizedPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "cropSafeInset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "properties": {
+        "top": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "right": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "bottom": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "left": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "layoutTolerance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position",
+        "scale",
+        "rotation"
+      ],
+      "properties": {
+        "position": {
+          "type": "number",
+          "minimum": 0
+        },
+        "scale": {
+          "type": "number",
+          "minimum": 0
+        },
+        "rotation": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "slot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot_id",
+        "bounds",
+        "intended_aspect_ratio",
+        "content_intent",
+        "focal_point",
+        "crop_safe_inset",
+        "z_order",
+        "layout_tolerance"
+      ],
+      "properties": {
+        "slot_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "bounds": {
+          "$ref": "#/$defs/normalizedBounds"
+        },
+        "intended_aspect_ratio": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "content_intent": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "focal_point": {
+          "$ref": "#/$defs/normalizedPoint"
+        },
+        "crop_safe_inset": {
+          "$ref": "#/$defs/cropSafeInset"
+        },
+        "z_order": {
+          "type": "integer"
+        },
+        "layout_tolerance": {
+          "$ref": "#/$defs/layoutTolerance"
+        }
+      }
+    },
+    "wireframeLayout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canvas",
+        "slots"
+      ],
+      "properties": {
+        "label_guide_policy": {
+          "enum": [
+            "REQUIRED",
+            "PRESERVE_IF_PRESENT",
+            "FORBIDDEN"
+          ],
+          "default": "PRESERVE_IF_PRESENT"
+        },
+        "canvas": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "width",
+            "height"
+          ],
+          "properties": {
+            "width": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "slots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/slot"
+          }
+        }
+      }
+    }
+  }
+}

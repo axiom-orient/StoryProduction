@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "plan_id": "DP-001",
+  "narrative_package_sha256": "9a284c441042a84a10029db28b8465dea4eacd544fd0fd93a2024ea29aa772ae",
+  "delivery_request_sha256": "6eb654ca7cbe68cc94291bc4dabb0347cbb36b3b1e693398093418898b2ded73",
+  "director_bundle_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "visual_grammar": {
+    "composition": {
+      "must": [
+        "clear hierarchy"
+      ],
+      "avoid": [
+        "decorative noise"
+      ]
+    },
+    "typography": {
+      "must": [
+        "legible Korean"
+      ],
+      "avoid": [
+        "text baked into generated images"
+      ]
+    }
+  },
+  "asset_requests": [
+    {
+      "asset_id": "CHAR-001",
+      "kind": "IMAGE",
+      "role": "canonical protagonist reference",
+      "narrative_refs": [
+        "SRC-001"
+      ],
+      "generation_mode": "GENERATIVE",
+      "consistency_group": "protagonist",
+      "brief": "canonical protagonist reference image",
+      "hard_constraints": [
+        "identity consistency"
+      ]
+    }
+  ],
+  "deliveries": [
+    {
+      "output_request_id": "html",
+      "presentation_structure": "SCROLL",
+      "units": [
+        {
+          "unit_id": "U-001",
+          "order": 0,
+          "narrative_refs": [
+            "SRC-001"
+          ],
+          "operation": "PRESERVE",
+          "direction": "open with the core narrative image",
+          "asset_refs": [
+            "CHAR-001"
+          ],
+          "content": "The protagonist enters the opening narrative beat."
+        },
+        {
+          "unit_id": "U-001",
+          "order": 0,
+          "narrative_refs": [
+            "SRC-001"
+          ],
+          "operation": "PRESERVE",
+          "direction": "open with the core narrative image",
+          "asset_refs": [
+            "CHAR-001"
+          ],
+          "content": "The protagonist enters the opening narrative beat."
+        }
+      ]
+    },
+    {
+      "output_request_id": "storyboard-png",
+      "presentation_structure": "GRID",
+      "units": [
+        {
+          "unit_id": "U-101",
+          "order": 0,
+          "narrative_refs": [
+            "SRC-001"
+          ],
+          "operation": "PRESERVE",
+          "direction": "show the same narrative beat as a storyboard panel",
+          "asset_refs": [
+            "CHAR-001"
+          ],
+          "content": "Storyboard panel preserving the same narrative beat."
+        }
+      ]
+    }
+  ]
+}

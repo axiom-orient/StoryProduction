@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0.0",
+  "invariants": [
+    {
+      "id": "INV_001",
+      "owner": "S00",
+      "name": "canonical authority is unique",
+      "condition": "exactly one canonical_narrative object with authority=canonical"
+    },
+    {
+      "id": "INV_002",
+      "owner": "S00",
+      "name": "target duration range valid",
+      "condition": "duration_min_sec <= duration_max_sec"
+    },
+    {
+      "id": "INV_003",
+      "owner": "S01",
+      "name": "source span ordered",
+      "condition": "every SourceSpan.end >= SourceSpan.start"
+    },
+    {
+      "id": "INV_004",
+      "owner": "S01",
+      "name": "explicit provenance",
+      "condition": "every explicit semantic item has non-empty evidence"
+    },
+    {
+      "id": "INV_005",
+      "owner": "S01",
+      "name": "event refs resolve",
+      "condition": "transition from_event/to_event exist in StoryIR.events"
+    },
+    {
+      "id": "INV_006",
+      "owner": "S03",
+      "name": "hard meaning coverage",
+      "condition": "every hard assertion and hard obligation is represented or explicitly text-covered"
+    },
+    {
+      "id": "INV_007",
+      "owner": "S04",
+      "name": "scene continuity",
+      "condition": "scene[i].state_out is compatible with scene[i+1].state_in"
+    },
+    {
+      "id": "INV_008",
+      "owner": "S05",
+      "name": "scene refs resolve",
+      "condition": "every ShotIR.scene_id exists in SceneBundleIR"
+    },
+    {
+      "id": "INV_009",
+      "owner": "S05",
+      "name": "obligation refs resolve",
+      "condition": "every shot obligation exists in MeaningSpec"
+    },
+    {
+      "id": "INV_010",
+      "owner": "S06",
+      "name": "asset refs resolve",
+      "condition": "every ShotIR.asset_ref exists in AssetManifest"
+    },
+    {
+      "id": "INV_011",
+      "owner": "S06",
+      "name": "asset consumers resolve",
+      "condition": "every AssetManifest.consumer exists in ShotBundleIR"
+    },
+    {
+      "id": "INV_012",
+      "owner": "S08",
+      "name": "capability hard match",
+      "condition": "assigned backend supports every required task/control/limit"
+    },
+    {
+      "id": "INV_013",
+      "owner": "S08",
+      "name": "hard invariant control",
+      "condition": "material hard invariant cannot rely only on uncontrolled stochastic generation"
+    },
+    {
+      "id": "INV_014",
+      "owner": "S10",
+      "name": "timeline frame exact",
+      "condition": "all clip starts/durations are integral non-negative frame counts"
+    },
+    {
+      "id": "INV_015",
+      "owner": "S11",
+      "name": "low-confidence fail-closed",
+      "condition": "low-confidence hard semantic check cannot be PASS"
+    },
+    {
+      "id": "INV_016",
+      "owner": "runtime",
+      "name": "single output owner",
+      "condition": "each output kind has one stage producer"
+    },
+    {
+      "id": "INV_017",
+      "owner": "runtime",
+      "name": "stage graph acyclic",
+      "condition": "on_pass graph has no cycle and all stages reachable from S00"
+    },
+    {
+      "id": "INV_018",
+      "owner": "runtime",
+      "name": "failure codes registered",
+      "condition": "all stage/substep failure codes exist in central catalog"
+    },
+    {
+      "id": "INV_019",
+      "owner": "runtime",
+      "name": "bounded retry",
+      "condition": "repair attempts never exceed StageContract.max_repairs"
+    },
+    {
+      "id": "INV_020",
+      "owner": "artifact",
+      "name": "content identity stable",
+      "condition": "artifact hash is computed from canonical content; execution timestamps are excluded"
+    },
+    {
+      "id": "INV_021",
+      "owner": "artifact",
+      "name": "lineage acyclic",
+      "condition": "artifact parent graph cannot contain self/cycles"
+    },
+    {
+      "id": "INV_022",
+      "owner": "S12",
+      "name": "package only verified master",
+      "condition": "S12 cannot run unless S11 hard_gate_status == PASS"
+    }
+  ]
+}

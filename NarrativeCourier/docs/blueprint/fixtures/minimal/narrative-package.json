@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "package_id": "NP-001",
+  "narrative_id": "story-001",
+  "sts_domain": {
+    "id": "sts",
+    "version": "4.3.0",
+    "bundle_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "source_snapshot_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+  "canonical_narrative": {
+    "kind": "SCREENPLAY",
+    "artifact": {
+      "kind": "screenplay",
+      "path": "output/final_screenplay.md",
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "mime": "text/markdown"
+    }
+  },
+  "authority": {
+    "source_ir": {
+      "kind": "source_ir",
+      "path": "output/source_ir.json",
+      "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "mime": "application/json"
+    },
+    "narrative_ir": {
+      "kind": "narrative_ir",
+      "path": "output/narrative_ir.json",
+      "sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+      "mime": "application/json"
+    },
+    "execution_constraints": {
+      "kind": "execution_constraints",
+      "path": "output/execution_constraints.json",
+      "sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+      "mime": "application/json"
+    },
+    "character_states": {
+      "kind": "character_states",
+      "path": "output/character_states.json",
+      "sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+      "mime": "application/json"
+    },
+    "scene_ir": {
+      "kind": "scene_ir",
+      "path": "output/scene_ir.json",
+      "sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+      "mime": "application/json"
+    },
+    "verification": {
+      "kind": "verification",
+      "path": "output/verification.json",
+      "sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+      "mime": "application/json"
+    }
+  }
+}

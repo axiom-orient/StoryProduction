@@ -1,0 +1,8 @@
+NarrativeCourier DirectorIR deterministic exact-preserve planner
+bundle-version: 5
+coverage: FULL|SELECTION|EXCERPT
+semantic-authority: none; STS NarrativePackage only
+planner-rule: raw screenplay hash binding; lossless SCN byte partitions; exact requested sequence and asset provenance; no summary or mood fabrication
+asset-rule: only source-bound IMAGE attachments in HTML; unsupported kinds/formats fail before delivery effects
+identity-timing-rule: full PLAN digest; ordered unit array; exact output structure; shared deterministic frame allocation
+output-option-rule: unsupported formats/adaptation/geometry/timing fail before effects; omitted optional values carry no default adaptation

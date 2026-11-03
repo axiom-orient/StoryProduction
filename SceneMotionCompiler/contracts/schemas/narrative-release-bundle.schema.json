@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-courier.local/contracts/release-bundle/v1.schema.json",
+  "title": "NvcReleaseBundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bundle_id",
+    "project_name",
+    "status",
+    "completed_state",
+    "narrative_package",
+    "scene_map",
+    "package_id",
+    "package_sha256",
+    "source_snapshot_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "bundle_id": { "type": "string", "pattern": "^nvcb_[0-9a-f]{64}$" },
+    "project_name": { "type": "string", "minLength": 1 },
+    "status": { "const": "COMPLETED" },
+    "completed_state": { "$ref": "#/$defs/completed_state_artifact_ref" },
+    "narrative_package": { "$ref": "#/$defs/narrative_package_artifact_ref" },
+    "scene_map": { "$ref": "#/$defs/scene_map_artifact_ref" },
+    "package_id": { "type": "string", "pattern": "^nvc2_[0-9a-f]{64}$" },
+    "package_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "source_snapshot_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  },
+  "$defs": {
+    "artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "sha256"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/|\\\\)\\\\.\\\\.(?:/|\\\\|$))(?!.*:).+$"
+        },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "mime": { "type": "string", "minLength": 1 }
+      }
+    },
+    "completed_state_artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "sha256"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "path": { "const": "state.json" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "mime": { "type": "string", "minLength": 1 }
+      }
+    },
+    "narrative_package_artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "sha256"],
+      "properties": {
+        "kind": { "const": "narrative_package_v2" },
+        "path": { "const": "narrative-package.json" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "mime": { "type": "string", "minLength": 1 }
+      }
+    },
+    "scene_map_artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "sha256"],
+      "properties": {
+        "kind": { "const": "narrative_scene_map_v2" },
+        "path": { "const": "output/scene-map.json" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "mime": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

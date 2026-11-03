@@ -1,0 +1,3 @@
+# Python schema/release development verification.
+# The existing scene_asset_compiler runtime CLI remains stdlib-only.
+jsonschema>=4.18,<5

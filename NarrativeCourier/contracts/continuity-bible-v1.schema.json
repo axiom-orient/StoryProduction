@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-courier.local/contracts/continuity-bible-v1.schema.json",
+  "title": "continuity-bible-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "narrativeId",
+    "narrativePackageSha256",
+    "sceneMapSha256",
+    "entities",
+    "sceneStates",
+    "contentHash"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "narrativeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "narrativePackageSha256": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sceneMapSha256": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "entityId",
+          "kind",
+          "name",
+          "sourceSceneIds",
+          "visualState"
+        ],
+        "properties": {
+          "entityId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(char|env|prop)\\.[a-z0-9][a-z0-9._-]{0,126}$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "CHARACTER",
+              "ENVIRONMENT",
+              "PROP"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceSceneIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^SCN-[0-9]{3,}$"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "visualState": {
+            "type": "string",
+            "enum": [
+              "UNRESOLVED_VISUAL"
+            ]
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "sceneStates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sceneId",
+          "environmentId",
+          "characterIds",
+          "propIds",
+          "timeOfDay"
+        ],
+        "properties": {
+          "sceneId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^SCN-[0-9]{3,}$"
+          },
+          "environmentId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(char|env|prop)\\.[a-z0-9][a-z0-9._-]{0,126}$"
+          },
+          "characterIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(char|env|prop)\\.[a-z0-9][a-z0-9._-]{0,126}$"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "propIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(char|env|prop)\\.[a-z0-9][a-z0-9._-]{0,126}$"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "timeOfDay": {
+            "type": "string",
+            "enum": [
+              "dawn",
+              "morning",
+              "noon",
+              "day",
+              "afternoon",
+              "dusk",
+              "night"
+            ]
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "contentHash": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

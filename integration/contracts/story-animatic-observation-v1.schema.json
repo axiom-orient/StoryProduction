@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://story-production.local/contracts/animatic-observation-v1",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "status",
+        "sourceStatus",
+        "render"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "story.animatic-observation/1"
+        },
+        "status": {
+          "const": "candidate"
+        },
+        "sourceStatus": {
+          "const": "current"
+        },
+        "render": {
+          "allOf": [
+            {
+              "$ref": "https://story-production.local/contracts/animatic-result-v1"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "const": "candidate"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "status",
+        "sourceStatus",
+        "render",
+        "detail"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "story.animatic-observation/1"
+        },
+        "status": {
+          "const": "source_stale"
+        },
+        "sourceStatus": {
+          "const": "changed"
+        },
+        "render": {
+          "allOf": [
+            {
+              "$ref": "https://story-production.local/contracts/animatic-result-v1"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "const": "candidate"
+                }
+              }
+            }
+          ]
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "status",
+        "sourceStatus",
+        "render",
+        "detail"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "story.animatic-observation/1"
+        },
+        "status": {
+          "const": "outcome_unknown"
+        },
+        "sourceStatus": {
+          "const": "unobserved"
+        },
+        "render": {
+          "allOf": [
+            {
+              "$ref": "https://story-production.local/contracts/animatic-result-v1"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "const": "candidate"
+                }
+              }
+            }
+          ]
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384
+        }
+      }
+    }
+  ]
+}

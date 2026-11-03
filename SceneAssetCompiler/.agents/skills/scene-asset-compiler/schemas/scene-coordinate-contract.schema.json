@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/scene-coordinate-contract.schema.json",
+  "title": "SceneCoordinateContract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scene_id",
+    "canvas",
+    "target_render",
+    "layers"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "scene_id": {
+      "type": "string"
+    },
+    "canvas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "width",
+        "height",
+        "origin"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "origin": {
+          "const": "TOP_LEFT"
+        }
+      }
+    },
+    "target_render": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_path",
+        "sha256"
+      ],
+      "properties": {
+        "run_path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "layer_id",
+          "z_band",
+          "registration_policy",
+          "occlusion_policy"
+        ],
+        "properties": {
+          "layer_id": {
+            "type": "string"
+          },
+          "z_band": {
+            "type": "integer"
+          },
+          "registration_policy": {
+            "enum": [
+              "FULL_CANVAS_LOCKED",
+              "NORMALIZE_ONCE"
+            ]
+          },
+          "occlusion_policy": {
+            "enum": [
+              "VISIBLE_ONLY",
+              "COMPLETE_OBJECT",
+              "POSE_SAFE_UNDERLAY"
+            ]
+          },
+          "bbox_hint": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "anchor_hint": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

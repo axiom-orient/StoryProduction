@@ -1,0 +1,401 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STS Audit Screenplay IR",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "observed_assertions",
+    "relations",
+    "ending",
+    "form_functions",
+    "knowledge_ledger",
+    "scene_transitions",
+    "internal_findings",
+    "confidence"
+  ],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scene_id",
+        "excerpt"
+      ],
+      "properties": {
+        "scene_id": {
+          "type": "string"
+        },
+        "excerpt": {
+          "type": "string",
+          "maxLength": 500
+        }
+      }
+    }
+  },
+  "properties": {
+    "observed_assertions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "assertion",
+          "actor",
+          "polarity",
+          "epistemic",
+          "evidence",
+          "confidence"
+        ],
+        "properties": {
+          "id": {
+            "pattern": "^OBS-[0-9]{3,}$"
+          },
+          "assertion": {
+            "type": "string"
+          },
+          "actor": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "polarity": {
+            "enum": [
+              "AFFIRM",
+              "NEGATE"
+            ]
+          },
+          "epistemic": {
+            "enum": [
+              "FACT",
+              "BELIEF",
+              "CLAIM",
+              "UNKNOWN"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/evidence"
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "from",
+          "to",
+          "evidence",
+          "confidence"
+        ],
+        "properties": {
+          "id": {
+            "pattern": "^OREL-[0-9]{3,}$"
+          },
+          "type": {
+            "enum": [
+              "CAUSES",
+              "ENABLES",
+              "PREVENTS",
+              "BEFORE",
+              "AFTER",
+              "KNOWS",
+              "BELIEVES",
+              "IDENTITY",
+              "RELATIONSHIP",
+              "WORLD_RULE"
+            ]
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/evidence"
+            }
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "acquisition": {
+            "enum": [
+              "SOURCE_GIVEN",
+              "OBSERVED",
+              "TOLD",
+              "INFERRED",
+              "REMEMBERED",
+              "UNKNOWN"
+            ]
+          },
+          "world_rule": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "trigger",
+              "scope",
+              "effect",
+              "cost",
+              "limits",
+              "reversibility",
+              "known_by"
+            ],
+            "properties": {
+              "trigger": {
+                "type": "string"
+              },
+              "scope": {
+                "type": "string"
+              },
+              "effect": {
+                "type": "string"
+              },
+              "cost": {
+                "type": "string"
+              },
+              "limits": {
+                "type": "string"
+              },
+              "reversibility": {
+                "type": "string"
+              },
+              "known_by": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "WORLD_RULE"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "world_rule"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "KNOWS",
+                    "BELIEVES"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "acquisition"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "ending": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "decisive_actors",
+        "semantic_reframe",
+        "residue",
+        "evidence"
+      ],
+      "properties": {
+        "outcome": {
+          "type": "string"
+        },
+        "decisive_actors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "semantic_reframe": {
+          "type": "string"
+        },
+        "residue": {
+          "type": "string"
+        }
+      }
+    },
+    "knowledge_ledger": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "entity",
+          "state",
+          "scene_id"
+        ],
+        "properties": {
+          "entity": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "scene_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scene_transitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "scene_id",
+          "preconditions",
+          "turn",
+          "postconditions",
+          "risk"
+        ],
+        "properties": {
+          "scene_id": {
+            "type": "string"
+          },
+          "preconditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "turn": {
+            "type": "string"
+          },
+          "postconditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risk": {
+            "enum": [
+              "LOW",
+              "WATCH",
+              "HIGH"
+            ]
+          }
+        }
+      }
+    },
+    "internal_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "severity",
+          "category",
+          "issue",
+          "evidence"
+        ],
+        "properties": {
+          "severity": {
+            "enum": [
+              "CRITICAL",
+              "MAJOR",
+              "MINOR"
+            ]
+          },
+          "category": {
+            "enum": [
+              "CAUSALITY",
+              "KNOWLEDGE_STATE",
+              "CHARACTER_RELATIONSHIP_STATE",
+              "PHYSICAL_SPATIAL_STATE",
+              "SCENE_DEPENDENCIES",
+              "PLAYABILITY",
+              "SCENE_ECONOMY",
+              "WORLD_RULE",
+              "FORM_FUNCTION",
+              "ENDING_MEANING"
+            ]
+          },
+          "issue": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence"
+            }
+          }
+        }
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "form_functions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "carrier",
+          "function",
+          "evidence"
+        ],
+        "properties": {
+          "carrier": {
+            "type": "string"
+          },
+          "function": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "stage_id": "S11_VERIFY_REPAIR",
+  "version": "1.0.0",
+  "artifact_owner": "Verifier",
+  "executor_classes": [
+    "DET",
+    "VLM",
+    "LLM"
+  ],
+  "inputs": [
+    {
+      "kind": "draft_master",
+      "schema": "schemas/artifact-envelope.schema.json",
+      "required": true
+    },
+    {
+      "kind": "meaning_spec",
+      "schema": "schemas/meaning-spec.schema.json",
+      "required": true
+    },
+    {
+      "kind": "scene_bundle_ir",
+      "schema": "schemas/scene-ir.schema.json",
+      "required": true
+    },
+    {
+      "kind": "shot_bundle_ir",
+      "schema": "schemas/shot-ir.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "evaluation_report",
+      "schema": "schemas/evaluation-report.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "hard assertions == 100%",
+    "hard transition recoverability == 100% or NEEDS_REVIEW",
+    "hard contradictions == 0",
+    "technical decode PASS",
+    "rights != FAIL"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "QAV_001_TRANSITION_UNRECOVERABLE",
+    "QAV_002_SOURCE_CONTRADICTION",
+    "QAV_003_CONTINUITY_FAILURE",
+    "QAV_004_HARD_GATE_FAILED",
+    "QAV_005_LOW_CONFIDENCE_REVIEW",
+    "QAV_006_RIGHTS_GATE_FAILED"
+  ],
+  "retry_policy": {
+    "max_repairs": 2
+  },
+  "next": {
+    "on_pass": "S12_PACKAGE_MASTER",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "run structural technical and deterministic invariant checks",
+      "executor_class": "DET",
+      "inputs": [
+        "draft_master",
+        "timeline_ir"
+      ],
+      "outputs": [
+        "det_eval"
+      ],
+      "hard_gate": "technical hard gates PASS",
+      "failure_codes": [
+        "QAV_004_HARD_GATE_FAILED"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "evaluate semantic assertions continuity and transition recoverability",
+      "executor_class": "VLM",
+      "inputs": [
+        "draft_master",
+        "meaning_spec",
+        "scene_bundle_ir",
+        "shot_bundle_ir"
+      ],
+      "outputs": [
+        "semantic_eval"
+      ],
+      "hard_gate": "hard semantic checks PASS or low confidence -> review",
+      "failure_codes": [
+        "QAV_001_TRANSITION_UNRECOVERABLE",
+        "QAV_002_SOURCE_CONTRADICTION",
+        "QAV_003_CONTINUITY_FAILURE",
+        "QAV_005_LOW_CONFIDENCE_REVIEW"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "compile evaluation report and route failures to root owner",
+      "executor_class": "DET",
+      "inputs": [
+        "det_eval",
+        "semantic_eval"
+      ],
+      "outputs": [
+        "evaluation_report"
+      ],
+      "hard_gate": "every FAIL has repair_stage or terminal reason",
+      "failure_codes": [
+        "QAV_004_HARD_GATE_FAILED",
+        "QAV_006_RIGHTS_GATE_FAILED"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "stage_id": "S04_SCENE_PLAN",
+  "version": "1.0.0",
+  "artifact_owner": "ContinuityPlanner",
+  "executor_classes": [
+    "LLM",
+    "DET"
+  ],
+  "inputs": [
+    {
+      "kind": "adaptation_ir",
+      "schema": "schemas/adaptation-ir.schema.json",
+      "required": true
+    },
+    {
+      "kind": "story_ir",
+      "schema": "schemas/story-ir.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "scene_bundle_ir",
+      "schema": "schemas/scene-ir.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "adjacent state compatible",
+    "immutable entity mutation justified",
+    "world rules valid"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "SCN_001_STATE_IN_OUT_MISMATCH",
+    "SCN_002_ILLEGAL_ENTITY_MUTATION",
+    "SCN_003_TIME_DISCONTINUITY",
+    "SCN_004_LOCATION_DISCONTINUITY",
+    "SCN_005_WORLD_RULE_VIOLATION"
+  ],
+  "retry_policy": {
+    "max_repairs": 2
+  },
+  "next": {
+    "on_pass": "S05_SHOT_PLAN",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "materialize state_in/state_delta/state_out per scene",
+      "executor_class": "LLM",
+      "inputs": [
+        "adaptation_ir",
+        "story_ir"
+      ],
+      "outputs": [
+        "scene_state_draft"
+      ],
+      "hard_gate": "each scene has complete state transition",
+      "failure_codes": [
+        "SCN_001_STATE_IN_OUT_MISMATCH"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "check adjacent state compatibility and world invariants",
+      "executor_class": "DET",
+      "inputs": [
+        "scene_state_draft"
+      ],
+      "outputs": [
+        "continuity_report"
+      ],
+      "hard_gate": "all hard state constraints valid",
+      "failure_codes": [
+        "SCN_001_STATE_IN_OUT_MISMATCH",
+        "SCN_002_ILLEGAL_ENTITY_MUTATION",
+        "SCN_005_WORLD_RULE_VIOLATION"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "emit scene bundle",
+      "executor_class": "DET",
+      "inputs": [
+        "scene_state_draft",
+        "continuity_report"
+      ],
+      "outputs": [
+        "scene_bundle_ir"
+      ],
+      "hard_gate": "continuity report PASS",
+      "failure_codes": [
+        "SCN_003_TIME_DISCONTINUITY",
+        "SCN_004_LOCATION_DISCONTINUITY"
+      ]
+    }
+  ]
+}

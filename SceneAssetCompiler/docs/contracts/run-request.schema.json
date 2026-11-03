@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/run-request.schema.json",
+  "title": "RunRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "goal",
+    "source",
+    "outputs",
+    "review_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "SMC_NARRATIVE_SCENE_PROJECTION",
+            "SCREENPLAY",
+            "SYNOPSIS",
+            "FREEFORM"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "project_root": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "SMC_NARRATIVE_SCENE_PROJECTION"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "path",
+              "project_root",
+              "sha256"
+            ],
+            "properties": {
+              "path": {
+                "minLength": 1
+              },
+              "project_root": {
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "CHARACTER_ASSETS",
+          "PROP_ASSETS",
+          "ENVIRONMENT_ASSETS",
+          "KEY_VISUALS",
+          "LAYERED_PSD",
+          "MOTION_SOURCE",
+          "RUNTIME_ASSETS"
+        ]
+      }
+    },
+    "runtime_target": {
+      "enum": [
+        "NONE",
+        "MOBILE_2D",
+        "WEB_2D",
+        "DESKTOP_2D",
+        "MOBILE_3D",
+        "WEB_3D"
+      ]
+    },
+    "review_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "codex_visual_review",
+        "human_final_review"
+      ],
+      "properties": {
+        "codex_visual_review": {
+          "const": true
+        },
+        "human_final_review": {
+          "type": "boolean"
+        },
+        "allow_warnings": {
+          "type": "boolean"
+        }
+      }
+    },
+    "user_direction": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reference_paths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

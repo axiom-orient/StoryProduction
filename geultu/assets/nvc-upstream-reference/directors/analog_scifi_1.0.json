@@ -1,0 +1,41 @@
+{
+  "preset_id": "analog_scifi/1.0",
+  "semantic_affinities": [
+    "technology",
+    "isolation",
+    "signal",
+    "dystopia"
+  ],
+  "visual_grammar": {
+    "display": "crt_or_optical",
+    "palette": "restrained"
+  },
+  "motion_grammar": {
+    "noise": "signal_based"
+  },
+  "camera_grammar": {
+    "default": "instrument_observer"
+  },
+  "typography_grammar": {
+    "reveal": "terminal_decode"
+  },
+  "transition_grammar": {
+    "default": "signal_loss"
+  },
+  "sound_grammar": {
+    "base": [
+      "hum",
+      "radio",
+      "machine"
+    ]
+  },
+  "supported_motion_modes": [
+    "LAYERED_2_5D",
+    "GEN_I2V",
+    "SCENE_3D",
+    "HYBRID"
+  ],
+  "negative_defaults": [
+    "avoid_generic_neon_cyberpunk"
+  ]
+}

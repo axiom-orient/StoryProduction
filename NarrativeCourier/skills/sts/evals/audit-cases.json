@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "ending-preservation",
+      "source": "The protagonist leaves the city alone at the end.",
+      "mutation": "They remain and reconcile.",
+      "expected": "BLOCKED",
+      "reason": "ending outcome drift"
+    },
+    {
+      "id": "causal-relation-drift",
+      "source": "A exposes the fraud, causing B to resign.",
+      "mutation": "B resigns before A discovers the fraud.",
+      "expected": "BLOCKED",
+      "reason": "REL causality drift despite event coverage"
+    },
+    {
+      "id": "belief-fact",
+      "source": "Jiu believes Min is the killer.",
+      "mutation": "The screenplay establishes Min as killer with no ambiguity.",
+      "expected": "BLOCKED",
+      "reason": "BELIEF→FACT drift"
+    },
+    {
+      "id": "negation",
+      "source": "Min did not steal the money.",
+      "mutation": "Min steals the money.",
+      "expected": "BLOCKED",
+      "reason": "NEGATE→AFFIRM"
+    },
+    {
+      "id": "nonlinear-safe",
+      "source": "A happens before B and causes B.",
+      "mutation": "Screenplay presents B first, later reveals A, preserving chronology/causality.",
+      "expected": "PASS",
+      "reason": "syuzhet reorder only"
+    },
+    {
+      "id": "connective-invention",
+      "source": "A travels from Seoul to Busan.",
+      "mutation": "Adds a short train scene with no new plot decision.",
+      "expected": "PASS",
+      "reason": "local dramatization inside open adaptation space"
+    },
+    {
+      "id": "actor-owner",
+      "source": "The daughter chooses to reveal the secret.",
+      "mutation": "The father reveals it instead.",
+      "expected": "BLOCKED",
+      "reason": "decisive actor ownership drift"
+    },
+    {
+      "id": "state-teleport",
+      "source": "Key is locked in office.",
+      "mutation": "Character uses key at home without acquisition scene/state.",
+      "expected": "BLOCKED",
+      "reason": "material state transition impossible"
+    },
+    {
+      "id": "one-to-many",
+      "source": "She decides to leave.",
+      "screenplay": "Decision is dramatized across three scenes ending with departure.",
+      "expected": "PASS",
+      "reason": "one source obligation may align to multiple scenes"
+    },
+    {
+      "id": "many-to-one",
+      "source": "Two adjacent source obligations occur in sequence.",
+      "screenplay": "One scene combines both without changing ownership/outcomes.",
+      "expected": "PASS",
+      "reason": "many-to-one combination can preserve semantics"
+    },
+    {
+      "id": "source-ambiguity",
+      "source": "Synopsis is ambiguous about whether claim is true.",
+      "screenplay": "Makes claim objectively true.",
+      "expected": "REVIEW",
+      "reason": "audit cannot silently resolve source ambiguity"
+    },
+    {
+      "id": "world-rule-scope",
+      "source": "A service works only from 22:00 to 06:00 and transfers exactly eight hours of sleep.",
+      "mutation": "The screenplay uses it at noon and transfers twelve hours.",
+      "expected": "BLOCKED",
+      "reason": "WORLD_RULE trigger/scope/effect drift"
+    },
+    {
+      "id": "epistemic-acquisition",
+      "source": "Only A reads the private letter.",
+      "mutation": "B quotes its private contents before any acquisition event.",
+      "expected": "BLOCKED",
+      "reason": "material knowledge has no acquisition path"
+    },
+    {
+      "id": "semantic-coda-equivalent",
+      "source": "The final prose coda reframes the light as meaningful because someone is waiting behind it.",
+      "mutation": "The screenplay removes the sentence but stages residents looking to the lit empty office, making the same distinction recoverable.",
+      "expected": "PASS",
+      "reason": "ending meaning preserved through cinematic externalization"
+    },
+    {
+      "id": "semantic-coda-loss",
+      "source": "The final coda changes the meaning of the preceding action from possession to safety.",
+      "mutation": "The screenplay preserves the action but loses the reframe entirely.",
+      "expected": "BLOCKED",
+      "reason": "material ending-meaning drift"
+    },
+    {
+      "id": "essential-form-equivalent",
+      "source": "A terms-of-service document gradually reveals the emotional premise; the document form controls information order.",
+      "mutation": "The screenplay uses an on-screen consent flow that preserves the same reveal function.",
+      "expected": "PASS",
+      "reason": "ESSENTIAL form function preserved with screen-native carrier"
+    },
+    {
+      "id": "essential-form-loss",
+      "source": "A chat log format materially establishes delayed communication and who sees each message.",
+      "mutation": "The screenplay converts it to ordinary dialogue and removes delay/visibility mechanics.",
+      "expected": "BLOCKED",
+      "reason": "ESSENTIAL source-form function lost"
+    },
+    {
+      "id": "expansion-pressure-no-authority",
+      "source": "A two-event microstory with one protected ending is requested as a 90-minute feature.",
+      "mutation": "Writer adds a new antagonist, romance and reversal without approved GAP/INVENT authority.",
+      "expected": "BLOCKED",
+      "reason": "high adaptation pressure does not authorize structural invention"
+    }
+  ]
+}

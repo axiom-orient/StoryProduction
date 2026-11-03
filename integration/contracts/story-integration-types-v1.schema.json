@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://story-production.local/contracts/integration-types/v1",
+  "title": "Story Production Integration Types v1",
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "identity": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "safeRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?!.*(?:^|/|\\\\)\\.\\.(?:/|\\\\|$))(?!.*:).+$"
+    },
+    "sourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "identity", "sha256"],
+      "properties": {
+        "kind": {"type": "string", "minLength": 1, "maxLength": 128},
+        "identity": {"$ref": "#/$defs/identity"},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "artifactRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "identity", "path", "sha256", "mediaType", "byteLength"],
+      "properties": {
+        "kind": {"type": "string", "minLength": 1, "maxLength": 128},
+        "identity": {"$ref": "#/$defs/identity"},
+        "path": {"$ref": "#/$defs/safeRelativePath"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "mediaType": {"type": "string", "minLength": 1, "maxLength": 256},
+        "byteLength": {"type": "integer", "minimum": 0},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"mediaType": {"pattern": "^image/"}}},
+          "then": {"required": ["width", "height"]}
+        }
+      ]
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "version", "networkPolicy"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1, "maxLength": 160},
+        "kind": {"enum": ["local_process", "codex", "openai", "external_process"]},
+        "model": {"type": ["string", "null"], "maxLength": 160},
+        "version": {"type": "string", "minLength": 1, "maxLength": 160},
+        "networkPolicy": {"enum": ["denied", "required"]}
+      }
+    },
+    "rights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assertedBy", "statement", "providerTransferAllowed"],
+      "properties": {
+        "assertedBy": {"type": "string", "minLength": 1, "maxLength": 160},
+        "statement": {"type": "string", "minLength": 1, "maxLength": 4000},
+        "providerTransferAllowed": {"type": "boolean"}
+      }
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "identity", "sha256"],
+      "properties": {
+        "kind": {"enum": ["human_approval", "approved_scope"]},
+        "identity": {"$ref": "#/$defs/identity"},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor", "id"],
+      "properties": {
+        "actor": {"enum": ["human", "agent", "system"]},
+        "id": {"type": "string", "minLength": 1, "maxLength": 160}
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "retryable", "stage"],
+      "properties": {
+        "code": {"type": "string", "minLength": 1, "maxLength": 160},
+        "message": {"type": "string", "minLength": 1, "maxLength": 4000},
+        "retryable": {"type": "boolean"},
+        "stage": {"type": "string", "minLength": 1, "maxLength": 160}
+      }
+    }
+  }
+}

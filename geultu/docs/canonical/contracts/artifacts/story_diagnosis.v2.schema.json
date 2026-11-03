@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geultu.dev/schemas/artifacts/story_diagnosis.v2.schema.json",
+  "title": "story_diagnosis artifact body",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "../runtime/artifact-ref.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "strengths": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "blocking_findings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "api_version",
+    "source_refs",
+    "strengths",
+    "blocking_findings",
+    "questions"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "director_id": "dir_shadow_001",
+  "preset_id": "living_parchment/1.0",
+  "creative_north_star": "기억이 처음 물리적 흔적이 되는 오래된 설화책",
+  "medium": {
+    "family": "living_parchment",
+    "rationale": "먹과 그림자의 물성이 주제와 직접 결합됨"
+  },
+  "visual_grammar": {
+    "surface": "aged_paper"
+  },
+  "motion_grammar": {
+    "rule": "one_primary_plus_ambient"
+  },
+  "camera_grammar": {
+    "default": "slow_observer"
+  },
+  "typography_grammar": {
+    "reveal": "ink_write",
+    "erase": "ink_fade"
+  },
+  "transition_grammar": {
+    "default": "ink_bleed"
+  },
+  "sound_grammar": {
+    "base": [
+      "wind",
+      "wood",
+      "paper"
+    ]
+  },
+  "negative_rules": [
+    "before_EV_05:no_human_shadow"
+  ],
+  "production_constraints": {
+    "prefer": "LAYERED_2_5D"
+  },
+  "candidate_scores": [
+    {
+      "preset_id": "living_parchment/1.0",
+      "semantic_fit": 0.95,
+      "production_fit": 0.92,
+      "novelty": 0.7
+    },
+    {
+      "preset_id": "shadow_play/1.0",
+      "semantic_fit": 0.86,
+      "production_fit": 0.9,
+      "novelty": 0.8
+    }
+  ]
+}

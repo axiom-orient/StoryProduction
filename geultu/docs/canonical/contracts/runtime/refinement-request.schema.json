@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geultu.dev/schemas/runtime/refinement-request.v1.schema.json",
+  "title": "Locale refinement request",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "const": "geultu.dev/refinement-request/v1"
+    },
+    "operation": {
+      "enum": [
+        "diagnose",
+        "plan_patch"
+      ]
+    },
+    "source_ref": {
+      "$ref": "artifact-ref.schema.json"
+    },
+    "source_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 2
+    },
+    "genre": {
+      "type": "string"
+    },
+    "approved_style": {
+      "type": "object"
+    },
+    "protected_spans": {
+      "type": "array",
+      "items": {
+        "$ref": "protected-span.schema.json"
+      }
+    },
+    "additional_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "api_version",
+    "operation",
+    "source_ref",
+    "source_text",
+    "locale",
+    "genre",
+    "approved_style",
+    "protected_spans",
+    "additional_constraints"
+  ]
+}

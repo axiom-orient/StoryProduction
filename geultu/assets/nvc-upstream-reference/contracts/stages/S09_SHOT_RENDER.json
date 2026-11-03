@@ -1,0 +1,110 @@
+{
+  "stage_id": "S09_SHOT_RENDER",
+  "version": "1.0.0",
+  "artifact_owner": "Renderer",
+  "executor_classes": [
+    "GEN",
+    "PROC",
+    "VLM"
+  ],
+  "inputs": [
+    {
+      "kind": "render_ir",
+      "schema": "schemas/render-ir.schema.json",
+      "required": true
+    },
+    {
+      "kind": "materialized_assets",
+      "schema": "schemas/artifact-envelope.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "shot_clips",
+      "schema": "schemas/artifact-envelope.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "outputs decode",
+    "shot hard invariants PASS",
+    "continuity tolerance PASS"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "RND_004_RENDER_TIMEOUT",
+    "RND_005_BACKEND_ERROR",
+    "MOT_001_MOTION_INVARIANT_VIOLATION",
+    "MOT_002_BACKGROUND_DRIFT",
+    "MOT_003_TEMPORAL_DISCONTINUITY",
+    "MOT_004_LOOP_SEAM_VISIBLE",
+    "MOT_005_CAMERA_TRAJECTORY_VIOLATION"
+  ],
+  "retry_policy": {
+    "max_repairs": 2
+  },
+  "next": {
+    "on_pass": "S10_COMPOSE",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "execute render jobs",
+      "executor_class": "GEN",
+      "inputs": [
+        "render_ir",
+        "materialized_assets"
+      ],
+      "outputs": [
+        "candidate_clips"
+      ],
+      "hard_gate": "jobs complete within limits",
+      "failure_codes": [
+        "RND_004_RENDER_TIMEOUT",
+        "RND_005_BACKEND_ERROR"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "check per-shot motion and continuity invariants",
+      "executor_class": "VLM",
+      "inputs": [
+        "candidate_clips",
+        "shot_bundle_ir"
+      ],
+      "outputs": [
+        "clip_eval"
+      ],
+      "hard_gate": "hard motion checks PASS",
+      "failure_codes": [
+        "MOT_001_MOTION_INVARIANT_VIOLATION",
+        "MOT_002_BACKGROUND_DRIFT",
+        "MOT_003_TEMPORAL_DISCONTINUITY",
+        "MOT_004_LOOP_SEAM_VISIBLE",
+        "MOT_005_CAMERA_TRAJECTORY_VIOLATION"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "decode/hash/register accepted clips",
+      "executor_class": "DET",
+      "inputs": [
+        "candidate_clips",
+        "clip_eval"
+      ],
+      "outputs": [
+        "shot_clips"
+      ],
+      "hard_gate": "all accepted clips decode and hash",
+      "failure_codes": [
+        "RND_005_BACKEND_ERROR"
+      ]
+    }
+  ]
+}

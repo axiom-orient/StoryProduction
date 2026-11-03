@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-motion-compiler.local/contracts/trackb/release-approval-receipt/v2",
+  "title": "TrackBReleaseApprovalReceipt v2",
+  "schemaVersion": 2,
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "approvalId", "subject", "decision", "actor", "reason", "origin", "reviewSessionId", "decidedAt", "approvalHash"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 2 },
+    "approvalId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidateHash", "meaningQualificationHash", "baseDeliverySetHash"],
+      "properties": {
+        "candidateHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "meaningQualificationHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "baseDeliverySetHash": { "type": "string", "pattern": "^(?:NONE|sha256:[0-9a-f]{64})$" }
+      }
+    },
+    "decision": { "type": "string", "enum": ["APPROVE", "REVISE", "REJECT"] },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actorId", "actorKind"],
+      "properties": {
+        "actorId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+        "actorKind": { "type": "string", "const": "human" }
+      }
+    },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 2048, "pattern": "^[\\s\\S]*\\S[\\s\\S]*$" },
+    "origin": { "type": "string", "const": "studio" },
+    "reviewSessionId": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "decidedAt": { "type": "string", "format": "date-time", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$" },
+    "approvalHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

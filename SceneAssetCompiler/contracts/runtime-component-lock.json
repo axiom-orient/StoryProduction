@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": 2,
+  "product": "SceneAssetCompiler",
+  "provider": {
+    "name": "scene-provider-v2",
+    "protocolSchema": "misegen.provider/2",
+    "protocolVersion": 2,
+    "schemaVersion": 2,
+    "sha256": "c64929d27b21458de5a1b2806a7d5863641d35e4a3f47e2f2922f100ec27d7ae"
+  },
+  "perfectpixel": {
+    "name": "perfectpixel",
+    "role": "deterministic-asset-compiler",
+    "inspectionSchema": "perfectpixel.asset-inspection/1",
+    "inspectionSchemaVersion": 1,
+    "cliVersion": "0.3.1",
+    "commands": ["schema", "inspect"],
+    "sourceManifestSha256": "cf62f477960b57be4c720664cc4238bf5ac2e84bb384e91b0595a84edb8e994e",
+    "sha256": "c9521a2a6165ef34efc02048be3de19c25d8d338ebc807053c831781d432aad3"
+  }
+}

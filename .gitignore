@@ -1,0 +1,20 @@
+.DS_Store
+._*
+__pycache__/
+*.py[cod]
+node_modules/
+target/
+.build/
+.tmp/
+.tmp-*/
+*.partial
+
+# Local-only materials excluded from public distribution.
+/external/screenwriting-skills/
+/geultu/assets/craft-packs-scriptforge-v4/
+/geultu/corpus/
+/geultu/profiles/author-current.json
+.env
+.env.*
+*.p12
+*.pfx

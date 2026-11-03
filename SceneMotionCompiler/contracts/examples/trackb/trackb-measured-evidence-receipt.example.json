@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 2,
+  "receiptId": "receipt.demo.v2",
+  "narrativeId": "narrative.demo",
+  "authorityHash": "sha256:a5083c7236b7d58e38ff75b567744ffd1bc17d39f39e840dbf9bee0c08e5d888",
+  "htmlHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "assetManifestHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+  "semanticManifestHash": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+  "rendererLockHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+  "navigationGuard": {
+    "mechanism": "cdp-binding-nonce",
+    "guardSourceHash": "sha256:922cd3832fe5988739a4be38f2d4c15bde7a672fa92b7301ee212548a3bd1099"
+  },
+  "shotIds": ["shot.001"],
+  "shots": [
+    {
+      "shotId": "shot.001",
+      "ordinal": 0,
+      "screenshotHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "runtime": {
+        "networkRequestCount": 0,
+        "externalRequestCount": 0,
+        "navigationAttemptCount": 0,
+        "exceptionCount": 0,
+        "semanticManifestVerified": true,
+        "pass": true
+      },
+      "visual": {
+        "activeShotCount": 1,
+        "visibleShotCount": 1,
+        "activeShotId": "shot.001",
+        "visibleShotId": "shot.001",
+        "stageGeometry": { "x": 0, "y": 0, "width": 1280, "height": 720 },
+        "shotGeometry": { "x": 0, "y": 0, "width": 1280, "height": 720 },
+        "pass": true
+      }
+    }
+  ],
+  "receiptHash": "sha256:0c4494f9c659261ef303381cd0f24135f6110151f25de84a829b7a659715f881"
+}

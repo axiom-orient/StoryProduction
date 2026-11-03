@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geultu.dev/schemas/artifacts/normalized_request.v2.schema.json",
+  "title": "normalized_request artifact body",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "../runtime/artifact-ref.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 2
+    },
+    "target_genre": {
+      "type": "string",
+      "minLength": 1
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "api_version",
+    "source_refs",
+    "goal",
+    "locale",
+    "target_genre",
+    "constraints"
+  ]
+}

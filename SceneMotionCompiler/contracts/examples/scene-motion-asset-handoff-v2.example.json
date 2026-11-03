@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "handoffId": "SAC-SMC-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "sourceKind": "SMC_NARRATIVE_SCENE_PROJECTION",
+  "projectionReceiptPath": "projection/narrative-scene-projection.v3.json",
+  "projectionReceiptSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "sceneGraphHash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "sourceSemanticManifestHash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "semanticManifestHash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "assetPackPath": "handoff/asset-pack.v2.json",
+  "assetPackSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "assetPackHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "assetPackAuditPath": "handoff/asset-pack-audit.v1.json",
+  "assetPackAuditSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+  "assetPackAuditHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "bindingManifestPath": "handoff/binding-manifest.v1.json",
+  "bindingManifestSha256": "3333333333333333333333333333333333333333333333333333333333333333",
+  "bindingManifestHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+  "approvalPath": "handoff/scene-asset-release-approval.v1.json",
+  "approvalSha256": "5555555555555555555555555555555555555555555555555555555555555555",
+  "approvalSubjectHash": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+}

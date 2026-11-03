@@ -1,0 +1,118 @@
+{
+  "schema_version": 2,
+  "plan_id": "PLAN-project",
+  "authority_id": "VA-project",
+  "tasks": [
+    {
+      "task_id": "TASK-character-anchor",
+      "asset_id": "char.hero.anchor",
+      "kind": "CHARACTER_ANCHOR",
+      "required": true,
+      "depends_on": [],
+      "split_profile": "L1",
+      "authority_refs": {
+        "character_ids": [
+          "hero"
+        ],
+        "prop_ids": [],
+        "color_script_beat_ids": []
+      },
+      "content": {
+        "subject": "Replace with recurring character identity",
+        "pose_or_state": "neutral full-body canonical reference",
+        "narrative_refs": []
+      },
+      "visual_brief": {
+        "narrative_function": "Canonical identity reference for all later hero assets.",
+        "first_read": "Face, silhouette, and signature identity marks.",
+        "focal_hierarchy": [
+          "face and hair shape",
+          "full-body silhouette",
+          "signature costume/mark"
+        ],
+        "composition": {
+          "framing": "full body with generous padding",
+          "camera_angle": "eye level",
+          "perspective": "neutral low-distortion reference view",
+          "subject_placement": "centered",
+          "depth_layers": [
+            "single subject only"
+          ],
+          "negative_space": "clean separation around full silhouette",
+          "lens_behavior": "neutral low-distortion reference perspective; no wide-angle exaggeration",
+          "focus_depth": "entire character equally readable; no shallow-focus loss of costume detail"
+        },
+        "lighting": {
+          "motivation": "neutral studio/reference illumination",
+          "direction": "soft frontal-side",
+          "quality": "broad and soft",
+          "contrast": "moderate, preserving form and color",
+          "color_relationship": "neutral; do not tint identity colors"
+        },
+        "color": {
+          "palette_role": "lock canonical character colors",
+          "dominant": [],
+          "accent": [],
+          "value_structure": "clear silhouette against transparent/neutral field"
+        },
+        "materials": [
+          "Describe signature fabrics, hair, skin/fur, metal, or other identity-critical surfaces."
+        ],
+        "environment_rules": [
+          "No scenery; this is an identity reference."
+        ],
+        "continuity": [
+          "This anchor becomes canonical for downstream tasks."
+        ],
+        "avoid": [
+          "generic beauty retouching that changes identity",
+          "extra props or text",
+          "dramatic lighting that obscures canonical colors"
+        ],
+        "emotional_intent": "Trustworthy, neutral production reference rather than a dramatic beauty shot.",
+        "atmosphere": []
+      },
+      "references": [],
+      "structure": {
+        "required_layer_ids": [
+          "char.hero.whole"
+        ],
+        "forbidden_merges": [],
+        "articulation_overlap": false
+      },
+      "output": {
+        "preferred": "PNG",
+        "fallback_allowed": false,
+        "transparent_background": true,
+        "size": "1024x1024"
+      },
+      "acceptance": {
+        "identity": [
+          "Replace with exact CharacterBible identity invariants"
+        ],
+        "style": [
+          "Match VisualAuthority visual language without drift"
+        ],
+        "narrative": [
+          "No narrative facts invented or contradicted"
+        ],
+        "composition": [
+          "Full subject readable and uncropped"
+        ],
+        "lighting_color": [
+          "Identity-critical colors and materials remain legible"
+        ],
+        "structure": [
+          "Full subject visible on transparent background"
+        ],
+        "articulation": [],
+        "usability": [
+          "Readable silhouette at thumbnail size; production reference quality"
+        ],
+        "material": [
+          "Hair, skin, cloth, and brass read as distinct materials without changing the project abstraction level"
+        ]
+      }
+    }
+  ]
+}

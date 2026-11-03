@@ -1,0 +1,16 @@
+[package]
+name = "smc-animatic"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Native source-bound animatic candidate renderer"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+base64.workspace = true
+libc.workspace = true
+tempfile = "3.27"
+jsonschema = { version = "0.50.1", default-features = false }
+tungstenite = { version = "0.28", default-features = false, features = ["handshake"] }

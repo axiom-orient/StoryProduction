@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://story-production.local/contracts/animatic-packet-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "plan",
+    "review",
+    "captions",
+    "contentHash"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "nvc.animatic-packet/1"
+    },
+    "plan": {
+      "$ref": "https://story-production.local/contracts/animatic-plan-v1"
+    },
+    "review": {
+      "$ref": "https://story-production.local/contracts/animatic-review-v1"
+    },
+    "captions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "panelId",
+          "soundNotes",
+          "lines"
+        ],
+        "properties": {
+          "panelId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "soundNotes": {
+            "type": "string",
+            "maxLength": 8192
+          },
+          "lines": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 128,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "semanticId",
+                "entryHash",
+                "text"
+              ],
+              "properties": {
+                "semanticId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2048
+                },
+                "entryHash": {
+                  "type": "string",
+                  "pattern": "^sha256:[a-f0-9]{64}$"
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 16384
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}

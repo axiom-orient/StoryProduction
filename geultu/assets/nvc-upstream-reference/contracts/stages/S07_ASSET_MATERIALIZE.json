@@ -1,0 +1,106 @@
+{
+  "stage_id": "S07_ASSET_MATERIALIZE",
+  "version": "1.0.0",
+  "artifact_owner": "AssetMaterializer",
+  "executor_classes": [
+    "GEN",
+    "PROC",
+    "VLM"
+  ],
+  "inputs": [
+    {
+      "kind": "asset_manifest",
+      "schema": "schemas/asset-manifest.schema.json",
+      "required": true
+    },
+    {
+      "kind": "director_ir",
+      "schema": "schemas/director-ir.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "materialized_assets",
+      "schema": "schemas/artifact-envelope.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "required assets exist/decode",
+    "identity/style/world hard checks PASS",
+    "hashes recorded"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "GEN_001_IDENTITY_DRIFT",
+    "GEN_002_STYLE_DRIFT",
+    "GEN_003_STATE_VIOLATION",
+    "GEN_004_REFERENCE_IGNORED",
+    "GEN_005_OUTPUT_CORRUPT"
+  ],
+  "retry_policy": {
+    "max_repairs": 2
+  },
+  "next": {
+    "on_pass": "S08_RENDER_PLAN",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "generate or procedurally build required anchors/assets",
+      "executor_class": "GEN",
+      "inputs": [
+        "asset_manifest",
+        "director_ir"
+      ],
+      "outputs": [
+        "candidate_assets"
+      ],
+      "hard_gate": "all required outputs produced",
+      "failure_codes": [
+        "GEN_005_OUTPUT_CORRUPT"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "verify identity style and world-state constraints",
+      "executor_class": "VLM",
+      "inputs": [
+        "candidate_assets",
+        "asset_manifest"
+      ],
+      "outputs": [
+        "asset_eval"
+      ],
+      "hard_gate": "hard asset checks PASS",
+      "failure_codes": [
+        "GEN_001_IDENTITY_DRIFT",
+        "GEN_002_STYLE_DRIFT",
+        "GEN_003_STATE_VIOLATION",
+        "GEN_004_REFERENCE_IGNORED"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "hash and register accepted assets",
+      "executor_class": "DET",
+      "inputs": [
+        "candidate_assets",
+        "asset_eval"
+      ],
+      "outputs": [
+        "materialized_assets"
+      ],
+      "hard_gate": "accepted asset hashes recorded",
+      "failure_codes": [
+        "GEN_005_OUTPUT_CORRUPT"
+      ]
+    }
+  ]
+}

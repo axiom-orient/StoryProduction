@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoryIR",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "story_id": {
+      "type": "string"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "Entity",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "entity_id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "character",
+              "location",
+              "object",
+              "group",
+              "abstract"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "explicit",
+              "inferred",
+              "creative"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "title": "SourceSpan",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "source_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "start": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "quote": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "source_id",
+                "start",
+                "end"
+              ]
+            }
+          }
+        },
+        "required": [
+          "entity_id",
+          "type",
+          "name",
+          "origin",
+          "evidence"
+        ]
+      }
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "Event",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "event_id": {
+            "type": "string"
+          },
+          "actor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1
+          },
+          "patient": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "location": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "goal": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "pre_state": {
+            "type": "object"
+          },
+          "post_state": {
+            "type": "object"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "explicit",
+              "inferred",
+              "creative"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "title": "SourceSpan",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "source_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "start": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "quote": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "source_id",
+                "start",
+                "end"
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "event_id",
+          "actor",
+          "action",
+          "patient",
+          "location",
+          "goal",
+          "pre_state",
+          "post_state",
+          "origin",
+          "evidence"
+        ]
+      },
+      "minItems": 1
+    },
+    "themes": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "Theme",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "explicit",
+              "inferred",
+              "creative"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "title": "SourceSpan",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "source_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "start": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "quote": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "source_id",
+                "start",
+                "end"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "statement",
+          "origin",
+          "evidence"
+        ]
+      }
+    },
+    "motifs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ambiguities": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "Ambiguity",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          },
+          "impact": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "question",
+          "impact"
+        ]
+      }
+    }
+  },
+  "required": [
+    "story_id",
+    "entities",
+    "events",
+    "themes",
+    "motifs",
+    "ambiguities"
+  ]
+}

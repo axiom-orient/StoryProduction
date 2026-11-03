@@ -1,0 +1,15 @@
+{
+  "api_version": "geultu.dev/refinement-pack-catalog/v1",
+  "catalog_id": "language-refinement-fixture-unlisted",
+  "source_release_version": "1.0.0",
+  "source_release_date": "2026-08-23",
+  "locale_archives": {
+    "ko": "koreanize-fixture.zip"
+  },
+  "policy": {
+    "operations": ["diagnose", "plan_patch"],
+    "output_authority": "geultu_polish_patch",
+    "translation_forbidden": true,
+    "approval_owned_by": "geultu"
+  }
+}

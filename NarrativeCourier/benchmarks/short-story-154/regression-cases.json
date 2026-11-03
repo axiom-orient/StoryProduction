@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "purpose": "Regression evidence from prior human/editorial corrections. Story text is intentionally not bundled into runtime prompts.",
+  "cases": [
+    {
+      "story_id": "002",
+      "severity": "high",
+      "oracle_categories": [
+        "referent",
+        "world_rule",
+        "causality",
+        "ending"
+      ],
+      "oracle_fix": "수면 대행 규칙과 8시간 계산을 명시하고, 도윤/정아의 선택을 분리했다. 도윤이 딸의 사망 시각을 깨어 지키는 이유와 마지막 죄책감/동행의 의미를 직접 회수했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "005",
+      "severity": "high",
+      "oracle_categories": [
+        "world_rule",
+        "physical_timing"
+      ],
+      "oracle_fix": "83초 대기를 평일 아침 1층에 한정하고 71초 이동+기본 12초라는 계산으로 설정을 현실적으로 만들었다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "008",
+      "severity": "high",
+      "oracle_categories": [
+        "character_knowledge",
+        "continuity"
+      ],
+      "oracle_fix": "사기범이 알 수 없는 사적 단서를 말하던 모순을 제거하고, 순자가 과거 아들의 당부를 스스로 떠올리는 인과로 바꿨다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "022",
+      "severity": "medium",
+      "oracle_categories": [
+        "dialogue",
+        "clarity"
+      ],
+      "oracle_fix": "마중의 이유가 상대의 귀가 지연에 대한 체감임을 대사에서 바로 이해되게 했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "023",
+      "severity": "high",
+      "oracle_categories": [
+        "continuity"
+      ],
+      "oracle_fix": "무료로 건넨 시계를 뒤에서 판매했다고 서술하던 연속성 오류를 수정했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "037",
+      "severity": "medium",
+      "oracle_categories": [
+        "causality",
+        "wording"
+      ],
+      "oracle_fix": "오경보 경험의 효용을 소리 자체가 아니라 위험 징후 학습으로 정확히 연결했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "043",
+      "severity": "medium",
+      "oracle_categories": [
+        "physical_action"
+      ],
+      "oracle_fix": "감에 발이 닿는 비현실적 표현을 돌을 밟고 올라가 감에 닿는 행동으로 고쳤다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "044",
+      "severity": "medium",
+      "oracle_categories": [
+        "ending",
+        "theme",
+        "clarity"
+      ],
+      "oracle_fix": "예약 난이도와 물리적 접근 불가능을 구분해 접근성이라는 결말 의미를 선명하게 했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "052",
+      "severity": "high",
+      "oracle_categories": [
+        "world_rule",
+        "institutional_logic"
+      ],
+      "oracle_fix": "출입금지 옥상을 무단 사용하던 설정을 열쇠 대여·시간 제한·난간 보강이 있는 허가된 이용으로 재구성했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "055",
+      "severity": "medium",
+      "oracle_categories": [
+        "interpretation",
+        "clarity"
+      ],
+      "oracle_fix": "사진관 규칙의 핵심이 ‘지금’이라는 시간 조건임을 더 정확히 회수했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "056",
+      "severity": "medium",
+      "oracle_categories": [
+        "specificity",
+        "naturalness"
+      ],
+      "oracle_fix": "모호하게 붙어 있던 대파 문장을 분리해 정원의 구체적 물성을 살렸다. 기존 해석 결말은 보존했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "059",
+      "severity": "medium",
+      "oracle_categories": [
+        "referent",
+        "specificity"
+      ],
+      "oracle_fix": "피신처를 ‘먼 친척’으로 일반화하지 않고 ‘소담의 외삼촌’으로 특정해 가족 관계와 목적지를 동시에 명확히 했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "061",
+      "severity": "high",
+      "oracle_categories": [
+        "world_rule",
+        "causality"
+      ],
+      "oracle_fix": "별의 점등/이동 규칙과 어부를 비추는 결말이 충돌하지 않도록 낮은 위치에서 점등 후 정위치로 올라가는 규칙으로 정리했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "067",
+      "severity": "high",
+      "oracle_categories": [
+        "character_knowledge",
+        "loop_invariant"
+      ],
+      "oracle_fix": "루프를 기억하지 못하는 딸이 반복을 아는 듯 말하던 모순을 제거하고 그날 한 장면 안에서만 성립하는 대사로 바꿨다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "076",
+      "severity": "high",
+      "oracle_categories": [
+        "institutional_logic",
+        "causality"
+      ],
+      "oracle_fix": "버스 기사의 규정 위반/거짓말 대신 관제에 사정을 알리고 허가받아 학생을 데려다주는 인과로 수정했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "083",
+      "severity": "medium",
+      "oracle_categories": [
+        "causality",
+        "dialogue"
+      ],
+      "oracle_fix": "곰이 온 실제 원인이 이름이 아니라 지연된 음식물 쓰레기 처리였음을 대사에서도 정확히 연결했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "085",
+      "severity": "high",
+      "oracle_categories": [
+        "continuity"
+      ],
+      "oracle_fix": "냉장고에서 되찾은 결혼반지를 결말에서 갑자기 새 반지로 바꾸던 오류를 수정했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "092",
+      "severity": "high",
+      "oracle_categories": [
+        "world_rule"
+      ],
+      "oracle_fix": "몸은 늙지 않는다고 한 뒤 1년을 실제로 살았다고 하는 모순을 제거해, 몸은 시간을 살고 기억만 거의 남지 않는 규칙으로 통일했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "098",
+      "severity": "medium",
+      "oracle_categories": [
+        "counting",
+        "word_choice"
+      ],
+      "oracle_fix": "한쪽 장갑 여섯 ‘짝’을 여섯 ‘개’로 바로잡았다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "102",
+      "severity": "medium",
+      "oracle_categories": [
+        "referent",
+        "ending"
+      ],
+      "oracle_fix": "행동 주체를 명시하고 걱정을 한 번에 하나씩 감당한다는 결말을 더 자연스럽게 정리했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "109",
+      "severity": "medium",
+      "oracle_categories": [
+        "ending",
+        "invariant_review"
+      ],
+      "oracle_fix": "v3의 나이/촛불 계산 수정은 그대로 검증하고, 애도 역시 앞으로 가게 둔다는 결말 의미를 더 명확히 했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "111",
+      "severity": "high",
+      "oracle_categories": [
+        "physical_accounting",
+        "safety"
+      ],
+      "oracle_fix": "612명·접시·남는 음식의 물리적 계산을 다시 맞추고, 아이의 멍을 발견한 뒤 담임/상담교사에게 연결하는 후속 행동을 보완했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "123",
+      "severity": "high",
+      "oracle_categories": [
+        "physical_logic",
+        "causality"
+      ],
+      "oracle_fix": "구조 중 등대 불을 끄는 비합리적 행동을 제거하고, 빛과 종이 실패한 뒤 노래가 추가 수단이 되는 인과로 수정했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "126",
+      "severity": "high",
+      "oracle_categories": [
+        "character_knowledge"
+      ],
+      "oracle_fix": "죽음이 알 근거가 없던 가족사를 편지 내용에서 읽어 알게 되도록 근거를 만들었다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "129",
+      "severity": "high",
+      "oracle_categories": [
+        "timeline",
+        "ending"
+      ],
+      "oracle_fix": "미래의 아들이 아버지를 기억하지 못한다는 설정과 현재 열 살 아들의 기억이 충돌하지 않도록 시간선이 달라졌음을 명시했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "132",
+      "severity": "medium",
+      "oracle_categories": [
+        "referent",
+        "invariant_review"
+      ],
+      "oracle_fix": "v3에서 바로잡은 35세/35년 계산과 해석 결말을 보존하고, 마지막 행동의 주체를 수호자로 명시했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "133",
+      "severity": "high",
+      "oracle_categories": [
+        "timeline",
+        "referent"
+      ],
+      "oracle_fix": "초등학교 졸업 후 ‘서른 살’과 ‘20년 뒤’가 충돌하던 약속을 20년 뒤로 통일하고 유진의 주어를 명시했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "146",
+      "severity": "high",
+      "oracle_categories": [
+        "physical_continuity"
+      ],
+      "oracle_fix": "철거된 벽 안에서 포스터가 발견되는 비약을 제거하고 현장소장이 입구의 포스터를 보관해 도서관에 전달하는 경로로 수정했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    },
+    {
+      "story_id": "147",
+      "severity": "medium",
+      "oracle_categories": [
+        "referent",
+        "world_detail",
+        "ending"
+      ],
+      "oracle_fix": "불화의 여신/하녀 지시를 명확히 하고, 빈 황금 사과를 녹여 여러 잔으로 만드는 물리적 회수와 결말 의미를 정리했다.",
+      "expected": "STS must surface the same semantic/state risk class before screenplay release"
+    }
+  ]
+}

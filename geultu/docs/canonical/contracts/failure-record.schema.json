@@ -1,0 +1,60 @@
+{
+  "$id": "https://geultu.dev/schema/failure-record/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cause_receipt": {
+      "maxLength": 256,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "class": {
+      "enum": [
+        "REJECTED",
+        "FAILED_VALIDATION",
+        "PROVIDER_FAILED",
+        "UNKNOWN_OUTCOME",
+        "COMMIT_CONFLICT",
+        "RECOVERY_REQUIRED"
+      ]
+    },
+    "code": {
+      "pattern": "^[A-Z][A-Z0-9_]{2,127}$",
+      "type": "string"
+    },
+    "command_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "details": {
+      "type": "object"
+    },
+    "failure_id": {
+      "pattern": "^failure_[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "retry_directive": {
+      "enum": [
+        "NEVER",
+        "AFTER_INPUT_CHANGE",
+        "BOUNDED_RETRY",
+        "RELOAD_AND_REPLAN",
+        "RECONCILE_ONLY",
+        "DOCTOR_RECOVERY",
+        "HUMAN_DECISION"
+      ]
+    }
+  },
+  "required": [
+    "failure_id",
+    "class",
+    "code",
+    "command_id",
+    "retry_directive"
+  ],
+  "title": "FailureRecord v1",
+  "type": "object"
+}

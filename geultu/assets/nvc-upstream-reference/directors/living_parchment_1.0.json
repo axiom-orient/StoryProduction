@@ -1,0 +1,42 @@
+{
+  "preset_id": "living_parchment/1.0",
+  "semantic_affinities": [
+    "memory",
+    "myth",
+    "loss",
+    "folklore"
+  ],
+  "visual_grammar": {
+    "surface": "aged_paper",
+    "render": "ink_watercolor"
+  },
+  "motion_grammar": {
+    "tempo": "slow",
+    "ambient": "organic"
+  },
+  "camera_grammar": {
+    "default": "slow_observer"
+  },
+  "typography_grammar": {
+    "reveal": "ink_write",
+    "erase": "ink_fade"
+  },
+  "transition_grammar": {
+    "default": "ink_bleed"
+  },
+  "sound_grammar": {
+    "base": [
+      "wind",
+      "paper",
+      "wood"
+    ]
+  },
+  "supported_motion_modes": [
+    "LAYERED_2_5D",
+    "RIGGED_2D",
+    "HYBRID"
+  ],
+  "negative_defaults": [
+    "avoid_modern_ui"
+  ]
+}

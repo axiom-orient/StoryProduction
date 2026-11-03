@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CapabilityProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "backend_id": {
+      "type": "string"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "t2i",
+          "i2i",
+          "t2v",
+          "i2v",
+          "audio",
+          "rig2d",
+          "scene3d",
+          "compose"
+        ]
+      }
+    },
+    "controls": {
+      "type": "object"
+    },
+    "limits": {
+      "type": "object"
+    },
+    "quality_tier": {
+      "type": "string",
+      "enum": [
+        "experimental",
+        "qualified",
+        "preferred"
+      ]
+    }
+  },
+  "required": [
+    "backend_id",
+    "tasks",
+    "controls",
+    "limits",
+    "quality_tier"
+  ]
+}

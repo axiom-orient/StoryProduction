@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": 2,
+  "registryId": "trackb-release-contract-v4",
+  "schemas": [
+    {
+      "logicalName": "TrackBNarrativeAuthority v2",
+      "path": "trackb-narrative-authority-v2.schema.json",
+      "$id": "https://scene-motion-compiler.local/contracts/trackb/narrative-authority/v2",
+      "version": 2
+    },
+    {
+      "logicalName": "TrackBReleaseCandidate v4",
+      "path": "trackb-release-candidate-v4.schema.json",
+      "$id": "https://scene-motion-compiler.local/contracts/trackb/release-candidate/v4",
+      "version": 4
+    },
+    {
+      "logicalName": "TrackBMeasuredEvidenceReceipt v2",
+      "path": "trackb-measured-evidence-receipt-v2.schema.json",
+      "$id": "https://scene-motion-compiler.local/contracts/trackb/measured-evidence-receipt/v2",
+      "version": 2
+    },
+    {
+      "logicalName": "TrackBReleaseApprovalReceipt v2",
+      "path": "trackb-release-approval-receipt-v2.schema.json",
+      "$id": "https://scene-motion-compiler.local/contracts/trackb/release-approval-receipt/v2",
+      "version": 2
+    },
+    {
+      "logicalName": "TrackBDeliverySet v2",
+      "path": "trackb-delivery-set-v2.schema.json",
+      "$id": "https://scene-motion-compiler.local/contracts/trackb/delivery-set/v2",
+      "version": 2
+    },
+    {
+      "logicalName": "TrackBDeliveryPointer v2",
+      "path": "trackb-delivery-pointer-v2.schema.json",
+      "$id": "https://scene-motion-compiler.local/contracts/trackb/delivery-pointer/v2",
+      "version": 2
+    }
+  ]
+}

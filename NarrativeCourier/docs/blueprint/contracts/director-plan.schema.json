@@ -1,0 +1,364 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-courier.local/contracts/director-plan.schema.json",
+  "title": "DirectorPlan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plan_id",
+    "narrative_package_sha256",
+    "delivery_request_sha256",
+    "director_bundle_sha256",
+    "visual_grammar",
+    "asset_requests",
+    "deliveries"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "plan_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "narrative_package_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "delivery_request_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "director_bundle_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "visual_grammar": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "composition": {
+          "$ref": "#/$defs/grammar_axis"
+        },
+        "light": {
+          "$ref": "#/$defs/grammar_axis"
+        },
+        "material": {
+          "$ref": "#/$defs/grammar_axis"
+        },
+        "camera": {
+          "$ref": "#/$defs/grammar_axis"
+        },
+        "motion": {
+          "$ref": "#/$defs/grammar_axis"
+        },
+        "typography": {
+          "$ref": "#/$defs/grammar_axis"
+        },
+        "sound": {
+          "$ref": "#/$defs/grammar_axis"
+        }
+      }
+    },
+    "asset_requests": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/asset_request"
+      }
+    },
+    "deliveries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/delivery_plan"
+      }
+    }
+  },
+  "$defs": {
+    "narrative_ref": {
+      "type": "string",
+      "pattern": "^(SRC|REL|GAP|CON|SCN)-[A-Za-z0-9_-]+$"
+    },
+    "grammar_axis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "must",
+        "avoid"
+      ],
+      "properties": {
+        "must": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "avoid": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "asset_request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_id",
+        "kind",
+        "role",
+        "narrative_refs",
+        "generation_mode",
+        "brief",
+        "hard_constraints"
+      ],
+      "properties": {
+        "asset_id": {
+          "type": "string",
+          "pattern": "^[A-Z]+-[0-9A-Za-z_-]+$"
+        },
+        "kind": {
+          "enum": [
+            "IMAGE",
+            "VECTOR",
+            "AUDIO",
+            "VIDEO",
+            "FONT",
+            "MODEL_3D",
+            "DATA"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "narrative_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/narrative_ref"
+          }
+        },
+        "generation_mode": {
+          "enum": [
+            "USER",
+            "PROCEDURAL",
+            "GENERATIVE",
+            "DERIVED"
+          ]
+        },
+        "consistency_group": {
+          "type": "string"
+        },
+        "brief": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hard_constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "mime": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "generation_mode": {
+                "enum": [
+                  "USER",
+                  "DERIVED"
+                ]
+              }
+            },
+            "required": [
+              "generation_mode"
+            ]
+          },
+          "then": {
+            "required": [
+              "source"
+            ]
+          }
+        }
+      ]
+    },
+    "projection_unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_id",
+        "order",
+        "narrative_refs",
+        "operation",
+        "direction",
+        "asset_refs"
+      ],
+      "properties": {
+        "unit_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "narrative_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/narrative_ref"
+          }
+        },
+        "operation": {
+          "enum": [
+            "PRESERVE",
+            "COMPRESS",
+            "EXCERPT",
+            "REORDER",
+            "ABSTRACT",
+            "OMIT"
+          ]
+        },
+        "direction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asset_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1
+        },
+        "duration_frames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4294967295
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "operation": {
+                "not": {
+                  "const": "OMIT"
+                }
+              }
+            },
+            "required": [
+              "operation"
+            ]
+          },
+          "then": {
+            "required": [
+              "content"
+            ]
+          }
+        }
+      ]
+    },
+    "delivery_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output_request_id",
+        "presentation_structure",
+        "units"
+      ],
+      "properties": {
+        "output_request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "presentation_structure": {
+          "enum": [
+            "LINEAR",
+            "SCROLL",
+            "GRID",
+            "PAGED",
+            "TIMED",
+            "GRAPH"
+          ]
+        },
+        "units": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/projection_unit"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "presentation_structure": {
+                "const": "TIMED"
+              }
+            },
+            "required": [
+              "presentation_structure"
+            ]
+          },
+          "then": {
+            "properties": {
+              "units": {
+                "items": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/projection_unit"
+                    },
+                    {
+                      "required": [
+                        "duration_frames"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "prompt_id": "meaning-compile/1.0",
+  "stage_id": "S01_SEMANTIC_COMPILE",
+  "purpose": "Compile must-keep and transition obligations",
+  "authoritative_inputs": [
+    "canonical_narrative",
+    "story_ir",
+    "constraints"
+  ],
+  "allowed_inference": [
+    "importance ranking"
+  ],
+  "forbidden_mutation": [
+    "canonical meaning",
+    "causal relation"
+  ],
+  "output_schema": "schemas/meaning-spec.schema.json",
+  "hard_requirements": [
+    "Hard transitions must be recoverable"
+  ],
+  "evaluation_rubric": [
+    "coverage",
+    "traceability"
+  ],
+  "template": "Implementation MUST inject only authoritative inputs and request output conforming exactly to output_schema. Natural-language wording is versioned separately; schema and hard requirements are authoritative."
+}

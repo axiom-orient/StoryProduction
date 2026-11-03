@@ -1,0 +1,17 @@
+[package]
+name = "geultu-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+description = "CLI and MCP stdio adapters for the Geultu engine"
+
+[[bin]]
+name = "geultu"
+path = "src/main.rs"
+
+[dependencies]
+geultu = { path = "../geultu" }
+geultu-writing = { path = "../../adapters/geultu-writing" }
+geultu-writer-process = { path = "../../adapters/geultu-writer-process" }
+serde.workspace = true
+serde_json.workspace = true

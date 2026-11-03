@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CanonicalNarrative",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "narrative_id": {
+      "type": "string",
+      "pattern": "^nar_[A-Za-z0-9._-]+$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "story",
+        "screenplay"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority": {
+      "const": "canonical"
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "narrative_id",
+    "kind",
+    "language",
+    "title",
+    "text",
+    "authority",
+    "content_hash"
+  ]
+}

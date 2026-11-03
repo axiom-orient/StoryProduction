@@ -1,0 +1,423 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/doctor-report.schema.json",
+  "title": "DoctorReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "doctor_id",
+    "task_id",
+    "attempt_no",
+    "created_at",
+    "scope",
+    "gap_signature",
+    "gap_vector",
+    "failed_claims",
+    "mechanical_failures",
+    "metric_evidence",
+    "hypotheses",
+    "recommended_strategy",
+    "preserve_axes",
+    "rewrite_axes",
+    "experiments",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "doctor_id": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "attempt_no": {
+      "type": "integer"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "scope": {
+      "enum": [
+        "CLEAN",
+        "LOCAL",
+        "REGIONAL",
+        "GLOBAL"
+      ]
+    },
+    "gap_signature": {
+      "type": "string"
+    },
+    "gap_vector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "style",
+        "narrative",
+        "composition",
+        "lighting_color",
+        "material",
+        "structure",
+        "articulation",
+        "usability"
+      ],
+      "properties": {
+        "identity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minor",
+            "major",
+            "critical_major",
+            "score"
+          ],
+          "properties": {
+            "minor": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "critical_major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "score": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "style": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minor",
+            "major",
+            "critical_major",
+            "score"
+          ],
+          "properties": {
+            "minor": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "critical_major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "score": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "narrative": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minor",
+            "major",
+            "critical_major",
+            "score"
+          ],
+          "properties": {
+            "minor": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "critical_major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "score": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "composition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minor",
+            "major",
+            "critical_major",
+            "score"
+          ],
+          "properties": {
+            "minor": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "critical_major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "score": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "lighting_color": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minor",
+            "major",
+            "critical_major",
+            "score"
+          ],
+          "properties": {
+            "minor": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "critical_major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "score": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "material": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minor",
+            "major",
+            "critical_major",
+            "score"
+          ],
+          "properties": {
+            "minor": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "critical_major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "score": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "structure": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minor",
+            "major",
+            "critical_major",
+            "score"
+          ],
+          "properties": {
+            "minor": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "critical_major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "score": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "articulation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minor",
+            "major",
+            "critical_major",
+            "score"
+          ],
+          "properties": {
+            "minor": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "critical_major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "score": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "usability": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minor",
+            "major",
+            "critical_major",
+            "score"
+          ],
+          "properties": {
+            "minor": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "critical_major": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "score": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "failed_claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mechanical_failures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "confidence",
+          "evidence"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "recommended_strategy": {
+      "enum": [
+        "NONE",
+        "SURGICAL_EDIT",
+        "TARGETED_EDIT",
+        "TARGETED_REGENERATION",
+        "RECONSTRUCT_FROM_AUTHORITY",
+        "REFERENCE_ABLATION",
+        "RESEED_ANCHOR",
+        "RESET_EXECUTION_CONTEXT"
+      ]
+    },
+    "preserve_axes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rewrite_axes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "change",
+          "metric",
+          "keep_if"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "change": {
+            "type": "string"
+          },
+          "metric": {
+            "type": "string"
+          },
+          "keep_if": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "metric_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

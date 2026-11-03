@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "request_id": "..",
+  "narrative_package_sha256": "9a284c441042a84a10029db28b8465dea4eacd544fd0fd93a2024ea29aa772ae",
+  "intent": "DEVELOPMENT",
+  "coverage": "FULL",
+  "locale": "ko-KR",
+  "must_include_refs": [
+    "SRC-001"
+  ],
+  "constraints": [],
+  "outputs": [
+    {
+      "output_id": "html",
+      "format": "HTML",
+      "backend_id": "web"
+    },
+    {
+      "output_id": "storyboard-png",
+      "format": "PNG",
+      "width": 1080,
+      "height": 1920
+    }
+  ]
+}

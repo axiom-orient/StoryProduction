@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-motion-compiler.local/contracts/trackb/delivery-pointer/v2",
+  "title": "TrackBDeliveryPointer v2",
+  "schemaVersion": 2,
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "pointerKey", "narrativeId", "revision", "state", "deliverySetHash", "candidateHash", "approvalHash", "meaningQualificationHash", "baseDeliverySetHash", "deliverySetPath", "pointerHash"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 2 },
+    "pointerKey": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+    "narrativeId": { "type": "string", "pattern": "^narrative\\.[A-Za-z0-9._:-]{1,127}$" },
+    "revision": { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+    "state": { "type": "string", "const": "PROMOTED" },
+    "deliverySetHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "candidateHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "approvalHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "meaningQualificationHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "baseDeliverySetHash": { "type": "string", "pattern": "^(?:NONE|sha256:[0-9a-f]{64})$" },
+    "deliverySetPath": { "type": "string", "minLength": 1, "maxLength": 1024, "pattern": "^(?:(?!\\.{1,2}(?:/|$))[A-Za-z0-9._-]+/)*(?!\\.{1,2}$)[A-Za-z0-9._-]+$" },
+    "pointerHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

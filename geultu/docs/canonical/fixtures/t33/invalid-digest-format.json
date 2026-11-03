@@ -1,0 +1,42 @@
+{
+  "global_constraints": [
+    "character identity must remain stable"
+  ],
+  "language": "ko",
+  "logline": "검증용 서사 패키지.",
+  "package_id": "np_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "scenes": [
+    {
+      "characters": [
+        "protagonist"
+      ],
+      "continuity": [
+        "door begins closed"
+      ],
+      "locations": [
+        "room"
+      ],
+      "narrative": "주인공이 문을 연다.",
+      "order": 1,
+      "scene_id": "scene_001",
+      "summary": "시작 장면",
+      "visual_priority": 0.8
+    }
+  ],
+  "schema_id": "geultu.dev/geultu-story-package/v1",
+  "source": {
+    "export_spec": {
+      "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "id": "text:geultu-story-export-001",
+      "kind": "geultu_story_export_spec",
+      "revision": 1
+    },
+    "text_master": {
+      "digest": "raw-text-digest",
+      "id": "text:master-001",
+      "kind": "text_master",
+      "revision": 1
+    }
+  },
+  "title": "Example"
+}

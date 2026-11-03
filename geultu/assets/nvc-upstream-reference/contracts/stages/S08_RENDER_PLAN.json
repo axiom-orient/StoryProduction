@@ -1,0 +1,105 @@
+{
+  "stage_id": "S08_RENDER_PLAN",
+  "version": "1.0.0",
+  "artifact_owner": "RenderPlanner",
+  "executor_classes": [
+    "DET",
+    "LLM"
+  ],
+  "inputs": [
+    {
+      "kind": "shot_bundle_ir",
+      "schema": "schemas/shot-ir.schema.json",
+      "required": true
+    },
+    {
+      "kind": "asset_manifest",
+      "schema": "schemas/asset-manifest.schema.json",
+      "required": true
+    },
+    {
+      "kind": "materialized_assets",
+      "schema": "schemas/artifact-envelope.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "render_ir",
+      "schema": "schemas/render-ir.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "each job has capable backend",
+    "hard invariants not delegated to uncontrolled stochastic path",
+    "job DAG acyclic"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "RND_001_NO_CAPABLE_BACKEND",
+    "RND_002_CAPABILITY_MISMATCH",
+    "RND_003_NONDETERMINISTIC_INVARIANT"
+  ],
+  "retry_policy": {
+    "max_repairs": 1
+  },
+  "next": {
+    "on_pass": "S09_SHOT_RENDER",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "compile shot constraints into renderer capability requirements",
+      "executor_class": "DET",
+      "inputs": [
+        "shot_bundle_ir",
+        "asset_manifest"
+      ],
+      "outputs": [
+        "render_requirements"
+      ],
+      "hard_gate": "every shot has capability requirements",
+      "failure_codes": [
+        "RND_002_CAPABILITY_MISMATCH"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "select backend with hard capability match before quality/cost",
+      "executor_class": "DET",
+      "inputs": [
+        "render_requirements",
+        "capability_registry"
+      ],
+      "outputs": [
+        "backend_assignments"
+      ],
+      "hard_gate": "all jobs have capable backend",
+      "failure_codes": [
+        "RND_001_NO_CAPABLE_BACKEND"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "reject uncontrolled stochastic paths for material hard invariants",
+      "executor_class": "DET",
+      "inputs": [
+        "backend_assignments",
+        "shot_bundle_ir"
+      ],
+      "outputs": [
+        "render_ir"
+      ],
+      "hard_gate": "every hard invariant has deterministic or verified control path",
+      "failure_codes": [
+        "RND_003_NONDETERMINISTIC_INVARIANT"
+      ]
+    }
+  ]
+}

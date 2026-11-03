@@ -1,0 +1,17 @@
+[package]
+name = "promptgen-openai"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Focused OpenAI GPT Image edit adapter"
+
+[dependencies]
+base64 = "0.23.0"
+promptgen-core = { path = "../promptgen-core" }
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2.189"
+
+[lints]
+workspace = true

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/psd-generation-profile.schema.json",
+  "title": "PSDGenerationProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "document_role",
+    "path_layers",
+    "primary_cutout_layer_id",
+    "document_clipping_path"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "document_role": {
+      "enum": [
+        "SINGLE_ASSET_MASTER",
+        "SCENE_MASTER"
+      ]
+    },
+    "path_layers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "layer_id",
+          "edge_class"
+        ],
+        "properties": {
+          "layer_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "edge_class": {
+            "enum": [
+              "HARD",
+              "ORGANIC",
+              "SOFT_ALPHA"
+            ]
+          },
+          "work_path_tolerance_px": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 10.0
+          }
+        }
+      }
+    },
+    "primary_cutout_layer_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "document_clipping_path": {
+      "enum": [
+        "PRIMARY_SAVED_PATH",
+        "NONE",
+        null
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "document_role": {
+            "const": "SCENE_MASTER"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "document_clipping_path": {
+            "const": "NONE"
+          }
+        }
+      }
+    }
+  ]
+}

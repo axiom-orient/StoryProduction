@@ -1,0 +1,89 @@
+{
+  "stage_id": "S12_PACKAGE_MASTER",
+  "version": "1.0.0",
+  "artifact_owner": "Packager",
+  "executor_classes": [
+    "DET",
+    "PROC"
+  ],
+  "inputs": [
+    {
+      "kind": "draft_master",
+      "schema": "schemas/artifact-envelope.schema.json",
+      "required": true
+    },
+    {
+      "kind": "evaluation_report",
+      "schema": "schemas/evaluation-report.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "master_package",
+      "schema": "schemas/artifact-envelope.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "S11 hard_gate_status == PASS",
+    "master decodes",
+    "content hash matches",
+    "lineage complete"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "PKG_001_MEDIA_DECODE_FAILURE",
+    "PKG_002_LINEAGE_INCOMPLETE",
+    "PKG_003_HASH_MISMATCH",
+    "PKG_004_MANIFEST_INCOMPLETE"
+  ],
+  "retry_policy": {
+    "max_repairs": 0
+  },
+  "next": {
+    "on_pass": null,
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "verify S11 hard_gate_status PASS",
+      "executor_class": "DET",
+      "inputs": [
+        "evaluation_report"
+      ],
+      "outputs": [
+        "package_gate"
+      ],
+      "hard_gate": "hard_gate_status == PASS",
+      "failure_codes": [
+        "PKG_004_MANIFEST_INCOMPLETE"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "package master lineage hashes reports and optional external provenance",
+      "executor_class": "PROC",
+      "inputs": [
+        "draft_master",
+        "evaluation_report",
+        "artifact_lineage"
+      ],
+      "outputs": [
+        "master_package"
+      ],
+      "hard_gate": "package decodes and manifest complete",
+      "failure_codes": [
+        "PKG_001_MEDIA_DECODE_FAILURE",
+        "PKG_002_LINEAGE_INCOMPLETE",
+        "PKG_003_HASH_MISMATCH",
+        "PKG_004_MANIFEST_INCOMPLETE"
+      ]
+    }
+  ]
+}

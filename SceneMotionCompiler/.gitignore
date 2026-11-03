@@ -1,0 +1,15 @@
+# dependencies / build output
+node_modules/
+.tmp/
+target/
+.build/
+/SceneMotionCompiler Studio.app/
+
+# agent & tool residue
+.gjc/
+demo-output/
+
+# local environment
+.DS_Store
+*.log
+.env

@@ -1,0 +1,48 @@
+{
+  "$id": "https://geultu.dev/schema/human-decision/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "decision": {
+      "enum": [
+        "APPROVE",
+        "REJECT"
+      ]
+    },
+    "decision_id": {
+      "pattern": "^human_[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "reason": {
+      "maxLength": 4000,
+      "type": "string"
+    },
+    "scope": {
+      "maxLength": 512,
+      "minLength": 1,
+      "type": "string"
+    },
+    "subject": {
+      "$ref": "artifact-ref.schema.json"
+    }
+  },
+  "required": [
+    "decision_id",
+    "actor_id",
+    "subject",
+    "scope",
+    "decision",
+    "occurred_at"
+  ],
+  "title": "HumanDecision v1",
+  "type": "object"
+}

@@ -1,0 +1,609 @@
+{
+  "fail_count": 0,
+  "failures": [],
+  "package_version": "4.1.0",
+  "pass_count": 150,
+  "passes": [
+    {
+      "detail": "",
+      "name": "exists:VERSION"
+    },
+    {
+      "detail": "",
+      "name": "exists:README.md"
+    },
+    {
+      "detail": "",
+      "name": "exists:documentation/00_INDEX.md"
+    },
+    {
+      "detail": "",
+      "name": "exists:documentation/17_ADOPTION_BASELINE.md"
+    },
+    {
+      "detail": "",
+      "name": "exists:documentation/18_CURRENT_STATE.md"
+    },
+    {
+      "detail": "",
+      "name": "exists:documentation/19_DATA_ASSET_REGISTRY.md"
+    },
+    {
+      "detail": "",
+      "name": "exists:documentation/20_VERIFICATION_GATES.md"
+    },
+    {
+      "detail": "",
+      "name": "exists:contracts/schema-registry.json"
+    },
+    {
+      "detail": "",
+      "name": "exists:contracts/geultu-story-package.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "exists:contracts/artifact-commit.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "exists:contracts/validation-receipt.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "exists:catalogs/authority.json"
+    },
+    {
+      "detail": "",
+      "name": "exists:catalogs/failure-codes.json"
+    },
+    {
+      "detail": "",
+      "name": "exists:fixtures/t33/valid-minimal.json"
+    },
+    {
+      "detail": "",
+      "name": "exists:evidence/asset-aggregates.json"
+    },
+    {
+      "detail": "",
+      "name": "docs_01_to_16_present"
+    },
+    {
+      "detail": "",
+      "name": "json:catalogs/authority.json"
+    },
+    {
+      "detail": "",
+      "name": "json:catalogs/failure-codes.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifact-commit.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifact-ref.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/approval_decision.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/approved_style.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/author_review.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/compiled_canon.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/completion_report.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/craft_input_plan.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/craft_reviewed_draft.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/craft_strategy_binding.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/dramatic_structure.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/frozen_draft_plan.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/genre_contract.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/genre_selection.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/narrative_design.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/normalized_request.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/normalized_style_corpus.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/polish_patch.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/polished_draft.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/refinement_diagnosis.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/revised_draft.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/revision_directive.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/revision_recheck.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/rights_report.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/semantic_guard_report.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/semantic_review.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/story_diagnosis.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/structural_review.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/style_candidate.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/style_comparison.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/style_profile.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/style_review.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/text_master.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/treatment_scene_plan.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/artifacts/unit_draft_set.v2.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/command-envelope.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/domain-decision.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/effect-receipt.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/failure-record.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/geultu-story-export-spec.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/geultu-story-package.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/human-decision.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/project-state.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/receipt-selector.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/reviewed-synopsis-handoff.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/route-admission.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/runtime/approval-decision.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/runtime/artifact-ref.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/runtime/protected-span.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/runtime/refinement-request.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/schema-registry.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/stage-contract.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/text-master.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/text-run-state.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/validation-receipt.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:contracts/visual-run-state.schema.json"
+    },
+    {
+      "detail": "",
+      "name": "json:evidence/asset-aggregates.json"
+    },
+    {
+      "detail": "",
+      "name": "json:evidence/verification-report.json"
+    },
+    {
+      "detail": "",
+      "name": "json:fixtures/commit/valid-multi-output.json"
+    },
+    {
+      "detail": "",
+      "name": "json:fixtures/jcs/body-digest-vector.json"
+    },
+    {
+      "detail": "",
+      "name": "json:fixtures/t33/invalid-caller-pass.json"
+    },
+    {
+      "detail": "",
+      "name": "json:fixtures/t33/invalid-digest-format.json"
+    },
+    {
+      "detail": "",
+      "name": "json:fixtures/t33/invalid-legacy-envelope.json"
+    },
+    {
+      "detail": "",
+      "name": "json:fixtures/t33/invalid-score-out-of-range.json"
+    },
+    {
+      "detail": "",
+      "name": "json:fixtures/t33/valid-minimal.json"
+    },
+    {
+      "detail": "registry=4.1.0 package=4.1.0",
+      "name": "registry_version_matches_package"
+    },
+    {
+      "detail": "",
+      "name": "schema_ids_unique"
+    },
+    {
+      "detail": "",
+      "name": "schema_files_exist"
+    },
+    {
+      "detail": "",
+      "name": "story_package_flat"
+    },
+    {
+      "detail": "",
+      "name": "story_package_schema_id"
+    },
+    {
+      "detail": "",
+      "name": "story_package_closed"
+    },
+    {
+      "detail": "",
+      "name": "story_package_two_inputs"
+    },
+    {
+      "detail": "",
+      "name": "story_package_score_number"
+    },
+    {
+      "detail": "",
+      "name": "legacy_story_package_schema_absent"
+    },
+    {
+      "detail": "",
+      "name": "story_package_single_target_schema"
+    },
+    {
+      "detail": "",
+      "name": "story_package_envelope_target_absent"
+    },
+    {
+      "detail": "",
+      "name": "story_package_envelope_file_absent"
+    },
+    {
+      "detail": "",
+      "name": "named_output_map"
+    },
+    {
+      "detail": "",
+      "name": "program_receipt_outcome"
+    },
+    {
+      "detail": "",
+      "name": "state_budgets"
+    },
+    {
+      "detail": "",
+      "name": "state_frozen_inputs"
+    },
+    {
+      "detail": "",
+      "name": "fixture_flat"
+    },
+    {
+      "detail": "",
+      "name": "fixture_legacy_is_invalid_shape"
+    },
+    {
+      "detail": "",
+      "name": "fixture_caller_pass_is_extra"
+    },
+    {
+      "detail": "",
+      "name": "fixture_score_out_of_range"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:00_INDEX.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:01_PRODUCT_SCOPE.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:02_ARCHITECTURE_BOUNDARIES.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:03_AUTHORITY_STATE_SSOT.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:04_EXECUTION_PROTOCOL.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:05_TEXT_PIPELINE.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:06_SCRIPTFORGE.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:07_REFINEMENT_QUALITY.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:08_T33_GEULTU_STORY_PACKAGE.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:09_VISUAL_PIPELINE.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:10_ARTIFACT_IDENTITY_DIGEST.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:11_VALIDATION_DECISION_RECEIPT.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:12_FAILURE_RECOVERY_IDEMPOTENCY.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:13_SECURITY_TRUST.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:14_SCHEMA_VERSIONING.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:15_VERIFICATION_RELEASE.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:16_IMPLEMENTATION_HANDOFF.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:17_ADOPTION_BASELINE.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:18_CURRENT_STATE.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:19_DATA_ASSET_REGISTRY.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:20_VERIFICATION_GATES.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:21_TEXT_PIPELINE_STAGES_T00_T33.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:22_NATIVE_TEXT_CRAFT_ADAPTERS.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:23_SCRIPTFORGE_FIDELITY_AND_INTEGRATION.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:24_SCRIPTFORGE_26_NODE_CONTRACTS.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:25_REFINEMENT_REVISION_AND_PIVOT.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:26_NVC_VISUAL_COMPILER_S00_S12.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:27_VISUAL_CHECKPOINTS_V00_V27.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:28_FAILURE_CODE_CATALOG.md"
+    },
+    {
+      "detail": "",
+      "name": "doc_no_embedded_json_schema:29_LICENSE_RIGHTS_AND_DISTRIBUTION.md"
+    },
+    {
+      "detail": "",
+      "name": "asset_dir:craft-packs-scriptforge-v4"
+    },
+    {
+      "detail": "declared=20 actual=20",
+      "name": "asset_file_count:craft-packs-scriptforge-v4"
+    },
+    {
+      "detail": "declared=1208c6856c0363cf... actual=1208c6856c0363cf...",
+      "name": "asset_aggregate:craft-packs-scriptforge-v4"
+    },
+    {
+      "detail": "",
+      "name": "asset_sums:craft-packs-scriptforge-v4"
+    },
+    {
+      "detail": "",
+      "name": "asset_dir:craft-packs-story-baseline-v1"
+    },
+    {
+      "detail": "declared=6 actual=6",
+      "name": "asset_file_count:craft-packs-story-baseline-v1"
+    },
+    {
+      "detail": "declared=5d618c685f55763a... actual=5d618c685f55763a...",
+      "name": "asset_aggregate:craft-packs-story-baseline-v1"
+    },
+    {
+      "detail": "",
+      "name": "asset_sums:craft-packs-story-baseline-v1"
+    },
+    {
+      "detail": "",
+      "name": "asset_dir:refinement-packs-language-v1"
+    },
+    {
+      "detail": "declared=17 actual=17",
+      "name": "asset_file_count:refinement-packs-language-v1"
+    },
+    {
+      "detail": "declared=6912ba363039f6b1... actual=6912ba363039f6b1...",
+      "name": "asset_aggregate:refinement-packs-language-v1"
+    },
+    {
+      "detail": "",
+      "name": "asset_sums:refinement-packs-language-v1"
+    },
+    {
+      "detail": "",
+      "name": "asset_dir:nvc-upstream-reference"
+    },
+    {
+      "detail": "declared=83 actual=83",
+      "name": "asset_file_count:nvc-upstream-reference"
+    },
+    {
+      "detail": "declared=2cceb26e6a58532a... actual=2cceb26e6a58532a...",
+      "name": "asset_aggregate:nvc-upstream-reference"
+    },
+    {
+      "detail": "",
+      "name": "asset_sums:nvc-upstream-reference"
+    },
+    {
+      "detail": "",
+      "name": "manifest_integrity"
+    }
+  ],
+  "schema_id": "geultu.dev/verification-report/v1"
+}

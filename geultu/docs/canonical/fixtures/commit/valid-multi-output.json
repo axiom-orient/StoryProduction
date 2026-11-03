@@ -1,0 +1,29 @@
+{
+  "command_id": "cmd-001",
+  "commit_id": "commit_cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "decision_receipt": "decision_6666666666666666666666666666666666666666666666666666666666666666",
+  "outputs": {
+    "quality_report": {
+      "digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "id": "visual:quality-001",
+      "kind": "quality_report",
+      "revision": 1
+    },
+    "render_manifest": {
+      "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "id": "visual:manifest-001",
+      "kind": "render_manifest",
+      "revision": 1
+    }
+  },
+  "project_revision_after": 5,
+  "project_revision_before": 4,
+  "provenance": {
+    "model_id": "example-model",
+    "prompt_digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+    "provider_id": "example"
+  },
+  "validation_receipts": [
+    "vr_5555555555555555555555555555555555555555555555555555555555555555"
+  ]
+}

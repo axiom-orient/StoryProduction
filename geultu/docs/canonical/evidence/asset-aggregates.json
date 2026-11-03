@@ -1,0 +1,35 @@
+{
+  "assets": [
+    {
+      "aggregate_sha256": "1208c6856c0363cfdcbeb3fa09a1b426e15b21e8da82865ff531046f4b790b12",
+      "file_count": 20,
+      "name": "craft-packs-scriptforge-v4",
+      "path": "assets/craft-packs-scriptforge-v4",
+      "status": "ACTIVE_INPUT_PLANNED"
+    },
+    {
+      "aggregate_sha256": "5d618c685f55763a5bf2cb4a2cc1a2f6568e4996de5d42f39f1ebaf589d30da0",
+      "file_count": 6,
+      "name": "craft-packs-story-baseline-v1",
+      "path": "assets/craft-packs-story-baseline-v1",
+      "status": "OPTIONAL_INPUT"
+    },
+    {
+      "aggregate_sha256": "6912ba363039f6b1144e106c024f891a2dfd8a416c7232f3586f600829e283b7",
+      "file_count": 17,
+      "name": "refinement-packs-language-v1",
+      "path": "assets/refinement-packs-language-v1",
+      "status": "ACTIVE_INPUT_PLANNED"
+    },
+    {
+      "aggregate_sha256": "2cceb26e6a58532a40fbc772ec40f8f55ff9d5bc432bcd7183117201c2af4030",
+      "file_count": 83,
+      "name": "nvc-upstream-reference",
+      "path": "assets/nvc-upstream-reference",
+      "status": "REFERENCE_ONLY"
+    }
+  ],
+  "note": "aggregate = sha256 of sorted `shasum -a 256` lines over all files in dir excluding SHA256SUMS",
+  "package_version": "4.0.0",
+  "schema_id": "geultu.dev/asset-aggregates/v1"
+}

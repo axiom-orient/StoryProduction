@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "nvc.text-storyboard-task/1",
+  "taskId": "SYNTHETIC-LEGACY-BYTES",
+  "source": {
+    "narrativePackageSha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "sceneMapSha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "releaseBundleSha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "sceneIds": [
+    "SCN-001"
+  ],
+  "brief": "합성 bytes fixture: 승인 증거가 아니다",
+  "base": null,
+  "contentHash": "sha256:45866da970c9718f6d1cf12326befc773603be6884c1a88467793c626bd8ea3d"
+}

@@ -1,0 +1,14 @@
+{
+  "narrative_package": "schemas/narrative-package.schema.json",
+  "story_ir": "schemas/story-ir.schema.json",
+  "meaning_spec": "schemas/meaning-spec.schema.json",
+  "director_ir": "schemas/director-ir.schema.json",
+  "adaptation_ir": "schemas/adaptation-ir.schema.json",
+  "scene_bundle_ir": "schemas/scene-ir.schema.json",
+  "shot_bundle_ir": "schemas/shot-ir.schema.json",
+  "asset_manifest": "schemas/asset-manifest.schema.json",
+  "render_ir": "schemas/render-ir.schema.json",
+  "timeline_ir": "schemas/timeline-ir.schema.json",
+  "evaluation_report": "schemas/evaluation-report.schema.json",
+  "master_package": "schemas/artifact-envelope.schema.json"
+}

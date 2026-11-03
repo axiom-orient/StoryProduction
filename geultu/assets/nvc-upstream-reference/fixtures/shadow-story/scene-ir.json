@@ -1,0 +1,97 @@
+{
+  "scenes": [
+    {
+      "scene_id": "SC_01",
+      "state_in": {
+        "human.shadow": "absent"
+      },
+      "state_delta": {},
+      "state_out": {
+        "human.shadow": "absent"
+      },
+      "location": "village",
+      "time": "ancient_day",
+      "narrative_function": "establish_world_rule",
+      "obligations": []
+    },
+    {
+      "scene_id": "SC_02",
+      "state_in": {
+        "human.shadow": "absent",
+        "wife": "missing"
+      },
+      "state_delta": {
+        "memory": "persistent"
+      },
+      "state_out": {
+        "human.shadow": "absent",
+        "wife": "missing",
+        "memory": "persistent"
+      },
+      "location": "home",
+      "time": "spring",
+      "narrative_function": "physicalize_absence",
+      "obligations": [
+        "TR_01"
+      ]
+    },
+    {
+      "scene_id": "SC_03",
+      "state_in": {
+        "human.shadow": "absent",
+        "memory": "persistent"
+      },
+      "state_delta": {
+        "artisan.shadow": "present"
+      },
+      "state_out": {
+        "artisan.shadow": "present",
+        "others.shadow": "absent"
+      },
+      "location": "summit",
+      "time": "sunset",
+      "narrative_function": "birth_of_shadow",
+      "obligations": [
+        "TR_01"
+      ]
+    },
+    {
+      "scene_id": "SC_04",
+      "state_in": {
+        "artisan.shadow": "present",
+        "others.shadow": "absent"
+      },
+      "state_delta": {
+        "others.shadow": "present"
+      },
+      "state_out": {
+        "artisan.shadow": "present",
+        "others.shadow": "present"
+      },
+      "location": "village",
+      "time": "sunset",
+      "narrative_function": "world_rule_change",
+      "obligations": [
+        "TR_02"
+      ]
+    },
+    {
+      "scene_id": "SC_05",
+      "state_in": {
+        "others.shadow": "present"
+      },
+      "state_delta": {
+        "artisan.age": "old",
+        "shadow.first_home": true
+      },
+      "state_out": {
+        "artisan.age": "old",
+        "shadow.first_home": true
+      },
+      "location": "path",
+      "time": "sunset",
+      "narrative_function": "resolution",
+      "obligations": []
+    }
+  ]
+}

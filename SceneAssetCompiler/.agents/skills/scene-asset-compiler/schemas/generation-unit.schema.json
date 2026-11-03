@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/generation-unit.schema.json",
+  "title": "GenerationUnit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "unit_id",
+    "stage",
+    "purpose",
+    "candidate_index",
+    "depends_on_locks",
+    "stop_condition"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "unit_id": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "scene_id": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "stage": {
+      "enum": [
+        "COMPOSITION",
+        "TARGET",
+        "LAYOUT_LOCK",
+        "PLACEHOLDER_PHOTO",
+        "LAYER",
+        "PSD_PACKAGING"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "candidate_index": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "depends_on_locks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z][A-Z0-9_]*$"
+      },
+      "uniqueItems": true
+    },
+    "output_role": {
+      "enum": [
+        "COMPOSITION_CANDIDATE",
+        "TARGET_CANDIDATE",
+        "LAYOUT_LOCK",
+        "PLACEHOLDER_PHOTO",
+        "SEMANTIC_LAYER",
+        "PSD_MASTER"
+      ]
+    },
+    "layer_id": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "slot_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "packaging_retry_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "trigger",
+        "max_retries",
+        "preserve_locked_pixels",
+        "preserve_locked_layout",
+        "creative_changes"
+      ],
+      "properties": {
+        "mode": {
+          "const": "PSD_ONLY"
+        },
+        "trigger": {
+          "const": "PREFERRED_OUTPUT_MISSING"
+        },
+        "max_retries": {
+          "const": 1
+        },
+        "preserve_locked_pixels": {
+          "const": true
+        },
+        "preserve_locked_layout": {
+          "const": true
+        },
+        "creative_changes": {
+          "const": "FORBID"
+        }
+      }
+    },
+    "stop_condition": {
+      "type": "string",
+      "pattern": "\\S"
+    }
+  },
+  "allOf": [
+    {
+      "anyOf": [
+        {
+          "required": [
+            "task_id"
+          ]
+        },
+        {
+          "required": [
+            "scene_id"
+          ]
+        }
+      ]
+    },
+    {
+      "if": {
+        "properties": {
+          "stage": {
+            "const": "PLACEHOLDER_PHOTO"
+          }
+        },
+        "required": [
+          "stage"
+        ]
+      },
+      "then": {
+        "required": [
+          "slot_id",
+          "output_role"
+        ],
+        "properties": {
+          "output_role": {
+            "const": "PLACEHOLDER_PHOTO"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "stage": {
+            "const": "LAYOUT_LOCK"
+          }
+        },
+        "required": [
+          "stage"
+        ]
+      },
+      "then": {
+        "required": [
+          "output_role"
+        ],
+        "properties": {
+          "output_role": {
+            "const": "LAYOUT_LOCK"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "stage": {
+            "const": "LAYER"
+          }
+        },
+        "required": [
+          "stage"
+        ]
+      },
+      "then": {
+        "required": [
+          "layer_id"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "stage": {
+            "const": "PSD_PACKAGING"
+          }
+        },
+        "required": [
+          "stage"
+        ]
+      },
+      "then": {
+        "required": [
+          "packaging_retry_policy"
+        ]
+      }
+    }
+  ]
+}

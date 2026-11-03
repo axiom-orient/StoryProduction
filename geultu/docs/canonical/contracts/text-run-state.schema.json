@@ -1,0 +1,121 @@
+{
+  "$id": "https://geultu.dev/schema/text-run-state/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "accepted_outputs": {
+      "additionalProperties": {
+        "$ref": "artifact-ref.schema.json"
+      },
+      "maxProperties": 256,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,63}$"
+      },
+      "type": "object"
+    },
+    "attempt": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "budgets": {
+      "additionalProperties": false,
+      "properties": {
+        "pivot_remaining": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "revision_remaining": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "revision_remaining",
+        "pivot_remaining"
+      ],
+      "type": "object"
+    },
+    "frozen_inputs": {
+      "additionalProperties": false,
+      "properties": {
+        "canon": {
+          "$ref": "artifact-ref.schema.json"
+        },
+        "genre": {
+          "$ref": "artifact-ref.schema.json"
+        },
+        "sources": {
+          "items": {
+            "$ref": "artifact-ref.schema.json"
+          },
+          "maxItems": 10000,
+          "type": "array"
+        },
+        "style": {
+          "$ref": "artifact-ref.schema.json"
+        },
+        "synopsis": {
+          "$ref": "artifact-ref.schema.json"
+        }
+      },
+      "required": [
+        "synopsis",
+        "style",
+        "canon",
+        "genre"
+      ],
+      "type": "object"
+    },
+    "pending_decision": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "project_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "schema_id": {
+      "const": "geultu.dev/text-run-state/v1"
+    },
+    "stage": {
+      "pattern": "^T(?:0[0-9]|[12][0-9]|3[0-3])$",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "READY",
+        "RUNNING",
+        "WAITING_HUMAN",
+        "REPAIR_REQUIRED",
+        "COMPLETED",
+        "FAILED"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "project_id",
+    "run_id",
+    "revision",
+    "stage",
+    "status",
+    "attempt",
+    "budgets",
+    "frozen_inputs",
+    "accepted_outputs"
+  ],
+  "title": "TextRunState v1",
+  "type": "object"
+}

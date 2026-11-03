@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STS Workflow",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "domain_id",
+    "domain_version",
+    "description",
+    "stages",
+    "nodes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "domain_id": {
+      "const": "sts"
+    },
+    "domain_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "description",
+          "outputs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "outputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "stage"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "agent",
+              "human"
+            ]
+          },
+          "step": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 99
+          },
+          "role": {
+            "enum": [
+              "analyst",
+              "writer",
+              "critic"
+            ]
+          },
+          "phase": {
+            "type": "string"
+          },
+          "system_prompt": {
+            "type": "string"
+          },
+          "task_prompt": {
+            "type": "string"
+          },
+          "principles": {
+            "type": "array",
+            "maxItems": 6,
+            "items": {
+              "type": "string"
+            }
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "output": {
+            "type": "string"
+          },
+          "gate_type": {
+            "enum": [
+              "artifact_review",
+              "checkpoint"
+            ]
+          },
+          "checkpoint": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "revision_targets": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "revision_node": {
+            "type": "string"
+          },
+          "max_revisions": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "notice": {
+            "type": "string"
+          },
+          "stage": {
+            "type": "string"
+          },
+          "execution_notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "summary_only_inputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "validation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "required_markers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "forbidden_markers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

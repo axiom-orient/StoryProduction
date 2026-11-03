@@ -1,0 +1,104 @@
+{
+  "stage_id": "S02_DIRECTION_SYNTHESIS",
+  "version": "1.0.0",
+  "artifact_owner": "Director",
+  "executor_classes": [
+    "LLM",
+    "DET"
+  ],
+  "inputs": [
+    {
+      "kind": "story_ir",
+      "schema": "schemas/story-ir.schema.json",
+      "required": true
+    },
+    {
+      "kind": "meaning_spec",
+      "schema": "schemas/meaning-spec.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "director_ir",
+      "schema": "schemas/director-ir.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "chosen preset production-feasible",
+    "typography grammar defined",
+    "motion grammar defined"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "DIR_001_MEDIUM_SEMANTIC_MISMATCH",
+    "DIR_002_RENDERER_UNAVAILABLE",
+    "DIR_003_TEXT_GRAMMAR_UNDEFINED",
+    "DIR_004_MOTION_GRAMMAR_UNDEFINED",
+    "DIR_005_PRODUCTION_INFEASIBLE"
+  ],
+  "retry_policy": {
+    "max_repairs": 2
+  },
+  "next": {
+    "on_pass": "S03_ADAPTATION_PLAN",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "generate 3-5 medium candidates from meaning and production constraints",
+      "executor_class": "LLM",
+      "inputs": [
+        "story_ir",
+        "meaning_spec"
+      ],
+      "outputs": [
+        "direction_candidates"
+      ],
+      "hard_gate": "candidate count and required grammars complete",
+      "failure_codes": [
+        "DIR_003_TEXT_GRAMMAR_UNDEFINED",
+        "DIR_004_MOTION_GRAMMAR_UNDEFINED"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "hard feasibility filter against capability registry",
+      "executor_class": "DET",
+      "inputs": [
+        "direction_candidates",
+        "capability_registry"
+      ],
+      "outputs": [
+        "feasible_candidates"
+      ],
+      "hard_gate": "at least one feasible candidate",
+      "failure_codes": [
+        "DIR_002_RENDERER_UNAVAILABLE",
+        "DIR_005_PRODUCTION_INFEASIBLE"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "pairwise rank semantic fit and lock direction",
+      "executor_class": "LLM",
+      "inputs": [
+        "feasible_candidates",
+        "meaning_spec"
+      ],
+      "outputs": [
+        "director_ir"
+      ],
+      "hard_gate": "winner explains semantic rationale",
+      "failure_codes": [
+        "DIR_001_MEDIUM_SEMANTIC_MISMATCH"
+      ]
+    }
+  ]
+}

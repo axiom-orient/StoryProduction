@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geultu.dev/schemas/artifacts/normalized_style_corpus.v2.schema.json",
+  "title": "normalized_style_corpus artifact body",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "../runtime/artifact-ref.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "locale": {
+      "type": "string"
+    },
+    "text_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "api_version",
+    "source_refs",
+    "locale",
+    "text_count",
+    "source_digest"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "story.capability-result/1",
+  "resultId": "result.111111111111111111111111",
+  "requestId": "request.storyboard.prompt.0001",
+  "requestHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "capability": "image.prompt.compile",
+  "source": {
+    "kind": "smc.scene_graph",
+    "identity": "scenegraph.storyboard.demo.0001",
+    "sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "provider": {
+    "id": "promptgen.local",
+    "kind": "local_process",
+    "model": null,
+    "version": "1.5.0",
+    "networkPolicy": "denied"
+  },
+  "status": "succeeded",
+  "artifacts": [
+    {
+      "kind": "prompt_compilation",
+      "identity": "artifact.444444444444444444444444",
+      "path": "integration/contracts/examples/capability-request.prompt-compile.json",
+      "sha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "mediaType": "application/json",
+      "byteLength": 1
+    }
+  ],
+  "providerReceipt": {},
+  "candidateOnly": true,
+  "createdAt": "2026-09-22T00:00:02Z"
+}

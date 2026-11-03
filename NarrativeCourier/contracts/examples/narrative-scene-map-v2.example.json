@@ -1,0 +1,155 @@
+{
+  "schema_version": 2,
+  "map_id": "nsm2_7166a058eb4e09f3246c185aa4b3871bb04e1933a743f48a0a70ae0816ba19ba",
+  "narrative_id": "narrative.archive-room",
+  "screenplay_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+  "scene_ir_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+  "scenes": [
+    {
+      "scene_id": "SCN-001",
+      "order": 1,
+      "heading": "SCN-001. INT. 기록 보관실 - night",
+      "setting": "INT",
+      "location": "기록 보관실",
+      "time_of_day": "night",
+      "time_of_day_label": "밤",
+      "silent": false,
+      "characters": ["지우", "민"],
+      "action": [
+        "지우가 낡은 서랍을 연다.\nThe hinge answers with a soft click.",
+        "A blue indicator blinks twice."
+      ],
+      "dialogue": [
+        { "character": "지우", "line": "같은 문장인가?\nIs it the same sentence?" },
+        { "character": "지우", "line": "같은 문장인가?\nIs it the same sentence?" }
+      ],
+      "asset_requirements": [
+        {
+          "kind": "prop",
+          "description": "낡은 서랍",
+          "source": "NarrativeSceneMap v2 fixture"
+        }
+      ]
+    },
+    {
+      "scene_id": "SCN-002",
+      "order": 2,
+      "heading": "SCN-002. EXT. 옥상 - dawn",
+      "setting": "EXT",
+      "location": "옥상",
+      "time_of_day": "dawn",
+      "time_of_day_label": "여명",
+      "silent": true,
+      "characters": ["민"],
+      "action": ["민이 봉투를 내려놓는다."],
+      "dialogue": [],
+      "asset_requirements": []
+    }
+  ],
+  "semantic_manifest": {
+    "schema_version": 1,
+    "semantic_manifest_hash": "sha256:e61fd1906d8afeabe96099bb19ad1614d9f5280554848a8994c1815a5e2e18c2",
+    "entries": [
+      {
+        "semantic_id": "semantic.action.001",
+        "entry_hash": "sha256:1ff6561a248c04e90dc730f76817a10617eabbedf84df136719af0cb697dfad3",
+        "scene_id": "SCN-001",
+        "kind": "action",
+        "source_text": "지우가 낡은 서랍을 연다.\nThe hinge answers with a soft click.",
+        "source_locator": {
+          "scene_id": "SCN-001",
+          "field": "action",
+          "occurrence_index": 0
+        }
+      },
+      {
+        "semantic_id": "semantic.action.002",
+        "entry_hash": "sha256:38a5552439e7a99756c07633d5740e461a613235578a1e9cdfc2fff5a4fa1b4f",
+        "scene_id": "SCN-001",
+        "kind": "action",
+        "source_text": "A blue indicator blinks twice.",
+        "source_locator": {
+          "scene_id": "SCN-001",
+          "field": "action",
+          "occurrence_index": 1
+        }
+      },
+      {
+        "semantic_id": "semantic.action.003",
+        "entry_hash": "sha256:4288fec349a7f52356b49727b2d7af95a6d4034199ed58cdad2e4c524ad304fc",
+        "scene_id": "SCN-002",
+        "kind": "action",
+        "source_text": "민이 봉투를 내려놓는다.",
+        "source_locator": {
+          "scene_id": "SCN-002",
+          "field": "action",
+          "occurrence_index": 0
+        }
+      },
+      {
+        "semantic_id": "semantic.dialogue.001",
+        "entry_hash": "sha256:15d60f6bc7b8c3fafd42d13da964879f813bf00983eebda594f552d071abbf4d",
+        "scene_id": "SCN-001",
+        "kind": "dialogue",
+        "source_text": "같은 문장인가?\nIs it the same sentence?",
+        "source_locator": {
+          "scene_id": "SCN-001",
+          "field": "dialogue",
+          "occurrence_index": 0,
+          "character": "지우",
+          "dialogue_index": 0
+        }
+      },
+      {
+        "semantic_id": "semantic.dialogue.002",
+        "entry_hash": "sha256:ae9fbd27ba9d185ca7e689c57da58202400a5ded6ced5ad6ad1fad7d99e781cb",
+        "scene_id": "SCN-001",
+        "kind": "dialogue",
+        "source_text": "같은 문장인가?\nIs it the same sentence?",
+        "source_locator": {
+          "scene_id": "SCN-001",
+          "field": "dialogue",
+          "occurrence_index": 1,
+          "character": "지우",
+          "dialogue_index": 1
+        }
+      },
+      {
+        "semantic_id": "semantic.emotion.001",
+        "entry_hash": "sha256:9c9fbe61180c8006e9188223c8887d805037403a557702306ec9ab92453c91f7",
+        "scene_id": "SCN-001",
+        "kind": "emotion",
+        "source_text": "지우는 망설이지만 손을 놓지 않는다.",
+        "source_locator": {
+          "scene_id": "SCN-001",
+          "field": "emotion",
+          "occurrence_index": 0
+        }
+      },
+      {
+        "semantic_id": "semantic.lighting.001",
+        "entry_hash": "sha256:31b48798b11d094a916d44ebbd823022be13ebbcafcf80db922641e34ea45c3d",
+        "scene_id": "SCN-002",
+        "kind": "lightingTransition",
+        "source_text": "푸른 밤이 희미한 여명으로 바뀐다.",
+        "source_locator": {
+          "scene_id": "SCN-002",
+          "field": "lightingTransition",
+          "occurrence_index": 0
+        }
+      },
+      {
+        "semantic_id": "semantic.camera.001",
+        "entry_hash": "sha256:a165bbffcbd5e970b4d554b975fb767e897bbe9f31d7e6327ce1ba4ead832031",
+        "scene_id": "SCN-002",
+        "kind": "cameraMovement",
+        "source_text": "카메라는 봉투에서 옥상 끝으로 천천히 이동한다.",
+        "source_locator": {
+          "scene_id": "SCN-002",
+          "field": "cameraMovement",
+          "occurrence_index": 0
+        }
+      }
+    ]
+  }
+}

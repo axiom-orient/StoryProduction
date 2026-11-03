@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-motion-compiler.local/contracts/trackb/release-candidate/v4",
+  "title": "TrackBReleaseCandidate v4",
+  "schemaVersion": 4,
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "candidateId", "narrativeId", "authorityHash", "meaningQualificationHash", "evidenceReceiptHash", "baseDeliverySetHash", "artifacts", "evidenceCells", "candidateVerdict", "candidateHash"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 4 },
+    "candidateId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+    "narrativeId": { "type": "string", "pattern": "^narrative\\.[A-Za-z0-9._:-]{1,127}$" },
+    "authorityHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "meaningQualificationHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "evidenceReceiptHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "baseDeliverySetHash": { "type": "string", "pattern": "^(?:NONE|sha256:[0-9a-f]{64})$" },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projectionReceiptHash", "sceneGraphHash", "assetHandoffHash", "assetHandoffSceneGraphHash", "htmlHash", "provenanceHash"],
+      "properties": {
+        "projectionReceiptHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "sceneGraphHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "assetHandoffHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "assetHandoffSceneGraphHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "htmlHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "provenanceHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+      }
+    },
+    "evidenceCells": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["shotId", "gateVerdict", "meaningCoverage", "runtimeEvidence", "assetEvidence", "visualEvidence", "evidenceCellHash"],
+        "properties": {
+          "shotId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+          "gateVerdict": { "type": "string", "enum": ["PROMOTE", "ITERATE", "FAIL"] },
+          "meaningCoverage": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["meaningId", "entryHash", "status", "representation"],
+              "properties": {
+                "meaningId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+                "entryHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+                "status": { "type": "string", "const": "SUPPORTED" },
+                "representation": { "type": "string", "const": "METADATA" }
+              }
+            }
+          },
+          "runtimeEvidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["networkRequestCount", "exceptionCount", "pass"],
+            "properties": {
+              "networkRequestCount": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+              "exceptionCount": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+              "pass": { "type": "boolean" }
+            }
+          },
+          "assetEvidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["assetManifestHash", "pass"],
+            "properties": {
+              "assetManifestHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+              "pass": { "type": "boolean" }
+            }
+          },
+          "visualEvidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["htmlHash", "pass"],
+            "properties": {
+              "htmlHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+              "pass": { "type": "boolean" }
+            }
+          },
+          "evidenceCellHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+        }
+      }
+    },
+    "candidateVerdict": { "type": "string", "enum": ["PROMOTE", "ITERATE", "FAIL"] },
+    "candidateHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

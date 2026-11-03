@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DirectorIR",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "director_id": {
+      "type": "string"
+    },
+    "preset_id": {
+      "type": "string"
+    },
+    "creative_north_star": {
+      "type": "string"
+    },
+    "medium": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "Medium",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "family": {
+          "type": "string"
+        },
+        "rationale": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "family",
+        "rationale"
+      ]
+    },
+    "visual_grammar": {
+      "type": "object"
+    },
+    "motion_grammar": {
+      "type": "object"
+    },
+    "camera_grammar": {
+      "type": "object"
+    },
+    "typography_grammar": {
+      "type": "object"
+    },
+    "transition_grammar": {
+      "type": "object"
+    },
+    "sound_grammar": {
+      "type": "object"
+    },
+    "negative_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "production_constraints": {
+      "type": "object"
+    },
+    "candidate_scores": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "CandidateScore",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "preset_id": {
+            "type": "string"
+          },
+          "semantic_fit": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "production_fit": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "novelty": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "preset_id",
+          "semantic_fit",
+          "production_fit",
+          "novelty"
+        ]
+      }
+    }
+  },
+  "required": [
+    "director_id",
+    "preset_id",
+    "creative_north_star",
+    "medium",
+    "visual_grammar",
+    "motion_grammar",
+    "camera_grammar",
+    "typography_grammar",
+    "transition_grammar",
+    "sound_grammar",
+    "negative_rules",
+    "production_constraints",
+    "candidate_scores"
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-courier.local/contracts/cinematic-director-plan-v1.schema.json",
+  "title": "cinematic-director-plan-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "planId",
+    "narrativePackageSha256",
+    "sceneMapSha256",
+    "continuityBibleSha256",
+    "fps",
+    "scenes",
+    "contentHash"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "planId": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^CDP-[A-Za-z0-9._-]+$"
+    },
+    "narrativePackageSha256": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sceneMapSha256": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "continuityBibleSha256": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "fps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 240
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sceneId",
+          "dramaticFunction",
+          "sceneObjective",
+          "sceneDurationFrames",
+          "shots"
+        ],
+        "properties": {
+          "sceneId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^SCN-[0-9]{3,}$"
+          },
+          "dramaticFunction": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sceneObjective": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sceneDurationFrames": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "shots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "shotId",
+                "order",
+                "narrativeRefs",
+                "durationFrames",
+                "shotSize",
+                "cameraAngle",
+                "cameraMovement",
+                "lensIntent",
+                "composition",
+                "subjectAction",
+                "performanceBeat",
+                "semanticRefs",
+                "dialogueRefs",
+                "requiredEntities",
+                "continuityRefs",
+                "visualPriority",
+                "transitionOut",
+                "referencePolicy"
+              ],
+              "properties": {
+                "shotId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^shot\\.[a-z0-9][a-z0-9._-]{0,126}$"
+                },
+                "order": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                },
+                "narrativeRefs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^SCN-[0-9]{3,}$"
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "durationFrames": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                },
+                "shotSize": {
+                  "type": "string",
+                  "enum": [
+                    "EXTREME_WIDE",
+                    "WIDE",
+                    "FULL",
+                    "MEDIUM",
+                    "CLOSE_UP",
+                    "EXTREME_CLOSE_UP"
+                  ]
+                },
+                "cameraAngle": {
+                  "type": "string",
+                  "enum": [
+                    "EYE_LEVEL",
+                    "HIGH",
+                    "LOW",
+                    "OVERHEAD",
+                    "DUTCH"
+                  ]
+                },
+                "cameraMovement": {
+                  "type": "string",
+                  "enum": [
+                    "STATIC",
+                    "PUSH_IN",
+                    "PULL_OUT",
+                    "PAN_LEFT",
+                    "PAN_RIGHT",
+                    "TILT_UP",
+                    "TILT_DOWN",
+                    "TRACKING",
+                    "HANDHELD"
+                  ]
+                },
+                "lensIntent": {
+                  "type": "string",
+                  "enum": [
+                    "WIDE",
+                    "NORMAL",
+                    "TELEPHOTO",
+                    "MACRO"
+                  ]
+                },
+                "composition": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "subjectAction": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "performanceBeat": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "semanticRefs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "minItems": 0,
+                  "uniqueItems": true
+                },
+                "dialogueRefs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "minItems": 0,
+                  "uniqueItems": true
+                },
+                "requiredEntities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^(char|env|prop)\\.[a-z0-9][a-z0-9._-]{0,126}$"
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "continuityRefs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^SCN-[0-9]{3,}$"
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "visualPriority": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "minItems": 0,
+                  "uniqueItems": true
+                },
+                "transitionOut": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "type",
+                    "durationFrames"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "CUT",
+                        "CROSS_DISSOLVE",
+                        "FADE_TO_BLACK",
+                        "FADE_FROM_BLACK",
+                        "WIPE"
+                      ]
+                    },
+                    "durationFrames": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    }
+                  }
+                },
+                "referencePolicy": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "requiresKeyframe",
+                    "requiresCharacterReference",
+                    "requiresEnvironmentReference"
+                  ],
+                  "properties": {
+                    "requiresKeyframe": {
+                      "type": "boolean"
+                    },
+                    "requiresCharacterReference": {
+                      "type": "boolean"
+                    },
+                    "requiresEnvironmentReference": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "minItems": 1
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "contentHash": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

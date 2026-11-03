@@ -1,0 +1,24 @@
+{
+  "prompt_id": "asset-plan/1.0",
+  "stage_id": "S06_ASSET_PLAN",
+  "purpose": "Compile lazy asset requirements",
+  "authoritative_inputs": [
+    "shot_bundle_ir",
+    "director_ir"
+  ],
+  "allowed_inference": [
+    "surface detail"
+  ],
+  "forbidden_mutation": [
+    "identity-critical attributes"
+  ],
+  "output_schema": "schemas/asset-manifest.schema.json",
+  "hard_requirements": [
+    "No unused expensive assets"
+  ],
+  "evaluation_rubric": [
+    "reuse",
+    "continuity"
+  ],
+  "template": "Implementation MUST inject only authoritative inputs and request output conforming exactly to output_schema. Natural-language wording is versioned separately; schema and hard requirements are authoritative."
+}

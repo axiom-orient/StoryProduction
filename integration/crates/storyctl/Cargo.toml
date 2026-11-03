@@ -1,0 +1,15 @@
+[package]
+name = "storyctl"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+story-integration-core = { path = "../story-integration-core" }
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+libc.workspace = true
+tempfile.workspace = true
+jsonschema.workspace = true
+chrono.workspace = true

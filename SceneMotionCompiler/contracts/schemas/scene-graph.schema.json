@@ -1,0 +1,658 @@
+{
+  "$id": "https://scene-motion-compiler.local/schemas/scene-graph.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SceneGraph v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sceneGraphId",
+    "characters",
+    "environments",
+    "shots",
+    "timeline",
+    "semanticManifest",
+    "sourceNarrativeSha256",
+    "sourceSceneMapSha256",
+    "directorPlanSha256",
+    "continuityBibleSha256",
+    "directorApprovalSha256"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 3
+    },
+    "sceneGraphId": {
+      "pattern": "^scenegraph\\.[A-Za-z0-9._:-]{1,127}$",
+      "type": "string"
+    },
+    "sourceNarrativeId": {
+      "type": "string"
+    },
+    "semanticManifest": {
+      "$ref": "#/$defs/semanticManifest"
+    },
+    "characters": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "appearance": {
+            "type": "string"
+          },
+          "consistencyAnchors": {
+            "additionalProperties": false,
+            "properties": {
+              "ipAdapterRef": {
+                "type": "string"
+              },
+              "loraId": {
+                "type": "string"
+              },
+              "referenceCardPath": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "id": {
+            "pattern": "^char\\.[a-z0-9._-]{1,127}$",
+            "type": "string"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "personality": {
+            "type": "string"
+          },
+          "voiceProfile": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object"
+      },
+      "minItems": 0,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "environments": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "pattern": "^env\\.[a-z0-9._-]{1,127}$",
+            "type": "string"
+          },
+          "lighting": {
+            "additionalProperties": false,
+            "properties": {
+              "fill": {
+                "type": "string"
+              },
+              "key": {
+                "type": "string"
+              },
+              "practical": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "mood": {
+            "type": "string"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "weather": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "props": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "animationHint": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "kind": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^prop\\.[a-z0-9._-]{1,127}$",
+            "type": "string"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "sources": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "shots": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "heading": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "camera": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "shotSize",
+              "cameraAngle",
+              "cameraMovement",
+              "lensIntent"
+            ],
+            "properties": {
+              "shotSize": {
+                "type": "string",
+                "enum": [
+                  "EXTREME_WIDE",
+                  "WIDE",
+                  "FULL",
+                  "MEDIUM",
+                  "CLOSE_UP",
+                  "EXTREME_CLOSE_UP"
+                ]
+              },
+              "cameraAngle": {
+                "type": "string",
+                "enum": [
+                  "EYE_LEVEL",
+                  "HIGH",
+                  "LOW",
+                  "OVERHEAD",
+                  "DUTCH"
+                ]
+              },
+              "cameraMovement": {
+                "type": "string",
+                "enum": [
+                  "STATIC",
+                  "PUSH_IN",
+                  "PULL_OUT",
+                  "PAN_LEFT",
+                  "PAN_RIGHT",
+                  "TILT_UP",
+                  "TILT_DOWN",
+                  "TRACKING",
+                  "HANDHELD"
+                ]
+              },
+              "lensIntent": {
+                "type": "string",
+                "enum": [
+                  "WIDE",
+                  "NORMAL",
+                  "TELEPHOTO",
+                  "MACRO"
+                ]
+              }
+            }
+          },
+          "characterIds": {
+            "items": {
+              "pattern": "^char\\.[a-z0-9._-]{1,127}$",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "dialogue": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "characterId": {
+                  "type": "string"
+                },
+                "delivery": {
+                  "type": "string"
+                },
+                "line": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "required": [
+                "characterId",
+                "line"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "emotion": {
+            "type": "string"
+          },
+          "environmentId": {
+            "pattern": "^env\\.[a-z0-9._-]{1,127}$",
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^shot\\.[a-z0-9][a-z0-9._-]{0,126}$",
+            "type": "string"
+          },
+          "location": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "lightingTransition": {
+            "additionalProperties": false,
+            "properties": {
+              "curve": {
+                "enum": [
+                  "linear",
+                  "ease-in",
+                  "ease-out",
+                  "ease-in-out"
+                ],
+                "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "propIds": {
+            "items": {
+              "pattern": "^prop\\.[a-z0-9._-]{1,127}$",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "setting": {
+            "enum": [
+              "INT",
+              "EXT",
+              "INT/EXT",
+              "I/E"
+            ],
+            "type": "string"
+          },
+          "silent": {
+            "type": "boolean"
+          },
+          "sourceSceneId": {
+            "pattern": "^SCN-[0-9]{3,}$",
+            "type": "string"
+          },
+          "timeOfDayLabel": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "durationFrames": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "narrativeRefs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^SCN-[0-9]{3,}$"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "semanticRefs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "continuityRefs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^SCN-[0-9]{3,}$"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "composition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "performanceBeat": {
+            "type": "string",
+            "minLength": 1
+          },
+          "visualPriority": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "referencePolicy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "requiresKeyframe",
+              "requiresCharacterReference",
+              "requiresEnvironmentReference"
+            ],
+            "properties": {
+              "requiresKeyframe": {
+                "type": "boolean"
+              },
+              "requiresCharacterReference": {
+                "type": "boolean"
+              },
+              "requiresEnvironmentReference": {
+                "type": "boolean"
+              }
+            }
+          },
+          "timeOfDay": {
+            "enum": [
+              "dawn",
+              "morning",
+              "noon",
+              "afternoon",
+              "dusk",
+              "night",
+              "day"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "environmentId",
+          "action",
+          "durationFrames",
+          "camera",
+          "sourceSceneId",
+          "narrativeRefs",
+          "semanticRefs",
+          "continuityRefs",
+          "composition",
+          "performanceBeat",
+          "referencePolicy",
+          "visualPriority",
+          "timeOfDay"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "timeline": {
+      "additionalProperties": false,
+      "properties": {
+        "fps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 240
+        },
+        "transitions": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "fromShot": {
+                "type": "string"
+              },
+              "toShot": {
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "cut",
+                  "cross-dissolve",
+                  "fade-to-black",
+                  "fade-from-black",
+                  "wipe"
+                ],
+                "type": "string"
+              },
+              "durationFrames": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "fromShot",
+              "toShot",
+              "type",
+              "durationFrames"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalDurationFrames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "fps",
+        "totalDurationFrames",
+        "transitions"
+      ],
+      "type": "object"
+    },
+    "sourceNarrativeSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sourceSceneMapSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "directorPlanSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "continuityBibleSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "directorApprovalSha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  },
+  "$defs": {
+    "semanticManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "sourceSemanticManifestHash",
+        "semanticManifestHash",
+        "entries"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "sourceSemanticManifestHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "semanticManifestHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/semanticEntry"
+          }
+        }
+      }
+    },
+    "semanticEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semanticId",
+        "entryHash",
+        "shotId",
+        "sourceSceneId",
+        "kind",
+        "sourceText",
+        "sourceLocator"
+      ],
+      "properties": {
+        "semanticId": {
+          "type": "string",
+          "pattern": "^semantic\\.[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "entryHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "shotId": {
+          "type": "string",
+          "pattern": "^shot\\.[a-z0-9][a-z0-9._-]{0,126}$"
+        },
+        "sourceSceneId": {
+          "type": "string",
+          "pattern": "^SCN-[0-9]{3,}$",
+          "maxLength": 64
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "action",
+            "dialogue",
+            "emotion",
+            "lightingTransition",
+            "cameraMovement"
+          ]
+        },
+        "sourceText": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384
+        },
+        "sourceLocator": {
+          "$ref": "#/$defs/sourceLocator"
+        }
+      }
+    },
+    "sourceLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sceneId",
+        "field",
+        "occurrenceIndex"
+      ],
+      "properties": {
+        "sceneId": {
+          "type": "string",
+          "pattern": "^SCN-[0-9]{3,}$",
+          "maxLength": 64
+        },
+        "field": {
+          "type": "string",
+          "enum": [
+            "action",
+            "dialogue",
+            "emotion",
+            "lightingTransition",
+            "cameraMovement"
+          ]
+        },
+        "occurrenceIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "character": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "dialogueIndex": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        }
+      },
+      "anyOf": [
+        {
+          "properties": {
+            "field": {
+              "not": {
+                "const": "dialogue"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "field": {
+              "const": "dialogue"
+            }
+          },
+          "required": [
+            "character",
+            "dialogueIndex"
+          ]
+        }
+      ]
+    }
+  }
+}

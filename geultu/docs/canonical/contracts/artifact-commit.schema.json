@@ -1,0 +1,82 @@
+{
+  "$id": "https://geultu.dev/schema/artifact-commit/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "command_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "commit_id": {
+      "pattern": "^commit_[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "decision_receipt": {
+      "pattern": "^(decision|human)_[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "outputs": {
+      "additionalProperties": {
+        "$ref": "artifact-ref.schema.json"
+      },
+      "maxProperties": 64,
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,63}$"
+      },
+      "type": "object"
+    },
+    "project_revision_after": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "project_revision_before": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "model_id": {
+          "maxLength": 512,
+          "type": "string"
+        },
+        "prompt_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "source_snapshot_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "validation_receipts": {
+      "items": {
+        "pattern": "^vr_[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "commit_id",
+    "command_id",
+    "project_revision_before",
+    "project_revision_after",
+    "outputs",
+    "validation_receipts",
+    "decision_receipt"
+  ],
+  "title": "ArtifactCommit v1",
+  "type": "object"
+}

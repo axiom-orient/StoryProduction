@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "story.capability-job/1",
+  "jobId": "job.111111111111111111111111",
+  "requestId": "request.storyboard.prompt.0001",
+  "requestHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "capability": "image.prompt.compile",
+  "source": {
+    "kind": "smc.scene_graph",
+    "identity": "scenegraph.storyboard.demo.0001",
+    "sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "provider": {
+    "id": "promptgen.local",
+    "kind": "local_process",
+    "model": null,
+    "version": "1.5.0",
+    "networkPolicy": "denied"
+  },
+  "status": "running",
+  "stage": "promptgen-execution",
+  "attempt": 1,
+  "cancelRequested": false,
+  "createdAt": "2026-09-22T00:00:00Z",
+  "updatedAt": "2026-09-22T00:00:01Z"
+}

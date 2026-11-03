@@ -1,0 +1,10 @@
+{
+  "protocol_version": 1,
+  "request_id": "A-001",
+  "task": "Create a DirectorPlan matching the provided contracts.",
+  "inputs": [],
+  "output_schema": {
+    "type": "object"
+  },
+  "workspace": ".work/A-001"
+}

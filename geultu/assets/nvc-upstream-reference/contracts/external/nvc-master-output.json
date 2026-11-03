@@ -1,0 +1,10 @@
+{
+  "port_id": "NVC_OUT_MASTER_PACKAGE",
+  "direction": "output",
+  "schema": "schemas/artifact-envelope.schema.json",
+  "authority": "derived",
+  "producer": "S12_PACKAGE_MASTER",
+  "consumer": "DistributionOrArchive",
+  "mutability": "immutable",
+  "accept_condition": "S11 hard_gate_status == PASS; master decodes; lineage and hashes complete"
+}

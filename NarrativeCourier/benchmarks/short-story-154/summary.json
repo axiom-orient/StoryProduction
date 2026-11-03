@@ -1,0 +1,39 @@
+{
+  "corpus": "Korean Story Polish v4 001-154",
+  "stories": 154,
+  "prior_revised": 55,
+  "prior_kept": 99,
+  "direct_contract_revision_matches": 41,
+  "adjacent_craft_revision_matches": 2,
+  "out_of_scope_prose_only_revisions": 12,
+  "high_severity_total": 16,
+  "high_severity_sts_matched": 16,
+  "medium_severity_total": 13,
+  "medium_severity_sts_matched": 11,
+  "risk_lens_counts": {
+    "SEMANTIC_CODA": 98,
+    "WORLD_RULE": 60,
+    "PHYSICAL_INSTITUTIONAL": 24,
+    "EPISTEMIC": 70,
+    "FORM_FUNCTION": 23,
+    "SPACE_STATE": 32,
+    "SOURCE_FIDELITY": 32
+  },
+  "sts_value_counts": {
+    "MEDIUM": 57,
+    "HIGH": 69,
+    "BASELINE": 28
+  },
+  "evaluation_design": "retrospective_oracle_mapping_plus_story_by_story_preflight",
+  "claims": {
+    "supported": "STS semantic/state/causal contracts correspond to real defect classes previously found in this 154-story corpus; STS 4.2 closes repeated modeling gaps.",
+    "not_supported": "prospective automatic detection rate, end-to-end screenplay quality gain, audience preference, or causal attribution of prior revisions to STS."
+  },
+  "threats_to_validity": [
+    "The field lens classification is not blinded and is retrospective.",
+    "KEEP is not treated as proof that a story is defect-free.",
+    "The corpus contains short prose stories, not 154 controlled screenplay generations.",
+    "Risk-lens frequencies are analyst classifications, not precision/recall metrics.",
+    "Some earlier editorial work used related narrative-state ideas, so historical evidence is not fully independent of the broader design lineage."
+  ]
+}

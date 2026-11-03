@@ -1,0 +1,75 @@
+geultu — Split License
+======================
+
+This repository contains separately licensed material.
+
+SECTION A — MIT License
+-----------------------
+
+Copyright (c) 2026 geultu authors
+
+Section A applies to the reusable engine, executable, agent skills, tests,
+release tooling, configuration and documentation, including:
+
+  src/
+  .agents/skills/
+  .cargo/
+  scripts/
+  tests/
+  docs/
+  resources/
+  README.md
+  Cargo.toml
+  Cargo.lock
+  rust-toolchain.toml
+  .gitignore
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the software and associated documentation files listed above (the
+"Software"), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom
+the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+SECTION B — Reserved Rights
+---------------------------
+
+한국어 원문이 이 절의 정본입니다.
+
+다음 자료는 저자의 글과 그 파생 데이터이므로 모든 권리가 유보됩니다.
+
+  corpus/
+  profiles/author-current.json
+
+별도 서면 허락이 없는 한 위 자료의 복제·재배포·공개 게시·번안·상업적 이용,
+그리고 기계학습 또는 언어모델의 학습·미세조정을 위한 이용을 허용하지 않습니다.
+개인적·비상업적으로 저장소의 구조와 동작을 열람하는 것은 허용합니다.
+
+Section A의 소프트웨어를 사용자의 글로 만든 별도 corpus 및 profile과 함께
+사용·수정·재배포하는 것은 허용됩니다. 그 경우 사용자는 자신이 제공하는 글과
+파생 데이터의 권리를 확보해야 하며, 이 저장소의 Section B 자료를 포함해서는
+안 됩니다.
+
+Non-binding English summary: the author's writings under corpus/ and the
+profile derived from them are All Rights Reserved. They may be read for
+personal, non-commercial study, but may not be redistributed, adapted, used
+commercially, or used for model training without separate written permission.
+The MIT-licensed engine may be reused with your own corpus and profile.
+
+SECTION C — Third-Party Software
+--------------------------------
+
+Files under vendor/ retain their respective upstream copyright notices and
+licenses. They are not relicensed by Sections A or B. The applicable license
+files are included with the vendored sources.

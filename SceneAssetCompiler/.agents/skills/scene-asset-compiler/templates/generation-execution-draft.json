@@ -1,0 +1,16 @@
+{
+  "provider": "OPENAI",
+  "tool": "$imagegen",
+  "model": "UNKNOWN",
+  "model_snapshot": "UNKNOWN",
+  "request_id": "UNKNOWN",
+  "started_at": "UNKNOWN",
+  "finished_at": "UNKNOWN",
+  "outcome": "SUCCEEDED",
+  "evidence_level": "EXECUTOR_RECORDED",
+  "submitted_prompt_path": "generation-capsule.md",
+  "capsule_verbatim": true,
+  "notes": [
+    "Replace UNKNOWN values whenever the execution surface exposes authoritative metadata. EXECUTOR_RECORDED is an auditable declaration, not a provider-signed receipt."
+  ]
+}

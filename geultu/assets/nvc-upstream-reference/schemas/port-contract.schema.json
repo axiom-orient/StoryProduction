@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PortContract",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "port_id": {
+      "type": "string"
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "input",
+        "output"
+      ]
+    },
+    "schema": {
+      "type": "string"
+    },
+    "authority": {
+      "type": "string",
+      "enum": [
+        "canonical",
+        "derived"
+      ]
+    },
+    "producer": {
+      "type": "string"
+    },
+    "consumer": {
+      "type": "string"
+    },
+    "mutability": {
+      "type": "string",
+      "enum": [
+        "immutable",
+        "versioned"
+      ]
+    },
+    "accept_condition": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "port_id",
+    "direction",
+    "schema",
+    "authority",
+    "producer",
+    "consumer",
+    "mutability",
+    "accept_condition"
+  ]
+}

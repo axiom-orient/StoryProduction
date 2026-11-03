@@ -1,0 +1,87 @@
+{
+  "$id": "https://geultu.dev/schema/validation-receipt/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "binding_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "pattern": "^[A-Z][A-Z0-9_]{2,127}$",
+            "type": "string"
+          },
+          "message": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "path": {
+            "maxLength": 2000,
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "ERROR",
+              "WARNING",
+              "INFO"
+            ]
+          }
+        },
+        "required": [
+          "code",
+          "severity",
+          "message"
+        ],
+        "type": "object"
+      },
+      "maxItems": 10000,
+      "type": "array"
+    },
+    "outcome": {
+      "enum": [
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "receipt_id": {
+      "pattern": "^vr_[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "subject": {
+      "$ref": "artifact-ref.schema.json"
+    },
+    "validator": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9_.-]{0,127}$",
+          "type": "string"
+        },
+        "version": {
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][A-Za-z0-9.-]+)?$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "receipt_id",
+    "validator",
+    "subject",
+    "binding_digest",
+    "outcome",
+    "findings"
+  ],
+  "title": "ValidationReceipt v1",
+  "type": "object"
+}

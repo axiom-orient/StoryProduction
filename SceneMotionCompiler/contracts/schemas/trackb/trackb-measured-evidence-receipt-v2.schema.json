@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-motion-compiler.local/contracts/trackb/measured-evidence-receipt/v2",
+  "title": "TrackBMeasuredEvidenceReceipt v2",
+  "schemaVersion": 2,
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "receiptId", "narrativeId", "authorityHash", "htmlHash", "assetManifestHash", "semanticManifestHash", "rendererLockHash", "navigationGuard", "shotIds", "shots", "receiptHash"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 2 },
+    "receiptId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+    "narrativeId": { "type": "string", "pattern": "^narrative\\.[A-Za-z0-9._:-]{1,127}$" },
+    "authorityHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "htmlHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "assetManifestHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "semanticManifestHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "rendererLockHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "navigationGuard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mechanism", "guardSourceHash"],
+      "properties": {
+        "mechanism": { "type": "string", "const": "cdp-binding-nonce" },
+        "guardSourceHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+      }
+    },
+    "shotIds": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" }
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["shotId", "ordinal", "screenshotHash", "runtime", "visual"],
+        "properties": {
+          "shotId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+          "ordinal": { "type": "integer", "minimum": 0, "maximum": 63 },
+          "screenshotHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+          "runtime": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["networkRequestCount", "externalRequestCount", "navigationAttemptCount", "exceptionCount", "semanticManifestVerified", "pass"],
+            "properties": {
+              "networkRequestCount": { "type": "integer", "const": 0 },
+              "externalRequestCount": { "type": "integer", "const": 0 },
+              "navigationAttemptCount": { "type": "integer", "const": 0 },
+              "exceptionCount": { "type": "integer", "const": 0 },
+              "semanticManifestVerified": { "type": "boolean", "const": true },
+              "pass": { "type": "boolean", "const": true }
+            }
+          },
+          "visual": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["activeShotCount", "visibleShotCount", "activeShotId", "visibleShotId", "stageGeometry", "shotGeometry", "pass"],
+            "properties": {
+              "activeShotCount": { "type": "integer", "const": 1 },
+              "visibleShotCount": { "type": "integer", "const": 1 },
+              "activeShotId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+              "visibleShotId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+              "stageGeometry": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["x", "y", "width", "height"],
+                "properties": {
+                  "x": { "type": "number", "minimum": -100000, "maximum": 100000 },
+                  "y": { "type": "number", "minimum": -100000, "maximum": 100000 },
+                  "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 100000 },
+                  "height": { "type": "number", "exclusiveMinimum": 0, "maximum": 100000 }
+                }
+              },
+              "shotGeometry": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["x", "y", "width", "height"],
+                "properties": {
+                  "x": { "type": "number", "minimum": -100000, "maximum": 100000 },
+                  "y": { "type": "number", "minimum": -100000, "maximum": 100000 },
+                  "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 100000 },
+                  "height": { "type": "number", "exclusiveMinimum": 0, "maximum": 100000 }
+                }
+              },
+              "pass": { "type": "boolean", "const": true }
+            }
+          }
+        }
+      }
+    },
+    "receiptHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

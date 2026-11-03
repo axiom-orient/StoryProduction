@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "deliverySetId": "delivery.demo.v2",
+  "narrativeId": "narrative.demo",
+  "candidateHash": "sha256:31b0422f01d8b0547ca679d57f057a7c07397225832b9cee12d034549b998fd7",
+  "authorityHash": "sha256:a5083c7236b7d58e38ff75b567744ffd1bc17d39f39e840dbf9bee0c08e5d888",
+  "meaningQualificationHash": "sha256:246118d7cff01a7240ced3d135270b9442775aa141325eb599cf2b0243b49c77",
+  "baseDeliverySetHash": "NONE",
+  "approvalHash": "sha256:84f3400cc69aaa2e1ad6746314b4d06adacd49be4b9f26f136e5dff1b6a6bce0",
+  "artifacts": {
+    "projectionReceiptHash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "sceneGraphHash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "assetHandoffHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "assetHandoffSceneGraphHash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "htmlHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "provenanceHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "evidenceCellHashes": [
+    "sha256:7f9acc3e57292d61fca3bb087f3971d5eae65b278a5c37b33ae5cbdb06402f93"
+  ],
+  "revision": 1,
+  "state": "PROMOTED",
+  "deliverySetHash": "sha256:d8cc23a1fbaf532b73280cbdbe8a6ec1812baf41f1403534880b69b1f8ab6ed0"
+}

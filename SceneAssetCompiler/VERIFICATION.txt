@@ -1,0 +1,52 @@
+SceneAssetCompiler Standalone 0.13.0 candidate verification
+Verification date: 2026-09-02
+
+Source gates (executed on the revised canonical source tree):
+G01 PASS clean source scan
+G02 PASS Python syntax files=33
+G03 PASS JSON parse files=199
+G04 PASS Draft202012 schemas=34
+G05 PASS canonical template/schema/semantic validation
+G06 PASS unittest discovery=105 (104 executed and passed; 1 opt-in live test skipped)
+G07 PASS scene graph recommended=13 PSD_PACKAGING=1
+G08 PASS PSD generation capsule/profile
+G09 PASS real PSD postflight regression fixtures=2; expected ICC defect reproduced
+G10 PASS no direct image API/local PSD producer
+G11 PASS exact manifests skill_files=100 docs_files=131 release_files=413
+
+G12 is externally executed after packaging by:
+PYTHONDONTWRITEBYTECODE=1 python3 tools/verify_release.py --standalone-bundle \
+  releases/SceneAssetCompiler-Standalone-0.13.0.zip
+
+The standalone verifier checks ZIP CRC, regular-file sizes and hashes,
+executable bits, deterministic rebuild byte identity, extracted full unittest
+discovery (105 total: 104 executed and 1 opt-in skip), PerfectPixel schema and
+transparent/opaque inspect fixtures, a v2 provider negative probe with process
+custody, and an actual extracted SAC integration smoke using the built
+PerfectPixel and a v2 fake provider. The archive digest and byte count are
+authoritative only in the adjacent release record and checksum sidecar; they
+are intentionally not repeated here to avoid a source-manifest cycle.
+
+The provider contract is strict `misegen.provider/2`: preflight hashes the
+exact binary, observes its bounded v2 invalid_request probe, and rejects v1,
+malformed, non-v2, timeout, or stale-hash cases before dispatch. A successful
+PNG imports only hash/byte-count/dimension/alpha-bound PerfectPixel inspect
+evidence. `UNKNOWN` and timeout attempts are terminal and have immediate and
+delayed no-survivor checks.
+
+The canonical public commands are `execute-scene-provider` and
+`probe-scene-provider`. Historical command spellings are argv-level hidden
+compatibility aliases and are absent from normal help. Local diagnostics and
+receipt notes use `SCENE_PROVIDER_*`/`scene_provider.*`; upstream
+`VERGERAIL_*` environment variables, the upstream runtime verification flag,
+and historical 0.12 evidence names remain only at their required compatibility
+boundaries.
+
+Rollback remains the unchanged 0.12.0 archive:
+SceneAssetCompiler-Standalone-0.12.0.zip
+SHA-256 a31eaed84dfaa75d73d50a35241c424d9b1b59fff547b120ea2d8e29fc04190f
+
+Native Apple Vision, KTX, Photoshop interoperability, and paid live provider
+generation are NOT_RUN with environment or side-effect reasons. They do not
+weaken the offline release gates. This is a candidate for fresh independent
+review, not an approval.

@@ -1,0 +1,26 @@
+{
+  "prompt_id": "verification/1.0",
+  "stage_id": "S11_VERIFY_REPAIR",
+  "purpose": "Evaluate final draft against hard semantic and continuity contracts",
+  "authoritative_inputs": [
+    "draft_master",
+    "meaning_spec",
+    "scene_bundle_ir",
+    "shot_bundle_ir"
+  ],
+  "allowed_inference": [
+    "semantic equivalence judgment"
+  ],
+  "forbidden_mutation": [
+    "expected source meaning"
+  ],
+  "output_schema": "schemas/evaluation-report.schema.json",
+  "hard_requirements": [
+    "Low confidence cannot become PASS"
+  ],
+  "evaluation_rubric": [
+    "evidence quality",
+    "failure localization"
+  ],
+  "template": "Implementation MUST inject only authoritative inputs and request output conforming exactly to output_schema. Natural-language wording is versioned separately; schema and hard requirements are authoritative."
+}

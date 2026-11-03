@@ -1,0 +1,10 @@
+[package]
+name = "narrative-courier-contracts"
+version = "0.12.1"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+narrative-courier-runtime = { path = "../runtime" }

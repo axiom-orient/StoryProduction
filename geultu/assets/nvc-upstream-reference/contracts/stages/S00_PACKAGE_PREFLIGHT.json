@@ -1,0 +1,98 @@
+{
+  "stage_id": "S00_PACKAGE_PREFLIGHT",
+  "version": "1.0.0",
+  "artifact_owner": "SourceRegistry",
+  "executor_classes": [
+    "DET",
+    "LLM"
+  ],
+  "inputs": [
+    {
+      "kind": "narrative_package",
+      "schema": "schemas/narrative-package.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "validated_package",
+      "schema": "schemas/narrative-package.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "JSON Schema PASS",
+    "canonical authority unique",
+    "target range valid",
+    "synopsis does not materially contradict canonical hard intent"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "SRC_001_SCHEMA_INVALID",
+    "SRC_003_HASH_MISMATCH",
+    "SRC_004_AUTHORITY_AMBIGUOUS",
+    "SRC_005_SYNOPSIS_CANONICAL_CONFLICT",
+    "SRC_006_TARGET_INVALID"
+  ],
+  "retry_policy": {
+    "max_repairs": 0
+  },
+  "next": {
+    "on_pass": "S01_SEMANTIC_COMPILE",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "validate package schema and hashes",
+      "executor_class": "DET",
+      "inputs": [
+        "narrative_package"
+      ],
+      "outputs": [
+        "schema_report"
+      ],
+      "hard_gate": "schema errors == 0",
+      "failure_codes": [
+        "SRC_001_SCHEMA_INVALID",
+        "SRC_003_HASH_MISMATCH"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "resolve canonical authority and target policy",
+      "executor_class": "DET",
+      "inputs": [
+        "narrative_package"
+      ],
+      "outputs": [
+        "authority_report"
+      ],
+      "hard_gate": "exactly one canonical narrative",
+      "failure_codes": [
+        "SRC_004_AUTHORITY_AMBIGUOUS",
+        "SRC_006_TARGET_INVALID"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "compare planning synopsis against canonical hard intent when synopsis exists",
+      "executor_class": "LLM",
+      "inputs": [
+        "planning_synopsis",
+        "canonical_narrative"
+      ],
+      "outputs": [
+        "conflict_report"
+      ],
+      "hard_gate": "no material hard-intent contradiction",
+      "failure_codes": [
+        "SRC_005_SYNOPSIS_CANONICAL_CONFLICT"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[package]
+name = "narrative-courier-mcp"
+version = "0.12.1"
+edition = "2021"
+license = "MIT"
+
+[[bin]]
+name = "narrative-courier-mcp"
+path = "src/main.rs"
+
+[dependencies]
+rmcp = { version = "=3.1.4", features = ["server", "transport-io"] }
+schemars = "=1.2.2"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "io-std"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sts-workflow = { path = "../sts" }
+narrative-courier-delivery = { path = "../delivery" }
+narrative-courier-contracts = { path = "../contracts" }
+narrative-courier-app-config = { path = "../app-config" }
+
+[dev-dependencies]
+tempfile = "3"
+tokio = { version = "1", features = ["io-util", "time"] }
+rmcp = { version = "=3.1.4", features = ["client", "transport-io"] }
+narrative-courier-runtime = { path = "../runtime" }

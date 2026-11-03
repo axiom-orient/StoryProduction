@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PromptSpec",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "prompt_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9._-]+/[0-9]+\\.[0-9]+$"
+    },
+    "stage_id": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "authoritative_inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "allowed_inference": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbidden_mutation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "output_schema": {
+      "type": "string"
+    },
+    "hard_requirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evaluation_rubric": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "template": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "prompt_id",
+    "stage_id",
+    "purpose",
+    "authoritative_inputs",
+    "allowed_inference",
+    "forbidden_mutation",
+    "output_schema",
+    "hard_requirements",
+    "evaluation_rubric",
+    "template"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geultu.dev/schemas/artifacts/text_master.v2.schema.json",
+  "title": "TextMaster",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "const": "geultu.dev/text-master/v1"
+    },
+    "master_ref": {
+      "$ref": "../runtime/artifact-ref.schema.json"
+    },
+    "approved_style_ref": {
+      "$ref": "../runtime/artifact-ref.schema.json"
+    },
+    "genre_contract_ref": {
+      "$ref": "../runtime/artifact-ref.schema.json"
+    },
+    "completion_report_ref": {
+      "$ref": "../runtime/artifact-ref.schema.json"
+    },
+    "genre": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 2
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content": {
+      "type": "string",
+      "minLength": 1
+    },
+    "approval": {
+      "$ref": "../runtime/approval-decision.schema.json"
+    }
+  },
+  "required": [
+    "api_version",
+    "master_ref",
+    "approved_style_ref",
+    "genre_contract_ref",
+    "completion_report_ref",
+    "genre",
+    "locale",
+    "title",
+    "content",
+    "approval"
+  ]
+}

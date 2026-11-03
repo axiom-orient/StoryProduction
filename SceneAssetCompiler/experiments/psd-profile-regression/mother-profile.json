@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "document_role": "SINGLE_ASSET_MASTER",
+  "path_layers": [
+    {"layer_id":"character.mother","edge_class":"ORGANIC","work_path_tolerance_px":1.5}
+  ],
+  "primary_cutout_layer_id": "character.mother",
+  "document_clipping_path": "PRIMARY_SAVED_PATH"
+}

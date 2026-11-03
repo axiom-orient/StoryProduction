@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArtifactEnvelope",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "parent_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "uniqueItems": true
+    },
+    "producer": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "Producer",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stage_id": {
+          "type": "string",
+          "pattern": "^S(0[0-9]|1[0-2])_[A-Z0-9_]+$"
+        },
+        "executor_class": {
+          "type": "string",
+          "enum": [
+            "DET",
+            "LLM",
+            "VLM",
+            "GEN",
+            "PROC",
+            "HUMAN",
+            "HYBRID"
+          ]
+        },
+        "executor_id": {
+          "type": "string"
+        },
+        "prompt_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "code_hash": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "stage_id",
+        "executor_class",
+        "executor_id",
+        "prompt_hash",
+        "code_hash"
+      ]
+    },
+    "content": {}
+  },
+  "required": [
+    "artifact_id",
+    "kind",
+    "schema_version",
+    "parent_ids",
+    "producer",
+    "content"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$id": "https://geultu.dev/schema/domain-decision/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "command_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "decision": {
+      "enum": [
+        "ACCEPT",
+        "REJECT",
+        "REPAIR",
+        "HUMAN_REQUIRED",
+        "FAIL"
+      ]
+    },
+    "decision_id": {
+      "pattern": "^decision_[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "reason_codes": {
+      "items": {
+        "pattern": "^[A-Z][A-Z0-9_]{2,127}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "selected_receipts": {
+      "items": {
+        "pattern": "^vr_[0-9a-f]{64}$",
+        "type": "string"
+      },
+      "maxItems": 256,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "state_revision": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "decision_id",
+    "command_id",
+    "state_revision",
+    "decision",
+    "selected_receipts",
+    "reason_codes"
+  ],
+  "title": "DomainDecision v1",
+  "type": "object"
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/contracts/scene-motion-asset-handoff/v2.schema.json",
+  "title": "SceneMotionAssetHandoff v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "handoffId", "sourceKind", "projectionReceiptPath", "projectionReceiptSha256", "sceneGraphHash", "sourceSemanticManifestHash", "semanticManifestHash", "assetPackPath", "assetPackSha256", "assetPackHash", "assetPackAuditPath", "assetPackAuditSha256", "assetPackAuditHash", "bindingManifestPath", "bindingManifestSha256", "bindingManifestHash", "approvalPath", "approvalSha256", "approvalSubjectHash"],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "handoffId": { "type": "string", "pattern": "^SAC-SMC-[0-9a-f]{64}$" },
+    "sourceKind": { "const": "SMC_NARRATIVE_SCENE_PROJECTION" },
+    "projectionReceiptPath": { "const": "projection/narrative-scene-projection.v3.json" },
+    "projectionReceiptSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "sceneGraphHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "sourceSemanticManifestHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "semanticManifestHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "assetPackPath": { "const": "handoff/asset-pack.v2.json" },
+    "assetPackSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "assetPackHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "assetPackAuditPath": { "const": "handoff/asset-pack-audit.v1.json" },
+    "assetPackAuditSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "assetPackAuditHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "bindingManifestPath": { "const": "handoff/binding-manifest.v1.json" },
+    "bindingManifestSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "bindingManifestHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "approvalPath": { "const": "handoff/scene-asset-release-approval.v1.json" },
+    "approvalSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "approvalSubjectHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Failure",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}_[0-9]{3}_[A-Z0-9_]+$"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "WARNING",
+        "ERROR",
+        "FATAL"
+      ]
+    },
+    "stage_id": {
+      "type": "string"
+    },
+    "artifact_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {}
+    },
+    "retryable": {
+      "type": "boolean"
+    },
+    "repair_stage": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "code",
+    "severity",
+    "stage_id",
+    "artifact_id",
+    "path",
+    "message",
+    "evidence",
+    "retryable",
+    "repair_stage"
+  ]
+}

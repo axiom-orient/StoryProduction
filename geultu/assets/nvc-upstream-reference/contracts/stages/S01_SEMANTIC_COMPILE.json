@@ -1,0 +1,124 @@
+{
+  "stage_id": "S01_SEMANTIC_COMPILE",
+  "version": "1.0.0",
+  "artifact_owner": "SemanticCompiler",
+  "executor_classes": [
+    "LLM",
+    "DET"
+  ],
+  "inputs": [
+    {
+      "kind": "validated_package",
+      "schema": "schemas/narrative-package.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "story_ir",
+      "schema": "schemas/story-ir.schema.json"
+    },
+    {
+      "kind": "meaning_spec",
+      "schema": "schemas/meaning-spec.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "explicit events source-traceable",
+    "hard assertions traceable",
+    "no invented fact marked explicit",
+    "blocking ambiguity == 0"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "SEM_001_UNRESOLVED_REFERENCE",
+    "SEM_002_UNSOURCED_FACT",
+    "SEM_003_SOURCE_CONTRADICTION",
+    "SEM_006_EVENT_ORDER_INVALID",
+    "SEM_008_AMBIGUITY_BLOCKING",
+    "SEM_004_CAUSAL_LINK_LOST",
+    "SEM_005_INTENTION_LOST",
+    "SEM_007_HARD_ASSERTION_MISSING"
+  ],
+  "retry_policy": {
+    "max_repairs": 2
+  },
+  "next": {
+    "on_pass": "S02_DIRECTION_SYNTHESIS",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "extract entities events and source spans",
+      "executor_class": "LLM",
+      "inputs": [
+        "validated_package"
+      ],
+      "outputs": [
+        "story_ir.draft"
+      ],
+      "hard_gate": "explicit claims carry evidence",
+      "failure_codes": [
+        "SEM_002_UNSOURCED_FACT"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "resolve references and temporal event order",
+      "executor_class": "LLM",
+      "inputs": [
+        "story_ir.draft"
+      ],
+      "outputs": [
+        "story_ir.resolved"
+      ],
+      "hard_gate": "references resolve and event order valid",
+      "failure_codes": [
+        "SEM_001_UNRESOLVED_REFERENCE",
+        "SEM_006_EVENT_ORDER_INVALID"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "compile must-keep assertions and transition obligations",
+      "executor_class": "LLM",
+      "inputs": [
+        "story_ir.resolved",
+        "canonical_narrative"
+      ],
+      "outputs": [
+        "meaning_spec.draft"
+      ],
+      "hard_gate": "hard source meaning covered",
+      "failure_codes": [
+        "SEM_004_CAUSAL_LINK_LOST",
+        "SEM_005_INTENTION_LOST",
+        "SEM_007_HARD_ASSERTION_MISSING"
+      ]
+    },
+    {
+      "step_id": "P04",
+      "purpose": "deterministic provenance audit",
+      "executor_class": "DET",
+      "inputs": [
+        "story_ir.resolved",
+        "meaning_spec.draft"
+      ],
+      "outputs": [
+        "story_ir",
+        "meaning_spec"
+      ],
+      "hard_gate": "all explicit items trace to canonical source",
+      "failure_codes": [
+        "SEM_002_UNSOURCED_FACT",
+        "SEM_003_SOURCE_CONTRADICTION"
+      ]
+    }
+  ]
+}

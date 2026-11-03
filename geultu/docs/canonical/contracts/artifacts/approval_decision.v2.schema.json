@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geultu.dev/schemas/artifacts/approval_decision.v2.schema.json",
+  "title": "approval_decision artifact body",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "../runtime/artifact-ref.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "decision": {
+      "$ref": "../runtime/approval-decision.schema.json"
+    }
+  },
+  "required": [
+    "api_version",
+    "source_refs",
+    "decision"
+  ]
+}

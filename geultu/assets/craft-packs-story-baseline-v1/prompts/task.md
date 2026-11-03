@@ -1,0 +1,1 @@
+Read source_scene and author_intent. Return one scene_candidate with the proposed scene text, a short explanation of material changes, and any unresolved questions. Change only what the stated intent requires. Keep unsupported details out of the scene. The author reviews the candidate before a separate Geultu adoption action.

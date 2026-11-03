@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "story.capability-request/1",
+  "requestId": "request.storyboard.prompt.0001",
+  "capability": "image.prompt.compile",
+  "source": {
+    "kind": "smc.scene_graph",
+    "identity": "scenegraph.storyboard.demo.0001",
+    "sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "payload": {
+    "kind": "promptgen.image_request",
+    "identity": "prompt.request.storyboard.0001",
+    "path": "ImagePromptCompiler/examples/image-cinematic-storyboard.json",
+    "sha256": "sha256:8c4531b969a461d0ea6a125318fd17a66c2064bf935f8d9d1efc236c96e4430c",
+    "mediaType": "application/json",
+    "byteLength": 8485
+  },
+  "provider": {
+    "id": "promptgen.local",
+    "kind": "local_process",
+    "model": null,
+    "version": "1.5.0",
+    "networkPolicy": "denied"
+  },
+  "rights": {
+    "assertedBy": "human.local",
+    "statement": "Local prompt compilation only; no asset bytes leave the machine.",
+    "providerTransferAllowed": false
+  },
+  "authorization": {
+    "kind": "approved_scope",
+    "identity": "approval.storyboard.demo.0001",
+    "sha256": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "requestedBy": {
+    "actor": "agent",
+    "id": "story.pipeline"
+  },
+  "expectedOutputs": [
+    {
+      "kind": "prompt_compilation",
+      "mediaType": "application/json"
+    }
+  ],
+  "createdAt": "2026-09-22T00:00:00Z"
+}

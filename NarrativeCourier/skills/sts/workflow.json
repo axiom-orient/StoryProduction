@@ -1,0 +1,761 @@
+{
+  "schema_version": 3,
+  "domain_id": "sts",
+  "domain_version": "4.3.0",
+  "description": "Canonical STS generation contract: synopsis fidelity compiler with lossless source coverage, adaptation-pressure preflight, typed source authority, stateful scene execution, source-blind round-trip verification and Human release.",
+  "stages": [
+    {
+      "id": "source",
+      "label": "Source",
+      "description": "Recover and approve the source truth.",
+      "outputs": [
+        "output/step_00_source_ir.md"
+      ]
+    },
+    {
+      "id": "architecture",
+      "label": "Architecture",
+      "description": "Define audience/presentation/causal adaptation contract.",
+      "outputs": [
+        "output/step_01_screenplay_contract.md",
+        "output/step_02_narrative_map.md"
+      ]
+    },
+    {
+      "id": "execution",
+      "label": "Execution System",
+      "description": "Define cinematic space and character state.",
+      "outputs": [
+        "output/step_03_cinematic_system.md",
+        "output/step_04_character_states.md"
+      ]
+    },
+    {
+      "id": "treatment",
+      "label": "Treatment",
+      "description": "Write the causal whole-film treatment.",
+      "outputs": [
+        "output/step_05_treatment.md"
+      ]
+    },
+    {
+      "id": "scenes",
+      "label": "Scene IR",
+      "description": "Build stateful SCN transition contracts.",
+      "outputs": [
+        "output/step_06_scene_blueprint.md"
+      ]
+    },
+    {
+      "id": "draft",
+      "label": "Draft",
+      "description": "Write bounded context parts and assemble the first draft.",
+      "outputs": [
+        "output/step_07_first_draft.md"
+      ]
+    },
+    {
+      "id": "revision",
+      "label": "Revision",
+      "description": "Diagnose and apply Human-authorized dependency-aware repairs.",
+      "outputs": [
+        "output/step_08_diagnosis.md",
+        "output/final_screenplay.md"
+      ]
+    },
+    {
+      "id": "verification",
+      "label": "Verification",
+      "description": "Source-blind reconstruction and independent source comparison.",
+      "outputs": [
+        "output/step_08_recovered_screenplay_ir.md",
+        "output/step_08_verification.md"
+      ]
+    },
+    {
+      "id": "final",
+      "label": "Release",
+      "description": "Human release of verified screenplay.",
+      "outputs": [
+        "output/final_screenplay.md"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "step_00",
+      "kind": "agent",
+      "step": 0,
+      "role": "analyst",
+      "system_prompt": "prompts/analyst/system.md",
+      "task_prompt": "prompts/analyst/step_00_source_graph.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/world-rules-epistemics.md",
+        "principles/externalization-form.md",
+        "principles/adaptation-pressure.md"
+      ],
+      "inputs": [
+        "config.yaml",
+        "@synopsis",
+        "@references"
+      ],
+      "output": "output/step_00_source_ir.md",
+      "stage": "source",
+      "validation": {
+        "required_markers": [
+          "## SRC Assertions",
+          "## REL Relations",
+          "## Source Coverage Audit",
+          "## GAP Open Adaptation Space",
+          "## CON Authority Conflicts",
+          "## Ending Contract",
+          "## Adaptation Preflight",
+          "## Fidelity Risks"
+        ]
+      }
+    },
+    {
+      "id": "source_approval",
+      "kind": "human",
+      "gate_type": "artifact_review",
+      "label": "Source IR 승인",
+      "source": "output/step_00_source_ir.md",
+      "stage": "source",
+      "max_revisions": 3,
+      "revision_node": "step_00",
+      "notice": "이 단계가 이후 fidelity의 source of truth입니다. SRC/REL의 사실·믿음·명시적 unknown과 Source Coverage Audit의 모든 원문 span/연결 ID를 대조해 누락을 확인하십시오."
+    },
+    {
+      "id": "step_01",
+      "kind": "agent",
+      "step": 1,
+      "role": "analyst",
+      "system_prompt": "prompts/analyst/system.md",
+      "task_prompt": "prompts/analyst/step_01_screenplay_contract.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/story-presentation.md",
+        "principles/heuristics.md",
+        "principles/externalization-form.md",
+        "principles/adaptation-pressure.md"
+      ],
+      "inputs": [
+        "config.yaml",
+        "@synopsis",
+        "output/step_00_source_ir.md"
+      ],
+      "output": "output/step_01_screenplay_contract.md",
+      "stage": "architecture"
+    },
+    {
+      "id": "step_02",
+      "kind": "agent",
+      "step": 2,
+      "role": "analyst",
+      "system_prompt": "prompts/analyst/system.md",
+      "task_prompt": "prompts/analyst/step_02_narrative_map.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/story-presentation.md",
+        "principles/causality-scenes.md",
+        "principles/world-rules-epistemics.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_01_screenplay_contract.md"
+      ],
+      "output": "output/step_02_narrative_map.md",
+      "stage": "architecture",
+      "validation": {
+        "required_markers": [
+          "## Fabula",
+          "## Syuzhet",
+          "## Information Ledger",
+          "## Transformation Ledger"
+        ]
+      }
+    },
+    {
+      "id": "checkpoint_a_review",
+      "kind": "agent",
+      "role": "critic",
+      "system_prompt": "prompts/critic/system.md",
+      "task_prompt": "prompts/critic/checkpoint_a.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/story-presentation.md",
+        "principles/revision-verification.md",
+        "principles/adaptation-pressure.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_01_screenplay_contract.md",
+        "output/step_02_narrative_map.md"
+      ],
+      "output": "output/checkpoint_a_review.md",
+      "stage": "architecture"
+    },
+    {
+      "id": "checkpoint_a",
+      "kind": "human",
+      "gate_type": "checkpoint",
+      "label": "Narrative IR 승인",
+      "source": "output/checkpoint_a_review.md",
+      "stage": "architecture",
+      "max_revisions": 3,
+      "checkpoint": "A",
+      "revision_targets": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "step_03",
+      "kind": "agent",
+      "step": 3,
+      "role": "writer",
+      "system_prompt": "prompts/writer/system.md",
+      "task_prompt": "prompts/writer/step_03_cinematic_system.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/space-form.md",
+        "principles/research-reality.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "@references",
+        "output/step_00_source_ir.md",
+        "output/step_01_screenplay_contract.md",
+        "output/step_02_narrative_map.md"
+      ],
+      "output": "output/step_03_cinematic_system.md",
+      "stage": "execution"
+    },
+    {
+      "id": "step_04",
+      "kind": "agent",
+      "step": 4,
+      "role": "writer",
+      "system_prompt": "prompts/writer/system.md",
+      "task_prompt": "prompts/writer/step_04_character_states.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/character-state.md",
+        "principles/world-rules-epistemics.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_02_narrative_map.md",
+        "output/step_03_cinematic_system.md"
+      ],
+      "output": "output/step_04_character_states.md",
+      "stage": "execution"
+    },
+    {
+      "id": "checkpoint_b_review",
+      "kind": "agent",
+      "role": "critic",
+      "system_prompt": "prompts/critic/system.md",
+      "task_prompt": "prompts/critic/checkpoint_b.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/character-state.md",
+        "principles/space-form.md",
+        "principles/research-reality.md",
+        "principles/world-rules-epistemics.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_02_narrative_map.md",
+        "output/step_03_cinematic_system.md",
+        "output/step_04_character_states.md"
+      ],
+      "output": "output/checkpoint_b_review.md",
+      "stage": "execution"
+    },
+    {
+      "id": "checkpoint_b",
+      "kind": "human",
+      "gate_type": "checkpoint",
+      "label": "Execution System 승인",
+      "source": "output/checkpoint_b_review.md",
+      "stage": "execution",
+      "max_revisions": 3,
+      "checkpoint": "B",
+      "revision_targets": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "step_05",
+      "kind": "agent",
+      "step": 5,
+      "role": "writer",
+      "system_prompt": "prompts/writer/system.md",
+      "task_prompt": "prompts/writer/step_05_treatment.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/story-presentation.md",
+        "principles/causality-scenes.md",
+        "principles/character-state.md",
+        "principles/adaptation-pressure.md"
+      ],
+      "inputs": [
+        "config.yaml",
+        "output/step_00_source_ir.md",
+        "output/step_01_screenplay_contract.md",
+        "output/step_02_narrative_map.md",
+        "output/step_03_cinematic_system.md",
+        "output/step_04_character_states.md"
+      ],
+      "output": "output/step_05_treatment.md",
+      "stage": "treatment"
+    },
+    {
+      "id": "step_06",
+      "kind": "agent",
+      "step": 6,
+      "role": "writer",
+      "system_prompt": "prompts/writer/system.md",
+      "task_prompt": "prompts/writer/step_06_scene_blueprint.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/causality-scenes.md",
+        "principles/character-state.md",
+        "principles/space-form.md",
+        "principles/world-rules-epistemics.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_02_narrative_map.md",
+        "output/step_03_cinematic_system.md",
+        "output/step_04_character_states.md",
+        "output/step_05_treatment.md"
+      ],
+      "output": "output/step_06_scene_blueprint.md",
+      "stage": "scenes",
+      "validation": {
+        "required_markers": [
+          "SCN-",
+          "Required preconditions",
+          "Required postconditions",
+          "Downstream dependencies",
+          "Risk:",
+          "Necessary function",
+          "Cinematic value"
+        ]
+      }
+    },
+    {
+      "id": "checkpoint_c_review",
+      "kind": "agent",
+      "role": "critic",
+      "system_prompt": "prompts/critic/system.md",
+      "task_prompt": "prompts/critic/checkpoint_c.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/causality-scenes.md",
+        "principles/revision-verification.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_02_narrative_map.md",
+        "output/step_05_treatment.md",
+        "output/step_06_scene_blueprint.md"
+      ],
+      "output": "output/checkpoint_c_review.md",
+      "stage": "scenes"
+    },
+    {
+      "id": "checkpoint_c",
+      "kind": "human",
+      "gate_type": "checkpoint",
+      "label": "Scene IR 승인",
+      "source": "output/checkpoint_c_review.md",
+      "stage": "scenes",
+      "max_revisions": 3,
+      "checkpoint": "C",
+      "revision_targets": [
+        5,
+        6
+      ],
+      "notice": "승인 후 screenplay drafting으로 진입합니다."
+    },
+    {
+      "id": "step_07_part1",
+      "kind": "agent",
+      "step": 7,
+      "role": "writer",
+      "system_prompt": "prompts/writer/system.md",
+      "task_prompt": "prompts/writer/step_07_draft.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/causality-scenes.md",
+        "principles/character-state.md",
+        "principles/screenplay-expression.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_01_screenplay_contract.md",
+        "output/step_02_narrative_map.md",
+        "output/step_03_cinematic_system.md",
+        "output/step_04_character_states.md",
+        "output/step_05_treatment.md",
+        "output/step_06_scene_blueprint.md"
+      ],
+      "output": "output/step_07_part1.md",
+      "stage": "draft",
+      "phase": "part1",
+      "execution_notes": [
+        "Write only context PART-1; PART labels are not acts."
+      ],
+      "validation": {
+        "required_markers": [
+          "## [TRANSFER CAPSULE]"
+        ]
+      }
+    },
+    {
+      "id": "step_07_part1_review",
+      "kind": "human",
+      "gate_type": "artifact_review",
+      "label": "PART-1 검토",
+      "source": "output/step_07_part1.md",
+      "stage": "draft",
+      "max_revisions": 3,
+      "revision_node": "step_07_part1"
+    },
+    {
+      "id": "step_07_part2",
+      "kind": "agent",
+      "step": 7,
+      "role": "writer",
+      "system_prompt": "prompts/writer/system.md",
+      "task_prompt": "prompts/writer/step_07_draft.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/causality-scenes.md",
+        "principles/character-state.md",
+        "principles/screenplay-expression.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_01_screenplay_contract.md",
+        "output/step_02_narrative_map.md",
+        "output/step_03_cinematic_system.md",
+        "output/step_04_character_states.md",
+        "output/step_05_treatment.md",
+        "output/step_06_scene_blueprint.md",
+        "output/step_07_part1.md"
+      ],
+      "output": "output/step_07_part2.md",
+      "stage": "draft",
+      "phase": "part2",
+      "execution_notes": [
+        "Write only context PART-2; PART labels are not acts."
+      ],
+      "summary_only_inputs": [
+        "output/step_07_part1.md"
+      ],
+      "validation": {
+        "required_markers": [
+          "## [TRANSFER CAPSULE]"
+        ]
+      }
+    },
+    {
+      "id": "step_07_part2_review",
+      "kind": "human",
+      "gate_type": "artifact_review",
+      "label": "PART-2 검토",
+      "source": "output/step_07_part2.md",
+      "stage": "draft",
+      "max_revisions": 3,
+      "revision_node": "step_07_part2"
+    },
+    {
+      "id": "step_07_part3",
+      "kind": "agent",
+      "step": 7,
+      "role": "writer",
+      "system_prompt": "prompts/writer/system.md",
+      "task_prompt": "prompts/writer/step_07_draft.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/causality-scenes.md",
+        "principles/character-state.md",
+        "principles/screenplay-expression.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_01_screenplay_contract.md",
+        "output/step_02_narrative_map.md",
+        "output/step_03_cinematic_system.md",
+        "output/step_04_character_states.md",
+        "output/step_05_treatment.md",
+        "output/step_06_scene_blueprint.md",
+        "output/step_07_part1.md",
+        "output/step_07_part2.md"
+      ],
+      "output": "output/step_07_part3.md",
+      "stage": "draft",
+      "phase": "part3",
+      "execution_notes": [
+        "Write only context PART-3; PART labels are not acts."
+      ],
+      "summary_only_inputs": [
+        "output/step_07_part1.md",
+        "output/step_07_part2.md"
+      ],
+      "validation": {
+        "required_markers": [
+          "## [TRANSFER CAPSULE]"
+        ]
+      }
+    },
+    {
+      "id": "step_07_part3_review",
+      "kind": "human",
+      "gate_type": "artifact_review",
+      "label": "PART-3 검토",
+      "source": "output/step_07_part3.md",
+      "stage": "draft",
+      "max_revisions": 3,
+      "revision_node": "step_07_part3"
+    },
+    {
+      "id": "step_07_part4",
+      "kind": "agent",
+      "step": 7,
+      "role": "writer",
+      "system_prompt": "prompts/writer/system.md",
+      "task_prompt": "prompts/writer/step_07_draft.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/causality-scenes.md",
+        "principles/character-state.md",
+        "principles/screenplay-expression.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_01_screenplay_contract.md",
+        "output/step_02_narrative_map.md",
+        "output/step_03_cinematic_system.md",
+        "output/step_04_character_states.md",
+        "output/step_05_treatment.md",
+        "output/step_06_scene_blueprint.md",
+        "output/step_07_part1.md",
+        "output/step_07_part2.md",
+        "output/step_07_part3.md"
+      ],
+      "output": "output/step_07_part4.md",
+      "stage": "draft",
+      "phase": "part4",
+      "execution_notes": [
+        "Write only context PART-4; PART labels are not acts."
+      ],
+      "summary_only_inputs": [
+        "output/step_07_part1.md",
+        "output/step_07_part2.md",
+        "output/step_07_part3.md"
+      ],
+      "validation": {
+        "required_markers": [
+          "## [TRANSFER CAPSULE]"
+        ]
+      }
+    },
+    {
+      "id": "step_07_part4_review",
+      "kind": "human",
+      "gate_type": "artifact_review",
+      "label": "PART-4 검토",
+      "source": "output/step_07_part4.md",
+      "stage": "draft",
+      "max_revisions": 3,
+      "revision_node": "step_07_part4"
+    },
+    {
+      "id": "step_07_full",
+      "kind": "agent",
+      "step": 7,
+      "role": "writer",
+      "system_prompt": "prompts/writer/system.md",
+      "task_prompt": "prompts/writer/step_07_merge.md",
+      "principles": [
+        "principles/core.md",
+        "principles/screenplay-expression.md",
+        "principles/causality-scenes.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/step_07_part1.md",
+        "output/step_07_part2.md",
+        "output/step_07_part3.md",
+        "output/step_07_part4.md"
+      ],
+      "output": "output/step_07_first_draft.md",
+      "stage": "draft",
+      "phase": "merge",
+      "validation": {
+        "required_markers": [
+          "SCN-"
+        ],
+        "forbidden_markers": [
+          "## [TRANSFER CAPSULE]"
+        ]
+      }
+    },
+    {
+      "id": "step_08_diagnosis",
+      "kind": "agent",
+      "step": 8,
+      "role": "critic",
+      "system_prompt": "prompts/critic/system.md",
+      "task_prompt": "prompts/critic/step_08_diagnosis.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/causality-scenes.md",
+        "principles/revision-verification.md",
+        "principles/world-rules-epistemics.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_02_narrative_map.md",
+        "output/step_06_scene_blueprint.md",
+        "output/step_07_first_draft.md"
+      ],
+      "output": "output/step_08_diagnosis.md",
+      "stage": "revision"
+    },
+    {
+      "id": "step_08_scope",
+      "kind": "human",
+      "gate_type": "artifact_review",
+      "label": "Repair scope 승인",
+      "source": "output/step_08_diagnosis.md",
+      "stage": "revision",
+      "max_revisions": 3,
+      "revision_node": "step_08_diagnosis",
+      "notice": "Critic의 진단과 수정 범위를 검토하십시오. 승인된 범위만 Writer가 적용합니다."
+    },
+    {
+      "id": "step_08_apply",
+      "kind": "agent",
+      "step": 8,
+      "role": "writer",
+      "system_prompt": "prompts/writer/system.md",
+      "task_prompt": "prompts/writer/step_08_apply.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/causality-scenes.md",
+        "principles/screenplay-expression.md",
+        "principles/revision-verification.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_06_scene_blueprint.md",
+        "output/step_07_first_draft.md",
+        "output/step_08_diagnosis.md"
+      ],
+      "output": "output/final_screenplay.md",
+      "stage": "revision",
+      "validation": {
+        "required_markers": [
+          "SCN-"
+        ]
+      }
+    },
+    {
+      "id": "step_08_reverse",
+      "kind": "agent",
+      "step": 8,
+      "role": "critic",
+      "system_prompt": "prompts/critic/reconstruction_system.md",
+      "task_prompt": "prompts/critic/reconstruct_screenplay.md",
+      "principles": [
+        "principles/core.md",
+        "principles/causality-scenes.md",
+        "principles/character-state.md",
+        "principles/revision-verification.md",
+        "principles/world-rules-epistemics.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/final_screenplay.md"
+      ],
+      "output": "output/step_08_recovered_screenplay_ir.md",
+      "stage": "verification",
+      "validation": {
+        "required_markers": [
+          "OBS-",
+          "OREL-",
+          "SCN-"
+        ]
+      }
+    },
+    {
+      "id": "step_08_verify",
+      "kind": "agent",
+      "step": 8,
+      "role": "critic",
+      "system_prompt": "prompts/critic/system.md",
+      "task_prompt": "prompts/critic/step_08_verify.md",
+      "principles": [
+        "principles/core.md",
+        "principles/source-fidelity.md",
+        "principles/revision-verification.md",
+        "principles/world-rules-epistemics.md",
+        "principles/externalization-form.md"
+      ],
+      "inputs": [
+        "output/step_00_source_ir.md",
+        "output/step_08_recovered_screenplay_ir.md"
+      ],
+      "output": "output/step_08_verification.md",
+      "stage": "verification",
+      "validation": {
+        "required_markers": [
+          "STS_STATUS:"
+        ]
+      }
+    },
+    {
+      "id": "final_release",
+      "kind": "human",
+      "gate_type": "artifact_review",
+      "label": "최종 릴리스",
+      "source": "output/step_08_verification.md",
+      "stage": "final",
+      "max_revisions": 5,
+      "revision_node": "step_08_diagnosis",
+      "notice": "STS_STATUS: READY일 때만 approve할 수 있습니다. BLOCKED면 revise로 repair cycle을 다시 실행하십시오."
+    }
+  ]
+}

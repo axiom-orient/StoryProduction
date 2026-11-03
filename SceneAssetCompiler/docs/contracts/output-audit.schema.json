@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/output-audit.schema.json",
+  "title": "OutputAudit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","audit_id","task_id","attempt_no","reviewer","created_at","status","artifact_ids","claims","reference_observations","global_observations"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "audit_id": {"type": "string"},
+    "task_id": {"type": "string"},
+    "attempt_no": {"type": "integer","minimum":1},
+    "reviewer": {"enum":["CODEX","HUMAN"]},
+    "created_at": {"type":"string"},
+    "status": {"enum":["INCOMPLETE","COMPLETE"]},
+    "artifact_ids": {"type":"array","items":{"type":"string"}},
+    "claims": {
+      "type":"array","minItems":1,
+      "items": {
+        "type":"object","additionalProperties":false,
+        "required":["claim_id","axis","source","kind","critical","expected","actual","status","evidence"],
+        "properties": {
+          "claim_id":{"type":"string"},
+          "axis":{"enum":["identity","style","narrative","composition","lighting_color","material","structure","articulation","usability"]},
+          "source":{"type":"string"},
+          "kind":{"enum":["MUST_HAVE","MUST_NOT_HAVE","MUST_SATISFY","PRESERVE"]},
+          "critical":{"type":"boolean"},
+          "expected":{"type":"string"},
+          "actual":{"type":"string"},
+          "status":{"enum":["PASS","MINOR","MAJOR","NA","UNKNOWN"]},
+          "evidence":{"type":"array","items":{"type":"string"}}
+        }
+      }
+    },
+    "reference_observations": {
+      "type":"array",
+      "items": {
+        "type":"object","additionalProperties":false,
+        "required":["reference_index","role","status","evidence"],
+        "properties": {
+          "reference_index":{"type":"integer","minimum":1},
+          "role":{"type":"string"},
+          "status":{"enum":["CLEAN","CONTAMINATION_SUSPECTED","CONFLICT_SUSPECTED","NA"]},
+          "evidence":{"type":"array","items":{"type":"string"}}
+        }
+      }
+    },
+    "global_observations":{"type":"array","items":{"type":"string"}}
+  }
+}

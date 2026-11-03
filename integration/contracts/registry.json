@@ -1,0 +1,293 @@
+{
+  "schemaVersion": "story.contract-registry/1",
+  "contracts": [
+    {
+      "id": "geultu.reviewed-synopsis-handoff/v1",
+      "owner": "geultu",
+      "producer": "geultu/contracts/reviewed-synopsis-handoff-v1.schema.json",
+      "consumers": [
+        "NarrativeCourier/contracts/reviewed-synopsis-handoff.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "narrative-courier.narrative-package/v2",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/narrative-package.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/narrative-courier-narrative-package-v2.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "narrative-courier.scene-map/v2",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/narrative-scene-map-v2.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/narrative-scene-map.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "narrative-courier.release-bundle/v1",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/release-bundle.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/narrative-release-bundle.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "scene-asset-compiler.scene-asset-pack/v2",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/docs/contracts/scene-asset-pack-v2.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/scene-asset-compiler/scene-asset-pack-v2.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "scene-asset-compiler.scene-asset-pack-audit/v1",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/docs/contracts/scene-asset-pack-audit-v1.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/scene-asset-compiler/scene-asset-pack-audit-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "scene-asset-compiler.release-approval/v1",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/docs/contracts/scene-asset-release-approval-v1.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/scene-asset-compiler/scene-asset-release-approval-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "scene-asset-compiler.motion-handoff/v2",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/docs/contracts/scene-motion-asset-handoff-v2.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/scene-asset-compiler/scene-motion-asset-handoff-v2.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "scene-asset-compiler.binding-manifest/v1",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/docs/contracts/binding-manifest-v1.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/scene-asset-compiler/binding-manifest-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "story.capability-request/v1",
+      "owner": "StoryProduction",
+      "producer": "integration/contracts/story-capability-request-v1.schema.json",
+      "consumers": [],
+      "verification": "schema"
+    },
+    {
+      "id": "story.capability-job/v1",
+      "owner": "StoryProduction",
+      "producer": "integration/contracts/story-capability-job-v1.schema.json",
+      "consumers": [],
+      "verification": "schema"
+    },
+    {
+      "id": "story.capability-result/v1",
+      "owner": "StoryProduction",
+      "producer": "integration/contracts/story-capability-result-v1.schema.json",
+      "consumers": [],
+      "verification": "schema"
+    },
+    {
+      "id": "narrative-courier.continuity-bible-v1",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/continuity-bible-v1.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/continuity-bible-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "narrative-courier.cinematic-director-plan-v1",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/cinematic-director-plan-v1.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/cinematic-director-plan-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "narrative-courier.cinematic-approval-v1",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/cinematic-approval-v1.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/cinematic-approval-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "scene-asset-compiler.visual-reference-pack-v1",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/docs/contracts/visual-reference-pack-v1.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/scene-asset-compiler/visual-reference-pack-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "scene-asset-compiler.visual-reference-approval-v1",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/docs/contracts/visual-reference-approval-v1.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/scene-asset-compiler/visual-reference-approval-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "narrative-courier.text-storyboard-v1",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/text-storyboard-v1.schema.json",
+      "consumers": [
+        "integration/contracts/nvc-text-storyboard-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "narrative-courier.text-storyboard-task-v1",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/text-storyboard-task-v1.schema.json",
+      "consumers": [
+        "integration/contracts/nvc-text-storyboard-task-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "narrative-courier.text-storyboard-review-v1",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/text-storyboard-review-v1.schema.json",
+      "consumers": [
+        "integration/contracts/nvc-text-storyboard-review-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "geultu.authoring-draft/v1",
+      "owner": "geultu",
+      "producer": "geultu/contracts/authoring-draft-v1.schema.json",
+      "consumers": [
+        "integration/contracts/geultu-authoring-draft-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "story.text-writer-request/v1",
+      "owner": "StoryProduction",
+      "producer": "integration/contracts/story-text-writer-request-v1.schema.json",
+      "consumers": [],
+      "verification": "schema"
+    },
+    {
+      "id": "story.text-writer-result/v1",
+      "owner": "StoryProduction",
+      "producer": "integration/contracts/story-text-writer-result-v1.schema.json",
+      "consumers": [],
+      "verification": "schema"
+    },
+    {
+      "id": "nvc.animatic-plan/1",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/animatic-plan-v1.schema.json",
+      "consumers": [
+        "SceneAssetCompiler/contracts/narrative-courier/animatic-plan-v1.schema.json",
+        "SceneMotionCompiler/contracts/schemas/animatic/animatic-plan-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "nvc.animatic-review/1",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/animatic-review-v1.schema.json",
+      "consumers": [
+        "SceneAssetCompiler/contracts/narrative-courier/animatic-review-v1.schema.json",
+        "SceneMotionCompiler/contracts/schemas/animatic/animatic-review-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "nvc.animatic-packet/1",
+      "owner": "NarrativeCourier",
+      "producer": "NarrativeCourier/contracts/animatic-packet-v1.schema.json",
+      "consumers": [
+        "SceneAssetCompiler/contracts/narrative-courier/animatic-packet-v1.schema.json",
+        "SceneMotionCompiler/contracts/schemas/animatic/animatic-packet-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "sac.animatic-assets/1",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/docs/contracts/animatic-assets-v1.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/animatic/animatic-assets-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "sac.animatic-assets-review/1",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/docs/contracts/animatic-assets-review-v1.schema.json",
+      "consumers": [
+        "SceneMotionCompiler/contracts/schemas/animatic/animatic-assets-review-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "smc.animatic-result/1",
+      "owner": "SceneMotionCompiler",
+      "producer": "SceneMotionCompiler/contracts/schemas/animatic/animatic-result-v1.schema.json",
+      "consumers": [
+        "integration/contracts/smc-animatic-result-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "story.animatic-observation/1",
+      "owner": "StoryProduction",
+      "producer": "integration/contracts/story-animatic-observation-v1.schema.json",
+      "consumers": [],
+      "verification": "schema"
+    },
+    {
+      "id": "scene-asset-compiler.run-request/v1",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/.agents/skills/scene-asset-compiler/schemas/run-request.schema.json",
+      "consumers": [
+        "integration/contracts/sac-run-request-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "promptgen.image-prompt/v1",
+      "owner": "ImagePromptCompiler",
+      "producer": "ImagePromptCompiler/schemas/image.schema.json",
+      "consumers": [
+        "integration/contracts/ipc-image-prompt-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    },
+    {
+      "id": "promptgen.compilation/v1",
+      "owner": "ImagePromptCompiler",
+      "producer": "ImagePromptCompiler/schemas/compilation.schema.json",
+      "consumers": [
+        "integration/contracts/ipc-compilation-v1.schema.json"
+      ],
+      "verification": "byte_equal"
+    }
+  ]
+}

@@ -1,0 +1,1015 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-motion-compiler.local/schemas/production/production-v1.schema.json",
+  "title": "Production boundary v1 — candidates and observations, never final approval",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/MotionRequestDraft"
+    },
+    {
+      "$ref": "#/$defs/ClipIngestDraft"
+    },
+    {
+      "$ref": "#/$defs/ClipReviewDraft"
+    },
+    {
+      "$ref": "#/$defs/EditorialDraft"
+    },
+    {
+      "$ref": "#/$defs/OTIOExportDraft"
+    },
+    {
+      "$ref": "#/$defs/MotionProviderReceipt"
+    },
+    {
+      "$ref": "#/$defs/ShotReviewEvidence"
+    },
+    {
+      "$ref": "#/$defs/ShotMotionRequest"
+    },
+    {
+      "$ref": "#/$defs/GeneratedClipCandidate"
+    },
+    {
+      "$ref": "#/$defs/ShotQCReport"
+    },
+    {
+      "$ref": "#/$defs/StoryEditorialTimeline"
+    }
+  ],
+  "$defs": {
+    "Media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "Sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "projectionReceiptPath",
+        "visualReferencePackPath",
+        "visualReferenceApprovalPath"
+      ],
+      "properties": {
+        "projectionReceiptPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visualReferencePackPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visualReferenceApprovalPath": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "MotionRequestDraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "sources",
+        "shotId",
+        "width",
+        "height",
+        "providerTransferAllowed"
+      ],
+      "properties": {
+        "kind": {
+          "const": "MotionRequestDraft"
+        },
+        "sources": {
+          "$ref": "#/$defs/Sources"
+        },
+        "shotId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16384
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16384
+        },
+        "providerTransferAllowed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ClipIngestDraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "requestPath",
+        "providerReceiptPath",
+        "media"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ClipIngestDraft"
+        },
+        "requestPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "providerReceiptPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "media": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Media"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "ClipReviewDraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "candidatePath",
+        "reviewEvidencePath"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ClipReviewDraft"
+        },
+        "candidatePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewEvidencePath": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "EditorialClipDraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shotId",
+        "candidatePath",
+        "qcPath",
+        "sourceStartFrame"
+      ],
+      "properties": {
+        "shotId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidatePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qcPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceStartFrame": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "AudioCue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "media",
+        "sourceStartFrame",
+        "timelineStartFrame",
+        "durationFrames",
+        "gainMilliDb"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "dialogue",
+            "ambience",
+            "sfx",
+            "music"
+          ]
+        },
+        "media": {
+          "$ref": "#/$defs/Media"
+        },
+        "sourceStartFrame": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "timelineStartFrame": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "durationFrames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "gainMilliDb": {
+          "type": "integer",
+          "minimum": -96000,
+          "maximum": 24000
+        }
+      }
+    },
+    "Caption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "startFrame",
+        "durationFrames"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "startFrame": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "durationFrames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "EditorialDraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "projectionReceiptPath",
+        "timelineId",
+        "clips",
+        "audioPlan",
+        "captions"
+      ],
+      "properties": {
+        "kind": {
+          "const": "EditorialDraft"
+        },
+        "projectionReceiptPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timelineId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "clips": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EditorialClipDraft"
+          }
+        },
+        "audioPlan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AudioCue"
+          }
+        },
+        "captions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Caption"
+          }
+        }
+      }
+    },
+    "OTIOExportDraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "timelinePath"
+      ],
+      "properties": {
+        "kind": {
+          "const": "OTIOExportDraft"
+        },
+        "timelinePath": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "MotionProviderReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "kind",
+        "requestHash",
+        "providerId",
+        "providerJobId",
+        "state",
+        "transferred",
+        "mediaSha256"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "MotionProviderReceipt"
+        },
+        "requestHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "providerId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "providerJobId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "enum": [
+            "SUCCEEDED",
+            "FAILED",
+            "CANCELLED",
+            "OUTCOME_UNKNOWN"
+          ]
+        },
+        "transferred": {
+          "type": "boolean"
+        },
+        "mediaSha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Observed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "visualContinuity",
+        "motion",
+        "narrative"
+      ],
+      "properties": {
+        "visualContinuity": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NOT_RUN"
+          ]
+        },
+        "motion": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NOT_RUN"
+          ]
+        },
+        "narrative": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NOT_RUN"
+          ]
+        }
+      }
+    },
+    "ShotReviewEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "kind",
+        "candidateHash",
+        "reviewer",
+        "basis",
+        "observed"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "ShotReviewEvidence"
+        },
+        "candidateHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "reviewer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis": {
+          "enum": [
+            "OPERATOR_REVIEW",
+            "MODEL_REVIEW"
+          ]
+        },
+        "observed": {
+          "$ref": "#/$defs/Observed"
+        }
+      }
+    },
+    "ShotMotionRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "kind",
+        "sources",
+        "shotId",
+        "sceneGraphHash",
+        "sourceNarrativeSha256",
+        "directorPlanSha256",
+        "continuityBibleSha256",
+        "visualReferencePackHash",
+        "visualReferenceApprovalHash",
+        "durationFrames",
+        "fps",
+        "width",
+        "height",
+        "camera",
+        "composition",
+        "subjectAction",
+        "performanceBeat",
+        "semanticRefs",
+        "startFrame",
+        "entityReferences",
+        "providerTransferAllowed",
+        "contentHash"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "ShotMotionRequest"
+        },
+        "sources": {
+          "$ref": "#/$defs/Sources"
+        },
+        "shotId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sceneGraphHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "sourceNarrativeSha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "directorPlanSha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "continuityBibleSha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "visualReferencePackHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "visualReferenceApprovalHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "durationFrames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "fps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 240
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16384
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16384
+        },
+        "camera": {
+          "$ref": "https://scene-motion-compiler.local/schemas/scene-graph.schema.json#/properties/shots/items/properties/camera"
+        },
+        "composition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subjectAction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "performanceBeat": {
+          "type": "string",
+          "minLength": 1
+        },
+        "semanticRefs": {
+          "$ref": "https://scene-motion-compiler.local/schemas/scene-graph.schema.json#/properties/shots/items/properties/semanticRefs"
+        },
+        "startFrame": {
+          "anyOf": [
+            {
+              "$ref": "https://scene-asset-compiler.local/contracts/visual-reference-pack-v1#/properties/storyboardFrames/items/properties/artifact"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "entityReferences": {
+          "$ref": "https://scene-asset-compiler.local/contracts/visual-reference-pack-v1#/properties/entityReferences"
+        },
+        "providerTransferAllowed": {
+          "type": "boolean"
+        },
+        "contentHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "ClipObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "width",
+        "height",
+        "fpsNumerator",
+        "fpsDenominator",
+        "frameCount",
+        "audioStreamCount"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "fpsNumerator": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "fpsDenominator": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "frameCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "audioStreamCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "GeneratedClipCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "kind",
+        "requestPath",
+        "requestHash",
+        "shotId",
+        "providerReceiptPath",
+        "providerReceiptSha256",
+        "state",
+        "media",
+        "observation",
+        "contentHash"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "GeneratedClipCandidate"
+        },
+        "requestPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "requestHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "shotId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "providerReceiptPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "providerReceiptSha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "state": {
+          "enum": [
+            "SUCCEEDED",
+            "FAILED",
+            "CANCELLED",
+            "OUTCOME_UNKNOWN"
+          ]
+        },
+        "media": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Media"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClipObservation"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "contentHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "Repair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "scope",
+        "shotId",
+        "decision",
+        "reason"
+      ],
+      "properties": {
+        "owner": {
+          "enum": [
+            "Human",
+            "SceneMotionCompiler",
+            "NarrativeCourier",
+            "SceneAssetCompiler"
+          ]
+        },
+        "scope": {
+          "const": "SHOT"
+        },
+        "shotId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision": {
+          "enum": [
+            "BLOCKED",
+            "REGENERATE",
+            "REPAIRABLE"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "ShotQCReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "kind",
+        "candidatePath",
+        "candidateHash",
+        "requestHash",
+        "shotId",
+        "contractChecks",
+        "observed",
+        "reviewEvidencePath",
+        "reviewEvidenceSha256",
+        "verdict",
+        "repairs",
+        "contentHash"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "ShotQCReport"
+        },
+        "candidatePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidateHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "requestHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "shotId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contractChecks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "providerCompleted",
+            "frameRate",
+            "duration",
+            "resolution"
+          ],
+          "properties": {
+            "providerCompleted": {
+              "type": "boolean"
+            },
+            "frameRate": {
+              "type": "boolean"
+            },
+            "duration": {
+              "type": "boolean"
+            },
+            "resolution": {
+              "type": "boolean"
+            }
+          }
+        },
+        "observed": {
+          "$ref": "#/$defs/Observed"
+        },
+        "reviewEvidencePath": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reviewEvidenceSha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "verdict": {
+          "enum": [
+            "PASS",
+            "BLOCKED"
+          ]
+        },
+        "repairs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Repair"
+          }
+        },
+        "contentHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "EditorialClip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shotId",
+        "candidatePath",
+        "qcPath",
+        "sourceStartFrame",
+        "candidateHash",
+        "qcHash",
+        "media",
+        "availableFrames",
+        "timelineStartFrame",
+        "durationFrames"
+      ],
+      "properties": {
+        "shotId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidatePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qcPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceStartFrame": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "candidateHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "qcHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "media": {
+          "$ref": "#/$defs/Media"
+        },
+        "availableFrames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "timelineStartFrame": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "durationFrames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      }
+    },
+    "StoryEditorialTimeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "kind",
+        "state",
+        "timelineId",
+        "projectionReceiptPath",
+        "sceneGraphHash",
+        "directorPlanSha256",
+        "continuityBibleSha256",
+        "fps",
+        "totalDurationFrames",
+        "clips",
+        "transitions",
+        "audioPlan",
+        "audioQualification",
+        "captions",
+        "contentHash"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "kind": {
+          "const": "StoryEditorialTimeline"
+        },
+        "state": {
+          "const": "CANDIDATE"
+        },
+        "timelineId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "projectionReceiptPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sceneGraphHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "directorPlanSha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "continuityBibleSha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "fps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 240
+        },
+        "totalDurationFrames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "clips": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EditorialClip"
+          }
+        },
+        "transitions": {
+          "$ref": "https://scene-motion-compiler.local/schemas/scene-graph.schema.json#/properties/timeline/properties/transitions"
+        },
+        "audioPlan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AudioCue"
+          }
+        },
+        "audioQualification": {
+          "enum": [
+            "NOT_RUN",
+            "N/A"
+          ]
+        },
+        "captions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Caption"
+          }
+        },
+        "contentHash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}

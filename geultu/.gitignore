@@ -1,0 +1,14 @@
+# Cargo build output
+/target/
+
+# Repository-owned tool caches
+/scripts/__pycache__/
+/scripts/**/*.py[co]
+
+# Sample and in-place workspace output
+/work/
+/.geultu/
+
+# Local temporary metadata
+*.tmp
+.DS_Store

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 2,
+  "authorityId": "authority.demo.v2",
+  "narrativeId": "narrative.demo",
+  "sourceRevision": "revision.001",
+  "sourceRefs": {
+    "nvcReleaseBundleHash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "narrativePackageHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "narrativeSceneMapHash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "projectionReceiptHash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "sceneGraphHash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "sourceSemanticManifestHash": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "semanticManifestHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "story": {
+    "premise": "A courier returns to a rooftop before dawn to deliver one final truth.",
+    "theme": "Truth requires a witness.",
+    "setting": "A rain-darkened city rooftop at night."
+  },
+  "characters": [
+    { "characterId": "char.hero", "name": "Mina" }
+  ],
+  "environments": [
+    { "environmentId": "env.rooftop", "name": "Rooftop" }
+  ],
+  "shots": [
+    { "shotId": "shot.001", "sceneId": "scene.001", "ordinal": 0 }
+  ],
+  "meaningItems": [
+    {
+      "meaningId": "meaning.dialogue.001",
+      "semanticRef": { "semanticId": "semantic.dialogue.001", "entryHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111" },
+      "shotId": "shot.001",
+      "kind": "dialogue",
+      "sourceText": "I brought the truth."
+    },
+    {
+      "meaningId": "meaning.action.001",
+      "semanticRef": { "semanticId": "semantic.action.001", "entryHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222" },
+      "shotId": "shot.001",
+      "kind": "action",
+      "sourceText": "Mina steps into the rain."
+    },
+    {
+      "meaningId": "meaning.emotion.001",
+      "semanticRef": { "semanticId": "semantic.emotion.001", "entryHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333" },
+      "shotId": "shot.001",
+      "kind": "emotion",
+      "sourceText": "Mina is resolved."
+    },
+    {
+      "meaningId": "meaning.lightingTransition.001",
+      "semanticRef": { "semanticId": "semantic.lightingTransition.001", "entryHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444" },
+      "shotId": "shot.001",
+      "kind": "lightingTransition",
+      "sourceText": "Blue night shifts toward dawn."
+    },
+    {
+      "meaningId": "meaning.cameraMovement.001",
+      "semanticRef": { "semanticId": "semantic.cameraMovement.001", "entryHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555" },
+      "shotId": "shot.001",
+      "kind": "cameraMovement",
+      "sourceText": "The camera slowly pushes in."
+    }
+  ],
+  "authorityHash": "sha256:a5083c7236b7d58e38ff75b567744ffd1bc17d39f39e840dbf9bee0c08e5d888"
+}

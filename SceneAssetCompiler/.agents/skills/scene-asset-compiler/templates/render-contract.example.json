@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "capture_profile": "PHOTOREAL",
+  "genre_profile": "FANTASY",
+  "semantic_role": "SCENE",
+  "wireframe_layout": {
+    "label_guide_policy": "REQUIRED",
+    "canvas": {
+      "width": 1536,
+      "height": 1024
+    },
+    "slots": [
+      {
+        "slot_id": "background",
+        "bounds": {
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "intended_aspect_ratio": 1.5,
+        "content_intent": "distant enchanted valley and sky",
+        "focal_point": {
+          "x": 0.5,
+          "y": 0.45
+        },
+        "crop_safe_inset": {
+          "top": 0.04,
+          "right": 0.04,
+          "bottom": 0.04,
+          "left": 0.04
+        },
+        "z_order": 0,
+        "layout_tolerance": {
+          "position": 0.02,
+          "scale": 0.03,
+          "rotation": 1
+        }
+      },
+      {
+        "slot_id": "hero-object",
+        "bounds": {
+          "x": 0.3,
+          "y": 0.25,
+          "width": 0.3,
+          "height": 0.5
+        },
+        "intended_aspect_ratio": 0.6,
+        "content_intent": "complete rune-carved lantern as the focal object",
+        "focal_point": {
+          "x": 0.45,
+          "y": 0.5
+        },
+        "crop_safe_inset": {
+          "top": 0.08,
+          "right": 0.08,
+          "bottom": 0.08,
+          "left": 0.08
+        },
+        "z_order": 20,
+        "layout_tolerance": {
+          "position": 0.015,
+          "scale": 0.02,
+          "rotation": 2
+        }
+      }
+    ]
+  }
+}

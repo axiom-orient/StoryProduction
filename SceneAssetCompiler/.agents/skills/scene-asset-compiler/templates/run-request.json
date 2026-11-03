@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "project_id": "project",
+  "goal": "Create reusable visual assets and key scenes from the released narrative.",
+  "source": {
+    "kind": "FREEFORM"
+  },
+  "outputs": [
+    "CHARACTER_ASSETS",
+    "KEY_VISUALS",
+    "LAYERED_PSD"
+  ],
+  "runtime_target": "MOBILE_2D",
+  "review_policy": {
+    "codex_visual_review": true,
+    "human_final_review": false,
+    "allow_warnings": true
+  },
+  "user_direction": [],
+  "reference_paths": []
+}

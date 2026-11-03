@@ -1,0 +1,78 @@
+{
+  "$id": "https://geultu.dev/schema/route-admission/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "budget": {
+      "additionalProperties": false,
+      "properties": {
+        "output_bytes": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "provider_attempts": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "time_ms": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "time_ms",
+        "output_bytes"
+      ],
+      "type": "object"
+    },
+    "capabilities": {
+      "items": {
+        "pattern": "^[a-z][a-z0-9_.:-]{0,127}$",
+        "type": "string"
+      },
+      "maxItems": 128,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "command_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "input_refs": {
+      "additionalProperties": {
+        "$ref": "artifact-ref.schema.json"
+      },
+      "maxProperties": 64,
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]{0,63}$"
+      },
+      "type": "object"
+    },
+    "required_receipts": {
+      "items": {
+        "$ref": "receipt-selector.schema.json"
+      },
+      "maxItems": 256,
+      "type": "array"
+    },
+    "route_id": {
+      "enum": [
+        "TEXT",
+        "TEXT_TO_NVC",
+        "NVC"
+      ]
+    }
+  },
+  "required": [
+    "route_id",
+    "command_id",
+    "input_refs",
+    "required_receipts",
+    "capabilities",
+    "budget"
+  ],
+  "title": "RouteAdmission v1",
+  "type": "object"
+}

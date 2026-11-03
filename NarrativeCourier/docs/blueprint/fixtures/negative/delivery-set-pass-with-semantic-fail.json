@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "set_id": "DS-001",
+  "narrative_package_sha256": "9a284c441042a84a10029db28b8465dea4eacd544fd0fd93a2024ea29aa772ae",
+  "delivery_request_sha256": "6eb654ca7cbe68cc94291bc4dabb0347cbb36b3b1e693398093418898b2ded73",
+  "director_plan_sha256": "22174556944ba34cf3cae10f572a15a775d32069ad5f0cc3c1b51a46996effe0",
+  "asset_index_sha256": "5398be74db216b4692cef20cd9cdf5c038c9a80eca6f611e08af4d1d089b8c9e",
+  "status": "PASS",
+  "deliveries": [
+    {
+      "output_request_id": "html",
+      "artifact": {
+        "kind": "HTML",
+        "path": "visual/deliveries/html/index.html",
+        "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "mime": "text/html"
+      },
+      "backend_id": "web",
+      "backend_fingerprint": "web@fixture",
+      "lineage_refs": [
+        "SRC-001"
+      ],
+      "verification": {
+        "semantic": {
+          "status": "FAIL",
+          "findings": [
+            "false actor"
+          ]
+        },
+        "visual": {
+          "status": "PASS",
+          "findings": []
+        },
+        "technical": {
+          "status": "PASS",
+          "findings": []
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "output_request_id": "storyboard-png",
+      "artifact": {
+        "kind": "PNG",
+        "path": "visual/deliveries/storyboard-png/storyboard.png",
+        "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "mime": "image/png"
+      },
+      "backend_id": "web",
+      "backend_fingerprint": "web@fixture",
+      "lineage_refs": [
+        "SRC-001"
+      ],
+      "verification": {
+        "semantic": {
+          "status": "PASS",
+          "findings": []
+        },
+        "visual": {
+          "status": "PASS",
+          "findings": []
+        },
+        "technical": {
+          "status": "PASS",
+          "findings": []
+        }
+      },
+      "status": "PASS"
+    }
+  ]
+}

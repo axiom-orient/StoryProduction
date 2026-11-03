@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "character_id": "hero",
+  "status": "DRAFT",
+  "master_canvas": {
+    "width": 2048,
+    "height": 3072,
+    "color_space": "sRGB",
+    "alpha": true
+  },
+  "strategy": "BODY_HEAD",
+  "anchors": {
+    "baseline_y": 0,
+    "body_center_x": 1024,
+    "neck_anchor": null,
+    "head_socket_bbox": null
+  },
+  "states": {
+    "whole": [],
+    "body": [
+      "neutral",
+      "hello",
+      "explain",
+      "open_arms",
+      "limit"
+    ],
+    "head": [
+      "neutral",
+      "blink",
+      "happy",
+      "laugh",
+      "surprised",
+      "sad",
+      "angry"
+    ]
+  },
+  "export": {
+    "format": "PNG_RGBA",
+    "trim": false,
+    "runtime_correction_allowed": false
+  }
+}

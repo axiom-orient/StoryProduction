@@ -1,0 +1,12 @@
+{
+  "api_version": "geultu.dev/craft-pack/v1",
+  "pack_id": "story-baseline",
+  "version": "1.0.0",
+  "source_archive": "source/story-baseline-v1.zip",
+  "source_archive_sha256": "05483ac6dda22937ec65ed901dc4807d007016a56d4f8e1ed86dcb721b18fe0f",
+  "workflow_manifest": "prompts/workflow_manifest.json",
+  "workflow_manifest_sha256": "83d72cb0a7405e01dc60388e5e975f4b2b55de5aebd518c80e8b7c3b48397cba",
+  "prompt_asset_count": 2,
+  "license": "MIT",
+  "redistribution_policy": "mit_licensed_story_owned_baseline"
+}

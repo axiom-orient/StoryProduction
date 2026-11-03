@@ -1,0 +1,95 @@
+{
+  "$id": "https://geultu.dev/schema/command-envelope/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "additionalProperties": false,
+      "properties": {
+        "actor_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "capabilities": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_.:-]{0,127}$",
+            "type": "string"
+          },
+          "maxItems": 128,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "actor_id",
+        "session_id",
+        "capabilities"
+      ],
+      "type": "object"
+    },
+    "command_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "expected_project_revision": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "expected_run_revision": {
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "idempotency_key": {
+      "pattern": "^idem_[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "input_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "kind": {
+      "pattern": "^[A-Z][A-Z0-9_]{2,127}$",
+      "type": "string"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "project_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "run_id": {
+      "maxLength": 256,
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "schema_id": {
+      "const": "geultu.dev/command-envelope/v1"
+    }
+  },
+  "required": [
+    "schema_id",
+    "command_id",
+    "idempotency_key",
+    "actor",
+    "project_id",
+    "expected_project_revision",
+    "kind",
+    "payload"
+  ],
+  "title": "CommandEnvelope v1",
+  "type": "object"
+}

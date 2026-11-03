@@ -1,0 +1,6 @@
+{
+  "git": {
+    "sha1": "60a563d3e7a3e9b4facb2abb15c6b30687e06050"
+  },
+  "path_in_vcs": "crates/jsonschema-value"
+}

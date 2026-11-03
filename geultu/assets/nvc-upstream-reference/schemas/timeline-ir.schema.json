@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TimelineIR",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "fps": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "FPS",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "num": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "den": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "num",
+        "den"
+      ]
+    },
+    "tracks": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "Track",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "track_id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "visual",
+              "text",
+              "audio",
+              "fx"
+            ]
+          },
+          "clips": {
+            "type": "array",
+            "items": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "title": "TimelineClip",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "clip_id": {
+                  "type": "string"
+                },
+                "start_frame": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "duration_frames": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "asset_ref": {
+                  "type": "string"
+                },
+                "params": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "clip_id",
+                "start_frame",
+                "duration_frames",
+                "asset_ref",
+                "params"
+              ]
+            }
+          }
+        },
+        "required": [
+          "track_id",
+          "type",
+          "clips"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "fps",
+    "tracks"
+  ]
+}

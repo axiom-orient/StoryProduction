@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-courier.local/schemas/project-config.schema.json",
+  "title": "NarrativeCourier Project Config",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "source_format",
+    "target_duration",
+    "synopsis_file"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_format": {
+      "enum": [
+        "shortform",
+        "webdrama",
+        "novel",
+        "webtoon",
+        "real_story",
+        "original"
+      ]
+    },
+    "target_duration": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "genre": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tone": {
+      "type": "string"
+    },
+    "theme_direction": {
+      "type": "string"
+    },
+    "synopsis_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reference_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "reviewed_synopsis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "handoff_id",
+        "handoff_sha256",
+        "source_project_id",
+        "source_revision",
+        "synopsis_sha256",
+        "title",
+        "language",
+        "actor_id"
+      ],
+      "properties": {
+        "handoff_id": { "type": "string", "pattern": "^gsh_[0-9a-f]{64}$" },
+        "handoff_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "source_project_id": { "type": "string", "minLength": 1 },
+        "source_revision": { "type": "integer", "minimum": 1 },
+        "synopsis_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "title": { "type": "string", "minLength": 1 },
+        "language": { "type": "string", "minLength": 2 },
+        "actor_id": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

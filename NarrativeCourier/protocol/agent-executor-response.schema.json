@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-courier.local/protocol/agent-executor-response.schema.json",
+  "title": "AgentExecutorResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "ok",
+    "artifact",
+    "error",
+    "error_class"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "artifact": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "error": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "error_class": {
+      "enum": [
+        "TRANSIENT",
+        "PERMANENT",
+        "CANCELED",
+        null
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "ok": {
+            "const": true
+          }
+        },
+        "required": [
+          "ok"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifact": {
+            "type": "object"
+          },
+          "error": {
+            "type": "null"
+          },
+          "error_class": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "ok": {
+            "const": false
+          }
+        },
+        "required": [
+          "ok"
+        ]
+      },
+      "then": {
+        "properties": {
+          "artifact": {
+            "type": "null"
+          },
+          "error": {
+            "type": "string",
+            "minLength": 1
+          },
+          "error_class": {
+            "enum": [
+              "TRANSIENT",
+              "PERMANENT",
+              "CANCELED"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

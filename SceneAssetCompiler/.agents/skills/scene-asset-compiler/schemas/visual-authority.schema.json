@@ -1,0 +1,321 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/visual-authority.schema.json",
+  "title": "VisualAuthority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "authority_id",
+    "style",
+    "characters",
+    "props",
+    "world",
+    "color_script",
+    "protected_visual_facts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "authority_id": {
+      "type": "string"
+    },
+    "style": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "style_id",
+        "render_family",
+        "visual_language",
+        "forbidden_drift"
+      ],
+      "properties": {
+        "style_id": {
+          "type": "string"
+        },
+        "render_family": {
+          "type": "string"
+        },
+        "visual_language": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "shape_language",
+            "line_edge",
+            "shading",
+            "texture",
+            "palette",
+            "lighting_principles",
+            "camera_principles",
+            "material_principles",
+            "detail_density"
+          ],
+          "properties": {
+            "shape_language": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "line_edge": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "shading": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "texture": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "palette": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "lighting_principles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "camera_principles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "material_principles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "detail_density": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "forbidden_drift": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reference_paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "character_id",
+          "name",
+          "identity_invariants",
+          "silhouette",
+          "face_anchors",
+          "palette",
+          "costume_rules",
+          "allowed_variation",
+          "scene_variants",
+          "anchor_required"
+        ],
+        "properties": {
+          "character_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "identity_invariants": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "silhouette": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "face_anchors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "palette": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "costume_rules": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "allowed_variation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "scene_variants": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "reference_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "anchor_required": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "prop_id",
+          "name",
+          "identity_invariants",
+          "allowed_variation",
+          "anchor_required"
+        ],
+        "properties": {
+          "prop_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "identity_invariants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "allowed_variation": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reference_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "anchor_required": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "world": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "color_script": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "beat_id",
+          "narrative_refs",
+          "function",
+          "palette",
+          "value_structure",
+          "lighting",
+          "transition"
+        ],
+        "properties": {
+          "beat_id": {
+            "type": "string"
+          },
+          "narrative_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "function": {
+            "type": "string"
+          },
+          "palette": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "value_structure": {
+            "type": "string"
+          },
+          "lighting": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "transition": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protected_visual_facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fact",
+          "source_ref"
+        ],
+        "properties": {
+          "fact": {
+            "type": "string"
+          },
+          "source_ref": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

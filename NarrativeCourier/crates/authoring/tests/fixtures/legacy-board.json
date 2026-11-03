@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "nvc.text-storyboard/1",
+  "source": {
+    "narrativePackageSha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "sceneMapSha256": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "releaseBundleSha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "taskHash": "sha256:45866da970c9718f6d1cf12326befc773603be6884c1a88467793c626bd8ea3d",
+  "baseHash": null,
+  "scenes": [
+    {
+      "sceneId": "SCN-001",
+      "intent": "원문과 연출의 결속을 확인한다",
+      "panels": [
+        {
+          "panelId": "panel-1",
+          "composition": "한글과 UTF-8 bytes",
+          "staging": "시선과 동선",
+          "sourceRefs": [
+            {
+              "semanticId": "semantic.SCN-001.action.0",
+              "entryHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+            }
+          ],
+          "soundNotes": "침묵",
+          "transition": "연결"
+        }
+      ]
+    }
+  ],
+  "changeSummary": "Synthetic legacy serialization only",
+  "assumptions": [],
+  "openQuestions": [],
+  "contentHash": "sha256:264d42954ad9ae9718e16251a986e751d5b682b41ddb9bc55328fc1b1a52c91c"
+}

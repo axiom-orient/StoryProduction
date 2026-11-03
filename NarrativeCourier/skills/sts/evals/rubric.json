@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "name": "STS fidelity/integrity rubric",
+  "hard_failures": [
+    "protected source assertion drift",
+    "protected material relation drift",
+    "ending outcome drift",
+    "loss of ESSENTIAL source-form function without equivalent",
+    "material ending-meaning drift",
+    "decisive actor ownership drift",
+    "polarity or epistemic drift",
+    "undeclared structural invention",
+    "story-changing causal break",
+    "impossible material transition chain",
+    "material round-trip source loss"
+  ],
+  "fidelity_dimensions": [
+    "SOURCE_ASSERTIONS",
+    "SOURCE_RELATIONS",
+    "ENDING_OUTCOME",
+    "ENDING_MEANING",
+    "ACTOR_OWNERSHIP",
+    "KNOWLEDGE_EPISTEMIC",
+    "FORM_FUNCTION",
+    "TRANSFORMATION_INVENTION"
+  ],
+  "integrity_dimensions": [
+    "CAUSALITY",
+    "KNOWLEDGE_STATE",
+    "CHARACTER_RELATIONSHIP_STATE",
+    "PHYSICAL_SPATIAL_STATE",
+    "SCENE_DEPENDENCIES",
+    "PLAYABILITY",
+    "SCENE_ECONOMY"
+  ],
+  "rule": "Never average a hard failure away. Fidelity and integrity remain separate judgments."
+}

@@ -1,0 +1,29 @@
+{
+  "decisions": [
+    {
+      "decision": "meaning_approval",
+      "owner": "HUMAN"
+    },
+    {
+      "decision": "candidate_generation",
+      "owner": "AGENT_PROVIDER"
+    },
+    {
+      "decision": "command_admission",
+      "owner": "PROGRAM"
+    },
+    {
+      "decision": "validation_fact",
+      "owner": "VALIDATOR_PROGRAM"
+    },
+    {
+      "decision": "state_transition",
+      "owner": "DOMAIN_REDUCER"
+    },
+    {
+      "decision": "external_effect",
+      "owner": "EFFECT_ADAPTER_AFTER_ADMISSION"
+    }
+  ],
+  "schema_id": "geultu.dev/authority-catalog/v1"
+}

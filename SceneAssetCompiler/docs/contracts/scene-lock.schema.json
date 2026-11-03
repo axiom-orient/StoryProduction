@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SceneLock",
+  "$defs": {
+    "artifactLock": {
+      "type":"object", "additionalProperties":false,
+      "required":["schema_version","scene_id","lock_kind","artifact_path","artifact_sha256","review_path","review_sha256","note"],
+      "properties":{
+        "schema_version":{"const":1}, "scene_id":{"type":"string"},
+        "lock_kind":{"enum":["COMPOSITION_LOCK","TARGET_LOCK","LAYOUT_LOCK","COORDINATE_LOCK","COMPOSITE_LOCK","DELIVERY_LOCK"]},
+        "artifact_path":{"type":"string"}, "artifact_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "review_path":{"type":"string"}, "review_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}, "note":{"type":"string"}
+      }
+    },
+    "layerLock": {
+      "type":"object", "additionalProperties":false,
+      "required":["schema_version","scene_id","lock_kind","layer_id","artifact_path","artifact_sha256","review_path","review_sha256","note"],
+      "properties":{
+        "schema_version":{"const":1}, "scene_id":{"type":"string"}, "lock_kind":{"const":"LAYER_LOCK"}, "layer_id":{"type":"string"},
+        "artifact_path":{"type":"string"}, "artifact_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "review_path":{"type":"string"}, "review_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}, "note":{"type":"string"}
+      }
+    },
+    "placeholderLock": {
+      "type":"object", "additionalProperties":false,
+      "required":["schema_version","scene_id","lock_kind","slot_id","artifact_path","artifact_sha256","review_path","review_sha256","note"],
+      "properties":{
+        "schema_version":{"const":1}, "scene_id":{"type":"string"}, "lock_kind":{"const":"PLACEHOLDER_LOCK"}, "slot_id":{"type":"string","pattern":"^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+        "artifact_path":{"type":"string"}, "artifact_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "review_path":{"type":"string"}, "review_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}, "note":{"type":"string"}
+      }
+    }
+  },
+  "oneOf": [
+    {"$ref":"#/$defs/artifactLock"},
+    {"$ref":"#/$defs/layerLock"},
+    {"$ref":"#/$defs/placeholderLock"},
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version","scene_id","lock_kind","layout_lock_sha256","placeholder_lock_sha256s","placeholders"],
+      "properties": {
+        "schema_version":{"const":1},
+        "scene_id":{"type":"string"},
+        "lock_kind":{"const":"PLACEHOLDER_SET_LOCK"},
+        "layout_lock_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "placeholder_lock_sha256s":{"type":"object","minProperties":1,"propertyNames":{"pattern":"^[A-Za-z0-9][A-Za-z0-9._-]*$"},"additionalProperties":{"type":"string","pattern":"^[0-9a-f]{64}$"}},
+        "placeholders":{"type":"array","minItems":1,"items":{"$ref":"#/$defs/placeholderLock"}}
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version","scene_id","lock_kind","layers"],
+      "properties": {
+        "schema_version":{"const":1},
+        "scene_id":{"type":"string"},
+        "lock_kind":{"const":"ASSET_LOCK"},
+        "layers":{"type":"array","items":{"$ref":"#/$defs/layerLock"}},
+        "layout_lock_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "placeholder_set_lock_sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}
+      }
+    }
+  ]
+}

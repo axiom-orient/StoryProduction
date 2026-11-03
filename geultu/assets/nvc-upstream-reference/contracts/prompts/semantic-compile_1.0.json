@@ -1,0 +1,28 @@
+{
+  "prompt_id": "semantic-compile/1.0",
+  "stage_id": "S01_SEMANTIC_COMPILE",
+  "purpose": "Compile canonical narrative into evidence-linked semantic IR",
+  "authoritative_inputs": [
+    "canonical_narrative",
+    "constraints"
+  ],
+  "allowed_inference": [
+    "reference resolution",
+    "theme inference"
+  ],
+  "forbidden_mutation": [
+    "canonical plot",
+    "event order",
+    "explicit facts"
+  ],
+  "output_schema": "schemas/story-ir.schema.json",
+  "hard_requirements": [
+    "Every explicit item cites source",
+    "Mark inferred/creative honestly"
+  ],
+  "evaluation_rubric": [
+    "source fidelity",
+    "causal completeness"
+  ],
+  "template": "Implementation MUST inject only authoritative inputs and request output conforming exactly to output_schema. Natural-language wording is versioned separately; schema and hard requirements are authoritative."
+}

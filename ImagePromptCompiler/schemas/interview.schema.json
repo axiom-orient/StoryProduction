@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "answers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "propertyNames": {
+        "minLength": 1,
+        "pattern": "^\\S(?:[\\s\\S]*\\S)?$"
+      },
+      "type": "object"
+    },
+    "brief": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "image"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "kind",
+    "brief"
+  ],
+  "title": "promptGen guided interview request",
+  "type": "object"
+}

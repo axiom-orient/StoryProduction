@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/contracts/scene-asset-pack-audit/v1.schema.json",
+  "title": "SceneAssetPackAudit v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "auditId", "status", "projection", "assetPackHash", "bindingManifestHash", "assetIds", "requirementIds", "checks"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "auditId": { "type": "string", "pattern": "^SAA1-[0-9a-f]{64}$" },
+    "status": { "const": "COMPLETE" },
+    "projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receiptSha256", "sceneGraphHash", "sceneCount", "sceneIds"],
+      "properties": {
+        "receiptSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "sceneGraphHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "sceneCount": { "type": "integer", "minimum": 1 },
+        "sceneIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^SCN-[0-9]{3,}$" } }
+      }
+    },
+    "assetPackHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "bindingManifestHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "assetIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{1,127}$" } },
+    "requirementIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^(CHARACTER_SPRITE|ENVIRONMENT_PLATE|PROP_CUTOUT|SHOT_KEYFRAME):[A-Za-z][A-Za-z0-9._:-]{1,127}$" } },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["checkId", "targetKind", "targetId", "status", "evidence"],
+        "properties": {
+          "checkId": { "type": "string", "minLength": 1 },
+          "targetKind": { "enum": ["SOURCE_ARTIFACT", "RUNTIME_DERIVATIVE", "REQUIREMENT"] },
+          "targetId": { "type": "string", "minLength": 1 },
+          "status": { "const": "PASS" },
+          "evidence": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    }
+  }
+}

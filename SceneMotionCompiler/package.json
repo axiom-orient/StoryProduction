@@ -1,0 +1,42 @@
+{
+  "name": "scene-motion-compiler",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "description": "Track B narrative projection, verified asset handoff, moving HTML, and release custody",
+  "scripts": {
+    "test": "node scripts/run-test-suite.mjs",
+    "verify": "./scripts/verify.sh",
+    "verify:aggregate": "node scripts/aggregate-verifier.mjs",
+    "contracts:verify": "node scripts/validate-contracts.mjs",
+    "syntax:check": "node scripts/check-syntax.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "source:manifest": "node scripts/source-manifest.mjs --out SOURCE_MANIFEST.json",
+    "verify:manifest": "node scripts/verify-source-tree.mjs",
+    "verify:source": "node scripts/run-source-integrity.mjs .tmp/source-integrity",
+    "verify:source:clean": "node scripts/verify-clean-source-package.mjs",
+    "package:source": "node scripts/package-source.mjs",
+    "smoke:trackb": "node scripts/run-trackb-smoke.mjs",
+    "studio:macos:build": "node scripts/build-macos-launcher.mjs",
+    "studio:macos": "node scripts/build-macos-launcher.mjs --open",
+    "smoke:studio:contract": "node scripts/run-studio-smoke.mjs . .tmp/studio-contract --contract-only",
+    "smoke": "npm run contracts:verify && npm run contracts:pin && npm run smoke:trackb && npm run smoke:cli && npm run smoke:studio:contract",
+    "smoke:cli": "node scripts/run-cli-smoke.mjs",
+    "contracts:pin": "node scripts/check-narrative-courier-pin.mjs && node scripts/check-scene-asset-compiler-pin.mjs",
+    "trackb:custody:build": "node scripts/build-trackb-custody.mjs",
+    "package:runtime": "node scripts/package-trackb-runtime.mjs",
+    "smoke:release": "node scripts/run-lifecycle-qa.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.0.0",
+    "zod": "^4.2.0"
+  },
+  "bin": {
+    "smc": "packages/cli/src/main.js",
+    "smc-mcp": "apps/mcp-server/src/cli.js"
+  }
+}

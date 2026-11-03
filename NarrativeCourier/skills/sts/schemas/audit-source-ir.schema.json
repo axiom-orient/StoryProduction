@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STS Audit Source IR",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "assertions",
+    "relations",
+    "gaps",
+    "conflicts",
+    "source_form",
+    "ending",
+    "open_adaptation_space",
+    "confidence"
+  ],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quote"
+      ],
+      "properties": {
+        "quote": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "properties": {
+    "assertions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "assertion",
+          "actor",
+          "polarity",
+          "epistemic",
+          "materiality",
+          "protected",
+          "narrative_function",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "pattern": "^SRC-[0-9]{3,}$"
+          },
+          "assertion": {
+            "type": "string"
+          },
+          "actor": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "polarity": {
+            "enum": [
+              "AFFIRM",
+              "NEGATE"
+            ]
+          },
+          "epistemic": {
+            "enum": [
+              "FACT",
+              "BELIEF",
+              "CLAIM",
+              "UNKNOWN"
+            ]
+          },
+          "materiality": {
+            "enum": [
+              "CORE",
+              "SUPPORT",
+              "TEXTURE"
+            ]
+          },
+          "protected": {
+            "type": "boolean"
+          },
+          "narrative_function": {
+            "type": "string"
+          },
+          "evidence": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "from",
+          "to",
+          "materiality",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "pattern": "^REL-[0-9]{3,}$"
+          },
+          "type": {
+            "enum": [
+              "CAUSES",
+              "ENABLES",
+              "PREVENTS",
+              "BEFORE",
+              "AFTER",
+              "KNOWS",
+              "BELIEVES",
+              "IDENTITY",
+              "RELATIONSHIP",
+              "WORLD_RULE"
+            ]
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "materiality": {
+            "enum": [
+              "CORE",
+              "SUPPORT",
+              "TEXTURE"
+            ]
+          },
+          "evidence": {
+            "$ref": "#/$defs/evidence"
+          },
+          "acquisition": {
+            "enum": [
+              "SOURCE_GIVEN",
+              "OBSERVED",
+              "TOLD",
+              "INFERRED",
+              "REMEMBERED",
+              "UNKNOWN"
+            ]
+          },
+          "world_rule": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "trigger",
+              "scope",
+              "effect",
+              "cost",
+              "limits",
+              "reversibility",
+              "known_by"
+            ],
+            "properties": {
+              "trigger": {
+                "type": "string"
+              },
+              "scope": {
+                "type": "string"
+              },
+              "effect": {
+                "type": "string"
+              },
+              "cost": {
+                "type": "string"
+              },
+              "limits": {
+                "type": "string"
+              },
+              "reversibility": {
+                "type": "string"
+              },
+              "known_by": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "WORLD_RULE"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "world_rule"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "KNOWS",
+                    "BELIEVES"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "acquisition"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "decision"
+        ],
+        "properties": {
+          "id": {
+            "pattern": "^GAP-[0-9]{3,}$"
+          },
+          "decision": {
+            "type": "string"
+          },
+          "why_needed": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "issue"
+        ],
+        "properties": {
+          "id": {
+            "pattern": "^CON-[0-9]{3,}$"
+          },
+          "issue": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ending": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "decisive_actors",
+        "semantic_reframe",
+        "residue"
+      ],
+      "properties": {
+        "outcome": {
+          "type": "string"
+        },
+        "decisive_actors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "semantic_reframe": {
+          "type": "string"
+        },
+        "residue": {
+          "type": "string"
+        }
+      }
+    },
+    "open_adaptation_space": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "source_form": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "function",
+        "narrative_function",
+        "externalization_items"
+      ],
+      "properties": {
+        "function": {
+          "enum": [
+            "NEUTRAL",
+            "SUPPORTING",
+            "ESSENTIAL"
+          ]
+        },
+        "narrative_function": {
+          "type": "string"
+        },
+        "externalization_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

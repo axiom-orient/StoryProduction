@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://story-production.local/contracts/capability-request/v1",
+  "title": "StoryCapabilityRequest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "requestId",
+    "capability",
+    "source",
+    "payload",
+    "provider",
+    "rights",
+    "authorization",
+    "requestedBy",
+    "expectedOutputs",
+    "createdAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "story.capability-request/1"
+    },
+    "requestId": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/identity"
+    },
+    "capability": {
+      "enum": [
+        "image.prompt.compile",
+        "image.generate",
+        "image.edit",
+        "image.effect"
+      ]
+    },
+    "source": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/sourceRef"
+    },
+    "payload": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/artifactRef"
+    },
+    "provider": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/provider"
+    },
+    "rights": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/rights"
+    },
+    "authorization": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/authorization"
+    },
+    "requestedBy": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/actor"
+    },
+    "expectedOutputs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "mediaType"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "mediaType": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "references": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/artifactRef"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "provider": {
+            "properties": {
+              "networkPolicy": {
+                "const": "required"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "rights": {
+            "properties": {
+              "providerTransferAllowed": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "capability": {
+            "const": "image.edit"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "references"
+        ],
+        "properties": {
+          "references": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

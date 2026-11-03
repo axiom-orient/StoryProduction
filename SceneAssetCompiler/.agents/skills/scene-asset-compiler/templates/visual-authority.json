@@ -1,0 +1,84 @@
+{
+  "schema_version": 2,
+  "authority_id": "VA-project",
+  "style": {
+    "style_id": "ST-main",
+    "render_family": "GRAPHIC_NOVEL",
+    "visual_language": {
+      "shape_language": [
+        "clear readable silhouette; simplified secondary forms"
+      ],
+      "line_edge": [
+        "clean intentional contour hierarchy; avoid noisy micro-lines"
+      ],
+      "shading": [
+        "restrained cel-like value grouping with selective soft transitions"
+      ],
+      "texture": [
+        "subtle paper/ink character; texture never competes with focal subject"
+      ],
+      "palette": [
+        "muted blue-gray base with controlled warm accent"
+      ],
+      "lighting_principles": [
+        "light must be motivated by scene sources or explicit graphic design intent"
+      ],
+      "camera_principles": [
+        "story-first framing; avoid arbitrary spectacle or lens distortion"
+      ],
+      "material_principles": [
+        "describe material response with concrete physical or intentionally stylized cues"
+      ],
+      "detail_density": [
+        "highest at focal area, reduced toward supporting and background regions"
+      ]
+    },
+    "forbidden_drift": [
+      "generic glossy 3D look",
+      "random photoreal skin rendering",
+      "unmotivated neon rim light"
+    ],
+    "reference_paths": []
+  },
+  "characters": [
+    {
+      "character_id": "hero",
+      "name": "Hero",
+      "identity_invariants": [
+        "same face proportions and age across all views",
+        "short dark hair with one stable silhouette",
+        "small triangular brass earring on left ear"
+      ],
+      "silhouette": [
+        "compact athletic adult silhouette"
+      ],
+      "face_anchors": [
+        "oval face",
+        "straight medium-width nose",
+        "slightly heavy upper eyelids"
+      ],
+      "palette": [
+        "dark hair",
+        "warm neutral skin",
+        "muted blue-gray costume",
+        "brass accent"
+      ],
+      "costume_rules": [
+        "costume construction remains unchanged unless a scene variant explicitly overrides it"
+      ],
+      "allowed_variation": [
+        "pose",
+        "expression",
+        "camera angle",
+        "scene lighting"
+      ],
+      "scene_variants": [],
+      "reference_paths": [],
+      "anchor_required": true
+    }
+  ],
+  "props": [],
+  "world": [],
+  "color_script": [],
+  "protected_visual_facts": []
+}

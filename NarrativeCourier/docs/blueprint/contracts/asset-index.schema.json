@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://narrative-courier.local/contracts/asset-index.schema.json",
+  "title": "AssetIndex",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "index_id",
+    "narrative_package_sha256",
+    "director_plan_sha256",
+    "assets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "index_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "narrative_package_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "director_plan_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_id",
+        "source_request_id",
+        "kind",
+        "path",
+        "sha256",
+        "mime",
+        "size_bytes",
+        "backend_id",
+        "backend_fingerprint"
+      ],
+      "properties": {
+        "asset_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_request_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "IMAGE",
+            "VECTOR",
+            "AUDIO",
+            "VIDEO",
+            "FONT",
+            "MODEL_3D",
+            "DATA"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "mime": {
+          "type": "string",
+          "minLength": 1
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "backend_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "backend_fingerprint": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

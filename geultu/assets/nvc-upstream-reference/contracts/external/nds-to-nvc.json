@@ -1,0 +1,10 @@
+{
+  "port_id": "NVC_IN_NARRATIVE_PACKAGE",
+  "direction": "input",
+  "schema": "schemas/narrative-package.schema.json",
+  "authority": "canonical",
+  "producer": "NarrativeDevelopmentSystem",
+  "consumer": "S00_PACKAGE_PREFLIGHT",
+  "mutability": "immutable",
+  "accept_condition": "NarrativePackage schema valid; exactly one canonical_narrative; target and authority hard gates pass"
+}

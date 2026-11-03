@@ -1,0 +1,103 @@
+{
+  "stage_id": "S06_ASSET_PLAN",
+  "version": "1.0.0",
+  "artifact_owner": "ArtDepartment",
+  "executor_classes": [
+    "LLM",
+    "DET"
+  ],
+  "inputs": [
+    {
+      "kind": "shot_bundle_ir",
+      "schema": "schemas/shot-ir.schema.json",
+      "required": true
+    },
+    {
+      "kind": "director_ir",
+      "schema": "schemas/director-ir.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "asset_manifest",
+      "schema": "schemas/asset-manifest.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "all shot asset refs resolved",
+    "continuity scopes defined",
+    "identity-critical forbidden mutations defined",
+    "no unused expensive asset"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "AST_001_MISSING_REFERENCE",
+    "AST_002_IDENTITY_SPEC_INCOMPLETE",
+    "AST_003_CONTINUITY_SCOPE_INVALID",
+    "AST_004_HIDDEN_AREA_REQUIRED",
+    "AST_005_RIGHTS_PROVENANCE_MISSING"
+  ],
+  "retry_policy": {
+    "max_repairs": 2
+  },
+  "next": {
+    "on_pass": "S07_ASSET_MATERIALIZE",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "collect unique asset requirements from shots",
+      "executor_class": "DET",
+      "inputs": [
+        "shot_bundle_ir"
+      ],
+      "outputs": [
+        "asset_requirements"
+      ],
+      "hard_gate": "all shot refs represented",
+      "failure_codes": [
+        "AST_001_MISSING_REFERENCE"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "define identity continuity hidden-area and mutation rules",
+      "executor_class": "LLM",
+      "inputs": [
+        "asset_requirements",
+        "director_ir"
+      ],
+      "outputs": [
+        "asset_manifest.draft"
+      ],
+      "hard_gate": "identity-critical assets fully specified",
+      "failure_codes": [
+        "AST_002_IDENTITY_SPEC_INCOMPLETE",
+        "AST_004_HIDDEN_AREA_REQUIRED"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "remove unused assets and validate rights/continuity scope",
+      "executor_class": "DET",
+      "inputs": [
+        "asset_manifest.draft"
+      ],
+      "outputs": [
+        "asset_manifest"
+      ],
+      "hard_gate": "no dangling/unused asset and scopes valid",
+      "failure_codes": [
+        "AST_003_CONTINUITY_SCOPE_INVALID",
+        "AST_005_RIGHTS_PROVENANCE_MISSING"
+      ]
+    }
+  ]
+}

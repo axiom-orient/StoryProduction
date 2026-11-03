@@ -1,0 +1,11 @@
+Schemas: 22
+Stages: 13
+Substeps: 40
+Prompt specs: 8
+Director presets: 4
+Failure codes: 76
+Runtime invariants: 22
+External ports: 2
+Fixture artifacts: 8
+Stage chain: S00_PACKAGE_PREFLIGHT -> S01_SEMANTIC_COMPILE -> S02_DIRECTION_SYNTHESIS -> S03_ADAPTATION_PLAN -> S04_SCENE_PLAN -> S05_SHOT_PLAN -> S06_ASSET_PLAN -> S07_ASSET_MATERIALIZE -> S08_RENDER_PLAN -> S09_SHOT_RENDER -> S10_COMPOSE -> S11_VERIFY_REPAIR -> S12_PACKAGE_MASTER
+AUDIT: PASS

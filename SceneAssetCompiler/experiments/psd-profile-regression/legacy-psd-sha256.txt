@@ -1,0 +1,2 @@
+458f4a4321830903c4d43b444ba7150c98daf91a744425299fb86c657401cd26  tests/fixtures/legacy-psd/mother_asset_v0.7.psd
+2568450bce14d725504a0b9499b862ef2da5ef5897fcb1d7772c35a7e922df41  tests/fixtures/legacy-psd/scene_master_v0.7.psd

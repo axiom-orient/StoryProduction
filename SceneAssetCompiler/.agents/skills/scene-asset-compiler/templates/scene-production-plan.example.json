@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "scene_id": "SCN-hanok-dog-001",
+  "authority_id": "A-project",
+  "narrative_refs": [
+    "SCN-001"
+  ],
+  "deliverables": [
+    "PNG",
+    "PSD"
+  ],
+  "visual_brief": {
+    "narrative_function": "Establish everyday warmth and free play in a Korean traditional home.",
+    "emotional_intent": "peaceful, lively, intimate",
+    "first_read": "the white dog in motion",
+    "focal_hierarchy": [
+      "white dog",
+      "hanok courtyard",
+      "warm afternoon light"
+    ],
+    "composition": {
+      "framing": "wide establishing shot",
+      "camera_angle": "eye level",
+      "perspective": "natural human-scale perspective",
+      "lens_behavior": "natural perspective without exaggerated wide-angle distortion",
+      "focus_depth": "dog and hanok architecture both clearly readable",
+      "subject_placement": "dog separated from architecture with clear silhouette",
+      "depth_layers": [
+        "foreground plants",
+        "dog and yard",
+        "hanok structure"
+      ],
+      "negative_space": "quiet upper courtyard/roof area without competing focal objects"
+    },
+    "lighting": {
+      "motivation": "natural afternoon daylight",
+      "direction": "soft side light",
+      "quality": "warm soft daylight",
+      "contrast": "gentle",
+      "color_relationship": "warm timber and earth tones with the white dog as the clean bright accent"
+    },
+    "color": {
+      "palette_role": "warm everyday life",
+      "dominant": [
+        "natural wood brown",
+        "earth/stone beige"
+      ],
+      "accent": [
+        "white dog",
+        "muted foliage green"
+      ],
+      "value_structure": "middle-high key, not sunset"
+    },
+    "materials": [
+      "aged timber",
+      "roof tile",
+      "stone and packed earth",
+      "soft dog fur"
+    ],
+    "atmosphere": [
+      "calm warm afternoon air"
+    ],
+    "environment_rules": [
+      "clearly Korean hanok eaves, timber columns and lattice doors",
+      "traditional courtyard, not European/Mediterranean architecture"
+    ],
+    "continuity": [],
+    "avoid": [
+      "people as primary subjects",
+      "European cottage",
+      "Mediterranean villa",
+      "sun on horizon",
+      "sunset",
+      "text",
+      "logos",
+      "UI",
+      "infographic"
+    ]
+  },
+  "authority_refs": {
+    "character_ids": [],
+    "prop_ids": [],
+    "color_script_beat_ids": []
+  },
+  "composition_mode": "ABSTRACT_BLOCKING",
+  "composition_candidates": [
+    {
+      "candidate_id": "C1",
+      "blocking": "dog runs left-to-right across the mid-foreground; open yard remains readable",
+      "camera": "eye-level from the house threshold",
+      "framing": "wide, dog on lower-center/right third",
+      "variation_intent": "clear action silhouette and architectural context"
+    },
+    {
+      "candidate_id": "C2",
+      "blocking": "dog runs toward camera from the center of the courtyard",
+      "camera": "slightly lower eye-level from garden edge",
+      "framing": "wide with strong depth from gate to house",
+      "variation_intent": "energetic movement with deeper courtyard perspective"
+    },
+    {
+      "candidate_id": "C3",
+      "blocking": "dog arcs around a low courtyard object while hanok façade spans background",
+      "camera": "eye-level diagonal view across yard",
+      "framing": "wide asymmetrical composition",
+      "variation_intent": "natural candid energy with layered depth"
+    },
+    {
+      "candidate_id": "C4",
+      "blocking": "dog crosses a patch of sunlight near the foreground while the shaded hanok frames it",
+      "camera": "eye-level from side of courtyard",
+      "framing": "wide with foreground foliage edge",
+      "variation_intent": "strong first-read via light/value rather than center placement"
+    }
+  ],
+  "target_candidate_policy": {
+    "recommended": 2,
+    "maximum": 3,
+    "stop_when": "ONE_APPROVABLE_CANDIDATE"
+  },
+  "characters": [],
+  "props": [],
+  "layers": [
+    {
+      "layer_id": "background.backplate",
+      "semantic_role": "BACKGROUND",
+      "owner_kind": "NONE",
+      "owner_id": null,
+      "generation_intent": "complete distant courtyard/sky/backdrop without the dog or foreground plants",
+      "z_band": 0,
+      "occlusion_policy": "VISIBLE_ONLY",
+      "reuse_scope": "SCENE_ONLY",
+      "registration_policy": "FULL_CANVAS_LOCKED",
+      "candidate_policy": {
+        "recommended": 1,
+        "maximum": 2,
+        "stop_when": "ONE_APPROVABLE_CANDIDATE"
+      },
+      "prompt_profile": "PROJECT_STYLE",
+      "path_boundary": "NONE",
+      "edge_class": "HARD"
+    },
+    {
+      "layer_id": "environment.hanok",
+      "semantic_role": "ENVIRONMENT",
+      "owner_kind": "NONE",
+      "owner_id": null,
+      "generation_intent": "hanok architecture and courtyard structural elements only, matching target perspective",
+      "z_band": 10,
+      "occlusion_policy": "VISIBLE_ONLY",
+      "reuse_scope": "PROJECT_REUSABLE",
+      "registration_policy": "FULL_CANVAS_LOCKED",
+      "candidate_policy": {
+        "recommended": 1,
+        "maximum": 2,
+        "stop_when": "ONE_APPROVABLE_CANDIDATE"
+      },
+      "prompt_profile": "PROJECT_STYLE",
+      "path_boundary": "NONE",
+      "edge_class": "HARD"
+    },
+    {
+      "layer_id": "character.white_dog",
+      "semantic_role": "CHARACTER",
+      "owner_kind": "NONE",
+      "owner_id": null,
+      "generation_intent": "white dog only, exact target pose/scale/placement; complete dog body on transparent canvas",
+      "z_band": 30,
+      "occlusion_policy": "COMPLETE_OBJECT",
+      "reuse_scope": "SCENE_ONLY",
+      "registration_policy": "FULL_CANVAS_LOCKED",
+      "candidate_policy": {
+        "recommended": 2,
+        "maximum": 4,
+        "stop_when": "ONE_APPROVABLE_CANDIDATE"
+      },
+      "prompt_profile": "PROJECT_STYLE",
+      "path_boundary": "SOFT_ENVELOPE",
+      "edge_class": "SOFT_ALPHA"
+    },
+    {
+      "layer_id": "foreground.plants",
+      "semantic_role": "FOREGROUND_OCCLUDER",
+      "owner_kind": "NONE",
+      "owner_id": null,
+      "generation_intent": "foreground plant/foliage occluder only, exact target placement on transparent canvas",
+      "z_band": 60,
+      "occlusion_policy": "VISIBLE_ONLY",
+      "reuse_scope": "SCENE_ONLY",
+      "registration_policy": "FULL_CANVAS_LOCKED",
+      "candidate_policy": {
+        "recommended": 1,
+        "maximum": 2,
+        "stop_when": "ONE_APPROVABLE_CANDIDATE"
+      },
+      "prompt_profile": "PROJECT_STYLE",
+      "path_boundary": "SAVED_PATH",
+      "edge_class": "ORGANIC"
+    },
+    {
+      "layer_id": "shadow.dog",
+      "semantic_role": "SHADOW_LIGHT_HELPER",
+      "owner_kind": "NONE",
+      "owner_id": null,
+      "generation_intent": "dog cast shadow only, matching target light direction and ground contact on transparent canvas",
+      "z_band": 25,
+      "occlusion_policy": "VISIBLE_ONLY",
+      "reuse_scope": "SCENE_ONLY",
+      "registration_policy": "FULL_CANVAS_LOCKED",
+      "candidate_policy": {
+        "recommended": 1,
+        "maximum": 2,
+        "stop_when": "ONE_APPROVABLE_CANDIDATE"
+      },
+      "prompt_profile": "PROJECT_STYLE",
+      "path_boundary": "NONE",
+      "edge_class": "HARD"
+    }
+  ],
+  "output": {
+    "size": "1536x1024",
+    "target_format": "PNG"
+  },
+  "budgets": {
+    "max_total_generations": 32,
+    "max_parallel_hint": 5
+  }
+}

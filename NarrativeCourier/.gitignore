@@ -1,0 +1,22 @@
+# Product data / generated creative work
+projects/
+
+# Rust / Tauri / Node
+target/
+src-tauri/target/
+src-tauri/gen/
+node_modules/
+
+# Local tooling
+.claude/
+docs/.bkit-memory.json
+docs/.pdca-status.json
+docs/.pdca-snapshots/
+
+# Temporary / OS
+temp_pages/
+.DS_Store
+Thumbs.db
+desktop.ini
+__pycache__/
+*.pyc

@@ -1,0 +1,71 @@
+{
+  "researched_at": "2026-08-21",
+  "principle": "adapters are capability-qualified; none defines core architecture",
+  "sources": [
+    {
+      "name": "agent-browser",
+      "url": "https://github.com/vercel-labs/agent-browser",
+      "decision": "QUALIFY_FIRST_BROWSER_CLI"
+    },
+    {
+      "name": "Playwright",
+      "url": "https://github.com/microsoft/playwright",
+      "decision": "ADOPT_CI_VISUAL_OR_CAPTURE_ALTERNATIVE"
+    },
+    {
+      "name": "WebMotion",
+      "url": "https://github.com/superhq-ai/webmotion",
+      "decision": "EXPERIMENTAL_VIDEO_QUALIFY_FIRST"
+    },
+    {
+      "name": "HyperFrames",
+      "url": "https://github.com/heygen-com/hyperframes",
+      "decision": "OPTIONAL_VIDEO_BACKEND"
+    },
+    {
+      "name": "Motion Canvas",
+      "url": "https://github.com/motion-canvas/motion-canvas",
+      "decision": "OPTIONAL_VECTOR_MOTION_SPECIALIST"
+    },
+    {
+      "name": "Revideo",
+      "url": "https://github.com/redotvideo/revideo",
+      "decision": "OPTIONAL_VIDEO_EDITOR_TEMPLATE_RUNTIME"
+    },
+    {
+      "name": "Paged.js",
+      "url": "https://github.com/pagedjs/pagedjs",
+      "decision": "OPTIONAL_PAGED_PRINT"
+    },
+    {
+      "name": "Cytoscape.js",
+      "url": "https://github.com/cytoscape/cytoscape.js",
+      "decision": "OPTIONAL_GRAPH"
+    },
+    {
+      "name": "dotLottie Web",
+      "url": "https://github.com/LottieFiles/dotlottie-web",
+      "decision": "OPTIONAL_VECTOR_ASSET_RUNTIME"
+    },
+    {
+      "name": "PixiJS",
+      "url": "https://github.com/pixijs/pixijs",
+      "decision": "OPTIONAL_2D"
+    },
+    {
+      "name": "Three.js",
+      "url": "https://github.com/mrdoob/three.js",
+      "decision": "OPTIONAL_3D"
+    },
+    {
+      "name": "OpenTimelineIO",
+      "url": "https://github.com/AcademySoftwareFoundation/OpenTimelineIO",
+      "decision": "OPTIONAL_NLE_EXPORT"
+    },
+    {
+      "name": "JSON Canonicalization Scheme RFC 8785",
+      "url": "https://www.rfc-editor.org/rfc/rfc8785",
+      "decision": "ADOPT_HASH_CONTRACT"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "$id": "https://geultu.dev/schema/geultu-story-export-spec/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "continuity_policy": {
+      "enum": [
+        "STRICT",
+        "REPORT_ONLY"
+      ]
+    },
+    "language": {
+      "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$",
+      "type": "string"
+    },
+    "scene_selection": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "RANGE"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "start_order",
+              "end_order"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "EXPLICIT"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "scene_ids"
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "end_order": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "mode": {
+          "enum": [
+            "ALL",
+            "RANGE",
+            "EXPLICIT"
+          ]
+        },
+        "scene_ids": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 10000,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "start_order": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "type": "object"
+    },
+    "schema_id": {
+      "const": "geultu.dev/geultu-story-export-spec/v1"
+    },
+    "target_schema_id": {
+      "const": "geultu.dev/geultu-story-package/v1"
+    },
+    "visual_policy": {
+      "additionalProperties": false,
+      "properties": {
+        "default_priority": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        "include_global_constraints": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "default_priority",
+        "include_global_constraints"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_id",
+    "target_schema_id",
+    "language",
+    "scene_selection",
+    "continuity_policy",
+    "visual_policy"
+  ],
+  "title": "GeultuStoryExportSpec v1",
+  "type": "object"
+}

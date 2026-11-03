@@ -1,0 +1,36 @@
+[package]
+name = "narrative-courier"
+version = "0.12.1"
+edition = "2021"
+license = "MIT"
+autobins = false
+
+[lib]
+name = "narrative_courier_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "narrative-courier"
+path = "src/main.rs"
+
+[[bin]]
+name = "narrative-courier-cli"
+path = "src/bin/narrative-courier-cli.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+sts-workflow = { path = "../crates/sts" }
+narrative-courier-delivery = { path = "../crates/delivery" }
+narrative-courier-contracts = { path = "../crates/contracts" }
+narrative-courier-runtime = { path = "../crates/runtime" }
+narrative-courier-app-config = { path = "../crates/app-config" }
+narrative-courier-authoring = { path = "../crates/authoring" }
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dev-dependencies]
+tempfile = "3"

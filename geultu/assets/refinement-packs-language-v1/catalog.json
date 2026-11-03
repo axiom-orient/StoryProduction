@@ -1,0 +1,31 @@
+{
+  "api_version": "geultu.dev/refinement-pack-catalog/v1",
+  "catalog_id": "language-refinement-v1",
+  "source_release_version": "1.1.0",
+  "source_release_date": "2026-08-07",
+  "locale_archives": {
+    "ar": "arabic-refine-2026-08-07.zip",
+    "de": "german-refine-2026-08-07.zip",
+    "en": "english-refine-2026-08-07.zip",
+    "es": "spanish-refine-2026-08-07.zip",
+    "fr": "french-refine-2026-08-07.zip",
+    "hi": "hindi-refine-2026-08-07.zip",
+    "it": "italian-refine-2026-08-07.zip",
+    "ja": "japanese-refine-2026-08-07.zip",
+    "ko": "koreanize-2026-08-07.zip",
+    "pt-BR": "portuguese-brazil-refine-2026-08-07.zip",
+    "pt-PT": "portuguese-portugal-refine-2026-08-07.zip",
+    "ru": "russian-refine-2026-08-07.zip",
+    "zh-Hans": "chinese-simplified-refine-2026-08-07.zip",
+    "zh-Hant": "chinese-traditional-refine-2026-08-07.zip"
+  },
+  "policy": {
+    "operations": [
+      "diagnose",
+      "plan_patch"
+    ],
+    "output_authority": "geultu_polish_patch",
+    "translation_forbidden": true,
+    "approval_owned_by": "geultu"
+  }
+}

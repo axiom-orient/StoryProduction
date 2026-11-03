@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GenerationAttempt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "attempt_no",
+    "mode",
+    "created_at",
+    "resolved_references",
+    "repair"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "attempt_no": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "mode": {
+      "enum": [
+        "GENERATE",
+        "EDIT",
+        "PACKAGING_RETRY"
+      ]
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "repair": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "resolved_references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_kind",
+          "role",
+          "path",
+          "sha256",
+          "mime",
+          "preserve",
+          "ignore"
+        ],
+        "properties": {
+          "source_kind": {
+            "enum": [
+              "FILE",
+              "TASK_OUTPUT"
+            ]
+          },
+          "role": {
+            "enum": [
+              "IDENTITY",
+              "STYLE",
+              "POSE",
+              "COSTUME",
+              "PROP",
+              "COMPOSITION",
+              "ENVIRONMENT",
+              "MATERIAL"
+            ]
+          },
+          "source_task_id": {
+            "type": "string"
+          },
+          "artifact_id": {
+            "type": "string"
+          },
+          "asset_id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "mime": {
+            "type": "string"
+          },
+          "preserve": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ignore": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {"const": "PACKAGING_RETRY"}
+        },
+        "required": ["mode"]
+      },
+      "then": {
+        "properties": {
+          "repair": {
+            "type": "object",
+            "required": ["strategy","edit_target","packaging_retry"],
+            "properties": {
+              "strategy": {"const": "PSD_PACKAGING_RETRY"},
+              "edit_target": {
+                "type": "object",
+                "required": ["sha256","run_path"],
+                "properties": {
+                  "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                  "run_path": {"type": "string", "minLength": 1}
+                }
+              },
+              "packaging_retry": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["mode","trigger","retry_index","max_retries","substrate_sha256","preserve_locked_pixels","preserve_locked_layout","creative_changes"],
+                "properties": {
+                  "mode": {"const": "PSD_ONLY"},
+                  "trigger": {"const": "PREFERRED_OUTPUT_MISSING"},
+                  "retry_index": {"type": "integer", "minimum": 1},
+                  "max_retries": {"const": 1},
+                  "substrate_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                  "preserve_locked_pixels": {"const": true},
+                  "preserve_locked_layout": {"const": true},
+                  "creative_changes": {"const": "FORBID"}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

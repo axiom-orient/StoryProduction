@@ -1,0 +1,487 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/scene-production-plan.schema.json",
+  "title": "SceneProductionPlan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scene_id",
+    "authority_id",
+    "narrative_refs",
+    "deliverables",
+    "visual_brief",
+    "authority_refs",
+    "composition_mode",
+    "composition_candidates",
+    "target_candidate_policy",
+    "characters",
+    "props",
+    "layers",
+    "output",
+    "budgets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "scene_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "authority_id": {
+      "type": "string"
+    },
+    "narrative_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "deliverables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "PNG",
+          "PSD"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "visual_brief": {
+      "$ref": "visual-brief.schema.json"
+    },
+    "render_contract": {
+      "$ref": "render-contract.schema.json"
+    },
+    "authority_refs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "character_ids",
+        "prop_ids",
+        "color_script_beat_ids"
+      ],
+      "properties": {
+        "character_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "prop_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "color_script_beat_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "composition_mode": {
+      "enum": [
+        "ABSTRACT_BLOCKING",
+        "IDENTITY_AWARE"
+      ]
+    },
+    "composition_candidates": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate_id",
+          "blocking",
+          "camera",
+          "framing",
+          "variation_intent"
+        ],
+        "properties": {
+          "candidate_id": {
+            "type": "string"
+          },
+          "blocking": {
+            "type": "string"
+          },
+          "camera": {
+            "type": "string"
+          },
+          "framing": {
+            "type": "string"
+          },
+          "variation_intent": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "target_candidate_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recommended",
+        "maximum",
+        "stop_when"
+      ],
+      "properties": {
+        "recommended": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "maximum": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "stop_when": {
+          "enum": [
+            "ONE_APPROVABLE_CANDIDATE",
+            "MANUAL"
+          ]
+        }
+      }
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/character"
+      }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/prop"
+      }
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/layer"
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "size",
+        "target_format"
+      ],
+      "properties": {
+        "size": {
+          "type": "string",
+          "pattern": "^[0-9]+x[0-9]+$"
+        },
+        "target_format": {
+          "const": "PNG"
+        }
+      }
+    },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_total_generations",
+        "max_parallel_hint"
+      ],
+      "properties": {
+        "max_total_generations": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "max_parallel_hint": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        }
+      }
+    }
+  },
+  "$defs": {
+    "referenceSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_kind",
+        "source"
+      ],
+      "properties": {
+        "source_kind": {
+          "enum": [
+            "FILE",
+            "TASK_OUTPUT"
+          ]
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "candidatePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recommended",
+        "maximum",
+        "stop_when"
+      ],
+      "properties": {
+        "recommended": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "maximum": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "stop_when": {
+          "enum": [
+            "ONE_APPROVABLE_CANDIDATE",
+            "MANUAL"
+          ]
+        }
+      }
+    },
+    "character": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "character_id",
+        "state_intent",
+        "anchor_required",
+        "assetization_strategy",
+        "anchor"
+      ],
+      "properties": {
+        "character_id": {
+          "type": "string"
+        },
+        "state_intent": {
+          "type": "string"
+        },
+        "anchor_required": {
+          "type": "boolean"
+        },
+        "assetization_strategy": {
+          "enum": [
+            "WHOLE_CHARACTER",
+            "BODY_HEAD",
+            "SEMANTIC_LAYERS"
+          ]
+        },
+        "anchor": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source_kind",
+                "source"
+              ],
+              "properties": {
+                "source_kind": {
+                  "enum": [
+                    "FILE",
+                    "TASK_OUTPUT"
+                  ]
+                },
+                "source": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "prop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prop_id",
+        "state_intent",
+        "anchor_required",
+        "anchor"
+      ],
+      "properties": {
+        "prop_id": {
+          "type": "string"
+        },
+        "state_intent": {
+          "type": "string"
+        },
+        "anchor_required": {
+          "type": "boolean"
+        },
+        "anchor": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source_kind",
+                "source"
+              ],
+              "properties": {
+                "source_kind": {
+                  "enum": [
+                    "FILE",
+                    "TASK_OUTPUT"
+                  ]
+                },
+                "source": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "layer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layer_id",
+        "semantic_role",
+        "owner_kind",
+        "owner_id",
+        "generation_intent",
+        "z_band",
+        "occlusion_policy",
+        "reuse_scope",
+        "registration_policy",
+        "candidate_policy",
+        "prompt_profile",
+        "path_boundary",
+        "edge_class"
+      ],
+      "properties": {
+        "layer_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]+$"
+        },
+        "semantic_role": {
+          "enum": [
+            "BACKGROUND",
+            "ENVIRONMENT",
+            "CHARACTER",
+            "PROP",
+            "FOREGROUND_OCCLUDER",
+            "EFFECT",
+            "EMISSION",
+            "SHADOW_LIGHT_HELPER"
+          ]
+        },
+        "owner_kind": {
+          "enum": [
+            "NONE",
+            "CHARACTER",
+            "PROP"
+          ]
+        },
+        "owner_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "generation_intent": {
+          "type": "string",
+          "minLength": 1
+        },
+        "z_band": {
+          "type": "integer"
+        },
+        "occlusion_policy": {
+          "enum": [
+            "VISIBLE_ONLY",
+            "COMPLETE_OBJECT",
+            "POSE_SAFE_UNDERLAY"
+          ]
+        },
+        "reuse_scope": {
+          "enum": [
+            "SCENE_ONLY",
+            "PROJECT_REUSABLE"
+          ]
+        },
+        "registration_policy": {
+          "enum": [
+            "FULL_CANVAS_LOCKED",
+            "NORMALIZE_ONCE"
+          ]
+        },
+        "candidate_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "recommended",
+            "maximum",
+            "stop_when"
+          ],
+          "properties": {
+            "recommended": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "maximum": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            },
+            "stop_when": {
+              "enum": [
+                "ONE_APPROVABLE_CANDIDATE",
+                "MANUAL"
+              ]
+            }
+          }
+        },
+        "prompt_profile": {
+          "enum": [
+            "PROJECT_STYLE",
+            "PHOTOREAL_LAYER_ASSET",
+            "CUSTOM"
+          ]
+        },
+        "path_boundary": {
+          "enum": [
+            "NONE",
+            "SAVED_PATH",
+            "SOFT_ENVELOPE"
+          ]
+        },
+        "edge_class": {
+          "enum": [
+            "HARD",
+            "ORGANIC",
+            "SOFT_ALPHA"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "$id": "https://scene-motion-compiler.local/schemas/asset-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "assetManifestId": {
+      "pattern": "^[A-Za-z][A-Za-z0-9._:-]{1,127}$",
+      "type": "string"
+    },
+    "assets": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "allowedUse": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "assetId": {
+            "pattern": "^[A-Za-z][A-Za-z0-9._:-]{1,127}$",
+            "type": "string"
+          },
+          "crop": {
+            "additionalProperties": false,
+            "properties": {
+              "height": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              "width": {
+                "exclusiveMinimum": 0,
+                "type": "number"
+              },
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "width",
+              "height"
+            ],
+            "type": "object"
+          },
+          "hasAlpha": {
+            "type": "boolean"
+          },
+          "kind": {
+            "enum": [
+              "illustration",
+              "photo",
+              "texture",
+              "product",
+              "icon",
+              "vector-decoration"
+            ]
+          },
+          "objectHash": {
+            "pattern": "^sha256:[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "rights": {
+            "additionalProperties": false,
+            "properties": {
+              "holder": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "license": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "USER_OWNED",
+                  "LICENSED",
+                  "PUBLIC_DOMAIN",
+                  "CC0",
+                  "verified",
+                  "exception",
+                  "unknown"
+                ]
+              }
+            },
+            "required": [
+              "status",
+              "source"
+            ],
+            "type": "object"
+          },
+          "sourceRegionId": {
+            "pattern": "^[A-Za-z][A-Za-z0-9._:-]{1,127}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "assetId",
+          "sourceRegionId",
+          "objectHash",
+          "kind",
+          "rights",
+          "allowedUse",
+          "crop"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "approvalSubjectHash": {
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "assetManifestId",
+    "approvalSubjectHash",
+    "assets"
+  ],
+  "title": "AssetManifest",
+  "type": "object"
+}

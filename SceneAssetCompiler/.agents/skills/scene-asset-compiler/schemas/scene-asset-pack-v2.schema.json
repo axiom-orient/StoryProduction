@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/contracts/scene-asset-pack/v2.schema.json",
+  "title": "SceneAssetPack v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "packId", "projectId", "createdAt", "projection", "assets", "requirements"],
+  "properties": {
+    "schemaVersion": { "const": 2 },
+    "packId": { "type": "string", "pattern": "^SAP2-[0-9a-f]{64}$" },
+    "projectId": { "type": "string", "pattern": "^[A-Za-z0-9._:-]{1,128}$" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "projection": { "$ref": "#/$defs/projection" },
+    "assets": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/asset" } },
+    "requirements": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/requirement" } }
+  },
+  "$defs": {
+    "projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receiptSha256", "sceneGraphHash", "sceneCount", "sceneIds"],
+      "properties": {
+        "receiptSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "sceneGraphHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "sceneCount": { "type": "integer", "minimum": 1 },
+        "sceneIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^SCN-[0-9]{3,}$" } }
+      }
+    },
+    "artifactRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "mime", "sizeBytes"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^[^/\\\\]+(?:/[^/\\\\]+)*$" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "mime": { "type": "string", "minLength": 1 },
+        "sizeBytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "sourceArtifactRef": {
+      "allOf": [
+        { "$ref": "#/$defs/artifactRef" },
+        {
+          "description": "The declared MIME must match the file extension and detected signature. PSD/PSB source provenance uses image/vnd.adobe.photoshop and an 8BPS versioned header.",
+          "properties": {
+            "mime": { "enum": ["image/png", "image/jpeg", "image/webp", "image/vnd.adobe.photoshop"] }
+          }
+        }
+      ]
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assetId", "kind", "rights", "sourceRegionId", "sourceArtifact", "runtimeDerivative"],
+      "properties": {
+        "assetId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{1,127}$" },
+        "kind": { "$ref": "#/$defs/kind" },
+        "rights": { "$ref": "#/$defs/rights" },
+        "sourceRegionId": { "$ref": "#/$defs/sourceRegionId" },
+        "sourceArtifact": { "$ref": "#/$defs/sourceArtifactRef" },
+        "runtimeDerivative": {
+          "allOf": [
+            { "$ref": "#/$defs/artifactRef" },
+            { "properties": { "mime": { "enum": ["image/png", "image/jpeg", "image/webp"] } } }
+          ]
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requirementId", "requirementType", "sceneEntityId", "assetId", "kind", "rights", "sourceRegionId", "allowedUse", "crop"],
+      "properties": {
+        "requirementId": { "type": "string", "pattern": "^(CHARACTER_SPRITE|ENVIRONMENT_PLATE|PROP_CUTOUT|SHOT_KEYFRAME):[A-Za-z][A-Za-z0-9._:-]{1,127}$" },
+        "requirementType": { "enum": ["CHARACTER_SPRITE", "ENVIRONMENT_PLATE", "PROP_CUTOUT", "SHOT_KEYFRAME"] },
+        "sceneEntityId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{1,127}$" },
+        "assetId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{1,127}$" },
+        "kind": { "$ref": "#/$defs/kind" },
+        "rights": { "$ref": "#/$defs/rights" },
+        "sourceRegionId": { "$ref": "#/$defs/sourceRegionId" },
+        "allowedUse": { "type": "string", "minLength": 1 },
+        "crop": { "$ref": "#/$defs/crop" }
+      }
+    },
+    "crop": {
+      "type": "object",
+      "description": "Pixel rectangle in the source artifact. All four values are JSON integers; x and y are zero-based coordinates and width and height are positive dimensions.",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "kind": {
+      "type": "string",
+      "description": "The producer-declared visual medium. It is descriptive metadata, not a permission to use the asset for another requirement type.",
+      "enum": ["illustration", "photo", "texture", "product", "icon", "vector-decoration"]
+    },
+    "rights": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Producer-declared rights evidence. The consumer must preserve it and must not infer or upgrade it.",
+      "required": ["status", "holder", "source"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "USER_OWNED means supplied by the user; LICENSED means a license is recorded; PUBLIC_DOMAIN and CC0 mean the producer recorded that public-use basis.",
+          "enum": ["USER_OWNED", "LICENSED", "PUBLIC_DOMAIN", "CC0"]
+        },
+        "holder": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "source": { "type": "string", "minLength": 1, "maxLength": 1024 }
+      }
+    },
+    "sourceRegionId": {
+      "type": "string",
+      "description": "Stable producer-owned region identifier in the source artifact; use full-frame when the entire source is the region.",
+      "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$"
+    }
+  }
+}

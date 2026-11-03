@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NarrativeCourier</title>
+  <link rel="icon" type="image/png" sizes="128x128" href="./assets/narrative-courier-mark.png" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><img class="brand-icon" src="./assets/narrative-courier-mark.png" alt="" aria-hidden="true" width="32" height="32" /><span>NarrativeCourier</span></div>
+      <nav class="nav">
+        <button data-route="project" class="nav-item active"><span aria-hidden="true">□</span>Projects</button>
+        <button data-route="pipeline" class="nav-item"><span aria-hidden="true">◇</span>Pipeline</button>
+        <button data-route="review" class="nav-item"><span aria-hidden="true">○</span>Reviews</button>
+        <button data-route="final" class="nav-item"><span aria-hidden="true">✓</span>Final</button>
+        <button data-route="deliveries" class="nav-item"><span aria-hidden="true">↗</span>Deliveries</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="profile"><span class="avatar">SF</span><span>Local workspace</span><span>⌄</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div id="banner" class="banner hidden"></div>
+
+      <section id="screen-project" class="screen active">
+        <header class="page-header">
+          <h1>New Project</h1>
+          <p>Start a new screenplay project by providing a synopsis.</p>
+        </header>
+        <div id="runtime-readiness" class="runtime-card hidden"><div><strong id="runtime-title">Codex runtime</strong><p id="runtime-message">Checking runtime…</p></div><span id="runtime-badge" class="runtime-badge">Checking</span></div>
+        <div class="form-card">
+          <form id="project-form">
+            <label>Project title<input id="project-title" maxlength="120" placeholder="Enter a working title" required /></label>
+            <label><span class="label-row"><span>Synopsis</span><button id="import-synopsis" type="button" class="inline-action">Import MD / TXT / PDF / DOCX</button></span><textarea id="project-synopsis" maxlength="120000" placeholder="Paste, write, or import your synopsis here..." required></textarea><span class="counter" id="synopsis-counter">0 / 120000</span></label>
+            <div class="form-grid">
+              <label>Source type<select id="source-format"><option value="original">Original</option><option value="shortform">Shortform</option><option value="webdrama">Web drama</option><option value="novel">Novel</option><option value="webtoon">Webtoon</option><option value="real_story">Real story</option></select></label>
+              <label>Target runtime<div class="unit-input"><input id="target-duration" type="number" min="20" max="240" value="90" /><span>min</span></div></label>
+            </div>
+            <details class="creative-direction">
+              <summary>Creative direction <span>Optional</span></summary>
+              <div class="creative-grid">
+                <label>Genre<input id="genre" maxlength="200" placeholder="Drama, thriller" /></label>
+                <label>Tone<input id="tone" maxlength="240" placeholder="Restrained, tense" /></label>
+              </div>
+              <label>Theme direction<textarea id="theme-direction" maxlength="1200" placeholder="What should the screenplay ultimately explore?"></textarea></label>
+            </details>
+            <label>Optional references
+              <div class="dropzone" id="dropzone"><span class="upload-icon">⇧</span><div><strong>Drop files here, or click to browse</strong><small id="file-label">PDF, DOCX, TXT, MD, or images (max 25 MB each)</small></div></div>
+            </label>
+            <div class="form-actions"><button type="reset" class="btn text">Clear</button><button id="start-button" class="btn primary" type="submit">Start</button></div>
+          </form>
+        </div>
+        <div id="recent-projects" class="recent hidden"><h2>Recent projects</h2><div id="recent-list"></div></div>
+      </section>
+
+      <section id="screen-pipeline" class="screen">
+        <header class="page-header split-header"><div><h1>Pipeline</h1><p>Track your screenplay from synopsis to final draft.</p></div><div id="project-meta" class="meta-card"></div></header>
+        <div class="pipeline-layout">
+          <div id="stage-list" class="stage-card"></div>
+          <div class="detail-card">
+            <span id="stage-badge" class="badge">Ready</span>
+            <h2 id="stage-title">Analysis</h2>
+            <p id="stage-description" class="lead">The workflow is ready to run.</p>
+            <hr />
+            <h3>Current state</h3>
+            <p id="stage-state">No agent has run yet.</p>
+            <h3>Expected output</h3>
+            <ul id="stage-outputs"><li>A durable artifact for the current obligation</li><li>A verified transition to the next obligation</li></ul>
+            <hr />
+            <div class="next-action"><div><h3>Next action</h3><p id="next-action-text">Run agents until the next human review.</p></div><div class="action-row"><button id="review-artifacts" class="btn secondary">Artifacts</button><button id="cancel-run" class="btn secondary hidden">Cancel</button><button id="run-button" class="btn primary">Run to review</button></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-review" class="screen">
+        <header class="page-header split-header"><div><h1 id="review-title">Review</h1><p>Inspect the generated result and decide whether to continue or revise.</p></div><div><span id="review-chip" class="status-chip">Human review</span></div></header>
+        <div class="review-layout">
+          <article class="review-card">
+            <h2 id="review-source-title">Agent Result</h2>
+            <div id="review-source" class="artifact-view"></div>
+          </article>
+          <div class="review-side">
+            <article id="critic-review-card" class="review-card critique-card"><h2>Critic Review</h2><div id="review-critique" class="artifact-view compact"></div></article>
+            <article class="review-card decision-card">
+              <h2>Decision</h2><p class="muted-copy">Choose how you would like to proceed.</p>
+              <div id="decision-buttons" class="decision-buttons"></div>
+              <label id="revision-target-wrap" class="hidden">Revise from<select id="revision-target"></select></label>
+              <label><span id="feedback-label">Revision request</span> <span id="feedback-hint" class="muted-copy">(when revising)</span><textarea id="revision-feedback" maxlength="4000" placeholder="Provide specific guidance for what should change..."></textarea></label>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="screen-final" class="screen">
+        <header class="page-header"><h1>Final Screenplay</h1><p>Your final screenplay is ready. Review the text and export the deliverable.</p></header>
+        <div class="final-layout">
+          <article class="viewer-card"><div class="viewer-toolbar"><strong>Screenplay Viewer</strong><span>100%</span></div><pre id="screenplay-viewer" class="screenplay"></pre><div class="viewer-footer"><span id="final-pages">—</span><span id="final-words">—</span></div></article>
+          <aside class="final-side">
+            <article class="summary-card"><h2>Project Summary</h2><dl id="final-summary"></dl></article>
+            <article class="summary-card"><h2>Completion Status</h2><div id="completion-status"></div></article>
+            <article class="summary-card"><h2>Export Screenplay</h2><p>Save the final screenplay to your Downloads folder.</p><button id="export-docx" class="btn primary wide">Export DOCX</button></article>
+          </aside>
+        </div>
+        <div class="change-card"><div class="section-title-row"><h2>STEP 8 Revision Evidence</h2><span id="revision-count" class="muted-copy"></span></div><pre id="revision-summary" class="revision-evidence">No revision evidence</pre></div>
+      </section>
+
+
+
+      <section id="screen-deliveries" class="screen">
+        <header class="page-header split-header">
+          <div><h1>Deliveries</h1><p>Project the verified screenplay without reinterpreting its narrative.</p></div>
+          <div id="delivery-package" class="meta-card"></div>
+        </header>
+        <article class="storyboard-studio" aria-labelledby="storyboard-title">
+          <div class="storyboard-heading">
+            <div>
+              <div class="eyebrow">STORYBOARD STUDIO · RELEASED NARRATIVE</div>
+              <h2 id="storyboard-title">Make the approved scenes visible</h2>
+              <p>Select canonical scenes, attach a human-approved external image, then review the HTML storyboard before approval.</p>
+            </div>
+            <div id="storyboard-status" class="storyboard-status" role="status">Loading canonical scenes…</div>
+          </div>
+          <div id="storyboard-scenes" class="scene-rail" role="listbox" aria-label="Canonical screenplay scenes" aria-multiselectable="true"></div>
+          <div class="storyboard-tools">
+            <div>
+              <strong id="storyboard-selection-label">No scenes selected</strong>
+              <span id="storyboard-selection-help" class="muted-copy">Scene text is read from the verified NarrativePackage.</span>
+            </div>
+            <div class="storyboard-actions">
+              <button id="copy-scene-brief" class="btn secondary" disabled>Copy source brief</button>
+              <button id="pick-delivery-asset" class="btn primary" disabled>Attach approved image</button>
+            </div>
+          </div>
+          <div id="storyboard-assets" class="storyboard-assets" aria-live="polite"></div>
+        </article>
+        <div class="delivery-layout">
+          <article class="delivery-compose">
+            <div class="section-title-row"><div><h2>New delivery</h2><p class="muted-copy">Image-backed deliveries are HTML-only.</p></div><span id="delivery-image-policy" class="status-chip">No image attached</span></div>
+            <div class="delivery-form-grid">
+              <label>Format<select id="delivery-format"><option>HTML</option><option>PNG</option><option>WEBP</option><option>PDF</option><option>JSON</option><option>MP4</option></select></label>
+              <label>Coverage<select id="delivery-coverage"><option>FULL</option><option>SELECTION</option><option>EXCERPT</option></select></label>
+              <label id="delivery-scenes-wrap" class="hidden">Scene refs<input id="delivery-scenes" placeholder="SCN-001, SCN-004" readonly aria-readonly="true" /></label>
+              <label>Backend<select id="delivery-backend"><option value="">Auto</option></select></label>
+              <label class="delivery-dim hidden">Width<input id="delivery-width" type="number" min="1" value="1280" /></label>
+              <label class="delivery-dim hidden">Height<input id="delivery-height" type="number" min="1" value="720" /></label>
+              <label class="delivery-video hidden">FPS<input id="delivery-fps" type="number" min="1" value="24" /></label>
+              <label class="delivery-video hidden">Frames<input id="delivery-frames" type="number" min="1" value="144" /></label>
+            </div>
+            <div class="action-row">
+              <span id="delivery-capability" class="muted-copy">Load a completed project to inspect capabilities.</span>
+              <div><button id="cancel-delivery" class="btn secondary hidden">Cancel</button> <button id="run-delivery" class="btn primary">Generate</button></div>
+            </div>
+          </article>
+          <article class="delivery-history">
+            <div class="section-title-row"><h2>Results</h2><button id="refresh-deliveries" class="inline-action">Refresh</button></div>
+            <div id="delivery-list" class="delivery-list"><p class="muted-copy">No deliveries yet.</p></div>
+          </article>
+        </div>
+        <article id="delivery-detail" class="delivery-detail hidden">
+          <div class="section-title-row"><div><h2 id="delivery-detail-title">Delivery</h2><p id="delivery-detail-meta" class="muted-copy"></p></div><span id="delivery-detail-status" class="status-chip"></span></div>
+          <div id="delivery-receipts"></div>
+          <div id="delivery-preview" class="delivery-preview"><p class="muted-copy">Select an output to preview it.</p></div>
+          <div id="delivery-review-actions" class="action-row hidden">
+            <span class="muted-copy">Human preview decision</span>
+            <div><button id="reject-delivery-review" class="btn secondary">Reject</button> <button id="approve-delivery-review" class="btn primary">Approve</button></div>
+          </div>
+        </article>
+      </section>
+
+      <aside id="artifact-drawer" class="artifact-drawer hidden" aria-label="Project artifacts">
+        <div class="drawer-header"><div><h2>Artifacts</h2><p>Verified durable outputs</p></div><button id="close-artifacts" class="icon-button" aria-label="Close artifacts">×</button></div>
+        <div class="drawer-body"><div id="artifact-list" class="artifact-list"></div><pre id="artifact-content" class="artifact-content">Select an artifact.</pre></div>
+      </aside>
+      <div id="drawer-scrim" class="drawer-scrim hidden"></div>
+    </main>
+  </div>
+  <script src="./graph-viewer.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "STS Audit Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "verdict",
+    "confidence",
+    "summary",
+    "fidelity",
+    "integrity",
+    "assertion_alignment",
+    "relation_alignment",
+    "findings"
+  ],
+  "$defs": {
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "status",
+        "summary"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "PASS",
+            "REVIEW",
+            "BLOCKED"
+          ]
+        },
+        "summary": {
+          "type": "string"
+        }
+      }
+    },
+    "alignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "status",
+        "recovered_ids",
+        "evidence",
+        "rationale"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "PRESERVED",
+            "DRAMATIZED",
+            "COMBINED",
+            "REORDERED",
+            "OMITTED",
+            "DRIFTED",
+            "UNCERTAIN"
+          ]
+        },
+        "recovered_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rationale": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "properties": {
+    "verdict": {
+      "enum": [
+        "PASS",
+        "REVIEW",
+        "BLOCKED"
+      ]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "summary": {
+      "type": "string"
+    },
+    "fidelity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimensions"
+      ],
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/dimension"
+              },
+              {
+                "properties": {
+                  "id": {
+                    "enum": [
+                      "SOURCE_ASSERTIONS",
+                      "SOURCE_RELATIONS",
+                      "ENDING_OUTCOME",
+                      "ENDING_MEANING",
+                      "ACTOR_OWNERSHIP",
+                      "KNOWLEDGE_EPISTEMIC",
+                      "FORM_FUNCTION",
+                      "TRANSFORMATION_INVENTION"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimensions"
+      ],
+      "properties": {
+        "dimensions": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/$defs/dimension"
+              },
+              {
+                "properties": {
+                  "id": {
+                    "enum": [
+                      "CAUSALITY",
+                      "KNOWLEDGE_STATE",
+                      "CHARACTER_RELATIONSHIP_STATE",
+                      "PHYSICAL_SPATIAL_STATE",
+                      "SCENE_DEPENDENCIES",
+                      "PLAYABILITY",
+                      "SCENE_ECONOMY"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "assertion_alignment": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/alignment"
+      }
+    },
+    "relation_alignment": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/alignment"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "severity",
+          "axis",
+          "category",
+          "issue",
+          "evidence",
+          "recommendation"
+        ],
+        "properties": {
+          "severity": {
+            "enum": [
+              "CRITICAL",
+              "MAJOR",
+              "MINOR"
+            ]
+          },
+          "axis": {
+            "enum": [
+              "FIDELITY",
+              "INTEGRITY"
+            ]
+          },
+          "category": {
+            "type": "string"
+          },
+          "issue": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "recommendation": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

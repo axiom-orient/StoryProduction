@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NarrativeSource",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "pattern": "^src_[A-Za-z0-9._-]+$"
+    },
+    "source_kind": {
+      "type": "string",
+      "enum": [
+        "prose",
+        "synopsis",
+        "screenplay",
+        "outline",
+        "logline"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "source_id",
+    "source_kind",
+    "language",
+    "text",
+    "content_hash"
+  ]
+}

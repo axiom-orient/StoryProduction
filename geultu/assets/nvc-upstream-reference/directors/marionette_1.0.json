@@ -1,0 +1,39 @@
+{
+  "preset_id": "marionette/1.0",
+  "semantic_affinities": [
+    "fate",
+    "control",
+    "hierarchy",
+    "powerlessness"
+  ],
+  "visual_grammar": {
+    "stage": "theatrical",
+    "character": "puppet"
+  },
+  "motion_grammar": {
+    "character": "jointed",
+    "strings": "optional_reveal"
+  },
+  "camera_grammar": {
+    "default": "stage_observer"
+  },
+  "typography_grammar": {
+    "reveal": "stage_card"
+  },
+  "transition_grammar": {
+    "default": "curtain_or_blackout"
+  },
+  "sound_grammar": {
+    "base": [
+      "wood",
+      "string",
+      "stage"
+    ]
+  },
+  "supported_motion_modes": [
+    "RIGGED_2D",
+    "SCENE_3D",
+    "HYBRID"
+  ],
+  "negative_defaults": []
+}

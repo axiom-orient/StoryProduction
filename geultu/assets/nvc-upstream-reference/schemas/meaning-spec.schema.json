@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MeaningSpec",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "must_keep_assertions": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "Assertion",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "assertion_id": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          },
+          "criticality": {
+            "type": "string",
+            "enum": [
+              "hard",
+              "soft"
+            ]
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "explicit",
+              "inferred",
+              "creative"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "title": "SourceSpan",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "source_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "start": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "quote": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "source_id",
+                "start",
+                "end"
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "assertion_id",
+          "statement",
+          "criticality",
+          "origin",
+          "evidence"
+        ]
+      }
+    },
+    "transition_obligations": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "TransitionObligation",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "obligation_id": {
+            "type": "string"
+          },
+          "from_event": {
+            "type": "string"
+          },
+          "to_event": {
+            "type": "string"
+          },
+          "dimension": {
+            "type": "string",
+            "enum": [
+              "causal",
+              "intentional",
+              "emotional",
+              "consequence",
+              "temporal",
+              "revelation"
+            ]
+          },
+          "criticality": {
+            "type": "string",
+            "enum": [
+              "hard",
+              "soft"
+            ]
+          },
+          "meaning": {
+            "type": "string"
+          },
+          "recoverability_question": {
+            "type": "string"
+          },
+          "accepted_meaning": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "title": "SourceSpan",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "source_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "start": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "quote": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "source_id",
+                "start",
+                "end"
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "obligation_id",
+          "from_event",
+          "to_event",
+          "dimension",
+          "criticality",
+          "meaning",
+          "recoverability_question",
+          "accepted_meaning",
+          "evidence"
+        ]
+      }
+    },
+    "forbidden_contradictions": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "ForbiddenContradiction",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "statement"
+        ]
+      }
+    }
+  },
+  "required": [
+    "must_keep_assertions",
+    "transition_obligations",
+    "forbidden_contradictions"
+  ]
+}

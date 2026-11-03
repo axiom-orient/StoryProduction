@@ -1,0 +1,65 @@
+{
+  "$id": "https://geultu.dev/schema/project-state/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "frozen_inputs": {
+      "additionalProperties": false,
+      "properties": {
+        "canon": {
+          "$ref": "artifact-ref.schema.json"
+        },
+        "genre": {
+          "$ref": "artifact-ref.schema.json"
+        },
+        "sources": {
+          "items": {
+            "$ref": "artifact-ref.schema.json"
+          },
+          "maxItems": 10000,
+          "type": "array"
+        },
+        "style": {
+          "$ref": "artifact-ref.schema.json"
+        },
+        "synopsis": {
+          "$ref": "artifact-ref.schema.json"
+        }
+      },
+      "required": [
+        "synopsis",
+        "style",
+        "canon",
+        "genre"
+      ],
+      "type": "object"
+    },
+    "project_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "schema_id": {
+      "const": "geultu.dev/project-state/v1"
+    },
+    "status": {
+      "enum": [
+        "ACTIVE",
+        "ARCHIVED"
+      ]
+    }
+  },
+  "required": [
+    "schema_id",
+    "project_id",
+    "revision",
+    "status",
+    "frozen_inputs"
+  ],
+  "title": "ProjectState v1",
+  "type": "object"
+}

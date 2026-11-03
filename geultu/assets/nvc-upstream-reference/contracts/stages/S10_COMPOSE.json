@@ -1,0 +1,115 @@
+{
+  "stage_id": "S10_COMPOSE",
+  "version": "1.0.0",
+  "artifact_owner": "Composer",
+  "executor_classes": [
+    "PROC",
+    "DET"
+  ],
+  "inputs": [
+    {
+      "kind": "shot_clips",
+      "schema": "schemas/artifact-envelope.schema.json",
+      "required": true
+    },
+    {
+      "kind": "director_ir",
+      "schema": "schemas/director-ir.schema.json",
+      "required": true
+    },
+    {
+      "kind": "validated_package",
+      "schema": "schemas/narrative-package.schema.json",
+      "required": true
+    }
+  ],
+  "outputs": [
+    {
+      "kind": "timeline_ir",
+      "schema": "schemas/timeline-ir.schema.json"
+    },
+    {
+      "kind": "draft_master",
+      "schema": "schemas/artifact-envelope.schema.json"
+    }
+  ],
+  "preconditions": [
+    "all required upstream artifacts exist and validate"
+  ],
+  "hard_gates": [
+    "frame-exact timeline",
+    "text/audio policy collision == 0",
+    "duration/fps/resolution valid"
+  ],
+  "soft_metrics": [
+    "aesthetic/efficiency metrics never override hard gates"
+  ],
+  "failure_codes": [
+    "CMP_001_TIMELINE_INVALID",
+    "CMP_002_TEXT_TIMING_COLLISION",
+    "CMP_003_AUDIO_TIMING_COLLISION",
+    "CMP_004_FRAME_RATE_MISMATCH",
+    "CMP_005_DURATION_OUT_OF_RANGE"
+  ],
+  "retry_policy": {
+    "max_repairs": 1
+  },
+  "next": {
+    "on_pass": "S11_VERIFY_REPAIR",
+    "on_fail": "REPAIR_ROUTER"
+  },
+  "substeps": [
+    {
+      "step_id": "P01",
+      "purpose": "compile frame-exact visual/text/audio tracks",
+      "executor_class": "PROC",
+      "inputs": [
+        "shot_clips",
+        "director_ir",
+        "validated_package"
+      ],
+      "outputs": [
+        "timeline_ir.draft"
+      ],
+      "hard_gate": "all referenced clips resolve",
+      "failure_codes": [
+        "CMP_001_TIMELINE_INVALID"
+      ]
+    },
+    {
+      "step_id": "P02",
+      "purpose": "validate timing collision fps resolution and duration",
+      "executor_class": "DET",
+      "inputs": [
+        "timeline_ir.draft"
+      ],
+      "outputs": [
+        "timeline_report"
+      ],
+      "hard_gate": "all technical timeline gates PASS",
+      "failure_codes": [
+        "CMP_002_TEXT_TIMING_COLLISION",
+        "CMP_003_AUDIO_TIMING_COLLISION",
+        "CMP_004_FRAME_RATE_MISMATCH",
+        "CMP_005_DURATION_OUT_OF_RANGE"
+      ]
+    },
+    {
+      "step_id": "P03",
+      "purpose": "render draft master",
+      "executor_class": "PROC",
+      "inputs": [
+        "timeline_ir.draft",
+        "timeline_report"
+      ],
+      "outputs": [
+        "timeline_ir",
+        "draft_master"
+      ],
+      "hard_gate": "draft decodes and timeline hash recorded",
+      "failure_codes": [
+        "CMP_001_TIMELINE_INVALID"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "$id": "https://geultu.dev/schema/artifact-ref/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "id": {
+      "pattern": "^[a-z][a-z0-9_.-]{0,63}:[A-Za-z0-9][A-Za-z0-9_.:/-]{0,191}$",
+      "type": "string"
+    },
+    "kind": {
+      "pattern": "^[a-z][a-z0-9_.-]{0,63}$",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "revision",
+    "digest"
+  ],
+  "title": "ArtifactRef v1",
+  "type": "object"
+}

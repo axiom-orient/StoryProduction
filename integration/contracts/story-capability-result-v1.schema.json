@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://story-production.local/contracts/capability-result/v1",
+  "title": "StoryCapabilityResult v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "resultId",
+    "requestId",
+    "requestHash",
+    "capability",
+    "source",
+    "provider",
+    "status",
+    "artifacts",
+    "candidateOnly",
+    "createdAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "story.capability-result/1"
+    },
+    "resultId": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/identity"
+    },
+    "requestId": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/identity"
+    },
+    "requestHash": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/sha256"
+    },
+    "capability": {
+      "enum": [
+        "image.prompt.compile",
+        "image.generate",
+        "image.edit",
+        "image.effect"
+      ]
+    },
+    "source": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/sourceRef"
+    },
+    "provider": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/provider"
+    },
+    "status": {
+      "enum": [
+        "succeeded",
+        "failed",
+        "cancelled",
+        "outcome_unknown"
+      ]
+    },
+    "artifacts": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/artifactRef"
+      }
+    },
+    "receipt": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/artifactRef"
+    },
+    "providerReceipt": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "failure": {
+      "$ref": "https://story-production.local/contracts/integration-types/v1#/$defs/failure"
+    },
+    "candidateOnly": {
+      "const": true
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "succeeded"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "artifacts": {
+            "minItems": 1
+          }
+        },
+        "not": {
+          "required": [
+            "failure"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "failure"
+        ],
+        "properties": {
+          "artifacts": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "cancelled",
+              "outcome_unknown"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "artifacts": {
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ]
+}

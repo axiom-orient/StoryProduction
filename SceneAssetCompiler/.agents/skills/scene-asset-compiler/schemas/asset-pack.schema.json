@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AssetPack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "pack_id",
+    "revision",
+    "project_id",
+    "created_at",
+    "assets",
+    "lineage"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "pack_id": {
+      "type": "string",
+      "pattern": "^AP-"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "asset_id",
+          "task_id",
+          "attempt_no",
+          "path",
+          "sha256",
+          "mime",
+          "size_bytes"
+        ],
+        "properties": {
+          "asset_id": {
+            "type": "string"
+          },
+          "task_id": {
+            "type": "string"
+          },
+          "attempt_no": {
+            "type": "integer"
+          },
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "mime": {
+            "type": "string"
+          },
+          "size_bytes": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "plan_id"
+      ],
+      "properties": {
+        "run_id": {
+          "type": "string"
+        },
+        "plan_id": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

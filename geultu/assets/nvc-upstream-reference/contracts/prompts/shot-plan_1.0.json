@@ -1,0 +1,26 @@
+{
+  "prompt_id": "shot-plan/1.0",
+  "stage_id": "S05_SHOT_PLAN",
+  "purpose": "Compile cinematic shots and motion constraints",
+  "authoritative_inputs": [
+    "scene_bundle_ir",
+    "director_ir",
+    "meaning_spec"
+  ],
+  "allowed_inference": [
+    "shot framing"
+  ],
+  "forbidden_mutation": [
+    "world state",
+    "hard meaning"
+  ],
+  "output_schema": "schemas/shot-ir.schema.json",
+  "hard_requirements": [
+    "Every hard invariant must be enforceable"
+  ],
+  "evaluation_rubric": [
+    "renderability",
+    "cinematic clarity"
+  ],
+  "template": "Implementation MUST inject only authoritative inputs and request output conforming exactly to output_schema. Natural-language wording is versioned separately; schema and hard requirements are authoritative."
+}

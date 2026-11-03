@@ -1,0 +1,259 @@
+{
+  "assets": [
+    {
+      "asset_id": "BG_HOME",
+      "type": "background",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_02"
+      ]
+    },
+    {
+      "asset_id": "BG_PATH_HOME",
+      "type": "background",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_05"
+      ]
+    },
+    {
+      "asset_id": "BG_SUMMIT",
+      "type": "background",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_03"
+      ]
+    },
+    {
+      "asset_id": "BG_VILLAGE",
+      "type": "background",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_01"
+      ]
+    },
+    {
+      "asset_id": "BG_VILLAGE_SUNSET",
+      "type": "background",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_04"
+      ]
+    },
+    {
+      "asset_id": "CHAR_ARTISAN_OLD",
+      "type": "character",
+      "continuity_scope": "story",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [
+        "pose"
+      ],
+      "forbidden_mutations": [
+        "identity"
+      ],
+      "consumers": [
+        "SH_05"
+      ]
+    },
+    {
+      "asset_id": "CHAR_ARTISAN_YOUNG",
+      "type": "character",
+      "continuity_scope": "story",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [
+        "pose"
+      ],
+      "forbidden_mutations": [
+        "identity"
+      ],
+      "consumers": [
+        "SH_02",
+        "SH_03"
+      ]
+    },
+    {
+      "asset_id": "CHAR_GROUP",
+      "type": "character",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [
+        "pose"
+      ],
+      "forbidden_mutations": [
+        "identity"
+      ],
+      "consumers": [
+        "SH_04"
+      ]
+    },
+    {
+      "asset_id": "CHAR_WALKER_A",
+      "type": "character",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [
+        "pose"
+      ],
+      "forbidden_mutations": [
+        "identity"
+      ],
+      "consumers": [
+        "SH_01"
+      ]
+    },
+    {
+      "asset_id": "CLOUD_01",
+      "type": "fx",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_01"
+      ]
+    },
+    {
+      "asset_id": "EMPTY_CUSHION_HALF",
+      "type": "prop",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_02"
+      ]
+    },
+    {
+      "asset_id": "SHADOW_GROUP",
+      "type": "fx",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_04"
+      ]
+    },
+    {
+      "asset_id": "SHADOW_MASK",
+      "type": "fx",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_03"
+      ]
+    },
+    {
+      "asset_id": "SHADOW_OLD",
+      "type": "fx",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_05"
+      ]
+    },
+    {
+      "asset_id": "SUN",
+      "type": "fx",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_01"
+      ]
+    },
+    {
+      "asset_id": "TREE_BRANCH",
+      "type": "prop",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_01"
+      ]
+    },
+    {
+      "asset_id": "WIFE_SHOES",
+      "type": "prop",
+      "continuity_scope": "scene",
+      "spec": {
+        "style": "living_parchment"
+      },
+      "required_views": [],
+      "allowed_mutations": [],
+      "forbidden_mutations": [],
+      "consumers": [
+        "SH_02"
+      ]
+    }
+  ]
+}

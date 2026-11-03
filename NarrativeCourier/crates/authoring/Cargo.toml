@@ -1,0 +1,22 @@
+[package]
+name = "narrative-courier-authoring"
+version = "0.12.1"
+edition = "2021"
+license = "MIT"
+
+[dependencies]
+chrono = "0.4"
+fs2 = "0.4"
+indexmap = "2"
+jsonschema = { version = "=0.50.1", default-features = false }
+serde = "1"
+serde_json = "1"
+narrative-courier-runtime = { path = "../runtime" }
+narrative-courier-contracts = { path = "../contracts" }
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[dev-dependencies]
+tempfile = "3"
+sts-workflow = { path = "../sts" }

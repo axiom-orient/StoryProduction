@@ -1,0 +1,160 @@
+# 001–154 STS Field Preflight Index
+
+- Cards: 154
+- These cards are quarantined benchmark evidence; runtime prompts never load them.
+- `Adaptation Pressure` remains unresolved per story until a target duration/format is supplied.
+
+- [001 — 아주 옛날에는 사람에게 그림자가 없었더란다.](preflight/001.md) — NO_KNOWN_DEFECT / SEMANTIC_CODA
+- [002 — 잠을 대신 자는 사람](preflight/002.md) — CONFIRMED_DIRECT / WORLD_RULE|PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA
+- [003 — 막내](preflight/003.md) — NO_KNOWN_DEFECT / EPISTEMIC
+- [004 — 기억 보관 서비스 이용약관](preflight/004.md) — NO_KNOWN_DEFECT / WORLD_RULE|SEMANTIC_CODA|FORM_FUNCTION
+- [005 — 83초](preflight/005.md) — CONFIRMED_DIRECT / WORLD_RULE|PHYSICAL_INSTITUTIONAL|SPACE_STATE
+- [006 — 엄마 회사](preflight/006.md) — CONFIRMED_DIRECT / SOURCE_FIDELITY
+- [007 — 버리고 싶은 마음 접수처](preflight/007.md) — NO_KNOWN_DEFECT / WORLD_RULE|SEMANTIC_CODA
+- [008 — 목소리 보관 사기](preflight/008.md) — CONFIRMED_DIRECT / EPISTEMIC|PHYSICAL_INSTITUTIONAL
+- [009 — 기억하지 못하는 자장가](preflight/009.md) — NO_KNOWN_DEFECT / EPISTEMIC
+- [010 — 면회 시간](preflight/010.md) — NO_KNOWN_DEFECT / EPISTEMIC|SEMANTIC_CODA
+- [011 — 돌이 되는 왕](preflight/011.md) — NO_KNOWN_DEFECT / WORLD_RULE|SEMANTIC_CODA
+- [012 — 마지막 박자](preflight/012.md) — NO_KNOWN_DEFECT / SEMANTIC_CODA
+- [013 — 은퇴한 용사의 귀환](preflight/013.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [014 — 할아버지가 칭찬하면 전기가 나가요](preflight/014.md) — NO_KNOWN_DEFECT / WORLD_RULE
+- [015 — 딱 한 번 돌아갈 수 있는 하루](preflight/015.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [016 — 새벽 두 시의 라디오](preflight/016.md) — NO_KNOWN_DEFECT / FORM_FUNCTION
+- [017 — 하루 동안 돌려드립니다](preflight/017.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [018 — 먼저 가](preflight/018.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [019 — 내가 들게](preflight/019.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [020 — 실종신고 취소](preflight/020.md) — OUT_OF_SCOPE_PROSE / EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [021 — 친구의 기준](preflight/021.md) — OUT_OF_SCOPE_PROSE / EPISTEMIC|SEMANTIC_CODA
+- [022 — 마중 나오는 사람](preflight/022.md) — ADJACENT_CRAFT / EPISTEMIC|SEMANTIC_CODA
+- [023 — 중고 시계](preflight/023.md) — CONFIRMED_DIRECT / EPISTEMIC|PHYSICAL_INSTITUTIONAL
+- [024 — 아무도 앉지 않는 자리](preflight/024.md) — OUT_OF_SCOPE_PROSE / SPACE_STATE|SEMANTIC_CODA
+- [025 — 용서 대기번호](preflight/025.md) — CONFIRMED_DIRECT / WORLD_RULE|SEMANTIC_CODA|FORM_FUNCTION
+- [026 — 고양이가 보는 집](preflight/026.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [027 — 마지막 역 다음](preflight/027.md) — NO_KNOWN_DEFECT / WORLD_RULE|SPACE_STATE|SEMANTIC_CODA
+- [028 — 슈퍼 앞 의자](preflight/028.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [029 — 왕의 코는 거짓말을 못 한다](preflight/029.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC
+- [030 — 모르는 척해 주는 가게](preflight/030.md) — NO_KNOWN_DEFECT / WORLD_RULE|SPACE_STATE|SEMANTIC_CODA
+- [031 — 낮 근무와 밤 근무의 노트](preflight/031.md) — CONFIRMED_DIRECT / SOURCE_FIDELITY
+- [032 — 다시 연결된 번호](preflight/032.md) — NO_KNOWN_DEFECT / EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [033 — 유리구슬](preflight/033.md) — NO_KNOWN_DEFECT / EPISTEMIC|SEMANTIC_CODA
+- [034 — 두 형제와 빈 곡간](preflight/034.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [035 — 숟가락과 젓가락](preflight/035.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [036 — 달리기 싫어하는 사슴](preflight/036.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [037 — 종을 너무 자주 울린 아이](preflight/037.md) — CONFIRMED_DIRECT / EPISTEMIC|SEMANTIC_CODA
+- [038 — 달을 빌려 간 나무꾼](preflight/038.md) — NO_KNOWN_DEFECT / WORLD_RULE|SPACE_STATE
+- [039 — 나무 아이의 첫 거짓말](preflight/039.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC
+- [040 — 자리 맡아 드립니다](preflight/040.md) — NO_KNOWN_DEFECT / SEMANTIC_CODA
+- [041 — 흰 우산을 든 아이](preflight/041.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SPACE_STATE
+- [042 — 등대 안의 바다](preflight/042.md) — NO_KNOWN_DEFECT / WORLD_RULE|SPACE_STATE|SEMANTIC_CODA
+- [043 — 높은 가지의 감](preflight/043.md) — CONFIRMED_DIRECT / EPISTEMIC
+- [044 — 문이 좁은 식당](preflight/044.md) — CONFIRMED_DIRECT / PHYSICAL_INSTITUTIONAL|SPACE_STATE|SEMANTIC_CODA
+- [045 — 마른 우물](preflight/045.md) — NO_KNOWN_DEFECT / EPISTEMIC|PHYSICAL_INSTITUTIONAL|SPACE_STATE|SEMANTIC_CODA
+- [046 — 김치 끝 조각](preflight/046.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [047 — 은퇴자 밴드](preflight/047.md) — CONFIRMED_DIRECT / SOURCE_FIDELITY
+- [048 — 새벽 해장국](preflight/048.md) — NO_KNOWN_DEFECT / SEMANTIC_CODA
+- [049 — 국 한 그릇](preflight/049.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [050 — 십 분을 파는 시계방](preflight/050.md) — OUT_OF_SCOPE_PROSE / WORLD_RULE|SEMANTIC_CODA
+- [051 — 대신 고맙다고 전해 드립니다](preflight/051.md) — NO_KNOWN_DEFECT / EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [052 — 옥상에서 가장 가까운 곳](preflight/052.md) — CONFIRMED_DIRECT / PHYSICAL_INSTITUTIONAL|SPACE_STATE|SEMANTIC_CODA
+- [053 — 유실물 보관 기간](preflight/053.md) — NO_KNOWN_DEFECT / EPISTEMIC
+- [054 — 감정 반품센터](preflight/054.md) — NO_KNOWN_DEFECT / WORLD_RULE|SEMANTIC_CODA
+- [055 — 사진관의 다섯 번째 칸](preflight/055.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [056 — 정원을 물려받은 사람](preflight/056.md) — ADJACENT_CRAFT / SEMANTIC_CODA
+- [057 — 아이들만 보이는 신호등](preflight/057.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SPACE_STATE|SEMANTIC_CODA
+- [058 — 바리의 빈 병](preflight/058.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [059 — 두 자매의 신발](preflight/059.md) — CONFIRMED_DIRECT / SOURCE_FIDELITY
+- [060 — 마지막 배달](preflight/060.md) — OUT_OF_SCOPE_PROSE / SPACE_STATE|SEMANTIC_CODA
+- [061 — 별 하나 늦게 뜨는 이유](preflight/061.md) — CONFIRMED_DIRECT / WORLD_RULE|PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA
+- [062 — 그림자가 먼저 늙는다](preflight/062.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [063 — 꿈 수선집](preflight/063.md) — CONFIRMED_DIRECT / WORLD_RULE|SEMANTIC_CODA
+- [064 — 후회 보험](preflight/064.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [065 — 일주일에 한 시간](preflight/065.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [066 — 명절 자리 배치](preflight/066.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [067 — 하루를 다시 사는 법](preflight/067.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [068 — 부재중 전화 17통](preflight/068.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [069 — 세 가지 소원을 거절한 사람](preflight/069.md) — CONFIRMED_DIRECT / WORLD_RULE|SEMANTIC_CODA
+- [070 — 숲의 재판](preflight/070.md) — NO_KNOWN_DEFECT / EPISTEMIC|SPACE_STATE|SEMANTIC_CODA
+- [071 — 가까이 서지 못하는 여자](preflight/071.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SPACE_STATE|SEMANTIC_CODA|FORM_FUNCTION
+- [072 — 장난감 상자의 마지막 밤](preflight/072.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [073 — 늙은 사자의 마지막 포효](preflight/073.md) — NO_KNOWN_DEFECT / WORLD_RULE|SEMANTIC_CODA
+- [074 — 기억 창고의 작은 직원](preflight/074.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [075 — 엄마가 남긴 알람](preflight/075.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [076 — 막차 기사](preflight/076.md) — CONFIRMED_DIRECT / PHYSICAL_INSTITUTIONAL|SPACE_STATE|SEMANTIC_CODA
+- [077 — 자판기 커피](preflight/077.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [078 — 셈을 못하는 아이](preflight/078.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [079 — 3층 버튼](preflight/079.md) — NO_KNOWN_DEFECT / SPACE_STATE|SEMANTIC_CODA
+- [080 — 거짓말이 자라는 화분](preflight/080.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [081 — 대장간 고양이 삼 년이면 불을 안다](preflight/081.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [082 — 늙은 독수리는 새끼였던 때를 잊는다](preflight/082.md) — OUT_OF_SCOPE_PROSE / SOURCE_FIDELITY
+- [083 — 곰 이야기하면 곰이 온다](preflight/083.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA
+- [084 — 메아리 장사꾼](preflight/084.md) — NO_KNOWN_DEFECT / WORLD_RULE|SEMANTIC_CODA
+- [085 — 까치가 물고 간 반지](preflight/085.md) — CONFIRMED_DIRECT / EPISTEMIC|PHYSICAL_INSTITUTIONAL
+- [086 — 마지막 봉화](preflight/086.md) — NO_KNOWN_DEFECT / PHYSICAL_INSTITUTIONAL|SPACE_STATE
+- [087 — 모래알로 벽 치기](preflight/087.md) — OUT_OF_SCOPE_PROSE / PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA
+- [088 — 낮에는 참새가 듣고 밤에는 와이파이가 듣는다](preflight/088.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [089 — 고양이 말을 알아듣는 여자](preflight/089.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [090 — 사진 밖의 아버지](preflight/090.md) — NO_KNOWN_DEFECT / EPISTEMIC|SEMANTIC_CODA
+- [091 — 해가 북쪽에서 뜬 날](preflight/091.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [092 — 나이를 맡기는 은행](preflight/092.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA
+- [093 — 결혼사진의 빈 의자](preflight/093.md) — NO_KNOWN_DEFECT / SPACE_STATE|SEMANTIC_CODA
+- [094 — 바다에게 목소리를 빌린 소녀](preflight/094.md) — NO_KNOWN_DEFECT / WORLD_RULE
+- [095 — 세 친구의 우물](preflight/095.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [096 — 참은 만큼 돌려드립니다](preflight/096.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [097 — 좋아요가 사라진 날](preflight/097.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [098 — 한 짝 장갑](preflight/098.md) — CONFIRMED_DIRECT / PHYSICAL_INSTITUTIONAL
+- [099 — 취하지 않는 술](preflight/099.md) — NO_KNOWN_DEFECT / WORLD_RULE|SEMANTIC_CODA|FORM_FUNCTION
+- [100 — 패배한 장군의 독백](preflight/100.md) — NO_KNOWN_DEFECT / EPISTEMIC|FORM_FUNCTION
+- [101 — 성문 앞의 무명 병사](preflight/101.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [102 — 걱정 보관소의 만기일](preflight/102.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [103 — 답장이 오지 않는 편지](preflight/103.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [104 — 입이 거친 세탁소 할머니](preflight/104.md) — CONFIRMED_DIRECT / SOURCE_FIDELITY
+- [105 — 고양이가 모르는 하루](preflight/105.md) — NO_KNOWN_DEFECT / EPISTEMIC
+- [106 — 강아지의 귀](preflight/106.md) — NO_KNOWN_DEFECT / EPISTEMIC
+- [107 — 평범한 날의 영수증](preflight/107.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [108 — 콩 한 알](preflight/108.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [109 — 초 하나](preflight/109.md) — CONFIRMED_DIRECT / EPISTEMIC|SEMANTIC_CODA
+- [110 — 후회 지우개](preflight/110.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [111 — 급식실의 빈 접시](preflight/111.md) — CONFIRMED_DIRECT / PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA
+- [112 — 수요일 밤의 토요일](preflight/112.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [113 — 왕의 늙은 말](preflight/113.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [114 — 국가기밀문서-우체통 프로젝트](preflight/114.md) — NO_KNOWN_DEFECT / EPISTEMIC|PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA|FORM_FUNCTION
+- [115 — 관리실 불빛](preflight/115.md) — NO_KNOWN_DEFECT / SPACE_STATE|SEMANTIC_CODA
+- [116 — 호텔 수건](preflight/116.md) — NO_KNOWN_DEFECT / EPISTEMIC|SEMANTIC_CODA
+- [117 — 복사기 옆의 머그컵](preflight/117.md) — NO_KNOWN_DEFECT / SPACE_STATE|SEMANTIC_CODA|FORM_FUNCTION
+- [118 — 이 부장의 낚시](preflight/118.md) — NO_KNOWN_DEFECT / EPISTEMIC
+- [119 — 손바닥만 한 자국](preflight/119.md) — NO_KNOWN_DEFECT / SEMANTIC_CODA|FORM_FUNCTION
+- [120 — 세 개의 코드](preflight/120.md) — OUT_OF_SCOPE_PROSE / SOURCE_FIDELITY
+- [121 — 수면선](preflight/121.md) — CONFIRMED_DIRECT / EPISTEMIC|SEMANTIC_CODA
+- [122 — 막차의 빈 정류장](preflight/122.md) — NO_KNOWN_DEFECT / SPACE_STATE|SEMANTIC_CODA
+- [123 — 등대지기의 노래](preflight/123.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|PHYSICAL_INSTITUTIONAL|SPACE_STATE|SEMANTIC_CODA
+- [124 — 할머니가 웃으면 눈이 와요](preflight/124.md) — NO_KNOWN_DEFECT / WORLD_RULE|SEMANTIC_CODA
+- [125 — 일요일의 다리미](preflight/125.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [126 — 죽음에게 매일 편지를 쓴 소녀](preflight/126.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA
+- [127 — 약속의 벤치](preflight/127.md) — CONFIRMED_DIRECT / SPACE_STATE|SEMANTIC_CODA
+- [128 — 마지막 손님을 깎는 이발사](preflight/128.md) — NO_KNOWN_DEFECT / SPACE_STATE|SEMANTIC_CODA
+- [129 — 내일에서 온 친구](preflight/129.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [130 — 화가의 빈 캔버스](preflight/130.md) — NO_KNOWN_DEFECT / SEMANTIC_CODA
+- [131 — 할머니의 두 번째 이름](preflight/131.md) — CONFIRMED_DIRECT / EPISTEMIC|SEMANTIC_CODA
+- [132 — 수호자의 퇴근](preflight/132.md) — CONFIRMED_DIRECT / SEMANTIC_CODA
+- [133 — 열지 않은 타임캡슐](preflight/133.md) — CONFIRMED_DIRECT / EPISTEMIC|PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA
+- [134 — 지옥의 리코더](preflight/134.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [135 — 보이지 않는 사람의 상담](preflight/135.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [136 — 아버지의 스텝](preflight/136.md) — NO_KNOWN_DEFECT / EPISTEMIC
+- [137 — 말이 바뀌는 가족](preflight/137.md) — NO_KNOWN_DEFECT / SOURCE_FIDELITY
+- [138 — 사람이 있는 편의점](preflight/138.md) — CONFIRMED_DIRECT / PHYSICAL_INSTITUTIONAL|SPACE_STATE|SEMANTIC_CODA
+- [139 — 맞은편 창문](preflight/139.md) — OUT_OF_SCOPE_PROSE / EPISTEMIC|SPACE_STATE|SEMANTIC_CODA
+- [140 — 놓고 온 우산](preflight/140.md) — NO_KNOWN_DEFECT / SPACE_STATE|SEMANTIC_CODA
+- [141 — 귀신들의 수선집](preflight/141.md) — NO_KNOWN_DEFECT / EPISTEMIC|SPACE_STATE|SEMANTIC_CODA
+- [142 — 한 사람의 소원](preflight/142.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [143 — 화성에서 온 단체채팅](preflight/143.md) — NO_KNOWN_DEFECT / EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [144 — 내 동생은 시간 여행자](preflight/144.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC
+- [145 — 칼국수 두 그릇](preflight/145.md) — OUT_OF_SCOPE_PROSE / SPACE_STATE
+- [146 — 마지막 손그림 포스터](preflight/146.md) — CONFIRMED_DIRECT / PHYSICAL_INSTITUTIONAL|SPACE_STATE|SEMANTIC_CODA
+- [147 — 세 여신과 빈 사과](preflight/147.md) — CONFIRMED_DIRECT / WORLD_RULE|PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA
+- [148 — 소개팅에서 미래 얼굴을 본 남자](preflight/148.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION
+- [149 — 아들이 찾아온 날](preflight/149.md) — OUT_OF_SCOPE_PROSE / EPISTEMIC|SEMANTIC_CODA
+- [150 — 악마 인턴과 계약한 남자](preflight/150.md) — NO_KNOWN_DEFECT / WORLD_RULE|SPACE_STATE|SEMANTIC_CODA
+- [151 — 가상도시의 꽃집](preflight/151.md) — CONFIRMED_DIRECT / WORLD_RULE|EPISTEMIC|SPACE_STATE|SEMANTIC_CODA|FORM_FUNCTION
+- [152 — 울어도 출근할 수 있는 안경](preflight/152.md) — OUT_OF_SCOPE_PROSE / WORLD_RULE|EPISTEMIC|PHYSICAL_INSTITUTIONAL|SEMANTIC_CODA|FORM_FUNCTION
+- [153 — 혼인 전 열람실](preflight/153.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA
+- [154 — 고맙다는 말을 못 듣는 남자](preflight/154.md) — NO_KNOWN_DEFECT / WORLD_RULE|EPISTEMIC|SEMANTIC_CODA|FORM_FUNCTION

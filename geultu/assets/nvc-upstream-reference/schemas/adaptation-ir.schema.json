@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AdaptationIR",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "selected_scenes": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "SelectedScene",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scene_id": {
+            "type": "string"
+          },
+          "source_spans": {
+            "type": "array",
+            "items": {
+              "$schema": "https://json-schema.org/draft/2020-12/schema",
+              "title": "SourceSpan",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "source_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "start": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "quote": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "source_id",
+                "start",
+                "end"
+              ]
+            },
+            "minItems": 1
+          },
+          "narrative_function": {
+            "type": "string"
+          },
+          "obligations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "representation": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Representation",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "text": {
+                "type": "boolean"
+              },
+              "image": {
+                "type": "boolean"
+              },
+              "sound": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "text",
+              "image",
+              "sound"
+            ]
+          },
+          "visual_metaphor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "scene_id",
+          "source_spans",
+          "narrative_function",
+          "obligations",
+          "representation",
+          "visual_metaphor"
+        ]
+      },
+      "minItems": 1
+    },
+    "omitted_spans": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "OmittedSpan",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "source_span": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "SourceSpan",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "source_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "start": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "end": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "quote": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_id",
+              "start",
+              "end"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          },
+          "safe_to_omit": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "source_span",
+          "reason",
+          "safe_to_omit"
+        ]
+      }
+    }
+  },
+  "required": [
+    "selected_scenes",
+    "omitted_spans"
+  ]
+}

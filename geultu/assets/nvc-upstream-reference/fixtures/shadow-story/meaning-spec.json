@@ -1,0 +1,109 @@
+{
+  "must_keep_assertions": [
+    {
+      "assertion_id": "MK_01",
+      "statement": "초기 인간에게 그림자가 없다.",
+      "criticality": "hard",
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 20,
+          "end": 60,
+          "quote": "그림자가 없었더란다"
+        }
+      ]
+    },
+    {
+      "assertion_id": "MK_02",
+      "statement": "장인은 아내를 잊지 못한다.",
+      "criticality": "hard",
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 330,
+          "end": 460,
+          "quote": "장인은 잊지 못했다"
+        }
+      ]
+    },
+    {
+      "assertion_id": "MK_03",
+      "statement": "장인에게 최초의 그림자가 생긴다.",
+      "criticality": "hard",
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 730,
+          "end": 830,
+          "quote": "검은 것이 길게 늘어났다"
+        }
+      ]
+    },
+    {
+      "assertion_id": "MK_04",
+      "statement": "늙은 장인의 그림자가 먼저 집에 닿는다.",
+      "criticality": "hard",
+      "origin": "explicit",
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 1040,
+          "end": 1170,
+          "quote": "먼저 집에 닿곤 했다"
+        }
+      ]
+    }
+  ],
+  "transition_obligations": [
+    {
+      "obligation_id": "TR_01",
+      "from_event": "EV_02",
+      "to_event": "EV_04",
+      "dimension": "intentional",
+      "criticality": "hard",
+      "meaning": "아내를 잊지 못했기 때문에 산에 오른다.",
+      "recoverability_question": "왜 장인은 산에 올랐는가?",
+      "accepted_meaning": [
+        "아내를 잊지 못해서",
+        "아내의 마지막 풍경을 보기 위해"
+      ],
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 330,
+          "end": 710,
+          "quote": "잊지 못했다 ... 산으로 올라갔다"
+        }
+      ]
+    },
+    {
+      "obligation_id": "TR_02",
+      "from_event": "EV_05",
+      "to_event": "EV_06",
+      "dimension": "consequence",
+      "criticality": "hard",
+      "meaning": "최초의 그림자 이후 모두에게 그림자가 생긴다.",
+      "recoverability_question": "왜 모두에게 그림자가 생겼는가?",
+      "accepted_meaning": [
+        "장인에게 처음 생긴 뒤 모두에게 생겼다"
+      ],
+      "evidence": [
+        {
+          "source_id": "src_shadow_001",
+          "start": 730,
+          "end": 980,
+          "quote": "검은 것이 ... 모두에게 그림자가 생겼다"
+        }
+      ]
+    }
+  ],
+  "forbidden_contradictions": [
+    {
+      "id": "FC_01",
+      "statement": "EV_05 이전 인간 그림자 금지"
+    }
+  ]
+}

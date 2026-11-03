@@ -1,0 +1,7 @@
+interface:
+  display_name: "SceneAssetCompiler"
+  short_description: "Multi-pass story assets, typed generation, PSD packaging, and QA"
+  default_prompt: "Use $scene-asset-compiler to plan visual assets from canonical narrative/visual authority, split each scene into independently reviewable generation units, execute eligible reference-free PNG tasks through the typed Scene Provider lane and delegate reference/edit/cutout/PSD work to $imagegen, require formal Named Saved Path metadata and the correct optional document clipping-path policy for PSD tasks, validate returned artifacts, repair only failed decisions, and publish only approved AssetPack outputs."
+
+policy:
+  allow_implicit_invocation: true

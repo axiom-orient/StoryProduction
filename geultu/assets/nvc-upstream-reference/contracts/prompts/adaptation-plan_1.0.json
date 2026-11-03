@@ -1,0 +1,26 @@
+{
+  "prompt_id": "adaptation-plan/1.0",
+  "stage_id": "S03_ADAPTATION_PLAN",
+  "purpose": "Select minimal sufficient scenes and modality assignment",
+  "authoritative_inputs": [
+    "story_ir",
+    "meaning_spec",
+    "director_ir"
+  ],
+  "allowed_inference": [
+    "visual metaphor",
+    "compression"
+  ],
+  "forbidden_mutation": [
+    "hard meaning"
+  ],
+  "output_schema": "schemas/adaptation-ir.schema.json",
+  "hard_requirements": [
+    "Justify all omissions"
+  ],
+  "evaluation_rubric": [
+    "hard coverage",
+    "scene economy"
+  ],
+  "template": "Implementation MUST inject only authoritative inputs and request output conforming exactly to output_schema. Natural-language wording is versioned separately; schema and hard requirements are authoritative."
+}

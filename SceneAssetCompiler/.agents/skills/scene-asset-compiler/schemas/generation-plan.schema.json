@@ -1,0 +1,606 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/generation-plan.schema.json",
+  "title": "GenerationPlan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plan_id",
+    "authority_id",
+    "tasks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2
+    },
+    "plan_id": {
+      "type": "string"
+    },
+    "authority_id": {
+      "type": "string"
+    },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/task"
+      }
+    }
+  },
+  "$defs": {
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_id",
+        "asset_id",
+        "kind",
+        "required",
+        "depends_on",
+        "split_profile",
+        "authority_refs",
+        "content",
+        "visual_brief",
+        "references",
+        "structure",
+        "output",
+        "acceptance"
+      ],
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "pattern": "^TASK-[A-Za-z0-9._-]+$"
+        },
+        "asset_id": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "STYLE_ANCHOR",
+            "CHARACTER_ANCHOR",
+            "CHARACTER_ASSET",
+            "PROP_ANCHOR",
+            "PROP_ASSET",
+            "ENVIRONMENT_ASSET",
+            "KEY_VISUAL",
+            "MOTION_SOURCE"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+      "split_profile": {
+          "enum": [
+            "L0",
+            "L1",
+            "L2",
+            "L3"
+        ]
+      },
+      "prompt_profile": {
+        "enum": [
+          "PROJECT_STYLE",
+          "PHOTOREAL_SCENE",
+          "PHOTOREAL_CHARACTER_ANCHOR",
+          "PHOTOREAL_LAYER_ASSET",
+          "CUSTOM"
+        ]
+      },
+      "render_contract": {
+        "$ref": "render-contract.schema.json"
+      },
+      "authority_refs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "character_ids",
+            "prop_ids",
+            "color_script_beat_ids"
+          ],
+          "properties": {
+            "character_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "prop_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "color_script_beat_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "content": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "subject",
+            "pose_or_state"
+          ],
+          "properties": {
+            "subject": {
+              "type": "string"
+            },
+            "pose_or_state": {
+              "type": "string"
+            },
+            "narrative_refs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "visual_brief": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "narrative_function",
+            "emotional_intent",
+            "first_read",
+            "focal_hierarchy",
+            "composition",
+            "lighting",
+            "color",
+            "materials",
+            "atmosphere",
+            "environment_rules",
+            "continuity",
+            "avoid"
+          ],
+          "properties": {
+            "narrative_function": {
+              "type": "string",
+              "minLength": 1
+            },
+            "first_read": {
+              "type": "string",
+              "minLength": 1
+            },
+            "focal_hierarchy": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 3,
+              "items": {
+                "type": "string"
+              }
+            },
+            "composition": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "framing",
+                "camera_angle",
+                "perspective",
+                "lens_behavior",
+                "focus_depth",
+                "subject_placement",
+                "depth_layers",
+                "negative_space"
+              ],
+              "properties": {
+                "framing": {
+                  "type": "string"
+                },
+                "camera_angle": {
+                  "type": "string"
+                },
+                "perspective": {
+                  "type": "string"
+                },
+                "subject_placement": {
+                  "type": "string"
+                },
+                "depth_layers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "negative_space": {
+                  "type": "string"
+                },
+                "lens_behavior": {
+                  "type": "string"
+                },
+                "focus_depth": {
+                  "type": "string"
+                }
+              }
+            },
+            "lighting": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "motivation",
+                "direction",
+                "quality",
+                "contrast",
+                "color_relationship"
+              ],
+              "properties": {
+                "motivation": {
+                  "type": "string"
+                },
+                "direction": {
+                  "type": "string"
+                },
+                "quality": {
+                  "type": "string"
+                },
+                "contrast": {
+                  "type": "string"
+                },
+                "color_relationship": {
+                  "type": "string"
+                }
+              }
+            },
+            "color": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "palette_role",
+                "dominant",
+                "accent",
+                "value_structure"
+              ],
+              "properties": {
+                "palette_role": {
+                  "type": "string"
+                },
+                "dominant": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "accent": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "value_structure": {
+                  "type": "string"
+                }
+              }
+            },
+            "materials": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "environment_rules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "continuity": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "avoid": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "emotional_intent": {
+              "type": "string",
+              "minLength": 1
+            },
+            "atmosphere": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "source_kind",
+              "role",
+              "source",
+              "preserve",
+              "ignore"
+            ],
+            "properties": {
+              "role": {
+                "enum": [
+                  "IDENTITY",
+                  "STYLE",
+                  "POSE",
+                  "COSTUME",
+                  "PROP",
+                  "COMPOSITION",
+                  "ENVIRONMENT",
+                  "MATERIAL"
+                ]
+              },
+              "source": {
+                "type": "string"
+              },
+              "preserve": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "ignore": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "source_kind": {
+                "enum": [
+                  "FILE",
+                  "TASK_OUTPUT"
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "role": {
+                      "const": "STYLE"
+                    }
+                  },
+                  "required": [
+                    "role"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "preserve": {
+                      "items": {
+                        "enum": [
+                          "line_weight",
+                          "ink",
+                          "value_grouping",
+                          "screentone",
+                          "palette",
+                          "edge_language",
+                          "shading",
+                          "texture",
+                          "material_response",
+                          "lighting_language",
+                          "camera_language",
+                          "detail_density",
+                          "brushwork"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "structure": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "required_layer_ids",
+            "forbidden_merges",
+            "articulation_overlap"
+          ],
+          "properties": {
+            "required_layer_ids": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "forbidden_merges": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "a",
+                  "b",
+                  "reason"
+                ],
+                "properties": {
+                  "a": {
+                    "type": "string"
+                  },
+                  "b": {
+                    "type": "string"
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "articulation_overlap": {
+              "type": "boolean"
+            }
+          }
+        },
+        "output": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "preferred",
+            "fallback_allowed",
+            "transparent_background",
+            "size"
+          ],
+          "properties": {
+            "preferred": {
+              "enum": [
+                "PNG",
+                "WEBP",
+                "PSD"
+              ]
+            },
+            "fallback_allowed": {
+              "type": "boolean"
+            },
+            "transparent_background": {
+              "type": "boolean"
+            },
+        "size": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*x[1-9][0-9]*$"
+        },
+      "min_transparent_margin_px": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "psd_profile": {
+              "$ref": "psd-generation-profile.schema.json"
+            }
+          }
+        },
+        "acceptance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "identity",
+            "style",
+            "narrative",
+            "composition",
+            "lighting_color",
+            "material",
+            "structure",
+            "articulation",
+            "usability"
+          ],
+          "properties": {
+            "identity": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "narrative": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "composition": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "lighting_color": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "structure": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "articulation": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "usability": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "material": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+      {
+        "if": {
+          "properties": {
+            "kind": {
+              "enum": [
+                "CHARACTER_ANCHOR",
+                "CHARACTER_ASSET",
+                "PROP_ANCHOR",
+                "PROP_ASSET"
+              ]
+            },
+            "output": {
+              "properties": {
+                "transparent_background": {
+                  "const": true
+                }
+              }
+            }
+          },
+          "required": ["kind", "output"]
+        },
+        "then": {
+          "properties": {
+            "output": {
+              "properties": {
+                "min_transparent_margin_px": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+}

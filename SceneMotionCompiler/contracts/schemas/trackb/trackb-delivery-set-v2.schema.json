@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-motion-compiler.local/contracts/trackb/delivery-set/v2",
+  "title": "TrackBDeliverySet v2",
+  "schemaVersion": 2,
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "deliverySetId", "narrativeId", "candidateHash", "authorityHash", "meaningQualificationHash", "baseDeliverySetHash", "approvalHash", "artifacts", "evidenceCellHashes", "revision", "state", "deliverySetHash"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 2 },
+    "deliverySetId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9._:-]{0,127}$" },
+    "narrativeId": { "type": "string", "pattern": "^narrative\\.[A-Za-z0-9._:-]{1,127}$" },
+    "candidateHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "authorityHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "meaningQualificationHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "baseDeliverySetHash": { "type": "string", "pattern": "^(?:NONE|sha256:[0-9a-f]{64})$" },
+    "approvalHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projectionReceiptHash", "sceneGraphHash", "assetHandoffHash", "assetHandoffSceneGraphHash", "htmlHash", "provenanceHash"],
+      "properties": {
+        "projectionReceiptHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "sceneGraphHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "assetHandoffHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "assetHandoffSceneGraphHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "htmlHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "provenanceHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+      }
+    },
+    "evidenceCellHashes": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" } },
+    "revision": { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+    "state": { "type": "string", "const": "PROMOTED" },
+    "deliverySetHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

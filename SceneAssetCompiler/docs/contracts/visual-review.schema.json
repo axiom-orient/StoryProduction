@@ -1,0 +1,470 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scene-asset-compiler.local/visual-review.schema.json",
+  "title": "VisualReview",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "attempt_no",
+    "reviewer",
+    "created_at",
+    "status",
+    "prompt_profile_snapshot",
+    "checks",
+    "evidence",
+    "findings",
+    "acceptance_snapshot",
+    "visual_brief_snapshot"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 3
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "attempt_no": {
+      "type": "integer"
+    },
+    "reviewer": {
+      "enum": [
+        "CODEX",
+        "HUMAN"
+      ]
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "APPROVED",
+        "REJECTED"
+      ]
+    },
+    "prompt_profile_snapshot": {
+      "enum": [
+        "PROJECT_STYLE",
+        "PHOTOREAL_SCENE",
+        "PHOTOREAL_CHARACTER_ANCHOR",
+        "PHOTOREAL_LAYER_ASSET",
+        "CUSTOM"
+      ]
+    },
+    "render_contract_snapshot": {
+      "$ref": "render-contract.schema.json"
+    },
+    "artifact_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "style",
+        "narrative",
+        "composition",
+        "lighting_color",
+        "material",
+        "photorealism",
+        "structure",
+        "articulation",
+        "usability"
+      ],
+      "properties": {
+        "identity": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "style": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "narrative": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "composition": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "lighting_color": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "material": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "photorealism": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "structure": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "articulation": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "usability": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "genre_fidelity": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        },
+        "layout_fidelity": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA"
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "style",
+        "narrative",
+        "composition",
+        "lighting_color",
+        "material",
+        "photorealism",
+        "structure",
+        "articulation",
+        "usability"
+      ],
+      "properties": {
+        "identity": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "style": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "narrative": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "composition": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lighting_color": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "material": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "photorealism": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "structure": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "articulation": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "usability": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "genre_fidelity": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "layout_fidelity": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "acceptance_snapshot": {
+      "type": "object"
+    },
+    "visual_brief_snapshot": {
+      "type": "object"
+    },
+    "layout_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_sha256",
+        "output_sha256",
+        "slots"
+      ],
+      "properties": {
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "output_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "slots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "slot_id",
+              "observed_bounds",
+              "observed_rotation_degrees",
+              "observed_z_order",
+              "focal_crop_result",
+              "label_guide_result",
+              "tolerance_verdict"
+            ],
+            "properties": {
+              "slot_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+              },
+              "observed_bounds": {
+                "$ref": "render-contract.schema.json#/$defs/normalizedBounds"
+              },
+              "observed_rotation_degrees": {
+                "type": "number"
+              },
+              "observed_z_order": {
+                "type": "integer"
+              },
+              "focal_crop_result": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "observed_focal_point",
+                  "observed_crop_safe_inset",
+                  "verdict"
+                ],
+                "properties": {
+                  "observed_focal_point": {
+                    "$ref": "render-contract.schema.json#/$defs/normalizedPoint"
+                  },
+                  "observed_crop_safe_inset": {
+                    "$ref": "render-contract.schema.json#/$defs/cropSafeInset"
+                  },
+                  "verdict": {
+                    "enum": [
+                      "PASS",
+                      "FAIL",
+                      "NA"
+                    ]
+                  }
+                }
+              },
+              "label_guide_result": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "source_labels",
+                  "output_labels",
+                  "source_guides",
+                  "output_guides",
+                  "verdict"
+                ],
+                "properties": {
+                  "source_labels": {
+                    "enum": [
+                      "PRESENT",
+                      "ABSENT",
+                      "NOT_APPLICABLE"
+                    ]
+                  },
+                  "output_labels": {
+                    "enum": [
+                      "PRESENT",
+                      "ABSENT",
+                      "NOT_APPLICABLE"
+                    ]
+                  },
+                  "source_guides": {
+                    "enum": [
+                      "PRESENT",
+                      "ABSENT",
+                      "NOT_APPLICABLE"
+                    ]
+                  },
+                  "output_guides": {
+                    "enum": [
+                      "PRESENT",
+                      "ABSENT",
+                      "NOT_APPLICABLE"
+                    ]
+                  },
+                  "verdict": {
+                    "enum": [
+                      "PASS",
+                      "FAIL",
+                      "NA"
+                    ]
+                  }
+                }
+              },
+              "tolerance_verdict": {
+                "enum": [
+                  "PASS",
+                  "FAIL",
+                  "NA"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "render_contract_snapshot"
+        ]
+      },
+      "then": {
+        "properties": {
+          "checks": {
+            "required": [
+              "genre_fidelity"
+            ]
+          },
+          "evidence": {
+            "required": [
+              "genre_fidelity"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "render_contract_snapshot"
+        ],
+        "properties": {
+          "render_contract_snapshot": {
+            "type": "object",
+            "required": [
+              "wireframe_layout"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "checks": {
+            "required": [
+              "layout_fidelity"
+            ]
+          },
+          "evidence": {
+            "required": [
+              "layout_fidelity"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "render_contract_snapshot"
+        ],
+        "properties": {
+          "render_contract_snapshot": {
+            "type": "object",
+            "required": [
+              "wireframe_layout"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "layout_evidence",
+          "artifact_sha256"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geultu.dev/schemas/artifacts/style_profile.v2.schema.json",
+  "title": "style_profile artifact body",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "../runtime/artifact-ref.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "locale": {
+      "type": "string"
+    },
+    "source_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sentence_length_histogram": {
+      "type": "object"
+    },
+    "paragraph_length_histogram": {
+      "type": "object"
+    },
+    "endings": {
+      "type": "object"
+    },
+    "punctuation": {
+      "type": "object"
+    },
+    "register_markers": {
+      "type": "object"
+    },
+    "dialogue_ratio_milli": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    }
+  },
+  "required": [
+    "api_version",
+    "source_refs",
+    "locale",
+    "source_digest",
+    "sentence_length_histogram",
+    "paragraph_length_histogram",
+    "endings",
+    "punctuation",
+    "register_markers",
+    "dialogue_ratio_milli"
+  ]
+}

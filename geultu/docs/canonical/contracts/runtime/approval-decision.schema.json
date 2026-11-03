@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://geultu.dev/schemas/runtime/approval-decision.v1.schema.json",
+  "title": "Approval decision",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "api_version": {
+      "const": "geultu.dev/approval/v1"
+    },
+    "decision_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gate_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "$ref": "artifact-ref.schema.json"
+    },
+    "action": {
+      "enum": [
+        "approve",
+        "request_revision",
+        "reject",
+        "pivot",
+        "pause"
+      ]
+    },
+    "actor_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "artifact-ref.schema.json"
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "api_version",
+    "decision_id",
+    "gate_id",
+    "subject",
+    "action",
+    "actor_id",
+    "rationale",
+    "evidence"
+  ]
+}

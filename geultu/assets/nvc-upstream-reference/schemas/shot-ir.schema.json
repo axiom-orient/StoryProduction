@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ShotBundleIR",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "shots": {
+      "type": "array",
+      "items": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "title": "ShotIR",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "shot_id": {
+            "type": "string"
+          },
+          "scene_id": {
+            "type": "string"
+          },
+          "narrative_function": {
+            "type": "string"
+          },
+          "setup": {
+            "type": "object"
+          },
+          "event": {
+            "type": "object"
+          },
+          "lighting": {
+            "type": "object"
+          },
+          "camera": {
+            "type": "object"
+          },
+          "motion": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "title": "Motion",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "LAYERED_2_5D",
+                  "RIGGED_2D",
+                  "STOP_MOTION",
+                  "GEN_I2V",
+                  "GEN_T2V",
+                  "SCENE_3D",
+                  "HYBRID"
+                ]
+              },
+              "primary": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "ambient": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "mode",
+              "primary",
+              "ambient"
+            ]
+          },
+          "hard_constraints": {
+            "type": "object"
+          },
+          "asset_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "obligations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "shot_id",
+          "scene_id",
+          "narrative_function",
+          "setup",
+          "event",
+          "lighting",
+          "camera",
+          "motion",
+          "hard_constraints",
+          "asset_refs",
+          "obligations"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "shots"
+  ]
+}
