@@ -118,4 +118,3 @@ OpenAI API/provider execution is NOT_RUN; adapter unit/integration tests use the
 Codex의 실제 exact imagegen skill `cat` 읽기와 기존 `sed` 이벤트를 좁게 허용한다. 다른 경로·명령 연결·셸 치환은 계속 거절한다. 다른 실행 mode의 Codex 인증 옵션을 무시하지 않는다. Story caller는 Codex binary/home을 명시 전달하고 capability·task_mode·참조 계약을 실행 전에 대조한다.
 
 현재 workspace 전체 Rust 테스트, strict Clippy, release build는 로컬 통과했다. 전체 `scripts/verify.sh`는 authentic historical `image-evidence.json` 누락에서 실패한다. 새 provider 실행은 해당 과거 자료를 대체하지 않는다. 실제 이미지 실행·취소·사람 승인 상태는 상위 공개 배포 보고서에서 별도로 기록한다.
-

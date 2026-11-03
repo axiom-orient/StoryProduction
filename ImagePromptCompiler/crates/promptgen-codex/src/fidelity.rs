@@ -224,6 +224,16 @@ mod tests {
                 !subject_instances_pass(&[wrong], &request),
                 "same total, missing panel"
             );
+            let mut stacked = check.clone();
+            stacked
+                .instances
+                .iter_mut()
+                .for_each(|instance| instance.x_percent = 50);
+            if layout == "three_panel_strip" {
+                let (_, _, correction) = placement_failure_details(&[stacked], &request).unwrap();
+                assert!(correction.contains("3 columns by 1 rows"));
+                assert!(correction.contains("Do not retain a transposed or stacked layout"));
+            }
             let mut wrong = check;
             wrong.observed -= 1;
             wrong.instances.pop();

@@ -39,14 +39,17 @@ pub(crate) fn placement_failure_details(
     checks: &[SubjectCountCheck],
     request: &ImagePromptRequest,
 ) -> Option<(String, String, String)> {
-    if grid(request).is_some() {
+    if let Some((columns, rows)) = grid(request) {
         if subject_instances_match_request(checks, request) {
             return None;
         }
-        let summary =
-            "cinematic subjects must satisfy count and local placement in every panel".to_owned();
-        return Some((summary.clone(), summary,
-            "Correct only the failing panel's subject count or placement. Preserve the ordered panel layout and show each typed subject's count in every panel, with placement measured inside that panel; preserve all other panels and visual properties.".to_owned()));
+        let summary = format!(
+            "cinematic geometry requires {columns} columns by {rows} rows with the typed subject count and local placement in every panel"
+        );
+        let repair = format!(
+            "Geometry-only correction: use exactly {columns} columns by {rows} rows, ordered left-to-right then top-to-bottom. Do not retain a transposed or stacked layout that disagrees with this grid. Show each typed subject's count separately in EVERY cell, with its typed placement measured inside that cell. Preserve the panel actions, shot sizes, character identity, lighting, palette, props, and every other visual property."
+        );
+        return Some((summary.clone(), summary, repair));
     }
     for subject in &request.subjects {
         let check = checks.iter().find(|check| check.id == subject.id)?;
