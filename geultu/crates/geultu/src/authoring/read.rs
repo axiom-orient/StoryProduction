@@ -105,10 +105,29 @@ pub fn candidate_view(project: &Project, id: &str) -> Result<Value> {
             changes.push(json!({"change":"order","before":old_order,"after":new_order}));
         }
     }
+    let current_target = project.authoring.documents.get(&task.target);
+    // Admission is checked before a decision. After adoption, comparing the
+    // original task base with the adopted document would report our own write
+    // as a conflict. Keep current-document freshness separate from that decision.
+    let adoption_blockers = if candidate.decision.is_none() {
+        freshness.task_reasons(task)
+    } else {
+        Vec::new()
+    };
+    let current_target_reasons = current_target
+        .map(|document| freshness.document_reasons(document))
+        .unwrap_or_default();
+    let next_action = match candidate.decision.as_ref() {
+        Some(decision) if decision.accepted && current_target_reasons.is_empty() => {
+            "authoring.status"
+        }
+        Some(_) => "authoring.prepare",
+        None => "authoring.review",
+    };
     Ok(
         json!({"candidate":candidate,"candidate_hash":digest(&candidate.draft),"changes":changes,
-        "current_target":project.authoring.documents.get(&task.target),"adoption_blockers":freshness.task_reasons(task),
-        "next_action":if candidate.decision.is_some(){"authoring.prepare"}else{"authoring.review"}}),
+        "current_target":current_target,"adoption_blockers":adoption_blockers,
+        "current_target_reasons":current_target_reasons,"next_action":next_action}),
     )
 }
 

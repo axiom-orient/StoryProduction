@@ -28,6 +28,12 @@ stable block ID·heading·text, dependency hashes, guidance와 document revision
 Human-only 작업은 MCP 목록과 실행에서 거절한다. CLI/Studio actor는 로컬 attribution이다.
 정확한 이름·필드는 [authoring tool 정본](../crates/geultu/src/authoring/api/tools.rs)을 따른다.
 
+후보 조회의 `adoption_blockers`는 미결 후보를 지금 채택할 때의 차단 사유다.
+검토가 끝난 후보는 저장된 `candidate.decision`으로 결과를 표시하며, 채택 자체가
+대상 문서를 바꾼 것을 새 충돌로 보고하지 않는다. 현재 대상 문서의 원문·브리프·
+글투 결속 상태는 별도 `current_target_reasons`에 표시한다. 과거 채택 이력은
+유지되더라도 현재 문서가 stale하면 export와 새 후보 채택의 기존 guard는 그대로 적용한다.
+
 ## 입력·출력·전제조건
 
 | surface | 입력·검증 | 출력·관찰 동작 |
