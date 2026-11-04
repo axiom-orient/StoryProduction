@@ -20,7 +20,10 @@ pub(super) fn parse_heading(line: &str) -> narrative_courier_runtime::Result<Par
             "scene heading is missing setting: {heading}"
         ))
     })?;
-    let setting = setting.trim().to_ascii_uppercase();
+    let mut setting = setting.trim().to_ascii_uppercase();
+    if setting == "INT./EXT" {
+        setting = "INT/EXT".into();
+    }
     if !matches!(setting.as_str(), "INT" | "EXT" | "INT/EXT" | "I/E") {
         return Err(narrative_courier_runtime::Error::Contract(format!(
             "unsupported scene setting in heading: {heading}"
@@ -58,6 +61,17 @@ pub(super) fn parse_heading(line: &str) -> narrative_courier_runtime::Result<Par
 }
 
 fn canonical_time(value: &str) -> Option<&'static str> {
+    // A story-day marker belongs in the original label, not the time-of-day enum.
+    let value = match value.split_once(char::is_whitespace) {
+        Some((day, time))
+            if day.strip_prefix('D').is_some_and(|index| {
+                !index.is_empty() && index.bytes().all(|b| b.is_ascii_digit())
+            }) =>
+        {
+            time.trim_start()
+        }
+        _ => value,
+    };
     let lower = value.to_ascii_lowercase();
     if matches!(value, "새벽" | "여명" | "동틀 무렵")
         || lower.contains("dawn")

@@ -491,6 +491,24 @@ fn korean_scene_map_extracts_dialogue_and_preserves_silent_scenes() {
 }
 
 #[test]
+fn scene_map_preserves_combined_heading_with_story_day() {
+    let heading = "SCN-001. INT./EXT. 버스·정류장 - D0 밤";
+    let screenplay = format!("{heading}\n버스가 멎는다.\n");
+    let map = sts_workflow::scene_map::build_scene_map(
+        "combined-heading",
+        screenplay.as_bytes(),
+        heading.as_bytes(),
+    )
+    .unwrap();
+
+    assert_eq!(map.scenes.len(), 1);
+    assert_eq!(map.scenes[0].heading, heading);
+    assert_eq!(map.scenes[0].setting, "INT/EXT");
+    assert_eq!(map.scenes[0].time_of_day, "night");
+    assert_eq!(map.scenes[0].time_of_day_label, "D0 밤");
+}
+
+#[test]
 fn scene_map_v2_emits_all_declared_semantic_kinds_and_distinguishes_repeated_dialogue() {
     let screenplay = concat!(
         "SCN-001. INT. 기록실 - 밤\n",
