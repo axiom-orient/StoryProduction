@@ -1,5 +1,7 @@
 # Story integration
 
+GPT Image 2.6 native GIF generation/edit and SAC intake: [GIF generation](../docs/GIF_GENERATION.md).
+
 StoryProduction의 native 공개 실행 파일 `storyctl`과 immutable 교환 계약을 소유한다. 작품 상태·서사 의미·승인 정본은 Geultu/NVC/SAC/SMC에 남는다. 합성 입력을 사용하는 integration E2E는 public 경로의 연결과 파일 무결성을 확인하며 실제 작품 품질·사용자 채택을 인증하지 않는다.
 
 ## 실행

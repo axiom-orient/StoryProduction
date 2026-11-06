@@ -30,6 +30,9 @@ pub struct OpenAiEditReceipt {
     pub backend: String,
     pub provider: String,
     pub model: String,
+    pub format: String,
+    pub frame_count: Option<u32>,
+    pub frame_duration_ms: Option<u32>,
     pub endpoint_contract: String,
     pub request_id: Option<String>,
     pub http_status: u16,
@@ -67,6 +70,17 @@ impl OpenAiEditReceipt {
             ("height", JsonValue::from(u64::from(self.height))),
             ("http_status", JsonValue::from(u64::from(self.http_status))),
             ("model", JsonValue::from(self.model.clone())),
+            ("format", JsonValue::from(self.format.clone())),
+            (
+                "frame_count",
+                self.frame_count
+                    .map_or(JsonValue::Null, |n| JsonValue::from(u64::from(n))),
+            ),
+            (
+                "frame_duration_ms",
+                self.frame_duration_ms
+                    .map_or(JsonValue::Null, |n| JsonValue::from(u64::from(n))),
+            ),
             (
                 "output_path",
                 JsonValue::from(self.output_path.display().to_string()),

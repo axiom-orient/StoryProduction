@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://story-production.local/contracts/gif-intake-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "candidateOnly",
+    "directionApproved",
+    "sourcePacketHash",
+    "source",
+    "boardHash",
+    "input",
+    "executionEvidence",
+    "fps",
+    "playback",
+    "sourceDurationMs",
+    "durationFrames",
+    "assets",
+    "planFragment",
+    "timingPolicy",
+    "contentHash"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "sac.gif-intake/1"
+    },
+    "candidateOnly": {
+      "const": true
+    },
+    "directionApproved": {
+      "const": false
+    },
+    "sourcePacketHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "narrativePackageSha256",
+        "releaseBundleSha256",
+        "sceneMapSha256"
+      ],
+      "properties": {
+        "narrativePackageSha256": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "releaseBundleSha256": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "sceneMapSha256": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
+    "boardHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
+    "executionEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "authenticated"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "authenticated": {
+          "const": false
+        }
+      }
+    },
+    "fps": {
+      "enum": [
+        12,
+        24,
+        30,
+        60
+      ]
+    },
+    "playback": {
+      "const": "once-hold"
+    },
+    "sourceDurationMs": {
+      "type": "integer",
+      "minimum": 40,
+      "maximum": 32000
+    },
+    "durationFrames": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1920
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetId",
+          "path",
+          "sha256",
+          "width",
+          "height",
+          "alpha",
+          "provenance"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8192
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8192
+          },
+          "alpha": {
+            "const": "opaque"
+          },
+          "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "executor",
+              "source"
+            ],
+            "properties": {
+              "executor": {
+                "const": "user-supplied"
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              }
+            }
+          }
+        }
+      }
+    },
+    "planFragment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assets",
+        "poses"
+      ],
+      "properties": {
+        "assets": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "assetId",
+              "width",
+              "height",
+              "alpha",
+              "brief"
+            ],
+            "properties": {
+              "assetId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 8192
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 8192
+              },
+              "alpha": {
+                "const": "opaque"
+              },
+              "brief": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8192
+              }
+            }
+          }
+        },
+        "poses": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 16,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "frame",
+              "assetId"
+            ],
+            "properties": {
+              "frame": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 35999
+              },
+              "assetId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "timingPolicy": {
+      "const": "ceil cumulative source time; hold last frame; no looping or time stretching"
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}

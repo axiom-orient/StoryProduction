@@ -10,14 +10,14 @@ use promptgen_core::image::ImagePromptRequest;
 use super::files::{create_private_file, read_bounded_bytes, read_bounded_utf8};
 use super::limits::{MAX_LOG_BYTES, MAX_RESPONSE_BYTES};
 use super::reference::ImageMime;
-use super::{API_ENDPOINT, API_MODEL, OpenAiExecutionError, OpenAiRunConfig};
+use super::{API_ENDPOINT, OpenAiExecutionError, OpenAiRunConfig};
 
 const POLL_INTERVAL: Duration = Duration::from_millis(10);
 
 pub(super) struct CurlRequest<'a> {
     pub(super) api_key: &'a str,
     pub(super) prompt_path: &'a Path,
-    pub(super) reference_path: &'a Path,
+    pub(super) reference_path: Option<&'a Path>,
     pub(super) mime: ImageMime,
     pub(super) response_path: &'a Path,
     pub(super) headers_path: &'a Path,
@@ -48,51 +48,83 @@ pub(super) fn validate_api_key(key: &str) -> Result<String, OpenAiExecutionError
 pub(super) fn build_curl_config(input: &CurlRequest<'_>) -> String {
     let mut output = String::new();
     output.push_str("silent = true\nshow-error = true\nrequest = \"POST\"\n");
-    output.push_str(&format!("url = {}\n", curl_quote(API_ENDPOINT)));
+    output.push_str(&format!(
+        "url = {}\n",
+        curl_quote(if input.reference_path.is_some() {
+            API_ENDPOINT
+        } else {
+            "https://api.openai.com/v1/images/generations"
+        })
+    ));
     output.push_str(&format!(
         "header = {}\n",
         curl_quote(&format!("Authorization: Bearer {}", input.api_key))
     ));
     output.push_str("header = \"Accept: application/json\"\n");
-    output.push_str(&format!(
-        "form = {}\n",
-        curl_quote(&format!("model={API_MODEL}"))
-    ));
-    output.push_str(&format!(
-        "form = {}\n",
-        curl_quote(&format!("prompt=<{}", input.prompt_path.display()))
-    ));
-    output.push_str(&format!(
-        "form = {}\n",
-        curl_quote(&format!(
-            "image[]=@{};type={}",
-            input.reference_path.display(),
-            input.mime.as_str()
-        ))
-    ));
-    output.push_str(&format!(
-        "form = {}\n",
-        curl_quote(&format!(
-            "size={}x{}",
-            input.request.output.width, input.request.output.height
-        ))
-    ));
-    output.push_str(&format!(
-        "form = {}\n",
-        curl_quote(&format!(
-            "quality={}",
-            input.request.output.quality.as_str()
-        ))
-    ));
-    output.push_str(&format!(
-        "form = {}\n",
-        curl_quote(&format!(
-            "background={}",
-            input.request.output.background.as_str()
-        ))
-    ));
-    output.push_str("form = \"output_format=png\"\n");
-    output.push_str("form = \"n=1\"\n");
+    if let Some(reference_path) = input.reference_path {
+        output.push_str(&format!(
+            "form = {}\n",
+            curl_quote(&format!("model={}", input.request.output.model))
+        ));
+        output.push_str(&format!(
+            "form = {}\n",
+            curl_quote(&format!("prompt=<{}", input.prompt_path.display()))
+        ));
+        output.push_str(&format!(
+            "form = {}\n",
+            curl_quote(&format!(
+                "image[]=@{};type={}",
+                reference_path.display(),
+                input.mime.as_str()
+            ))
+        ));
+        output.push_str(&format!(
+            "form = {}\n",
+            curl_quote(&format!(
+                "size={}x{}",
+                input.request.output.width, input.request.output.height
+            ))
+        ));
+        output.push_str(&format!(
+            "form = {}\n",
+            curl_quote(&format!(
+                "quality={}",
+                input.request.output.quality.as_str()
+            ))
+        ));
+        output.push_str(&format!(
+            "form = {}\n",
+            curl_quote(&format!(
+                "background={}",
+                input.request.output.background.as_str()
+            ))
+        ));
+
+        output.push_str(&format!(
+            "form = {}\n",
+            curl_quote(&format!("output_format={}", input.request.output.format))
+        ));
+        if input.request.output.format == "gif" {
+            for (key, value) in [
+                ("frame_count", input.request.output.frame_count),
+                ("frame_duration_ms", input.request.output.frame_duration_ms),
+            ] {
+                if let Some(value) = value {
+                    output.push_str(&format!(
+                        "form = {}\n",
+                        curl_quote(&format!("{key}={value}"))
+                    ));
+                }
+            }
+        }
+        output.push_str("form = \"n=1\"\n");
+    } else {
+        output.push_str("header = \"Content-Type: application/json\"\n");
+        output.push_str(&format!(
+            "data-binary = {}\n",
+            curl_quote(&format!("@{}", input.prompt_path.display()))
+        ));
+    }
     output.push_str(&format!(
         "output = {}\n",
         curl_quote(&path_string(input.response_path))

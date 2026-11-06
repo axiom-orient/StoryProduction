@@ -35,6 +35,7 @@ pub struct PromptgenOptions {
 enum Mode {
     Compile,
     Generate,
+    ApiGenerate,
     Edit,
 }
 impl Mode {
@@ -42,6 +43,7 @@ impl Mode {
         match self {
             Self::Compile => "prompt-only",
             Self::Generate => "codex-imagegen",
+            Self::ApiGenerate => "openai-image-generate",
             Self::Edit => "openai-image-edit",
         }
     }
@@ -53,6 +55,9 @@ impl Mode {
 fn mode(request: &Value) -> Result<Mode> {
     let (mode, kind, network) = match request["capability"].as_str() {
         Some("image.prompt.compile") => (Mode::Compile, "local_process", "denied"),
+        Some("image.generate") if request["provider"]["kind"] == "openai" => {
+            (Mode::ApiGenerate, "openai", "required")
+        }
         Some("image.generate") => (Mode::Generate, "codex", "required"),
         Some("image.edit") => (Mode::Edit, "openai", "required"),
         _ => {
@@ -80,7 +85,10 @@ fn mode(request: &Value) -> Result<Mode> {
             output["kind"] == "prompt_compilation" && output["mediaType"] == "application/json"
         } else {
             (output["kind"] == "generation_receipt" && output["mediaType"] == "application/json")
-                || (output["kind"] == "image_candidate" && output["mediaType"] == "image/png")
+                || (output["kind"] == "image_candidate"
+                    && (output["mediaType"] == "image/png"
+                        || (matches!(mode, Mode::Edit | Mode::ApiGenerate)
+                            && output["mediaType"] == "image/gif")))
         };
         if !supported {
             return Err(Error::not_applied(
@@ -117,7 +125,7 @@ fn validate_payload_mode(mode: Mode, payload: &Value) -> Result<()> {
         .map(Vec::as_slice)
         .unwrap_or(&[]);
     let supported = match mode {
-        Mode::Generate => task == "generate" && references.is_empty(),
+        Mode::Generate | Mode::ApiGenerate => task == "generate" && references.is_empty(),
         Mode::Edit => {
             task == "edit"
                 && references.len() == 1
@@ -126,13 +134,23 @@ fn validate_payload_mode(mode: Mode, payload: &Value) -> Result<()> {
         }
         Mode::Compile => true,
     };
-    if !supported
-        || payload["output"]["model"] != "gpt-image-2"
-        || payload["output"]["format"] != "png"
-    {
-        return Err(Error::not_applied(
-            "capability and typed payload disagree: image.generate requires reference-free generate; image.edit requires edit with one index=1 role=base reference; both require gpt-image-2 PNG",
-        ));
+    let model = payload["output"]["model"].as_str().unwrap_or("");
+    let format = payload["output"]["format"].as_str().unwrap_or("");
+    let output_supported = match mode {
+        Mode::Generate => model == "gpt-image-2" && format == "png",
+        Mode::ApiGenerate => {
+            matches!(model, "gpt-image-2.6-sunburst" | "gpt-image-2.6-flare")
+                && matches!(format, "png" | "gif")
+        }
+        Mode::Edit => {
+            (model == "gpt-image-2" && format == "png")
+                || (matches!(model, "gpt-image-2.6-sunburst" | "gpt-image-2.6-flare")
+                    && matches!(format, "png" | "gif"))
+        }
+        Mode::Compile => true,
+    };
+    if !supported || !output_supported {
+        return Err(Error::not_applied("capability and typed payload disagree: Codex generate requires GPT Image 2 PNG; OpenAI generation requires GPT Image 2.6; OpenAI edit requires one base reference; both support native GIF"));
     }
     Ok(())
 }
@@ -264,6 +282,13 @@ fn artifact(
         value["width"] = json!(width);
         value["height"] = json!(height);
     }
+    if media_type == "image/gif" {
+        if bytes.len() < 13 || !matches!(&bytes[..6], b"GIF87a" | b"GIF89a") {
+            return Err(Error::not_applied("candidate has no GIF header"));
+        }
+        value["width"] = json!(u16::from_le_bytes(bytes[6..8].try_into().unwrap()));
+        value["height"] = json!(u16::from_le_bytes(bytes[8..10].try_into().unwrap()));
+    }
     Ok(value)
 }
 
@@ -322,22 +347,42 @@ fn candidates(
             }
         } else if receipt["provider"] != "openai"
             || receipt["http_status"].as_u64() != Some(200)
-            || receipt["reference_sha256"].as_str()
-                != request["references"][0]["sha256"].as_str().map(|v| &v[7..])
+            || (mode == Mode::Edit
+                && receipt["reference_sha256"].as_str()
+                    != request["references"][0]["sha256"].as_str().map(|v| &v[7..]))
+            || (mode == Mode::ApiGenerate
+                && (receipt["reference_index"] != 0
+                    || receipt["reference_bytes"] != 0
+                    || receipt["endpoint_contract"]
+                        != "POST https://api.openai.com/v1/images/generations"))
         {
             return Err(Error::not_applied(
                 "edit receipt has no successful bound provider/reference response",
             ));
         }
-        let image_path = output.path().join("image.png");
-        let image_bytes = output.read_bytes_limited("image.png", MAX_IMAGE_BYTES)?;
+        let gif = payload["output"]["format"] == "gif";
+        let name = if gif { "image.gif" } else { "image.png" };
+        let media_type = if gif { "image/gif" } else { "image/png" };
+        if matches!(mode, Mode::Edit | Mode::ApiGenerate)
+            && (receipt["model"] != payload["output"]["model"]
+                || (gif
+                    && ["format", "frame_count", "frame_duration_ms"]
+                        .iter()
+                        .any(|key| receipt[key] != payload["output"][key])))
+        {
+            return Err(Error::not_applied(
+                "edit receipt model/animation profile mismatch",
+            ));
+        }
+        let image_path = output.path().join(name);
+        let image_bytes = output.read_bytes_limited(name, MAX_IMAGE_BYTES)?;
         let image = artifact(
             capability_root,
             output,
-            "image.png",
+            name,
             &image_bytes,
             "image_candidate",
-            "image/png",
+            media_type,
         )?;
         let hash_key = if mode == Mode::Generate {
             "sha256"
@@ -373,7 +418,7 @@ fn candidates(
                 ));
             }
         }
-        if output.read_bytes_limited("image.png", MAX_IMAGE_BYTES)? != image_bytes {
+        if output.read_bytes_limited(name, MAX_IMAGE_BYTES)? != image_bytes {
             return Err(Error::not_applied(
                 "candidate image changed during validation",
             ));
@@ -402,6 +447,9 @@ fn candidates(
         "provider",
         "model",
         "request_id",
+        "format",
+        "frame_count",
+        "frame_duration_ms",
         "thread_id",
         "image_call_id",
         "sha256",
@@ -459,6 +507,35 @@ pub(crate) fn run_promptgen_in_roots(
     let payload = json::parse_object(&payload_bytes)?;
     registry.validate(PAYLOAD_SCHEMA, &payload)?;
     validate_payload_mode(mode, &payload)?;
+    if mode.external() {
+        let media_type = if payload["output"]["format"] == "gif" {
+            "image/gif"
+        } else {
+            "image/png"
+        };
+        if request["expectedOutputs"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|a| a["kind"] == "image_candidate" && a["mediaType"] != media_type)
+            || request["provider"]["model"]
+                .as_str()
+                .is_some_and(|model| payload["output"]["model"] != model)
+        {
+            return Err(Error::not_applied(
+                "requested provider model or image media type differs from typed payload",
+            ));
+        }
+    }
+    if matches!(mode, Mode::Edit | Mode::ApiGenerate)
+        && std::env::var("OPENAI_API_KEY")
+            .ok()
+            .is_none_or(|key| key.trim().is_empty() || key.chars().any(char::is_control))
+    {
+        return Err(Error::not_started(
+            "OPENAI_API_KEY missing or invalid; no provider request dispatched",
+        ));
+    }
     if mode != Mode::Generate && (options.codex_binary.is_some() || options.codex_home.is_some()) {
         return Err(Error::not_applied("Codex options require image.generate"));
     }
@@ -524,7 +601,11 @@ pub(crate) fn run_promptgen_in_roots(
     if mode.external() {
         command.extend([
             "--image-output".into(),
-            "image.png".into(),
+            if payload["output"]["format"] == "gif" {
+                "image.gif".into()
+            } else {
+                "image.png".into()
+            },
             "--timeout-seconds".into(),
             options.timeout_seconds.to_string(),
         ]);

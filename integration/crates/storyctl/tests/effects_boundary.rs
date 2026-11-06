@@ -435,6 +435,6 @@ fn current_producer_contract_pins_and_story_schemas_compile() {
     let result =
         verify_contract_registry(story, &integration.join("contracts/registry.json")).unwrap();
     assert_eq!(result["status"], "PASS");
-    assert_eq!(result["contracts"].as_array().unwrap().len(), 33);
+    assert_eq!(result["contracts"].as_array().unwrap().len(), 34);
     SchemaRegistry::new(&integration.join("contracts")).unwrap();
 }

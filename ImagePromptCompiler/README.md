@@ -23,7 +23,7 @@ cargo run -p promptgen-cli -- catalog --family all
 ```
 
 The workspace requires Rust 1.97, as declared by `Cargo.toml`. A result file uses `--result FILE`;
-`--output FILE` is not accepted. `--image-output FILE` is the generated PNG destination,
+`--output FILE` is not accepted. `--image-output FILE` is the generated PNG/GIF destination,
 and Studio's `serve --output-dir` is a separate directory setting. Repeated options fail.
 
 The six catalog entries and their PNG reference cards live under `catalog/`.
@@ -31,13 +31,28 @@ Reference images are evidence for visual direction only; the Codex image
 adapter requires an explicitly transported reference and never invents a local
 path. Prompt-only compilation works without a provider or authenticated runtime.
 
-For one explicitly bounded edit workflow, the CLI also exposes
-`--mode openai-image-edit`. It requires `task_mode=edit`, exactly one typed
-`references[0]` with `index=1` and `role=base`, one `--reference-image FILE`,
-`OPENAI_API_KEY`, and `--image-output FILE`. It sends one multipart request to
-OpenAI's `POST /v1/images/edits` with model `gpt-image-2`, then publishes only a
-strictly validated PNG and a minimal receipt. Generate, composite, pose,
-multiple-reference, mask, Web, and MCP transport remain fail-closed.
+The Image API adapter supports native GPT Image 2.6 GIF generation with
+`--mode openai-image-generate`, `task_mode=generate`, no references, and
+`output.model=gpt-image-2.6-sunburst` or `gpt-image-2.6-flare`.
+Use `output.format=gif`, explicit `frame_count=2..16` and
+`frame_duration_ms=20..2000` in 10 ms increments. This local profile caps
+all decoded frames at 16,777,216 pixels. GIF preview entitlement and
+`OPENAI_API_KEY` are required; account access is not inferred from docs.
+See [the animated example](examples/image-animated-coffee.json).
+
+`--mode openai-image-edit` sends one base image to `POST /v1/images/edits`;
+it accepts GPT Image 2 PNG or GPT Image 2.6 PNG/GIF. It requires exactly one
+`references[0]` with `index=1`, `role=base`, and `--reference-image FILE`.
+Generation sends JSON to `POST /v1/images/generations`; editing sends multipart.
+Both routes require `--image-output FILE`, preserve API keys outside argv,
+and publish only validated bytes plus a hash-bound receipt. GIF validation
+checks actual LZW raster data, canvas, frame count and frame delays. A PNG
+returned for a GIF request fails; it is never relabeled or synthesized into success.
+The Codex adapter retains its verified GPT Image 2 PNG profile; GIF does not
+silently fall back to that adapter. Composite, multi-reference, mask, and
+Web/MCP image execution remain unsupported.
+
+[Official GIF parameters](https://developers.openai.com/api/docs/guides/image-generation#generate-animated-gif-output).
 
 ## MCP agent entry point
 

@@ -5,17 +5,18 @@ use promptgen_core::diagnostic::CompilationOutcome;
 use promptgen_core::image::ImagePromptRequest;
 use promptgen_core::json::JsonValue;
 use promptgen_openai::{
-    OpenAiEditReceipt, OpenAiRunConfig, execute_image_edit, openai_paths_alias,
+    OpenAiEditReceipt, OpenAiRunConfig, execute_image_edit, execute_image_generate,
+    openai_paths_alias,
 };
 
 use crate::error::{CliError, EXIT_OK};
-use crate::options::{CompileOptions, ImageOptions, OutputFormat};
+use crate::options::{CompileOptions, ImageMode, ImageOptions, OutputFormat};
 use crate::output::{preflight_output, write_output};
 
 #[derive(Debug)]
 pub(super) struct OpenAiEditPreflight {
     image_output: PathBuf,
-    reference_image: PathBuf,
+    reference_image: Option<PathBuf>,
 }
 
 fn paths_alias(left: &Path, right: &Path) -> Result<bool, CliError> {
@@ -27,22 +28,31 @@ pub(super) fn preflight_paths(options: &ImageOptions) -> Result<OpenAiEditPrefli
     let image_output = options
         .image_output
         .clone()
-        .ok_or_else(|| CliError::usage("--mode openai-image-edit requires --image-output"))?;
-    let reference_image = options
-        .reference_image
-        .clone()
-        .ok_or_else(|| CliError::usage("--mode openai-image-edit requires --reference-image"))?;
-    if paths_alias(&reference_image, &image_output)? {
+        .ok_or_else(|| CliError::usage("OpenAI image execution requires --image-output"))?;
+    let reference_image = options.reference_image.clone();
+    if options.mode == ImageMode::OpenAiImageEdit && reference_image.is_none() {
         return Err(CliError::usage(
-            "--reference-image and --image-output must be different paths",
+            "--mode openai-image-edit requires --reference-image",
         ));
     }
-    if let Some(result) = options.compile.output.result.as_deref()
-        && paths_alias(result, &reference_image)?
-    {
+    if options.mode == ImageMode::OpenAiImageGenerate && reference_image.is_some() {
         return Err(CliError::usage(
-            "--result and --reference-image must be different paths",
+            "--mode openai-image-generate does not accept --reference-image",
         ));
+    }
+    if let Some(reference_image) = reference_image.as_deref() {
+        if paths_alias(reference_image, &image_output)? {
+            return Err(CliError::usage(
+                "--reference-image and --image-output must be different paths",
+            ));
+        }
+        if let Some(result) = options.compile.output.result.as_deref()
+            && paths_alias(result, reference_image)?
+        {
+            return Err(CliError::usage(
+                "--result and --reference-image must be different paths",
+            ));
+        }
     }
     if let Some(result) = options.compile.output.result.as_deref()
         && paths_alias(result, &image_output)?
@@ -70,8 +80,12 @@ pub(super) fn run(
     let mut config = OpenAiRunConfig::new("curl", preflight.image_output);
     config.timeout = timeout;
     config.overwrite = compile.output.force;
-    let receipt = execute_image_edit(compilation, request, &preflight.reference_image, &config)
-        .map_err(|error| CliError::execution(error.to_string()))?;
+    let receipt = if let Some(reference) = preflight.reference_image.as_deref() {
+        execute_image_edit(compilation, request, reference, &config)
+    } else {
+        execute_image_generate(compilation, request, &config)
+    }
+    .map_err(|error| CliError::execution(error.to_string()))?;
     let text = if compile.output.result.is_some() {
         match compile.format {
             OutputFormat::Json => receipt.to_json().to_pretty_string(),

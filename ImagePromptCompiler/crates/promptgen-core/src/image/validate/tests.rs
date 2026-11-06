@@ -19,6 +19,32 @@ fn example() -> ImagePromptRequest {
 }
 
 #[test]
+fn gif_profile_requires_explicit_animation_and_26_model() {
+    let mut request = example();
+    request.output.model = "gpt-image-2.6-sunburst".into();
+    request.output.format = "gif".into();
+    request.output.width = 768;
+    request.output.height = 512;
+    request.output.frame_count = Some(9);
+    request.output.frame_duration_ms = Some(200);
+    assert!(crate::image::compile_image_prompt(&request).is_valid());
+    assert_eq!(
+        ImagePromptRequest::from_json(request.to_json()).unwrap(),
+        request
+    );
+    request.output.frame_count = Some(17);
+    assert!(!crate::image::compile_image_prompt(&request).is_valid());
+    request.output.frame_count = Some(9);
+    request.output.frame_duration_ms = Some(201);
+    assert!(!crate::image::compile_image_prompt(&request).is_valid());
+    request.output.frame_duration_ms = Some(200);
+    request.output.model = "gpt-image-2".into();
+    assert!(!crate::image::compile_image_prompt(&request).is_valid());
+    request.output.format = "png".into();
+    assert!(!crate::image::compile_image_prompt(&request).is_valid());
+}
+
+#[test]
 fn category_bound_profiles_compile_for_logo_ui_and_poomsae_examples() {
     for path in [
         "image-logo-identity.json",

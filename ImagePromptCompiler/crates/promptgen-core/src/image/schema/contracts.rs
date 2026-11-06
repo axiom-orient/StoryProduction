@@ -45,12 +45,21 @@ pub(super) fn output_schema() -> JsonValue {
             "format",
         ],
         [
-            ("model", enum_schema(&["gpt-image-2"])),
+            (
+                "model",
+                enum_schema(&[
+                    "gpt-image-2",
+                    "gpt-image-2.6-sunburst",
+                    "gpt-image-2.6-flare",
+                ]),
+            ),
             ("width", integer_schema(16, 3840)),
             ("height", integer_schema(16, 3840)),
             ("quality", enum_schema(&["auto", "low", "medium", "high"])),
             ("background", enum_schema(&["auto", "opaque"])),
-            ("format", enum_schema(&["png"])),
+            ("format", enum_schema(&["png", "gif"])),
+            ("frame_count", integer_schema(2, 16)),
+            ("frame_duration_ms", integer_schema(20, 2000)),
         ],
     )
 }

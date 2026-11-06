@@ -624,9 +624,20 @@
         },
         "format": {
           "enum": [
-            "png"
+            "png",
+            "gif"
           ],
           "type": "string"
+        },
+        "frame_count": {
+          "maximum": 16,
+          "minimum": 2,
+          "type": "integer"
+        },
+        "frame_duration_ms": {
+          "maximum": 2000,
+          "minimum": 20,
+          "type": "integer"
         },
         "height": {
           "maximum": 3840,
@@ -635,7 +646,9 @@
         },
         "model": {
           "enum": [
-            "gpt-image-2"
+            "gpt-image-2",
+            "gpt-image-2.6-sunburst",
+            "gpt-image-2.6-flare"
           ],
           "type": "string"
         },

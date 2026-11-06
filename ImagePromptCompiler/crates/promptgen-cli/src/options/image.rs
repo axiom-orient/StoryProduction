@@ -15,6 +15,7 @@ pub(crate) enum ImageMode {
     PromptOnly,
     CodexImagegen,
     OpenAiImageEdit,
+    OpenAiImageGenerate,
 }
 
 pub(crate) struct ImageOptions {
@@ -34,8 +35,9 @@ impl ImageMode {
             "prompt-only" => Ok(Self::PromptOnly),
             "codex-imagegen" => Ok(Self::CodexImagegen),
             "openai-image-edit" => Ok(Self::OpenAiImageEdit),
+            "openai-image-generate" => Ok(Self::OpenAiImageGenerate),
             _ => Err(CliError::usage(format!(
-                "invalid --mode {value:?}; expected prompt-only, codex-imagegen, or openai-image-edit"
+                "invalid --mode {value:?}; expected prompt-only, codex-imagegen, openai-image-edit, or openai-image-generate"
             ))),
         }
     }

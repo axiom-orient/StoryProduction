@@ -4,5 +4,6 @@
 //! published. It has no provider, process, or filesystem side effects beyond
 //! reading a path explicitly supplied by a caller.
 
+pub mod gif;
 pub mod png;
 pub mod sha256;

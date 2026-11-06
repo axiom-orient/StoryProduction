@@ -11,11 +11,10 @@ mod support;
 mod transport;
 
 pub use api::{OpenAiEditReceipt, OpenAiExecutionError, OpenAiRunConfig};
-pub use execution::execute_image_edit;
+pub use execution::{execute_image_edit, execute_image_generate};
 pub use reference::openai_paths_alias;
 
 const API_ENDPOINT: &str = "https://api.openai.com/v1/images/edits";
-const API_MODEL: &str = "gpt-image-2";
 
 #[cfg(test)]
 mod tests;

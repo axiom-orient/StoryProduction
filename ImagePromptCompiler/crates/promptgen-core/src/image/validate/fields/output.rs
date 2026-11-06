@@ -8,18 +8,41 @@ pub(in crate::image::validate) fn validate_output(
     diagnostics: &mut Vec<Diagnostic>,
 ) {
     let output = &request.output;
-    if output.model != "gpt-image-2" {
+    let animated_model = matches!(
+        output.model.as_str(),
+        "gpt-image-2.6-sunburst" | "gpt-image-2.6-flare"
+    );
+    if output.model != "gpt-image-2" && !animated_model {
         diagnostics.push(Diagnostic::error(
             "IMG_MODEL",
             "$.output.model",
-            "this compiler profile currently supports gpt-image-2 only",
+            "supported models: gpt-image-2, gpt-image-2.6-sunburst, gpt-image-2.6-flare",
         ));
     }
-    if output.format != "png" {
+    if output.format != "png" && !(animated_model && output.format == "gif") {
         diagnostics.push(Diagnostic::error(
             "IMG_FORMAT",
             "$.output.format",
-            "Codex artifact verification currently supports png only",
+            "GIF requires GPT Image 2.6; PNG remains supported",
+        ));
+    }
+    if output.format == "gif" {
+        if !output.frame_count.is_some_and(|n| (2..=16).contains(&n))
+            || !output
+                .frame_duration_ms
+                .is_some_and(|n| (20..=2000).contains(&n) && n.is_multiple_of(10))
+        {
+            diagnostics.push(Diagnostic::error(
+                "IMG_GIF_TIMING",
+                "$.output",
+                "GIF requires frame_count=2..16 and frame_duration_ms=20..2000 in 10 ms increments",
+            ));
+        }
+    } else if output.frame_count.is_some() || output.frame_duration_ms.is_some() {
+        diagnostics.push(Diagnostic::error(
+            "IMG_ANIMATION_REQUIRES_GIF",
+            "$.output",
+            "frame timing is allowed only with format=gif",
         ));
     }
     if output.width == 0 || output.height == 0 {
@@ -45,7 +68,12 @@ pub(in crate::image::validate) fn validate_output(
         ));
     }
     let pixels = u64::from(output.width) * u64::from(output.height);
-    if !(MIN_PIXELS..=MAX_PIXELS).contains(&pixels) {
+    let minimum = if output.format == "gif" {
+        256
+    } else {
+        MIN_PIXELS
+    };
+    if !(minimum..=MAX_PIXELS).contains(&pixels) {
         diagnostics.push(Diagnostic::error(
             "IMG_PIXEL_COUNT",
             "$.output",
@@ -56,6 +84,14 @@ pub(in crate::image::validate) fn validate_output(
             "IMG_EXPERIMENTAL_SIZE",
             "$.output",
             "this size is within hard limits but above the documented standard range",
+        ));
+    }
+    // Conservative local decoded-frame budget, not a claim about provider entitlement.
+    if output.format == "gif" && pixels * u64::from(output.frame_count.unwrap_or(0)) > 16_777_216 {
+        diagnostics.push(Diagnostic::error(
+            "IMG_GIF_PIXEL_BUDGET",
+            "$.output",
+            "local GIF profile limits total decoded pixels to 16777216",
         ));
     }
     let ratio = output.width as f64 / output.height as f64;

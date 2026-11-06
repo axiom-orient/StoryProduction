@@ -288,6 +288,15 @@
         "integration/contracts/ipc-compilation-v1.schema.json"
       ],
       "verification": "byte_equal"
+    },
+    {
+      "id": "scene-asset-compiler.gif-intake/v1",
+      "owner": "SceneAssetCompiler",
+      "producer": "SceneAssetCompiler/docs/contracts/gif-intake-v1.schema.json",
+      "consumers": [
+        "integration/contracts/sac-gif-intake-v1.schema.json"
+      ],
+      "verification": "byte_equal"
     }
   ]
 }

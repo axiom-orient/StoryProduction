@@ -1,6 +1,7 @@
 //! SAC's animatic PNG pack owner. Story invokes this public CLI and pinned contracts.
 mod contracts;
 mod files;
+mod gif;
 mod png;
 use chrono::{SecondsFormat, Utc};
 use contracts::{canonical, parse, seal, sha256, Contracts};
@@ -159,18 +160,25 @@ fn publish(root: &Root, relative: &str, value: &Value) -> Result<()> {
 
 pub fn run(options: &Options) -> Result<Value> {
     check(
-        ["submit", "inspect", "review"].contains(&options.operation.as_str()),
+        ["submit", "inspect", "review", "import-gif", "inspect-gif"]
+            .contains(&options.operation.as_str()),
         "UNKNOWN_OPERATION",
     )?;
     let root = Root::new(&options.project_root)?;
     let contracts = Contracts::new(&options.owner_root)?;
-    if options.operation != "inspect" {
+    if !matches!(options.operation.as_str(), "inspect" | "inspect-gif") {
         check(
             required(&options.output)?.starts_with("animatic/"),
             "OUTPUT_MUST_BE_UNDER_ANIMATIC",
         )?;
     }
     let source = packet(&root, &options.packet, &contracts)?;
+    if options.operation == "inspect-gif" {
+        return gif::inspect(&root, options, &source, &contracts);
+    }
+    if options.operation == "import-gif" {
+        return gif::import(&root, options, &source, &contracts);
+    }
     let mut value = read_json(
         &root,
         if options.operation == "submit" {
@@ -307,11 +315,11 @@ pub fn parse_options(arguments: &[String]) -> Result<Options> {
         note: values.remove("note").unwrap_or_default(),
     };
     match options.operation.as_str() {
-        "submit" => {
+        "submit" | "import-gif" => {
             required(&options.draft)?;
             required(&options.output)?;
         }
-        "inspect" => {
+        "inspect" | "inspect-gif" => {
             required(&options.pack)?;
         }
         "review" => {

@@ -142,7 +142,11 @@ impl Contracts {
             (
                 "sac",
                 "docs/contracts",
-                vec!["animatic-assets-v1", "animatic-assets-review-v1"],
+                vec![
+                    "animatic-assets-v1",
+                    "animatic-assets-review-v1",
+                    "gif-intake-v1",
+                ],
             ),
             (
                 "nvc",

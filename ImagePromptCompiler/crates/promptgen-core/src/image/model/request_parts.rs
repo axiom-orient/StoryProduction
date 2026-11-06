@@ -372,6 +372,8 @@ pub struct ImageGenerationParameters {
     pub quality: ImageQuality,
     pub background: BackgroundMode,
     pub format: String,
+    pub frame_count: Option<u32>,
+    pub frame_duration_ms: Option<u32>,
 }
 
 impl ImageGenerationParameters {
@@ -392,20 +394,31 @@ impl ImageGenerationParameters {
             quality: ImageQuality::parse(&quality_value, &format!("{path}.quality"))?,
             background: BackgroundMode::parse(&background_value, &format!("{path}.background"))?,
             format: take_string(&mut fields, "format", path)?,
+            frame_count: take_optional_u32(&mut fields, "frame_count", path)?,
+            frame_duration_ms: take_optional_u32(&mut fields, "frame_duration_ms", path)?,
         };
         reject_unknown(fields, path)?;
         Ok(result)
     }
 
     pub fn to_json(&self) -> JsonValue {
-        JsonValue::object([
+        let mut fields = vec![
             ("background", JsonValue::from(self.background.as_str())),
             ("format", JsonValue::from(self.format.clone())),
             ("height", JsonValue::from(u64::from(self.height))),
             ("model", JsonValue::from(self.model.clone())),
             ("quality", JsonValue::from(self.quality.as_str())),
             ("width", JsonValue::from(u64::from(self.width))),
-        ])
+        ];
+        for (key, value) in [
+            ("frame_count", self.frame_count),
+            ("frame_duration_ms", self.frame_duration_ms),
+        ] {
+            if let Some(value) = value {
+                fields.push((key, JsonValue::from(u64::from(value))));
+            }
+        }
+        JsonValue::object(fields)
     }
 
     pub fn aspect_ratio_label(&self) -> String {
@@ -418,6 +431,20 @@ impl ImageGenerationParameters {
         let divisor = left;
         format!("{}:{}", self.width / divisor, self.height / divisor)
     }
+}
+
+fn take_optional_u32(
+    fields: &mut std::collections::BTreeMap<String, JsonValue>,
+    key: &str,
+    path: &str,
+) -> Result<Option<u32>, DecodeError> {
+    if !fields.contains_key(key) {
+        return Ok(None);
+    }
+    let value = take_u64(fields, key, path)?;
+    u32::try_from(value)
+        .map(Some)
+        .map_err(|_| DecodeError::new(format!("{path}.{key}"), "value exceeds u32"))
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

@@ -106,5 +106,8 @@ pub(super) fn render_constraints_and_output(
         request.output.aspect_ratio_label()
     ));
 
+    if request.output.format == "gif" {
+        sections.push(format!("ANIMATED GIF OUTPUT\n- frame_count={}\n- frame_duration_ms={}\n- Return an actual animated GIF, not a still image or contact sheet. Motion and start/end states follow the scene and change contract.", request.output.frame_count.unwrap_or(9), request.output.frame_duration_ms.unwrap_or(200)));
+    }
     sections
 }

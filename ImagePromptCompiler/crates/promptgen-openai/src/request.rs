@@ -1,7 +1,7 @@
 use promptgen_core::diagnostic::{CompilationOutcome, PromptKind};
 use promptgen_core::image::{ImagePromptRequest, ImageReferenceRole, ImageTaskMode};
 
-use super::{API_MODEL, OpenAiExecutionError};
+use super::OpenAiExecutionError;
 
 const MAX_PROMPT_CHARS: usize = 32_000;
 
@@ -11,7 +11,7 @@ pub(super) fn validate_compilation(
     if compilation.kind != PromptKind::Image || !compilation.is_valid() {
         return Err(OpenAiExecutionError::new(
             "OPENAI_INVALID_COMPILATION",
-            "OpenAI image edit requires a valid image compilation",
+            "OpenAI image execution requires a valid image compilation",
         ));
     }
     Ok(())
@@ -40,10 +40,15 @@ pub(super) fn validate_request(
             "OpenAI adapter requires reference index=1 with role=base",
         ));
     }
-    if request.output.model != API_MODEL || request.output.format != "png" {
+    if !matches!(
+        request.output.model.as_str(),
+        "gpt-image-2" | "gpt-image-2.6-sunburst" | "gpt-image-2.6-flare"
+    ) || !matches!(request.output.format.as_str(), "png" | "gif")
+        || (request.output.format == "gif" && request.output.model == "gpt-image-2")
+    {
         return Err(OpenAiExecutionError::new(
             "OPENAI_OUTPUT_CONTRACT",
-            "OpenAI adapter requires model=gpt-image-2 and format=png",
+            "OpenAI adapter supports PNG and GPT Image 2.6 GIF",
         ));
     }
     if prompt.trim().is_empty() {

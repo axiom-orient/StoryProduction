@@ -139,6 +139,31 @@ fn validate_assets(value: &Value, args: &[String], schemas: &SchemaRegistry) -> 
         return Ok(());
     }
     let valid = match args.first().map(String::as_str) {
+        Some("inspect-gif") => {
+            value["status"] == "gif_inspected"
+                && value["candidateOnly"] == true
+                && value["directionApproved"] == false
+                && value["contentHash"]
+                    .as_str()
+                    .is_some_and(crate::effects::hash::is_sha256)
+                && value["frameCount"]
+                    .as_u64()
+                    .is_some_and(|n| (2..=16).contains(&n))
+        }
+        Some("import-gif") => {
+            value["status"] == "gif_candidate"
+                && value["candidateOnly"] == true
+                && value["directionApproved"] == false
+                && value["path"]
+                    .as_str()
+                    .is_some_and(|p| Some(p) == owner_option(args, "output"))
+                && value["contentHash"]
+                    .as_str()
+                    .is_some_and(crate::effects::hash::is_sha256)
+                && value["frameCount"]
+                    .as_u64()
+                    .is_some_and(|n| (2..=16).contains(&n))
+        }
         Some("submit") => {
             value["status"] == "candidate"
                 && value["path"]
@@ -335,6 +360,43 @@ fn run_inner(
             return Err(producer_root_changed(&result));
         }
         validate_assets(&result, &args, &schemas)?;
+        if matches!(
+            result["status"].as_str(),
+            Some("gif_candidate" | "gif_inspected")
+        ) {
+            let receipt_path = owner_option(
+                &args,
+                if args[0] == "import-gif" {
+                    "output"
+                } else {
+                    "pack"
+                },
+            )
+            .ok_or_else(|| producer_error(&result, "GIF receipt path missing"))?;
+            let receipt = root
+                .read_bytes_limited(receipt_path, 16 * 1024 * 1024)
+                .and_then(|raw| json::parse_object(&raw))
+                .map_err(|_| producer_error(&result, "published GIF receipt could not be read"))?;
+            SchemaRegistry::new(&ctx.repository.join("integration/contracts"))
+                .and_then(|schemas| {
+                    schemas.validate(
+                        "https://story-production.local/contracts/gif-intake-v1",
+                        &receipt,
+                    )
+                })
+                .map_err(|_| {
+                    producer_error(&result, "published GIF receipt failed its pinned contract")
+                })?;
+            if receipt["contentHash"] != result["contentHash"]
+                || receipt["assets"].as_array().map(Vec::len)
+                    != result["frameCount"].as_u64().map(|n| n as usize)
+            {
+                return Err(producer_error(
+                    &result,
+                    "GIF receipt identity changed after producer dispatch",
+                ));
+            }
+        }
         return Ok(result);
     }
     if ["status", "cancel", "recover"].contains(&operation.as_str()) {

@@ -46,6 +46,58 @@ fn edit_request() -> ImagePromptRequest {
     .unwrap()
 }
 
+#[test]
+fn gif_transport_and_response_are_bound_to_requested_animation() {
+    let mut request = edit_request();
+    request.output.model = "gpt-image-2.6-sunburst".into();
+    request.output.format = "gif".into();
+    request.output.width = 16;
+    request.output.height = 16;
+    request.output.frame_count = Some(2);
+    request.output.frame_duration_ms = Some(200);
+    let compilation = compile_image_prompt(&request);
+    assert!(compilation.is_valid());
+    let config = transport::build_curl_config(&transport::CurlRequest {
+        api_key: "test-placeholder",
+        prompt_path: std::path::Path::new("prompt.txt"),
+        reference_path: Some(std::path::Path::new("reference.png")),
+        mime: reference::ImageMime::Png,
+        response_path: std::path::Path::new("response.json"),
+        headers_path: std::path::Path::new("headers"),
+        request: &request,
+        timeout: std::time::Duration::from_secs(60),
+    });
+    for field in [
+        "model=gpt-image-2.6-sunburst",
+        "output_format=gif",
+        "frame_count=2",
+        "frame_duration_ms=200",
+        "image[]=@reference.png",
+    ] {
+        assert!(config.contains(field), "{field}");
+    }
+    // Codec fixture: two 1px raster frames, not an external provider response.
+    let mut gif = b"GIF89a\x01\0\x01\0\x80\0\0\0\0\0\xff\xff\xff".to_vec();
+    for pixel in [0x44, 0x4c] {
+        gif.extend_from_slice(b"\x21\xf9\x04\0\x14\0\0\0\x2c\0\0\0\0\x01\0\x01\0\0\x02\x02");
+        gif.extend_from_slice(&[pixel, 1, 0]);
+    }
+    gif.push(0x3b);
+    request.output.width = 1;
+    request.output.height = 1;
+    let encoded = base64::engine::general_purpose::STANDARD.encode(&gif);
+    let response = format!("{{\"data\":[{{\"b64_json\":\"{encoded}\"}}]}}");
+    assert_eq!(
+        response::decode_response(&response, &request.output).unwrap(),
+        gif
+    );
+    request.output.frame_count = Some(3);
+    assert!(response::decode_response(&response, &request.output).is_err());
+    request.output.frame_count = Some(2);
+    request.output.frame_duration_ms = Some(300);
+    assert!(response::decode_response(&response, &request.output).is_err());
+}
+
 fn fixture() -> PathBuf {
     repository_root().join("tests/fixtures/valid-1024x1536.png")
 }
@@ -90,13 +142,64 @@ fn api_key_rules_reject_blank_and_control_values() {
     assert_eq!(validate_api_key("sk-test").unwrap(), "sk-test");
 }
 
+#[test]
+fn native_gif_generation_uses_json_generation_endpoint_and_decodes_all_frames() {
+    if !run_with_test_key(
+        "tests::native_gif_generation_uses_json_generation_endpoint_and_decodes_all_frames",
+    ) {
+        return;
+    }
+    let root = test_root("gif-generate");
+    let bytes = include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../../tests/fixtures/codec-test-nineframes.gif"
+    ));
+    let encoded = base64::engine::general_purpose::STANDARD.encode(bytes);
+    let script = fake_curl(
+        &root,
+        200,
+        &format!("{{\"data\":[{{\"b64_json\":\"{encoded}\"}}]}}"),
+    );
+    let mut request = edit_request();
+    request.task_mode = promptgen_core::image::ImageTaskMode::Generate;
+    request.references.clear();
+    request.change_contract = Default::default();
+    request.output.model = "gpt-image-2.6-sunburst".into();
+    request.output.format = "gif".into();
+    request.output.width = 32;
+    request.output.height = 32;
+    request.output.frame_count = Some(9);
+    request.output.frame_duration_ms = Some(200);
+    let compilation = compile_image_prompt(&request);
+    let config = OpenAiRunConfig::new(&script, root.join("generated.gif"));
+    let receipt = execute_image_generate(&compilation, &request, &config).unwrap();
+    assert_eq!(fs::read(root.join("generated.gif")).unwrap(), bytes);
+    assert_eq!(receipt.reference_index, 0);
+    assert_eq!(receipt.reference_bytes, 0);
+    assert_eq!(receipt.model, "gpt-image-2.6-sunburst");
+    let wire = fs::read_to_string(script.with_extension("sh.stdin")).unwrap();
+    assert!(wire.contains("https://api.openai.com/v1/images/generations"));
+    assert!(wire.contains("Content-Type: application/json"));
+    assert!(!wire.contains("form ="));
+    let body = parse(&fs::read_to_string(script.with_extension("sh.prompt")).unwrap()).unwrap();
+    let body = body.as_object().unwrap();
+    assert_eq!(body["output_format"].as_str(), Some("gif"));
+    assert_eq!(body["model"].as_str(), Some("gpt-image-2.6-sunburst"));
+    assert!(
+        !fs::read_to_string(script.with_extension("sh.argv"))
+            .unwrap()
+            .contains("sk-test")
+    );
+    fs::remove_dir_all(root).unwrap();
+}
+
 #[cfg(unix)]
 fn fake_curl(root: &Path, status: u16, response: &str) -> PathBuf {
     use std::os::unix::fs::PermissionsExt;
 
     let script = root.join("fake-curl.sh");
     let body = format!(
-        "#!/bin/sh\nset -eu\nprintf '%s' \"$*\" > \"$0.argv\"\ncat > \"$0.stdin\"\nresponse=$(awk -F '\"' '$1 == \"output = \" {{print $2}}' \"$0.stdin\")\nheaders=$(awk -F '\"' '$1 == \"dump-header = \" {{print $2}}' \"$0.stdin\")\nprompt_path=$(sed -n 's/^form = \"prompt=<\\(.*\\)\"$/\\1/p' \"$0.stdin\")\nimage_path=$(sed -n 's/^form = \"image\\[\\]=@\\(.*\\);type=.*\"$/\\1/p' \"$0.stdin\")\ncat \"$prompt_path\" > \"$0.prompt\"\ncp \"$image_path\" \"$0.image\"\nprintf '%s' '{}' > \"$response\"\nprintf '%s\\n' 'HTTP/1.1 {} OK' 'x-request-id: req-fixture' > \"$headers\"\nprintf '%s' '{}'\n",
+        "#!/bin/sh\nset -eu\nprintf '%s' \"$*\" > \"$0.argv\"\ncat > \"$0.stdin\"\nresponse=$(awk -F '\"' '$1 == \"output = \" {{print $2}}' \"$0.stdin\")\nheaders=$(awk -F '\"' '$1 == \"dump-header = \" {{print $2}}' \"$0.stdin\")\nprompt_path=$(sed -n 's/^form = \"prompt=<\\(.*\\)\"$/\\1/p' \"$0.stdin\")\nimage_path=$(sed -n 's/^form = \"image\\[\\]=@\\(.*\\);type=.*\"$/\\1/p' \"$0.stdin\")\nif [ -z \"$prompt_path\" ]; then prompt_path=$(sed -n 's/^data-binary = \"@\\(.*\\)\"$/\\1/p' \"$0.stdin\"); fi\ncat \"$prompt_path\" > \"$0.prompt\"\nif [ -n \"$image_path\" ]; then cp \"$image_path\" \"$0.image\"; fi\nprintf '%s' '{}' > \"$response\"\nprintf '%s\\n' 'HTTP/1.1 {} OK' 'x-request-id: req-fixture' > \"$headers\"\nprintf '%s' '{}'\n",
         response, status, status
     );
     fs::write(&script, body).unwrap();

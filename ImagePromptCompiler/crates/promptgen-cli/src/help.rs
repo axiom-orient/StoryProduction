@@ -15,7 +15,7 @@ pub(super) fn print_interview_help() {
 
 pub(super) fn print_image_help() {
     println!(
-        "USAGE: promptgen image [--input FILE|-] [--mode prompt-only|codex-imagegen|openai-image-edit] [--format json|text] [--result FILE] [--image-output FILE] [--reference-image FILE] [--codex-binary FILE] [--codex-home DIR] [--timeout-seconds 1..3600] [--artifact-wait-seconds 1..600] [--force]"
+        "USAGE: promptgen image [--input FILE|-] [--mode prompt-only|codex-imagegen|openai-image-edit|openai-image-generate] [--format json|text] [--result FILE] [--image-output FILE] [--reference-image FILE] [--codex-binary FILE] [--codex-home DIR] [--timeout-seconds 1..3600] [--artifact-wait-seconds 1..600] [--force]"
     );
 }
 

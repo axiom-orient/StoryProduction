@@ -1,5 +1,8 @@
 # SceneAssetCompiler
 
+Native GIF intake and exact-frame handoff: [Story GIF workflow](../docs/GIF_GENERATION.md). GIF generation stays in promptGen; SAC decodes and inspects existing bytes.
+
+
 외부에서 만든 실제 시각 자료를 task/attempt·검사·선택·사람 검토·AssetPack/scene handoff로 관리하는 CLI와 Codex skill이다. 일반 제작은 Python skill CLI, animatic PNG pack은 Rust `sac-animatic`이 소유한다. NVC 서사 정본이나 SMC 렌더/release를 대신 소유하지 않는다. 로컬 픽셀·matting·path tracing·PSD assembly로 생성 실패를 우회하지 않는다.
 
 ## 공개 경로

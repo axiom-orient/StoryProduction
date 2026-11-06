@@ -11,7 +11,7 @@
 | `promptgen-mcp` | tool contract·stdio/HTTP transport·compile/interview 결과 | agent; image provider 실행을 임의 노출하지 않음 |
 | `promptgen-web` | loopback server, transient interview/generation lease, artifact serving, UI presentation | browser |
 | `promptgen-codex` | 선택 Codex generation, event/thread/call artifact binding, fidelity/제한 repair | CLI/Web |
-| `promptgen-openai` | 명시 단일 base-reference edit, HTTP/PNG/receipt | CLI |
+| `promptgen-openai` | 2.6 native GIF generate·단일 base-reference edit, HTTP/PNG/GIF/receipt | CLI |
 
 profile/category 정책은 core에만 둔다. effect adapter는 core를 다시 호출해 전달된 request와 compilation의 prompt가 같은지 확인해야 한다. 이는 중복 정책 구현이 아니라 신뢰 경계 검증이다.
 
@@ -24,7 +24,7 @@ primitive를 사용하며 streaming copy digest는 복사 effect에 남긴다.
 
 순수 compiler는 별도 DB·job·승인 상태를 갖지 않는다. interview answers와 normalized decisions를 구별하고 사용자 답을 backend 추론으로 덮어쓰지 않는다. Web의 connection/generation guard는 임시 수명주기이고 provider receipt는 원문/scene/asset approval이 아니다.
 
-provider binary/home/output/API-key는 Configuration, timeout/fidelity attempt ceiling은 Policy, protocol/profile/version은 Constant다. 파일 publication은 검증된 PNG와 binding receipt만 내보낸다. timeout이나 파일 존재만으로 성공을 결정하지 않는다. raw credentials/adapter stderr는 사용자용 UI 문구와 구분한다.
+provider binary/home/output/API-key는 Configuration, timeout/fidelity attempt ceiling은 Policy, protocol/profile/version은 Constant다. 파일 publication은 검증된 PNG/GIF와 binding receipt만 내보낸다. timeout이나 파일 존재만으로 성공을 결정하지 않는다. raw credentials/adapter stderr는 사용자용 UI 문구와 구분한다.
 
 ## 코어·선택·확장
 

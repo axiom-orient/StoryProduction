@@ -4,7 +4,46 @@ use std::path::Path;
 use std::sync::atomic::Ordering;
 
 use base64::Engine as _;
-use promptgen_core::image_artifact::png;
+use promptgen_core::image::ImageGenerationParameters;
+use promptgen_core::image_artifact::{gif, png};
+
+pub(super) struct OutputInfo {
+    pub width: u32,
+    pub height: u32,
+}
+fn validate_output(
+    bytes: &[u8],
+    output: &ImageGenerationParameters,
+) -> Result<OutputInfo, OpenAiExecutionError> {
+    if output.format == "gif" {
+        let info = gif::inspect(bytes)
+            .map_err(|error| OpenAiExecutionError::new("OPENAI_INVALID_GIF", error.to_string()))?;
+        if info.width != output.width
+            || info.height != output.height
+            || Some(info.delays_ms.len() as u32) != output.frame_count
+            || info
+                .delays_ms
+                .iter()
+                .any(|ms| Some(*ms) != output.frame_duration_ms)
+        {
+            return Err(OpenAiExecutionError::new(
+                "OPENAI_GIF_CONTRACT",
+                "GIF canvas, frame count or delay differs from request",
+            ));
+        }
+        Ok(OutputInfo {
+            width: info.width,
+            height: info.height,
+        })
+    } else {
+        let info = png::validate_bytes(bytes, (output.width, output.height))
+            .map_err(|error| OpenAiExecutionError::new("OPENAI_INVALID_PNG", error.to_string()))?;
+        Ok(OutputInfo {
+            width: info.width,
+            height: info.height,
+        })
+    }
+}
 use promptgen_core::json::{JsonValue, parse_with_limits};
 
 use super::OpenAiExecutionError;
@@ -19,7 +58,7 @@ const MAX_REQUEST_ID_CHARS: usize = 256;
 
 pub(super) fn decode_response(
     response: &str,
-    expected_dimensions: (u32, u32),
+    output: &ImageGenerationParameters,
 ) -> Result<Vec<u8>, OpenAiExecutionError> {
     let value = parse_with_limits(response, MAX_RESPONSE_BYTES, 64).map_err(|_| {
         OpenAiExecutionError::new("OPENAI_RESPONSE_JSON", "OpenAI response is not valid JSON")
@@ -78,21 +117,16 @@ pub(super) fn decode_response(
             "decoded image exceeds the bounded output size",
         ));
     }
-    png::validate_bytes(&decoded, expected_dimensions).map_err(|error| {
-        OpenAiExecutionError::new(
-            "OPENAI_INVALID_PNG",
-            format!("decoded OpenAI image failed strict PNG validation: {error}"),
-        )
-    })?;
+    validate_output(&decoded, output)?;
     Ok(decoded)
 }
 
-pub(super) fn publish_png(
+pub(super) fn publish_image(
     bytes: &[u8],
     destination: &Path,
     overwrite: bool,
-    expected_dimensions: (u32, u32),
-) -> Result<(String, png::PngInfo), OpenAiExecutionError> {
+    output: &ImageGenerationParameters,
+) -> Result<(String, OutputInfo), OpenAiExecutionError> {
     preflight_output(destination, overwrite)?;
     let parent = destination
         .parent()
@@ -111,12 +145,12 @@ pub(super) fn publish_png(
     ));
     let operation = (|| {
         write_private_file(&temporary, bytes)?;
-        let info = png::validate_file(&temporary, expected_dimensions).map_err(|error| {
-            OpenAiExecutionError::new(
-                "OPENAI_INVALID_PNG",
-                format!("published candidate failed strict PNG validation: {error}"),
-            )
-        })?;
+        let written = super::files::read_bounded_bytes(
+            &temporary,
+            MAX_DECODED_IMAGE_BYTES,
+            "candidate image",
+        )?;
+        let info = validate_output(&written, output)?;
         preflight_output(destination, overwrite)?;
         if overwrite {
             fs::rename(&temporary, destination)

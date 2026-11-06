@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "story.capability-request/1",
+  "requestId": "request.gif.example.0001",
+  "capability": "image.generate",
+  "source": {
+    "kind": "smc.scene_graph",
+    "identity": "scenegraph.storyboard.demo.0001",
+    "sha256": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "payload": {
+    "kind": "promptgen.image_request",
+    "identity": "prompt.gif.coffee.example",
+    "path": "ImagePromptCompiler/examples/image-animated-coffee.json",
+    "sha256": "sha256:d435acca0b2e2aa4a6d9318746ac21b5e9943f160c6f091d9e930ccc1f15421b",
+    "mediaType": "application/json",
+    "byteLength": 7183
+  },
+  "provider": {
+    "id": "openai-images.gif",
+    "kind": "openai",
+    "model": "gpt-image-2.6-sunburst",
+    "version": "image-api",
+    "networkPolicy": "required"
+  },
+  "rights": {
+    "assertedBy": "human.local",
+    "statement": "Example template only: replace source and authorization with actual project authority before provider dispatch.",
+    "providerTransferAllowed": true
+  },
+  "authorization": {
+    "kind": "approved_scope",
+    "identity": "approval.storyboard.demo.0001",
+    "sha256": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "requestedBy": {
+    "actor": "agent",
+    "id": "story.pipeline"
+  },
+  "expectedOutputs": [
+    {
+      "kind": "image_candidate",
+      "mediaType": "image/gif"
+    },
+    {
+      "kind": "generation_receipt",
+      "mediaType": "application/json"
+    }
+  ],
+  "createdAt": "2026-11-06T00:00:00Z"
+}

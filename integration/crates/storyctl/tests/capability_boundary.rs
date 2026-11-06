@@ -119,7 +119,7 @@ impl Fixture {
             self.request["references"] = json!([{"kind":"image_reference","identity":"reference.test","path":"fixture.png",
             "sha256":hash::sha256_bytes(png),"mediaType":"image/png","byteLength":png.len(),"width":16,"height":16}]);
         }
-        let mut receipt = json!({"backend":if edit{"openai-images"}else{"codex-imagegen"},"provider":"openai","http_status":200,
+        let mut receipt = json!({"backend":if edit{"openai-images"}else{"codex-imagegen"},"provider":"openai","http_status":200,"model":"gpt-image-2",
             "width":16,"height":16,"thread_id":"test.thread","image_call_id":"test.call","process_exit_code":0,
             "compiled_prompt_sha256":hash::sha256_hex_bytes(b"fixture prompt"),"reference_sha256":hash::sha256_hex_bytes(png),"reference_bytes":png.len()});
         let digest = if drift {
@@ -228,6 +228,19 @@ fn compilation_captures_exact_input_and_rejects_attempt_reuse() {
 
 #[test]
 fn dispatched_snapshots_cannot_change_without_an_uncertain_terminal_result() {
+    if std::env::var_os("STORY_SNAPSHOT_FIXTURE_CHILD").is_none() {
+        let status = Command::new(std::env::current_exe().unwrap())
+            .args([
+                "--exact",
+                "dispatched_snapshots_cannot_change_without_an_uncertain_terminal_result",
+            ])
+            .env("OPENAI_API_KEY", "sk-test-only")
+            .env("STORY_SNAPSHOT_FIXTURE_CHILD", "1")
+            .status()
+            .unwrap();
+        assert!(status.success());
+        return;
+    }
     for edit in [false, true] {
         let mut fixture = Fixture::new();
         fixture.receipt_provider(edit, false);
@@ -700,6 +713,19 @@ fn scene_asset_compose_obeys_the_pinned_sac_run_request_contract() {
 
 #[test]
 fn imagegen_and_edit_receipts_bind_paths_hashes_prompt_and_reference() {
+    if std::env::var_os("STORY_EDIT_FIXTURE_CHILD").is_none() {
+        let status = Command::new(std::env::current_exe().unwrap())
+            .args([
+                "--exact",
+                "imagegen_and_edit_receipts_bind_paths_hashes_prompt_and_reference",
+            ])
+            .env("OPENAI_API_KEY", "sk-test-only")
+            .env("STORY_EDIT_FIXTURE_CHILD", "1")
+            .status()
+            .unwrap();
+        assert!(status.success());
+        return;
+    }
     for edit in [false, true] {
         let mut fixture = Fixture::new();
         fixture.receipt_provider(edit, false);
@@ -718,6 +744,87 @@ fn imagegen_and_edit_receipts_bind_paths_hashes_prompt_and_reference() {
         fixture.receipt_provider(edit, true);
         fixture.assert_terminal(&fixture.invoke().unwrap(), "outcome_unknown");
     }
+}
+
+#[test]
+fn missing_edit_auth_starts_no_process_or_claim() {
+    let mut fixture = Fixture::new();
+    fixture.receipt_provider(true, false);
+    fs::write(
+        &fixture.options.request,
+        serde_json::to_vec(&fixture.request).unwrap(),
+    )
+    .unwrap();
+    let output = Command::new(env!("CARGO_BIN_EXE_storyctl"))
+        .arg("--story-root")
+        .arg(&fixture.root)
+        .args(["run-promptgen", "--request"])
+        .arg(&fixture.options.request)
+        .arg("--output-dir")
+        .arg(&fixture.options.output_dir)
+        .arg("--promptgen-bin")
+        .arg(&fixture.options.promptgen_bin)
+        .env_remove("OPENAI_API_KEY")
+        .output()
+        .unwrap();
+    let error: Value = serde_json::from_slice(&output.stderr).unwrap();
+    assert_eq!(error["status"], "not_started");
+    assert!(!fixture.options.output_dir.exists());
+}
+
+#[test]
+fn api_gif_generation_uses_the_gif_candidate_path_and_bound_model() {
+    if std::env::var_os("STORY_GIF_FIXTURE_CHILD").is_none() {
+        let status = Command::new(std::env::current_exe().unwrap())
+            .args([
+                "--exact",
+                "api_gif_generation_uses_the_gif_candidate_path_and_bound_model",
+            ])
+            .env("OPENAI_API_KEY", "sk-test-only")
+            .env("STORY_GIF_FIXTURE_CHILD", "1")
+            .status()
+            .unwrap();
+        assert!(status.success());
+        return;
+    }
+    let mut fixture = Fixture::new();
+    fixture.external(false);
+    fixture.request["provider"]["kind"] = json!("openai");
+    fixture.request["provider"]["model"] = json!("gpt-image-2.6-sunburst");
+    fixture.request["expectedOutputs"][0]["mediaType"] = json!("image/gif");
+    let mut payload: Value =
+        serde_json::from_slice(&fs::read(fixture.root.join("payload.json")).unwrap()).unwrap();
+    payload["output"] = json!({"model":"gpt-image-2.6-sunburst","width":32,"height":32,"quality":"medium","background":"opaque","format":"gif","frame_count":9,"frame_duration_ms":200});
+    let bytes = serde_json::to_vec(&payload).unwrap();
+    fs::write(fixture.root.join("payload.json"), &bytes).unwrap();
+    fixture.request["payload"]["sha256"] = json!(hash::sha256_bytes(&bytes));
+    fixture.request["payload"]["byteLength"] = json!(bytes.len());
+    let gif = include_bytes!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../../../ImagePromptCompiler/tests/fixtures/codec-test-nineframes.gif"
+    ));
+    let source = fixture.root.join("codec.gif");
+    fs::write(&source, gif).unwrap();
+    let receipt = json!({"backend":"openai-images","provider":"openai","http_status":200,"model":"gpt-image-2.6-sunburst","format":"gif","width":32,"height":32,"frame_count":9,"frame_duration_ms":200,
+        "reference_index":0,"reference_bytes":0,"endpoint_contract":"POST https://api.openai.com/v1/images/generations",
+        "output_path":fixture.options.output_dir.join("image.gif"),"output_sha256":hash::sha256_hex_bytes(gif)});
+    fixture.provider(&format!(
+        "/bin/cp '{}' \"$image\"\n/bin/cat > \"$result\" <<'JSON'\n{receipt}\nJSON",
+        source.display()
+    ));
+    let result = fixture.invoke().unwrap();
+    fixture.assert_terminal(&result, "succeeded");
+    assert!(result["result"]["artifacts"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .any(|a| a["mediaType"] == "image/gif" && a["width"] == 32));
+    assert_eq!(result["result"]["providerReceipt"]["frame_count"], 9);
+    // MIME mismatch must stop before dispatch, independently of API authentication.
+    fixture.options.output_dir = fixture.root.join("results/mismatch");
+    fixture.request["expectedOutputs"][0]["mediaType"] = json!("image/png");
+    assert!(fixture.invoke().is_err());
+    assert!(!fixture.options.output_dir.exists());
 }
 
 #[test]

@@ -14,7 +14,10 @@ use super::super::paths::{resolve_codex_home, same_lexical_path};
 pub(crate) fn compile_image(options: ImageOptions) -> Result<u8, CliError> {
     let request = ImagePromptRequest::from_json(read_json(&options.compile.input)?)
         .map_err(|error| CliError::validation(error.to_string()))?;
-    let openai_edit_preflight = if options.mode == ImageMode::OpenAiImageEdit {
+    let openai_edit_preflight = if matches!(
+        options.mode,
+        ImageMode::OpenAiImageEdit | ImageMode::OpenAiImageGenerate
+    ) {
         Some(preflight_paths(&options)?)
     } else {
         None
@@ -83,7 +86,7 @@ pub(crate) fn compile_image(options: ImageOptions) -> Result<u8, CliError> {
             )?;
             Ok(EXIT_OK)
         }
-        ImageMode::OpenAiImageEdit => {
+        ImageMode::OpenAiImageEdit | ImageMode::OpenAiImageGenerate => {
             let preflight = openai_edit_preflight
                 .ok_or_else(|| CliError::execution("OpenAI edit paths were not preflighted"))?;
             run_openai_edit(
