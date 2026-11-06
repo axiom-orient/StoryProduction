@@ -6,6 +6,7 @@ pub(super) const EXIT_OK: u8 = 0;
 pub(super) const EXIT_USAGE_OR_IO: u8 = 2;
 pub(super) const EXIT_VALIDATION: u8 = 3;
 pub(super) const EXIT_EXECUTION: u8 = 4;
+pub(super) const EXIT_PROVIDER_REJECTED: u8 = 5;
 
 #[derive(Debug)]
 pub(super) struct CliError {

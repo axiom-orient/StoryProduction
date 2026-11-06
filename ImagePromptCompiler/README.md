@@ -48,9 +48,19 @@ Both routes require `--image-output FILE`, preserve API keys outside argv,
 and publish only validated bytes plus a hash-bound receipt. GIF validation
 checks actual LZW raster data, canvas, frame count and frame delays. A PNG
 returned for a GIF request fails; it is never relabeled or synthesized into success.
-The Codex adapter retains its verified GPT Image 2 PNG profile; GIF does not
-silently fall back to that adapter. Composite, multi-reference, mask, and
-Web/MCP image execution remain unsupported.
+The existing `--mode codex-imagegen` also accepts the GPT Image 2.6 GIF profile
+for reference-free generate or one base-PNG edit (`--reference-image FILE`).
+It requires a ChatGPT login and a selected CLI with native GIF support, including
+the `image_generation_animation` feature (observed in official
+`0.168.0-alpha.7`). API key environment variables are removed for this lane.
+Use `--codex-binary PATH --codex-home PATH` to select an installed runtime.
+Server entitlement remains independent of client version; a known rejection
+is a failure. The actual hidden model ID is recorded as unknown. GIF candidates
+require separate visual review. Default size policy is exact; explicit
+`output.size_policy=provider` retains and records the provider's native canvas.
+The legacy GPT Image 2 PNG profile is preserved. No route silently substitutes
+another executor. Composite, multi-reference, mask, and Web/MCP image execution
+remain unsupported. See [both key-free GIF paths](https://github.com/axiom-orient/StoryProduction/blob/main/docs/GIF_GENERATION.md).
 
 [Official GIF parameters](https://developers.openai.com/api/docs/guides/image-generation#generate-animated-gif-output).
 

@@ -58,6 +58,7 @@ pub(super) fn output_schema() -> JsonValue {
             ("quality", enum_schema(&["auto", "low", "medium", "high"])),
             ("background", enum_schema(&["auto", "opaque"])),
             ("format", enum_schema(&["png", "gif"])),
+            ("size_policy", enum_schema(&["exact", "provider"])),
             ("frame_count", integer_schema(2, 16)),
             ("frame_duration_ms", integer_schema(20, 2000)),
         ],

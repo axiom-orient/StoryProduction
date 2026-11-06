@@ -49,13 +49,16 @@ export async function installComposition(packet, imageSources, reducedMotion) {
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d', { alpha: false });
   const images = {};
-  const loadedFonts = await document.fonts.load('16px AnimaticLocked');
+  let loadedFonts;
+  try { loadedFonts = await document.fonts.load('16px AnimaticLocked'); }
+  catch (error) { throw new Error(`LOCKED_FONT_LOAD_FAILED:${error.message}`); }
   if (loadedFonts.length === 0) throw new Error('LOCKED_FONT_NOT_LOADED');
   await document.fonts.ready;
   for (const asset of plan.assets) {
     const img = new Image();
     img.src = imageSources[asset.assetId];
-    await img.decode();
+    try { await img.decode(); }
+    catch (error) { throw new Error(`IMAGE_DECODE_FAILED:${asset.assetId}:${error.message}`); }
     if (img.naturalWidth !== asset.width || img.naturalHeight !== asset.height) throw new Error('DECODED_IMAGE_DIMENSIONS');
     images[asset.assetId] = img;
   }

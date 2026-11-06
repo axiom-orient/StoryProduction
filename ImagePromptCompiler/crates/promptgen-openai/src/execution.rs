@@ -41,7 +41,8 @@ pub fn execute_image_generate(
     request: &ImagePromptRequest,
     config: &OpenAiRunConfig,
 ) -> Result<OpenAiEditReceipt, OpenAiExecutionError> {
-    if request.task_mode != ImageTaskMode::Generate
+    if request.output.size_policy.as_deref() == Some("provider")
+        || request.task_mode != ImageTaskMode::Generate
         || !request.references.is_empty()
         || !matches!(
             request.output.model.as_str(),

@@ -107,6 +107,15 @@ impl Browser {
             "FONT_BYTES_CHANGED",
         )?;
         let profile = io::io(tempfile::Builder::new().prefix("smc-chromium-").tempdir())?;
+        let log_path = profile.path().join("browser-startup.log");
+        let startup_log = io::io(std::fs::File::create(&log_path))?;
+        let startup_error = |code: &str| {
+            let mut bytes = Vec::new();
+            if let Ok(file) = std::fs::File::open(&log_path) {
+                let _ = file.take(8192).read_to_end(&mut bytes);
+            }
+            format!("{code}:{}", String::from_utf8_lossy(&bytes))
+        };
         let mut command = Command::new(path);
         command
             .args([
@@ -127,15 +136,14 @@ impl Browser {
             .arg("about:blank")
             .stdin(Stdio::null())
             .stdout(Stdio::null())
-            .stderr(Stdio::null());
+            .stderr(Stdio::from(startup_log));
         let mut child = process::spawn(&mut command)?;
         let deadline = Instant::now() + Duration::from_secs(12);
         while Instant::now() < deadline {
             io::check(!io::interrupted(), "WORKER_INTERRUPTED")?;
-            io::check(
-                io::io(child.0.try_wait())?.is_none(),
-                "CHROMIUM_EXITED_BEFORE_DEVTOOLS",
-            )?;
+            if io::io(child.0.try_wait())?.is_some() {
+                return Err(startup_error("CHROMIUM_EXITED_BEFORE_DEVTOOLS"));
+            }
             if let Ok(text) = fs::read_to_string(profile.path().join("DevToolsActivePort")) {
                 if let Some(port) = text
                     .lines()
@@ -152,7 +160,7 @@ impl Browser {
             }
             std::thread::sleep(Duration::from_millis(50));
         }
-        Err("CHROMIUM_DEVTOOLS_TIMEOUT".into())
+        Err(startup_error("CHROMIUM_DEVTOOLS_TIMEOUT"))
     }
     pub fn close(&mut self) -> Result<()> {
         self.child

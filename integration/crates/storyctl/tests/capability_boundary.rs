@@ -828,6 +828,60 @@ fn api_gif_generation_uses_the_gif_candidate_path_and_bound_model() {
 }
 
 #[test]
+fn unsupported_codex_png_edit_stops_before_an_execution_directory_is_created() {
+    let mut fixture = Fixture::new();
+    fixture.receipt_provider(true, false);
+    fixture.request["provider"]["kind"] = json!("codex");
+    assert!(fixture.invoke().is_err());
+    assert!(!fixture.options.output_dir.exists());
+}
+
+#[test]
+fn codex_gif_subscription_candidate_and_known_rejection_keep_distinct_outcomes() {
+    for rejected in [false, true] {
+        let mut fixture = Fixture::new();
+        fixture.external(false);
+        fixture.request["provider"]["model"] = json!("gpt-image-2.6-sunburst");
+        fixture.request["expectedOutputs"][0]["mediaType"] = json!("image/gif");
+        let mut payload: Value =
+            serde_json::from_slice(&fs::read(fixture.root.join("payload.json")).unwrap()).unwrap();
+        payload["output"] = json!({"model":"gpt-image-2.6-sunburst","width":768,"height":512,"quality":"medium","background":"opaque","format":"gif","frame_count":9,"frame_duration_ms":200,"size_policy":"provider"});
+        let raw = serde_json::to_vec(&payload).unwrap();
+        fs::write(fixture.root.join("payload.json"), &raw).unwrap();
+        fixture.request["payload"]["sha256"] = json!(hash::sha256_bytes(&raw));
+        fixture.request["payload"]["byteLength"] = json!(raw.len());
+        if rejected {
+            fixture.provider("printf '%s\\n' 'error[PROVIDER_REJECTED]: CODEX_GIF_SERVICE_REJECTED: HTTP 400: GIF output is not enabled for this request' >&2\nexit 5");
+            let result = fixture.invoke().unwrap();
+            fixture.assert_terminal(&result, "failed");
+            assert_eq!(
+                result["result"]["failure"]["code"],
+                "PROMPTGEN_PROVIDER_REJECTED"
+            );
+        } else {
+            let gif = include_bytes!(concat!(
+                env!("CARGO_MANIFEST_DIR"),
+                "/../../../ImagePromptCompiler/tests/fixtures/codec-test-nineframes.gif"
+            ));
+            let source = fixture.root.join("codec.gif");
+            fs::write(&source, gif).unwrap();
+            let receipt = json!({"backend":"codex-imagegen","auth_mode":"chatgpt_subscription","requested_model":"gpt-image-2.6-sunburst","format":"gif","frame_count":9,"frame_duration_ms":200,"size_policy":"provider","width":32,"height":32,"thread_id":"fixture.thread","image_call_id":"fixture.call","process_exit_code":0,"compiled_prompt_sha256":hash::sha256_hex_bytes(b"fixture prompt"),"sha256":hash::sha256_hex_bytes(gif),"output_artifact":fixture.options.output_dir.join("image.gif")});
+            let result = json!({"compilation":{"kind":"image","status":"valid","prompt":"fixture prompt","diagnostics":[],"metadata":{}},"execution":receipt});
+            fixture.provider(&format!(
+                "/bin/cp '{}' \"$image\"\n/bin/cat > \"$result\" <<'JSON'\n{result}\nJSON",
+                source.display()
+            ));
+            let result = fixture.invoke().unwrap();
+            fixture.assert_terminal(&result, "succeeded");
+            assert_eq!(
+                result["result"]["providerReceipt"]["auth_mode"],
+                "chatgpt_subscription"
+            );
+        }
+    }
+}
+
+#[test]
 fn actual_signal_after_dispatch_preserves_unknown_for_local_and_external_execution() {
     for external in [false, true] {
         let mut fixture = Fixture::new();

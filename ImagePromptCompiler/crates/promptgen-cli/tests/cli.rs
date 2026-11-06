@@ -10,6 +10,72 @@ use promptgen_core::json::parse;
 static NEXT: AtomicU64 = AtomicU64::new(1);
 
 #[test]
+fn codex_gif_relative_output_keeps_the_base_image_attached_after_cwd_change() {
+    use std::os::unix::fs::PermissionsExt;
+    let root = test_root("gif-reference-cwd");
+    let mut request = ImagePromptRequest::from_json(
+        parse(
+            &fs::read_to_string(repository_root().join("examples/image-edit-product.json"))
+                .unwrap(),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    request.output.model = "gpt-image-2.6-sunburst".into();
+    request.output.format = "gif".into();
+    request.output.frame_count = Some(9);
+    request.output.frame_duration_ms = Some(200);
+    request.output.size_policy = Some("provider".into());
+    fs::write(
+        root.join("input.json"),
+        request.to_json().to_pretty_string(),
+    )
+    .unwrap();
+    fs::copy(
+        repository_root().join("tests/fixtures/valid-1024x1536.png"),
+        root.join("reference.png"),
+    )
+    .unwrap();
+    let provider = root.join("codex-double");
+    let script = format!(
+        "#!/bin/sh\nset -eu\nif [ \"${{1-}}\" = --version ]; then printf 'codex-cli 0.168.0-alpha.7\\n'; exit 0; fi\nif [ \"${{1-}}\" = login ]; then printf 'Logged in using ChatGPT\\n'; exit 0; fi\nfound=0\nwhile [ \"$#\" -gt 0 ]; do\ncase \"$1\" in --image) test -f \"$2\" || exit 8; found=1; shift 2;; *) shift;; esac\ndone\ntest \"$found\" = 1 || exit 9\nmkdir -p \"$CODEX_HOME/generated_images/gif-thread\"\ncp '{}' \"$CODEX_HOME/generated_images/gif-thread/gif-call.gif\"\nprintf '%s\\n' '{{\"type\":\"thread.started\",\"thread_id\":\"gif-thread\"}}' '{{\"type\":\"turn.started\"}}' '{{\"type\":\"turn.completed\"}}'\n",
+        repository_root()
+            .join("tests/fixtures/codec-test-nineframes.gif")
+            .display()
+    );
+    fs::write(&provider, script).unwrap();
+    fs::set_permissions(&provider, fs::Permissions::from_mode(0o700)).unwrap();
+    let result = Command::new(binary())
+        .current_dir(&root)
+        .args([
+            "image",
+            "--mode",
+            "codex-imagegen",
+            "--input",
+            "input.json",
+            "--image-output",
+            "image.gif",
+            "--reference-image",
+            "reference.png",
+            "--codex-binary",
+        ])
+        .arg(&provider)
+        .arg("--codex-home")
+        .arg(root.join("home"))
+        .args(["--artifact-wait-seconds", "2", "--format", "json"])
+        .output()
+        .unwrap();
+    assert!(
+        result.status.success(),
+        "{}",
+        String::from_utf8_lossy(&result.stderr)
+    );
+    assert!(root.join("image.gif").is_file());
+    assert!(String::from_utf8_lossy(&result.stdout).contains("chatgpt_subscription"));
+    fs::remove_dir_all(root).unwrap();
+}
+
+#[test]
 fn codex_auth_options_are_not_silently_ignored_by_other_modes() {
     for mode in ["prompt-only", "openai-image-edit"] {
         let output = Command::new(binary())

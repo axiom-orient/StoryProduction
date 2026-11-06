@@ -35,6 +35,7 @@ pub struct PromptgenOptions {
 enum Mode {
     Compile,
     Generate,
+    CodexEdit,
     ApiGenerate,
     Edit,
 }
@@ -42,7 +43,7 @@ impl Mode {
     fn argument(self) -> &'static str {
         match self {
             Self::Compile => "prompt-only",
-            Self::Generate => "codex-imagegen",
+            Self::Generate | Self::CodexEdit => "codex-imagegen",
             Self::ApiGenerate => "openai-image-generate",
             Self::Edit => "openai-image-edit",
         }
@@ -59,6 +60,9 @@ fn mode(request: &Value) -> Result<Mode> {
             (Mode::ApiGenerate, "openai", "required")
         }
         Some("image.generate") => (Mode::Generate, "codex", "required"),
+        Some("image.edit") if request["provider"]["kind"] == "codex" => {
+            (Mode::CodexEdit, "codex", "required")
+        }
         Some("image.edit") => (Mode::Edit, "openai", "required"),
         _ => {
             return Err(Error::not_applied(
@@ -72,7 +76,9 @@ fn mode(request: &Value) -> Result<Mode> {
         )));
     }
     let references = request["references"].as_array().map_or(0, Vec::len);
-    if (mode == Mode::Edit && references != 1) || (mode != Mode::Edit && references != 0) {
+    if (matches!(mode, Mode::Edit | Mode::CodexEdit) && references != 1)
+        || (!matches!(mode, Mode::Edit | Mode::CodexEdit) && references != 0)
+    {
         return Err(Error::not_applied(
             "image.edit requires one reference; other modes cannot consume references",
         ));
@@ -87,8 +93,10 @@ fn mode(request: &Value) -> Result<Mode> {
             (output["kind"] == "generation_receipt" && output["mediaType"] == "application/json")
                 || (output["kind"] == "image_candidate"
                     && (output["mediaType"] == "image/png"
-                        || (matches!(mode, Mode::Edit | Mode::ApiGenerate)
-                            && output["mediaType"] == "image/gif")))
+                        || (matches!(
+                            mode,
+                            Mode::Edit | Mode::ApiGenerate | Mode::Generate | Mode::CodexEdit
+                        ) && output["mediaType"] == "image/gif")))
         };
         if !supported {
             return Err(Error::not_applied(
@@ -126,7 +134,7 @@ fn validate_payload_mode(mode: Mode, payload: &Value) -> Result<()> {
         .unwrap_or(&[]);
     let supported = match mode {
         Mode::Generate | Mode::ApiGenerate => task == "generate" && references.is_empty(),
-        Mode::Edit => {
+        Mode::Edit | Mode::CodexEdit => {
             task == "edit"
                 && references.len() == 1
                 && references[0]["index"] == 1
@@ -137,7 +145,11 @@ fn validate_payload_mode(mode: Mode, payload: &Value) -> Result<()> {
     let model = payload["output"]["model"].as_str().unwrap_or("");
     let format = payload["output"]["format"].as_str().unwrap_or("");
     let output_supported = match mode {
-        Mode::Generate => model == "gpt-image-2" && format == "png",
+        Mode::Generate | Mode::CodexEdit => {
+            (mode == Mode::Generate && model == "gpt-image-2" && format == "png")
+                || (matches!(model, "gpt-image-2.6-sunburst" | "gpt-image-2.6-flare")
+                    && format == "gif")
+        }
         Mode::ApiGenerate => {
             matches!(model, "gpt-image-2.6-sunburst" | "gpt-image-2.6-flare")
                 && matches!(format, "png" | "gif")
@@ -149,8 +161,12 @@ fn validate_payload_mode(mode: Mode, payload: &Value) -> Result<()> {
         }
         Mode::Compile => true,
     };
-    if !supported || !output_supported {
-        return Err(Error::not_applied("capability and typed payload disagree: Codex generate requires GPT Image 2 PNG; OpenAI generation requires GPT Image 2.6; OpenAI edit requires one base reference; both support native GIF"));
+    if !supported
+        || !output_supported
+        || (matches!(mode, Mode::ApiGenerate | Mode::Edit)
+            && payload["output"]["size_policy"] == "provider")
+    {
+        return Err(Error::not_applied("capability and typed payload disagree: Codex accepts GPT Image 2 PNG generate or GPT Image 2.6 GIF generate/single-base edit; Image API requires an exact-size supported generate/edit profile"));
     }
     Ok(())
 }
@@ -319,14 +335,14 @@ fn candidates(
     if mode == Mode::Compile {
         compilation(registry, &value)?;
     } else {
-        receipt = if mode == Mode::Generate {
+        receipt = if matches!(mode, Mode::Generate | Mode::CodexEdit) {
             value["execution"].clone()
         } else {
             value.clone()
         };
         if !receipt.is_object()
             || receipt["backend"]
-                != if mode == Mode::Generate {
+                != if matches!(mode, Mode::Generate | Mode::CodexEdit) {
                     "codex-imagegen"
                 } else {
                     "openai-images"
@@ -334,7 +350,7 @@ fn candidates(
         {
             return Err(Error::not_applied("provider receipt backend mismatch"));
         }
-        if mode == Mode::Generate {
+        if matches!(mode, Mode::Generate | Mode::CodexEdit) {
             let prompt = compilation(registry, &value["compilation"])?;
             if receipt["compiled_prompt_sha256"] != hash::sha256_hex_bytes(prompt.as_bytes())
                 || receipt["thread_id"].as_str().is_none_or(str::is_empty)
@@ -374,6 +390,28 @@ fn candidates(
                 "edit receipt model/animation profile mismatch",
             ));
         }
+        if gif
+            && matches!(mode, Mode::Generate | Mode::CodexEdit)
+            && (["format", "frame_count", "frame_duration_ms", "size_policy"]
+                .iter()
+                .any(|key| {
+                    let expected = if *key == "size_policy" && payload["output"][key].is_null() {
+                        json!("exact")
+                    } else {
+                        payload["output"][key].clone()
+                    };
+                    receipt[key] != expected
+                })
+                || receipt["requested_model"] != payload["output"]["model"]
+                || receipt["auth_mode"] != "chatgpt_subscription"
+                || (mode == Mode::CodexEdit
+                    && receipt["reference_sha256"].as_str()
+                        != request["references"][0]["sha256"].as_str().map(|v| &v[7..])))
+        {
+            return Err(Error::not_applied(
+                "Codex GIF receipt profile/reference differs from request",
+            ));
+        }
         let image_path = output.path().join(name);
         let image_bytes = output.read_bytes_limited(name, MAX_IMAGE_BYTES)?;
         let image = artifact(
@@ -384,12 +422,12 @@ fn candidates(
             "image_candidate",
             media_type,
         )?;
-        let hash_key = if mode == Mode::Generate {
+        let hash_key = if matches!(mode, Mode::Generate | Mode::CodexEdit) {
             "sha256"
         } else {
             "output_sha256"
         };
-        let path_key = if mode == Mode::Generate {
+        let path_key = if matches!(mode, Mode::Generate | Mode::CodexEdit) {
             "output_artifact"
         } else {
             "output_path"
@@ -411,7 +449,8 @@ fn candidates(
         for key in ["width", "height"] {
             if receipt[key].as_u64().is_none()
                 || receipt[key] != image[key]
-                || image[key] != payload["output"][key]
+                || (!(gif && payload["output"]["size_policy"] == "provider")
+                    && image[key] != payload["output"][key])
             {
                 return Err(Error::not_applied(
                     "requested, receipt, and image dimensions differ",
@@ -447,6 +486,13 @@ fn candidates(
         "provider",
         "model",
         "request_id",
+        "auth_mode",
+        "requested_model",
+        "provider_model",
+        "model_identity_verified",
+        "semantic_review_required",
+        "reference_sha256",
+        "size_policy",
         "format",
         "frame_count",
         "frame_duration_ms",
@@ -536,7 +582,9 @@ pub(crate) fn run_promptgen_in_roots(
             "OPENAI_API_KEY missing or invalid; no provider request dispatched",
         ));
     }
-    if mode != Mode::Generate && (options.codex_binary.is_some() || options.codex_home.is_some()) {
+    if !matches!(mode, Mode::Generate | Mode::CodexEdit)
+        && (options.codex_binary.is_some() || options.codex_home.is_some())
+    {
         return Err(Error::not_applied("Codex options require image.generate"));
     }
     let codex_binary = options
@@ -610,7 +658,7 @@ pub(crate) fn run_promptgen_in_roots(
             options.timeout_seconds.to_string(),
         ]);
     }
-    if mode == Mode::Generate {
+    if matches!(mode, Mode::Generate | Mode::CodexEdit) {
         command.extend([
             "--artifact-wait-seconds".into(),
             options.artifact_wait_seconds.to_string(),
@@ -630,6 +678,7 @@ pub(crate) fn run_promptgen_in_roots(
     }
     let mut started = false;
     let mut binding_unknown = false;
+    let mut definite_provider_rejection = false;
     let mut stdout = Vec::new();
     let mut stderr = Vec::new();
     let execution: Result<(Vec<Value>, Value)> = (|| {
@@ -671,6 +720,15 @@ pub(crate) fn run_promptgen_in_roots(
             return Err(error);
         }
         if !result.status.success() {
+            if matches!(mode, Mode::Generate | Mode::CodexEdit)
+                && payload["output"]["format"] == "gif"
+                && result.status.code() == Some(5)
+                && String::from_utf8_lossy(&stderr)
+                    .starts_with("error[PROVIDER_REJECTED]: CODEX_GIF_SERVICE_REJECTED:")
+            {
+                definite_provider_rejection = true;
+                return Err(Error::not_applied("Codex subscription provider rejected native GIF: HTTP 400 GIF output is not enabled for this request"));
+            }
             return Err(Error::not_applied(format!(
                 "PromptGen exited with status {}",
                 result.status
@@ -714,10 +772,12 @@ pub(crate) fn run_promptgen_in_roots(
                 job = capability::request_cancellation(&job)?;
             }
             let unknown = binding_unknown
-                || (mode.external() && started)
+                || (mode.external() && started && !definite_provider_rejection)
                 || (error.outcome == Outcome::Unknown && (started || error.spawned));
             let status = if unknown {
                 "outcome_unknown"
+            } else if definite_provider_rejection {
+                "failed"
             } else if cancelled {
                 "cancelled"
             } else {
@@ -728,7 +788,9 @@ pub(crate) fn run_promptgen_in_roots(
             } else {
                 "execution-or-candidate-validation"
             };
-            let code = if cancelled {
+            let code = if definite_provider_rejection {
+                "PROMPTGEN_PROVIDER_REJECTED"
+            } else if cancelled {
                 "PROMPTGEN_CANCELLED"
             } else if error.message.contains("output limit") {
                 "PROMPTGEN_OUTPUT_LIMIT"

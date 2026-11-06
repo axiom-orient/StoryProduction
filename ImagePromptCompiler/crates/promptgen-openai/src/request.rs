@@ -51,6 +51,12 @@ pub(super) fn validate_request(
             "OpenAI adapter supports PNG and GPT Image 2.6 GIF",
         ));
     }
+    if request.output.size_policy.as_deref() == Some("provider") {
+        return Err(OpenAiExecutionError::new(
+            "OPENAI_SIZE_POLICY",
+            "Image API requires the exact size policy",
+        ));
+    }
     if prompt.trim().is_empty() {
         return Err(OpenAiExecutionError::new(
             "OPENAI_EMPTY_PROMPT",

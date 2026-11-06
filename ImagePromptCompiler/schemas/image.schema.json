@@ -661,6 +661,13 @@
           ],
           "type": "string"
         },
+        "size_policy": {
+          "enum": [
+            "exact",
+            "provider"
+          ],
+          "type": "string"
+        },
         "width": {
           "maximum": 3840,
           "minimum": 16,

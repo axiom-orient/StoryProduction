@@ -1,4 +1,4 @@
-//! Thread-bound Codex PNG discovery and identity admission.
+//! Thread-bound Codex image discovery and identity admission.
 
 use std::ffi::OsStr;
 use std::fs;
@@ -19,6 +19,26 @@ pub(crate) fn discover_artifact(
     started_at: SystemTime,
     timeout: Duration,
 ) -> Result<(String, PathBuf), CodexExecutionError> {
+    discover(generated_root, thread_id, started_at, timeout, "png")
+}
+
+pub(crate) fn discover_gif_artifact(
+    generated_root: &Path,
+    thread_id: &str,
+    started_at: SystemTime,
+    timeout: Duration,
+) -> Result<(String, PathBuf), CodexExecutionError> {
+    discover(generated_root, thread_id, started_at, timeout, "gif")
+}
+
+fn discover(
+    generated_root: &Path,
+    thread_id: &str,
+    started_at: SystemTime,
+    timeout: Duration,
+    extension: &str,
+) -> Result<(String, PathBuf), CodexExecutionError> {
+    let label = if extension == "png" { "PNG" } else { "GIF" };
     let root = fs::canonicalize(generated_root)
         .map_err(|error| io_error("canonicalize generated root", generated_root, error))?;
     let thread_dir = root.join(sanitize_component(thread_id));
@@ -35,12 +55,12 @@ pub(crate) fn discover_artifact(
     let mut stable = 0_u8;
 
     loop {
-        let files = list_thread_pngs(&thread_dir)?;
+        let files = list_thread_images(&thread_dir, extension)?;
         if files.len() > 1 {
             return Err(CodexExecutionError::new(
                 "CODEX_ARTIFACT_COUNT",
                 format!(
-                    "thread directory must contain exactly one PNG: dir={}, files={files:?}",
+                    "thread directory must contain exactly one {label}: dir={}, files={files:?}",
                     thread_dir.display()
                 ),
             ));
@@ -100,7 +120,7 @@ pub(crate) fn discover_artifact(
                     })?
                     .to_owned();
                 if actual.file_name().and_then(OsStr::to_str)
-                    != Some(&format!("{}.png", sanitize_component(&call_id)))
+                    != Some(&format!("{}.{extension}", sanitize_component(&call_id)))
                 {
                     return Err(CodexExecutionError::new(
                         "CODEX_ARTIFACT_IDENTITY",
@@ -114,7 +134,7 @@ pub(crate) fn discover_artifact(
             return Err(CodexExecutionError::new(
                 "CODEX_ARTIFACT_TIMEOUT",
                 format!(
-                    "no stable, unique PNG appeared in {} within {} seconds",
+                    "no stable, unique {label} appeared in {} within {} seconds",
                     thread_dir.display(),
                     timeout.as_secs()
                 ),
@@ -124,7 +144,10 @@ pub(crate) fn discover_artifact(
     }
 }
 
-fn list_thread_pngs(thread_dir: &Path) -> Result<Vec<PathBuf>, CodexExecutionError> {
+fn list_thread_images(
+    thread_dir: &Path,
+    wanted_extension: &str,
+) -> Result<Vec<PathBuf>, CodexExecutionError> {
     let entries = match fs::read_dir(thread_dir) {
         Ok(entries) => entries,
         Err(error) if error.kind() == io::ErrorKind::NotFound => return Ok(Vec::new()),
@@ -162,7 +185,7 @@ fn list_thread_pngs(thread_dir: &Path) -> Result<Vec<PathBuf>, CodexExecutionErr
             && path
                 .extension()
                 .and_then(OsStr::to_str)
-                .is_some_and(|extension| extension.eq_ignore_ascii_case("png"))
+                .is_some_and(|extension| extension.eq_ignore_ascii_case(wanted_extension))
         {
             files.push(path);
         }

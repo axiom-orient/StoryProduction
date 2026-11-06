@@ -26,6 +26,17 @@ pub(in crate::image::validate) fn validate_output(
             "GIF requires GPT Image 2.6; PNG remains supported",
         ));
     }
+    if output
+        .size_policy
+        .as_deref()
+        .is_some_and(|p| p != "exact" && !(p == "provider" && output.format == "gif"))
+    {
+        diagnostics.push(Diagnostic::error(
+            "IMG_SIZE_POLICY",
+            "$.output.size_policy",
+            "provider size policy is allowed only for GIF output",
+        ));
+    }
     if output.format == "gif" {
         if !output.frame_count.is_some_and(|n| (2..=16).contains(&n))
             || !output

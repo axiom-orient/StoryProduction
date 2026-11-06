@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "packageName": "scene-motion-compiler",
   "fileCount": 264,
-  "totalBytes": 2751626,
+  "totalBytes": 2752330,
   "excludedDirectories": [
     ".build",
     ".git",
@@ -489,14 +489,14 @@
     },
     {
       "path": "engine/crates/smc-animatic/src/animatic.rs",
-      "sha256": "sha256:18880d56e299ccde25a140d01b08d6b63de455cf159a5ce9cd21455c0fb2a0cd",
-      "bytes": 33892,
+      "sha256": "sha256:682af65dc889d1471486b5bdd5494d69b2c4f7e7c944c9699c88ad8ef4755f4f",
+      "bytes": 33931,
       "mode": "100644"
     },
     {
       "path": "engine/crates/smc-animatic/src/browser.rs",
-      "sha256": "sha256:591d6cfe356c055cfe5fb830fa17e26909a7ccf06146ee32c13f23c888e5453a",
-      "bytes": 17115,
+      "sha256": "sha256:cdb2dad6291ee2f4c347fd107ae1b9f235ed4142cc6aaea2396aee7593901bf9",
+      "bytes": 17574,
       "mode": "100644"
     },
     {
@@ -1107,8 +1107,8 @@
     },
     {
       "path": "packages/production/src/animatic-runtime.js",
-      "sha256": "sha256:0fd5616f9db387da28d91c46b3d6831636af35c6fe2f983b4d95cf567246fd95",
-      "bytes": 5705,
+      "sha256": "sha256:451f7caf54f15dcac27d41f7286f50abc0c0a3348786c0b115cab90ad05e4157",
+      "bytes": 5911,
       "mode": "100644"
     },
     {
@@ -1604,5 +1604,5 @@
       "mode": "100644"
     }
   ],
-  "sourceTreeHash": "sha256:f547b62f829c287c40cd54d686912e5406eacc974b9118b40f11184830fd6da2"
+  "sourceTreeHash": "sha256:18ea80655a9f586a17d27b24441266c9683fff471e4d181ade12e2d5ad73a29d"
 }

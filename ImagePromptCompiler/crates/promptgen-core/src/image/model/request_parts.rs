@@ -372,6 +372,7 @@ pub struct ImageGenerationParameters {
     pub quality: ImageQuality,
     pub background: BackgroundMode,
     pub format: String,
+    pub size_policy: Option<String>,
     pub frame_count: Option<u32>,
     pub frame_duration_ms: Option<u32>,
 }
@@ -394,6 +395,7 @@ impl ImageGenerationParameters {
             quality: ImageQuality::parse(&quality_value, &format!("{path}.quality"))?,
             background: BackgroundMode::parse(&background_value, &format!("{path}.background"))?,
             format: take_string(&mut fields, "format", path)?,
+            size_policy: take_optional_string(&mut fields, "size_policy", path)?,
             frame_count: take_optional_u32(&mut fields, "frame_count", path)?,
             frame_duration_ms: take_optional_u32(&mut fields, "frame_duration_ms", path)?,
         };
@@ -410,6 +412,9 @@ impl ImageGenerationParameters {
             ("quality", JsonValue::from(self.quality.as_str())),
             ("width", JsonValue::from(u64::from(self.width))),
         ];
+        if let Some(value) = &self.size_policy {
+            fields.push(("size_policy", JsonValue::from(value.clone())));
+        }
         for (key, value) in [
             ("frame_count", self.frame_count),
             ("frame_duration_ms", self.frame_duration_ms),

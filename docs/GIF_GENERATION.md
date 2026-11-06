@@ -4,7 +4,69 @@ StoryProduction supports native GPT Image 2.6 animation through the existing
 promptGen adapter. NVC retains narrative/direction authority; LayoutSheet remains
 an optional `.layoutpack` input. SAC and SMC do not acquire image API clients.
 
-## Generate
+## ChatGPT subscription through codex-imagegen (no API key)
+
+Use the same typed GIF profile below with `provider.kind=codex` and the existing
+`--mode codex-imagegen` adapter. Both reference-free `image.generate` and one
+base-PNG `image.edit` are supported. An edit must transport the actual file with
+`--reference-image FILE`; a path mentioned in prose is not an attachment.
+
+`promptgen-codex` has no embedded OpenAI SDK to upgrade. Its only library
+dependency is local `promptgen-core`; the image client is the selected external
+Codex executable. Official `0.168.0-alpha.7` exposes the native `gif` tool argument
+and the `image_generation_animation` feature. Install the main binary and its
+same-version code-mode host and exec-server together, then select it with
+`--codex-binary PATH --codex-home PATH`. The adapter checks an existing
+`Logged in using ChatGPT` login and removes API key environment variables.
+It leaves the app bundle, global configuration and authentication files intact.
+
+```sh
+"$STORY_ROOT/integration/target/release/storyctl" --story-root "$STORY_ROOT" \
+  run-promptgen --capability-root /path/to/capability-root \
+  --request /path/to/current-codex-gif-request.json \
+  --output-dir /path/to/capability-root/runs/unique-attempt \
+  --promptgen-bin "$STORY_ROOT/ImagePromptCompiler/target/release/promptgen" \
+  --codex-binary /path/to/codex --codex-home /path/to/existing-codex-home
+```
+
+This sends exactly one image request. Evidence retains the selected version,
+instruction, attached reference hash, thread, events and returned GIF bytes.
+The default canvas policy is exact. Explicit `output.size_policy=provider`
+allows a provider-selected canvas while preserving requested and actual sizes;
+there is no silent resize. Actual frame count and delays must still match.
+The receipt separates the requested 2.6 profile from the hidden provider model
+(`UNKNOWN`, identity unverified), and requires visual review.
+
+Client support does not grant server access. On 2026-11-06 the upgraded native
+subscription tool returned HTTP 400, `GIF output is not enabled for this request`.
+That observed server rejection is a failure, not a reason to switch to PNG or
+charge an API key. Other interrupted or uncertain effects remain
+`outcome_unknown`; they do not authorize retry. Local codec/process tests are
+not evidence of live Codex GIF generation.
+
+## ChatGPT screen generation and SAC intake (no API key)
+
+Use the user's existing signed-in ChatGPT image-generation screen, attach the
+approved source PNG, request a native animation with explicit frame count and
+delay, then export through the GIF viewer's **GIF download** control. Retain the
+original downloaded bytes, reference hash, exact prompt, conversation URL and
+observed execution outcome outside the public repository. Inspect the bytes:
+an assistant's text or a sprite-sheet preview does not establish GIF output.
+
+Feed that exported file to the existing `animatic assets import-gif` command
+below with a truthful local execution observation. A completed generation can
+declare `status=succeeded_gif_generation`; failed/cancelled/unknown attempts
+cannot. This is an external media intake route with unauthenticated provenance,
+not a successful Codex API receipt. The program does not read browser cookies,
+copy session tokens or implement a private ChatGPT HTTP client. There is no
+automatic switch between these two subscription surfaces.
+
+The EP01 S01 screen run produced an actual 9-frame, 200-ms-per-frame GIF from its
+approved still reference. SAC decoded all nine original frames for NVC's
+play-once direction. The actual 506×336 canvas was retained. Scene images and
+private prompts are excluded from the public source repository.
+
+## Explicit Image API route
 
 Use `image.generate` with `provider.kind=openai`,
 `provider.model=gpt-image-2.6-sunburst` or `gpt-image-2.6-flare`,
@@ -98,4 +160,5 @@ downloaded bytes and observations separately from API execution and scene approv
 
 Official sources: [GIF output](https://developers.openai.com/api/docs/guides/image-generation#generate-animated-gif-output),
 [generation API](https://developers.openai.com/api/reference/resources/images/methods/generate),
-[edit API and preview access](https://developers.openai.com/api/reference/resources/images/methods/edit).
+[edit API and preview access](https://developers.openai.com/api/reference/resources/images/methods/edit),
+[official Codex GIF-capable client release](https://github.com/openai/codex/releases/tag/rust-v0.168.0-alpha.7).

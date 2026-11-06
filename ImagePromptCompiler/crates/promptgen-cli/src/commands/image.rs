@@ -1,3 +1,4 @@
+mod codex_gif;
 mod openai;
 
 use promptgen_codex::{CodexRunConfig, execute_image_generation};
@@ -36,9 +37,12 @@ pub(crate) fn compile_image(options: ImageOptions) -> Result<u8, CliError> {
             emit_compilation(compilation, options.compile)
         }
         ImageMode::CodexImagegen => {
+            if request.output.format == "gif" {
+                return codex_gif::run(&compilation, &request, options);
+            }
             if options.reference_image.is_some() {
                 return Err(CliError::usage(
-                    "--reference-image is valid only with --mode openai-image-edit",
+                    "PNG codex-imagegen does not accept reference-image; use a supported edit profile",
                 ));
             }
             let image_output = options
