@@ -499,8 +499,11 @@ pub fn verify(
         .as_array()
         .ok_or("SMC candidate artifacts absent")?;
     check(
-        outputs.len() == 5,
-        "SMC candidate must bind its exact five artifacts",
+        outputs.len() == 6
+            && receipt["gifPreview"]["mediaType"] == "image/gif"
+            && receipt["gifPreview"]["nativeGeneration"] == false
+            && receipt["gifPreview"]["containsAudio"] == false,
+        "SMC candidate must bind its six artifacts and an honest rendered GIF preview",
     )?;
     for artifact in outputs {
         let bytes =

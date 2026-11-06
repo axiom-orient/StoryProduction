@@ -2,7 +2,7 @@
 
 선택 animatic 경로는 `animatic-render/status/cancel/recover` public CLI로
 source-bound NVC packet과 SAC PNG pack/review를 소비한다. pinned Chromium의
-프레임 합성으로 editable HTML·VTT·VP9 WebM 후보를 출력한다. 사용법과 승인
+프레임 합성으로 editable HTML·VTT·VP9 WebM·GIF 후보를 출력한다. 사용법과 승인
 경계는 [움직이는 콘티 운영](../docs/ANIMATIC_PRODUCTION.md)을 따른다.
 
 승인 cinematic/visual reference·motion/editorial 후보의 사용은 [StoryProduction 운영 가이드](../docs/OPERATIONS.md), 실제 구현 범위는 [Current](docs/IMPLEMENTATION_STATUS.md)를 참조한다.
@@ -80,7 +80,7 @@ Render는 approved NVC packet과 SAC pack/review를 요구하고 `--motion full|
 Animatic producer는 owner-local Rust `smc-animatic`이며 Node/Python을 실행하지 않는다.
 기존 SMC Node application의 네 명령은 같은 native executable에 전달한다.
 locked Chromium/font, FFmpeg/ffprobe가 필요하다. 결과는 `finalApproval:false`,
-`audio:none`인 WebM 후보·HTML 합성 원본·VTT이며 기존 custody release promotion이 아니다.
+`audio:none`인 WebM·렌더 GIF 후보·HTML 합성 원본·VTT이며 기존 custody release promotion이 아니다.
 같은 attempt의 다른 입력은 거절하고 cancel/recover가 renderer를 자동 재시작하지 않는다.
 Direct SMC CLI는 전달 packet/asset bytes를 재검사한다. 실제 현재 NVC 원고의 재관찰은
 StoryProduction integration 경로가 별도로 수행한다.

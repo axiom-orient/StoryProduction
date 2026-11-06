@@ -11,7 +11,7 @@ import { join } from 'node:path';
 import { deflateSync } from 'node:zlib';
 import { canonicalHash, sha256Prefixed } from '../packages/core/src/canonical.js';
 import { writeReleaseFixture, writeJson } from './support/narrative-fixture.js';
-import { frameState, totalFrames } from '../packages/production/src/animatic-runtime.js';
+import { frameState, totalFrames, captionTimeline, captionAtFrame } from '../packages/production/src/animatic-runtime.js';
 import { loadAnimaticInput, renderAnimatic, statusAnimatic, cancelAnimatic, recoverAnimatic } from '../packages/production/src/animatic.js';
 
 const STORY_ROOT = fileURLToPath(new URL('../../', import.meta.url));
@@ -20,6 +20,32 @@ const SAC = process.env.STORY_SAC_ANIMATIC_BIN || join(STORY_ROOT, 'SceneAssetCo
 const SMC_CLI = fileURLToPath(new URL('../packages/cli/src/main.js', import.meta.url));
 const SMC_NATIVE = process.env.SMC_ANIMATIC_BIN || fileURLToPath(new URL('../target/release/smc-animatic', import.meta.url));
 const execute = promisify(execFile);
+
+test('caption cues preserve original ranges, gaps, Unicode and source order on one clock', () => {
+  const first = '첫 문장. 다음 문장.';
+  const second = '조심히 가요.';
+  const packet = { plan: { captionStyle: { fadeFrames: 2 }, panels: [{ panelId: 'p1', durationFrames: 72,
+    captions: ['a', 'b'], captionCues: [
+      { cueId: 'a1', semanticId: 'a', startFrame: 0, endFrame: 12, startUtf16: 0, endUtf16: 5 },
+      { cueId: 'a2', semanticId: 'a', startFrame: 14, endFrame: 32, startUtf16: 6, endUtf16: first.length },
+      { cueId: 'b1', semanticId: 'b', startFrame: 40, endFrame: 60, startUtf16: 0, endUtf16: second.length },
+    ] }] }, captions: [{ panelId: 'p1', lines: [{ semanticId: 'a', text: first }, { semanticId: 'b', text: second }] }] };
+  const cues = captionTimeline(packet);
+  assert.equal(captionAtFrame(cues, 0).text, '첫 문장.');
+  assert.equal(captionAtFrame(cues, 12), null);
+  assert.equal(captionAtFrame(cues, 14).text, '다음 문장.');
+  assert.equal(captionAtFrame(cues, 60), null);
+  for (const mutation of [p => { p.plan.panels[0].captionCues[0].startUtf16 = 1; },
+    p => { p.plan.panels[0].captionCues[1].startFrame = 10; },
+    p => { p.plan.panels[0].captionCues.pop(); }]) {
+    const changed = structuredClone(packet); mutation(changed);
+    assert.throws(() => captionTimeline(changed), /CAPTION/);
+  }
+  const unicode = structuredClone(packet);
+  unicode.captions[0].lines[0].text = 'e\u0301';
+  unicode.plan.panels[0].captionCues[0].endUtf16 = 1;
+  assert.throws(() => captionTimeline(unicode), /CAPTION_RANGE_SPLITS_GRAPHEME/);
+});
 
 async function owner(lane, root, tokens) {
   const executable = lane === SAC ? SAC : NVC;
@@ -41,7 +67,7 @@ function testPng(width, height, transparent) {
   return Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]), chunk('IHDR', header), chunk('IDAT', deflateSync(raw)), chunk('IEND', Buffer.alloc(0))]);
 }
 
-async function fixture(t) {
+async function fixture(t, { timedCaptions = false } = {}) {
   const source = await writeReleaseFixture();
   const { root, map } = source;
   t.after(async () => { if (!process.env.STORY_ANIMATIC_KEEP_FIXTURE) await rm(root, { recursive: true, force: true }); });
@@ -68,6 +94,16 @@ async function fixture(t) {
         { layerId: 'background', depthPerMille: 400, poses: [{ frame: 0, assetId: 'background' }], motion: [motion(0, 320), motion(11, 320)] },
         { layerId: 'actor', depthPerMille: 1000, poses: [{ frame: 0, assetId: 'actor' }], motion: [motion(0, 260), motion(11, 380)] }],
       captions: [scene.panels[0].sourceRefs[0].semanticId] })), openQuestions: [] };
+  if (timedCaptions) {
+    draft.canvas.height += 64;
+    draft.captionStyle = { fontSize: 14, maxLines: 2, bandHeight: 64, fadeFrames: 1 };
+    draft.panels.forEach((panel, index) => {
+      const id = panel.captions[0];
+      const text = map.semantic_manifest.entries.find(entry => entry.semantic_id === id).source_text;
+      panel.captionCues = [{ cueId: `cue-${index}`, semanticId: id, startFrame: 3, endFrame: 10,
+        startUtf16: 0, endUtf16: text.length }];
+    });
+  }
   await writeJson(join(root, 'direction-draft.json'), draft);
   const plan = await owner('animatic', root, ['submit', ...boardArgs, '--draft', 'direction-draft.json', '--output', 'animatic/plan.json']);
   const reviewArgs = ['review', ...boardArgs, '--plan', plan.path, '--expected-hash', plan.contentHash, '--reviewer', 'SIMULATED_TEST_ONLY', '--decision', 'approved', '--output', 'animatic/review.json'];
@@ -111,7 +147,10 @@ test('real locked Chromium -> frames -> VP9 WebM candidate exports editable sour
   const result = await renderAnimatic(f.root, { ...f.input, attemptId: 'runtime' });
   assert.equal(result.status, 'candidate', JSON.stringify(result));
   assert.equal(result.finalApproval, false); assert.equal(result.frameCount, 24); assert.equal(result.audio, 'none');
-  assert.equal(result.artifacts.length, 5);
+  assert.equal(result.artifacts.length, 6);
+  assert.equal(result.gifPreview.mediaType, 'image/gif');
+  assert.equal(result.gifPreview.nativeGeneration, false);
+  assert.ok(result.artifacts.some(item => item.path.endsWith('/preview.gif')));
   assert.deepEqual(await renderAnimatic(f.root, { ...f.input, attemptId: 'runtime' }), result);
   await assert.rejects(renderAnimatic(f.root, { ...f.input, attemptId: 'runtime', reducedMotion: true }), /ATTEMPT_INPUT_CHANGED/);
   const frame0 = await readFile(join(f.root, 'animatic/renders/runtime/frames/000000.png'));
@@ -152,6 +191,26 @@ test('cancellation is terminal and late successful commits cannot replace it; to
   await mkdir(join(f.root, 'animatic/renders/torn'));
   assert.equal((await recoverAnimatic(f.root, { attemptId: 'torn' })).status, 'outcome_unknown');
   assert.equal((await statusAnimatic(f.root, { attemptId: 'absent' })).status, 'not_started');
+});
+
+test('timed captions survive NVC export and native render; omitted source is refused before approval', async (t) => {
+  const f = await fixture(t, { timedCaptions: true });
+  const bad = structuredClone(f.draft);
+  bad.panels[0].captionCues[0].startUtf16 = 1;
+  await writeJson(join(f.root, 'omitted-caption.json'), bad);
+  await assert.rejects(owner('animatic', f.root, ['submit', ...f.boardArgs, '--draft', 'omitted-caption.json',
+    '--output', 'animatic/omitted.json']), /CAPTION/);
+  const result = await renderAnimatic(f.root, { ...f.input, attemptId: 'timed-captions' });
+  assert.equal(result.status, 'candidate', JSON.stringify(result));
+  const cues = captionTimeline(f.packet);
+  assert.equal(captionAtFrame(cues, 0), null);
+  assert.equal(captionAtFrame(cues, 3).text, f.packet.captions[0].lines[0].text);
+  assert.equal(captionAtFrame(cues, 10), null);
+  const vtt = await readFile(join(f.root, 'animatic/renders/timed-captions/captions.vtt'), 'utf8');
+  assert.match(vtt, /00:00:00.250 --> 00:00:00.833/);
+  assert.match(vtt, /00:00:01.250 --> 00:00:01.833/);
+  assert.ok(vtt.includes(f.packet.captions[0].lines[0].text));
+  assert.equal(result.gifPreview.durationMs, 2000);
 });
 
 async function startWorker(f, attemptId, native = false) {

@@ -33,7 +33,7 @@ integration/target/release/storyctl text --workspace /absolute/path/my-story nex
 | 씬 설계·대본 | NarrativeCourier STS | 현재 source의 task/gate를 거친 Completed release |
 | 텍스트 콘티 | NarrativeCourier | 현재 씬의 의미 참조와 별도 검토 |
 | 제작 패키지 | integration | 원고 3개·NVC 산출물 6개와 마지막 `story-package.json` |
-| 선택 animatic | NVC → SAC → SMC | 연출·자산 검토에 결속된 HTML/VTT/WebM 후보 |
+| 선택 animatic | NVC → SAC → SMC | 연출·자산 검토에 결속된 HTML/VTT/WebM·GIF 후보 |
 
 생성 성공, 후보 저장, 사람의 채택, package의 파일 무결성을 구분한다. `complete`나 문체 점수는 작품 품질을 인증하지 않는다. 원문·상위 자료가 바뀌면 오래된 후보나 승인 결과를 그대로 재사용하지 않는다. 실패·취소·결과 불명은 자동 성공이나 재시도로 바꾸지 않는다.
 

@@ -318,6 +318,53 @@
               "minLength": 1,
               "maxLength": 2048
             }
+          },
+          "captionCues": {
+            "type": "array",
+            "maxItems": 128,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "cueId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "semanticId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                "startFrame": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 35999
+                },
+                "endFrame": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 36000
+                },
+                "startUtf16": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 16000
+                },
+                "endUtf16": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 16000
+                }
+              },
+              "required": [
+                "cueId",
+                "semanticId",
+                "startFrame",
+                "endFrame",
+                "startUtf16",
+                "endUtf16"
+              ]
+            }
           }
         }
       }
@@ -335,6 +382,36 @@
     "contentHash": {
       "type": "string",
       "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "captionStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fontSize": {
+          "type": "integer",
+          "minimum": 14,
+          "maximum": 42
+        },
+        "maxLines": {
+          "const": 2
+        },
+        "bandHeight": {
+          "type": "integer",
+          "minimum": 40,
+          "maximum": 128
+        },
+        "fadeFrames": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        }
+      },
+      "required": [
+        "fontSize",
+        "maxLines",
+        "bandHeight",
+        "fadeFrames"
+      ]
     }
   }
 }

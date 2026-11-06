@@ -29,6 +29,15 @@ boardReviewHash는 source 응답 그대로 사용한다. source를 고친다면 
   pack hash를 plan에 다시 넣지 않는다.
 - captions는 panel.sourceRefs 안의 semanticId를 순서대로 선택한다. 렌더용
   문자열을 직접 다시 쓰지 않는다. 말풍선이나 번역문을 만들어 원문을 대체하지 않는다.
+- 개별 대사를 시간별로 보여 줄 때는 plan의 `captionStyle`에 fontSize,
+  maxLines:2, bandHeight, fadeFrames를 정하고 모든 panel에 `captionCues`를 둔다.
+  각 cue는 cueId, semanticId, panel 내 startFrame/exclusive endFrame과 원문
+  UTF-16 startUtf16/exclusive endUtf16을 선택한다. 대사 순서와 공백 외 모든
+  원문 글자를 한 번씩 보존한다. 긴 대사는 문장·의미 단위로 나누고 grapheme을
+  쪼개지 않는다. 서로 다른 cue 시간을 겹치지 않는다. 읽기 시간과 동작의
+  선후를 검토하고, 하차 뒤 인사를 하차 전에 표시하지 않는다.
+  bandHeight는 그림 아래에 예약된다. canvas 높이에 이 영역을 포함하고,
+  그림의 중심·카메라는 남은 picture 높이를 기준으로 작성한다.
 
 미술 brief에는 일관된 인물 특징·선·색·빛과 layer의 완성 크기, foreground의
 투명 여백, 포즈별 고정 요소를 적는다. cutout은 독립된 실제 PNG로 준비한다.

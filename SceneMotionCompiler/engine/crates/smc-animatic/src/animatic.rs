@@ -1,5 +1,5 @@
 use crate::{
-    browser,
+    browser, gif_preview,
     io::{self, Result},
     process, producer,
 };
@@ -19,7 +19,7 @@ const NAMES: &[&str] = &[
     "request.json",
 ];
 pub fn policy() -> Value {
-    json!({"maxFrames":36000,"maxImageBytes":64*1024*1024,"maxTotalImageBytes":128*1024*1024,"maxFrameBytes":16*1024*1024,"maxFrameSequenceBytes":2u64*1024*1024*1024,"renderTimeoutMs":900000,"processTimeoutMs":600000,"processOutputBytes":1048576,"crf":24,"cpuUsed":2})
+    json!({"maxFrames":36000,"maxImageBytes":64*1024*1024,"maxTotalImageBytes":128*1024*1024,"maxFrameBytes":16*1024*1024,"maxFrameSequenceBytes":2u64*1024*1024*1024,"renderTimeoutMs":900000,"processTimeoutMs":600000,"processOutputBytes":1048576,"crf":24,"cpuUsed":2,"gifPreview":{"frameRate":6,"maxWidth":640,"maxBytes":134217728}})
 }
 #[derive(Clone)]
 struct Local(Arc<BTreeMap<String, Value>>);
@@ -311,8 +311,13 @@ impl Context {
                     "CANDIDATE_IS_NOT_APPROVAL",
                 )?;
                 let artifacts = array(&result["artifacts"])?;
-                io::check(artifacts.len() == NAMES.len(), "OUTPUT_ARTIFACT_COVERAGE")?;
-                for (artifact, name) in artifacts.iter().zip(NAMES) {
+                let mut names = NAMES.to_vec();
+                if request["policy"].get("gifPreview").is_some() {
+                    io::check(result["gifPreview"].is_object(), "GIF_PREVIEW_MISSING")?;
+                    names.push("preview.gif");
+                }
+                io::check(artifacts.len() == names.len(), "OUTPUT_ARTIFACT_COVERAGE")?;
+                for (artifact, name) in artifacts.iter().zip(&names) {
                     io::check(
                         artifact["path"] == format!("{dir}/{name}"),
                         "OUTPUT_ARTIFACT_COVERAGE",
@@ -320,6 +325,12 @@ impl Context {
                     io::check(
                         io::hash_file(directory, name)? == artifact["sha256"],
                         "OUTPUT_HASH_CHANGED",
+                    )?;
+                }
+                if result["gifPreview"].is_object() {
+                    io::check(
+                        result["gifPreview"]["sha256"] == io::hash_file(directory, "preview.gif")?,
+                        "GIF_HASH_CHANGED",
                     )?;
                 }
             }
@@ -478,11 +489,6 @@ impl Context {
                 "source.json",
                 &json!({"packet":source.packet,"assetPack":source.pack,"assetReview":source.review}),
             )?;
-            io::publish(
-                &attempt_root,
-                "captions.vtt",
-                captions_vtt(&source.packet)?.as_bytes(),
-            )?;
             let mut browser = browser::Browser::launch(&lock)?;
             let capture = (|| -> Result<()> {
                 let mut client = browser::Cdp::connect(browser.port)?;
@@ -498,6 +504,17 @@ impl Context {
                 io::check(
                     ready["exceptionDetails"].is_null() && ready["result"]["value"] == true,
                     &format!("COMPOSITION_FAILED:{}", ready["exceptionDetails"]),
+                )?;
+                let cues = client.send(
+                    "Runtime.evaluate",
+                    json!({"expression":"globalThis.animatic.captions","returnByValue":true}),
+                    &cancellation,
+                )?;
+                io::check(cues["exceptionDetails"].is_null(), "CAPTION_EXPORT_FAILED")?;
+                io::publish(
+                    &attempt_root,
+                    "captions.vtt",
+                    captions_vtt(&cues["result"]["value"], number(&plan["fps"])?)?.as_bytes(),
                 )?;
                 let mut total = 0u64;
                 for frame in 0..total_frames(plan) {
@@ -622,6 +639,15 @@ impl Context {
                     && text(&observed["format"]["format_name"])?.contains("webm"),
                 "WEBM_OBSERVATION_MISMATCH",
             )?;
+            let gif = gif_preview::render(
+                &attempt_root,
+                &frames,
+                plan,
+                &encoder,
+                &probe,
+                total_frames(plan),
+                &cancellation,
+            )?;
             let latest = self.load(input)?;
             io::check(
                 io::canonical_hash(&json!([latest.packet, latest.pack, latest.review]))?
@@ -636,7 +662,8 @@ impl Context {
                 let path = format!("{dir}/{name}");
                 artifacts.push(json!({"sha256":io::hash_file(&attempt_root,name)?,"path":path}));
             }
-            self.commit_at(attempt, &attempt_root, json!({"schemaVersion":"smc.animatic-result/1","status":"candidate","attemptId":attempt,"requestHash":request["contentHash"],"finalApproval":false,"audio":"none","frameCount":total_frames(plan),"fps":plan["fps"],"width":plan["canvas"]["width"],"height":plan["canvas"]["height"],"artifacts":artifacts}))
+            artifacts.push(json!({"sha256":gif["sha256"],"path":format!("{dir}/preview.gif")}));
+            self.commit_at(attempt, &attempt_root, json!({"schemaVersion":"smc.animatic-result/1","status":"candidate","attemptId":attempt,"requestHash":request["contentHash"],"finalApproval":false,"audio":"none","frameCount":total_frames(plan),"fps":plan["fps"],"width":plan["canvas"]["width"],"height":plan["canvas"]["height"],"artifacts":artifacts,"gifPreview":gif}))
         })();
         match effect {
             Ok(result) => Ok(result),
@@ -720,7 +747,7 @@ fn composition(source: &Source, font: &[u8], reduced: bool, runtime: &str) -> Re
         .replace("export async function", "async function");
     Ok(format!("<!doctype html><html lang=\"ko\"><meta charset=\"utf-8\"><meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; img-src data:; font-src data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'\"><style>@font-face{{font-family:AnimaticLocked;src:url(data:font/ttf;base64,{})}}html,body{{margin:0;width:100%;height:100%;overflow:hidden;background:{}}}canvas{{display:block}}p{{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}}</style><canvas width=\"{}\" height=\"{}\" role=\"img\"></canvas><p></p><script>\n{runtime}\nglobalThis.animaticReady=installComposition({},{},{});</script></html>",STANDARD.encode(font),text(&plan["canvas"]["background"])?,number(&plan["canvas"]["width"])?,number(&plan["canvas"]["height"])?,literal(&source.packet),literal(&json!(source.images)),reduced))
 }
-fn captions_vtt(packet: &Value) -> Result<String> {
+fn captions_vtt(cues: &Value, fps: u64) -> Result<String> {
     fn time(frame: u64, fps: u64) -> String {
         let ms = (frame * 1000 + fps / 2) / fps;
         let sec = ms / 1000;
@@ -732,36 +759,21 @@ fn captions_vtt(packet: &Value) -> Result<String> {
             ms % 1000
         )
     }
-    let fps = number(&packet["plan"]["fps"])?;
-    let mut first = 0;
     let mut result = String::from("WEBVTT\n\n");
-    for (index, (panel, caption)) in array(&packet["plan"]["panels"])?
-        .iter()
-        .zip(array(&packet["captions"])?)
-        .enumerate()
-    {
-        let end = first + number(&panel["durationFrames"])?;
-        let lines = array(&caption["lines"])?;
-        if !lines.is_empty() {
-            let copy = lines
-                .iter()
-                .map(|line| {
-                    text(&line["text"]).map(|text| {
-                        text.replace('&', "&amp;")
-                            .replace('<', "&lt;")
-                            .replace('>', "&gt;")
-                    })
-                })
-                .collect::<Result<Vec<_>>>()?
-                .join("\n");
-            result.push_str(&format!(
-                "{}\n{} --> {}\n{copy}\n\n",
-                index + 1,
-                time(first, fps),
-                time(end, fps)
-            ));
-        }
-        first = end;
+    for cue in array(cues)? {
+        let start = number(&cue["startFrame"])?;
+        let end = number(&cue["endFrame"])?;
+        io::check(end > start && end <= 36000, "CAPTION_EXPORT_TIME")?;
+        let copy = text(&cue["text"])?
+            .replace('&', "&amp;")
+            .replace('<', "&lt;")
+            .replace('>', "&gt;");
+        result.push_str(&format!(
+            "{}\n{} --> {}\n{copy}\n\n",
+            text(&cue["cueId"])?,
+            time(start, fps),
+            time(end, fps)
+        ));
     }
     Ok(result)
 }

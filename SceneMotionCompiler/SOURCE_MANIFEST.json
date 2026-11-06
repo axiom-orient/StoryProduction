@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "packageName": "scene-motion-compiler",
-  "fileCount": 264,
-  "totalBytes": 2752330,
+  "fileCount": 265,
+  "totalBytes": 2772446,
   "excludedDirectories": [
     ".build",
     ".git",
@@ -57,8 +57,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "sha256:3f1d5bb7c2d89388bfbaab6bf70500bdbafc439965ac77a257310a8d28c9e9a0",
-      "bytes": 8073,
+      "sha256": "sha256:b8ff9b83a02227abd1fa15b716567f2dab47225af172a95df7f81ba8de6cefd8",
+      "bytes": 8090,
       "mode": "100644"
     },
     {
@@ -273,14 +273,14 @@
     },
     {
       "path": "contracts/schemas/animatic/animatic-plan-v1.schema.json",
-      "sha256": "sha256:f05021bc88c04938ed309539507b044fe70495323b4221bd2df1e4c779e010c5",
-      "bytes": 8870,
+      "sha256": "sha256:19d0576452739fb465eff41a13cba19d25fa7ef5beedcfe7cb9962575bce244d",
+      "bytes": 10885,
       "mode": "100644"
     },
     {
       "path": "contracts/schemas/animatic/animatic-result-v1.schema.json",
-      "sha256": "sha256:23405640602905ccc3ac90d29cc332223f0f37e5e540d8db73266a4ee9ce5b60",
-      "bytes": 4740,
+      "sha256": "sha256:367ca983ff81c16fb82e2ab8b24da524e6f3be17a20a20d1f9244e86aae90320",
+      "bytes": 6696,
       "mode": "100644"
     },
     {
@@ -489,14 +489,20 @@
     },
     {
       "path": "engine/crates/smc-animatic/src/animatic.rs",
-      "sha256": "sha256:682af65dc889d1471486b5bdd5494d69b2c4f7e7c944c9699c88ad8ef4755f4f",
-      "bytes": 33931,
+      "sha256": "sha256:69e52749bc14d461f54a580f32bf6275cc5a782df4d1e3800798548925e811f4",
+      "bytes": 34824,
       "mode": "100644"
     },
     {
       "path": "engine/crates/smc-animatic/src/browser.rs",
       "sha256": "sha256:cdb2dad6291ee2f4c347fd107ae1b9f235ed4142cc6aaea2396aee7593901bf9",
       "bytes": 17574,
+      "mode": "100644"
+    },
+    {
+      "path": "engine/crates/smc-animatic/src/gif_preview.rs",
+      "sha256": "sha256:ca92d354e3889f0ace2fbb7a9a74b86490ed1571f460cb0668a21b6ee7aa9a81",
+      "bytes": 6516,
       "mode": "100644"
     },
     {
@@ -507,8 +513,8 @@
     },
     {
       "path": "engine/crates/smc-animatic/src/main.rs",
-      "sha256": "sha256:c315610a55c224a826eaef947a3a21e982bd1ccb7f3ef81a67513016f8560b2f",
-      "bytes": 4059,
+      "sha256": "sha256:72f632f3f5e6d05db71bb533f8521cbf0adabf2b9877c145178ae5378c022337",
+      "bytes": 4076,
       "mode": "100644"
     },
     {
@@ -1107,8 +1113,8 @@
     },
     {
       "path": "packages/production/src/animatic-runtime.js",
-      "sha256": "sha256:451f7caf54f15dcac27d41f7286f50abc0c0a3348786c0b115cab90ad05e4157",
-      "bytes": 5911,
+      "sha256": "sha256:baaa98939d75a7ba2a8a3eb4c273d31308d9f279134c8f291438615601de27ea",
+      "bytes": 11080,
       "mode": "100644"
     },
     {
@@ -1455,8 +1461,8 @@
     },
     {
       "path": "tests/animatic.test.js",
-      "sha256": "sha256:8ca9f8b5924e2acf5b35a7aff73b708014ace805b80fd23e07fe3c3403203fb5",
-      "bytes": 17485,
+      "sha256": "sha256:ace6fc28b8e16c1f81a8bc2a82181708f1a4fefde52fd6e470b5d62424c3b58e",
+      "bytes": 21018,
       "mode": "100644"
     },
     {
@@ -1604,5 +1610,5 @@
       "mode": "100644"
     }
   ],
-  "sourceTreeHash": "sha256:18ea80655a9f586a17d27b24441266c9683fff471e4d181ade12e2d5ad73a29d"
+  "sourceTreeHash": "sha256:5553780433a2d400edac5ef2b36b598b2f6ac75473cfda2ca7487741c5510ed5"
 }

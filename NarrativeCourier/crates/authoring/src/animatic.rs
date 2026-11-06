@@ -1,6 +1,9 @@
 //! Frame-addressable direction of the exact current approved board.
 //! Plan candidate, human review, and exported packet have separate identities.
 
+#[path = "caption_cues.rs"]
+mod caption_cues;
+
 use crate::codec::{json, Value};
 use crate::{
     arguments::Invocation,
@@ -145,6 +148,7 @@ fn validate_plan(
         assets.len() == ids.len() && ids == used_assets,
         "ASSET_COVERAGE",
     )?;
+    caption_cues::validate(plan, release)?;
     require(
         plan["canvas"]["width"]
             .as_u64()

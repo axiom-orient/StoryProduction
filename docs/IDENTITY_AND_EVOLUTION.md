@@ -10,7 +10,7 @@
 
 geultu는 원문·집필 브리프·글투·스토리·시놉시스·후보·채택 이력을 가진다. NarrativeCourier STS는 인물 상태·서사 인과·트리트먼트·씬·대본의 권위 모델을 유지한다. NVC 텍스트 콘티는 확정된 씬을 참조하는 연출 문서이며 새로운 서사 정본이 아니다. integration은 파일 참조·공개 CLI 연결·작성 프로세스 실행 기록·불변 내보내기만 맡는다.
 
-SceneMotionCompiler, SceneAssetCompiler, ImagePromptCompiler는 독립된 선택 확장이다. 텍스트 집필은 이미지·영상·렌더링 단계를 요구하지 않는다. 현재 선택 animatic 경로는 NVC 연출 검토·SAC PNG 자산 검토·SMC 합성으로 HTML/VTT/VP9 WebM 후보를 만든다. 후보의 최종 작품 release는 별도다. 제품 화면 제작과 VisualScreenCompiler는 범위 밖이다.
+SceneMotionCompiler, SceneAssetCompiler, ImagePromptCompiler는 독립된 선택 확장이다. 텍스트 집필은 이미지·영상·렌더링 단계를 요구하지 않는다. 현재 선택 animatic 경로는 NVC 연출 검토·SAC PNG 자산 검토·SMC 합성으로 HTML/VTT/VP9 WebM·렌더 GIF 후보를 만든다. 개별 자막은 원문 범위와 같은 프레임 시계에 묶인다. 후보의 최종 작품 release는 별도다. 제품 화면 제작과 VisualScreenCompiler는 범위 밖이다.
 
 ## 품질의 방향
 

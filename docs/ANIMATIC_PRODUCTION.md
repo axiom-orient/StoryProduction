@@ -120,8 +120,9 @@ integration/target/release/storyctl text --workspace /absolute/my-story \
 | 파일 | 의미 |
 |---|---|
 | preview.webm | opaque VP9 후보. 실제 frame count/canvas/fps 검사 후 publish |
+| preview.gif | 같은 캡처 PNG로 만든 6 fps·최대 폭 640 px의 무음 미리보기. 실제 GIF frame/delay/dimensions/hash 검사 후 publish |
 | composition.html | PNG·font·원문 자막을 포함한 자급식 합성 원본 |
-| captions.vtt | 원문 문자열과 panel timing을 가진 별도 자막 |
+| captions.vtt | 원문 문자열과 합성 화면에서 사용한 동일 cue timing을 가진 별도 자막 |
 | source.json | NVC packet, SAC pack, SAC review의 정확한 snapshot |
 | request.json | 입력 hash, 실행 worker identity, browser/font/encoder/probe 및 정책 |
 | result.json | 위 출력의 raw hash를 가진 terminal receipt |
@@ -132,6 +133,23 @@ HTML은 제품 화면이 아니라 media composition이다. 호스트에서
 `animatic.pause()`로 조작한다. 자동 재생하지 않는다. native `<video controls>`로
 WebM을 재생할 수 있다. 자막은 별도 VTT와 합성 영상에 보존되며 canvas의 텍스트
 접근성 이름도 갱신한다. 자막이 화면에 들어가지 않으면 잘라 내지 않고 실패한다.
+
+새 연출 draft는 `captionStyle`로 `fontSize`, `maxLines: 2`, `bandHeight`,
+`fadeFrames`를 지정하고 모든 panel에 `captionCues` 배열을 둔다. 각 cue는
+`cueId`, `semanticId`, panel 내 `startFrame`/exclusive `endFrame`, 원문 UTF-16
+`startUtf16`/exclusive `endUtf16` 범위를 선택한다. 대사를 새로 작성하는 필드가
+아니다. NVC는 원문 누락·중복·역순·시간 겹침을 거절하고, renderer는 grapheme
+경계·실제 locked font의 두 줄 배치까지 검사한다. 자막 영역은 그림 아래에
+예약하므로 손·발·문턱 위에 덮지 않는다. fade는 같은 frame clock을 사용하며
+reduced motion에서는 생략한다. 이전 승인 plan의 panel 단위 자막은 그대로
+읽을 수 있다. 새 cue를 추가하면 새 plan hash를 검토해야 한다.
+
+`gifPreview.kind`는 `rendered-preview`, `nativeGeneration`은 `false`다.
+이미지 생성 서비스가 직접 반환한 GIF와 혼동하지 않는다. GIF에는 소리가
+없고 palette/centisecond 지연 제약이 있으므로 편집 원본은 PNG·plan·HTML,
+영상 재생은 WebM을 사용한다. 이번 버전에는 목소리를 연결하지 않는다.
+GIF 검사가 실패하면 성공 후보를 발행하지 않는다. 이전 정책으로 만든 다섯
+artifact의 과거 receipt는 보존하며 새 출력은 GIF를 포함한 여섯 artifact를 결속한다.
 
 카메라/레이어/포즈/자막을 수정하려면 원래 JSON을 새 draft로 작성해 새 revision을
 submit하고 정확한 새 hash를 검토한다. 영향을 받지 않은 panel은 그대로 유지한다.

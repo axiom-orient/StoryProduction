@@ -1,5 +1,6 @@
 mod animatic;
 mod browser;
+mod gif_preview;
 mod io;
 mod process;
 mod producer;
